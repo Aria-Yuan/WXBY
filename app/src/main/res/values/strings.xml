@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">我们的app还没有名字</string>
+    <string name="app_name">我們的app還沒有名字</string>
     <string name="hint">hint</string>
     <string name="title">查事務所</string>
     <string name="按地區">string</string>
@@ -7,8 +7,8 @@
     <string name="tuijian">推薦</string>
     <string name="andiqu">按地區</string>
     <string name="zahoanjianTitle">找案件</string>
-    <string name="remenanjianTitle">熱門案件</string>
-    <string name="anjiansosuo">案件搜索</string>
+    <string name="remenfaguiTitle">熱門法規</string>
+    <string name="faguisosuo">法規搜索</string>
     <string name="jiensuozihuiTitle">檢索字彙</string>
     <string name="caipanzihaoTitle">裁判字號</string>
     <string name="diyuanfanwei">地院範圍</string>
@@ -76,8 +76,16 @@
     <string name="nextpage">下一條</string>
     <string name="toZhaolusuo_andiqu">按地區</string>
     <string name="anduqu_title">按地區</string>
+
     <string name="toZhaolvsuo_anfenlei">按分類</string>
     <string name="toZhaolvsuo_andiqu">按地區</string>
     <string name="toZhaolvsuo_tuijian">推薦</string>
     <string name="title_amfenlei">按分類</string>
+    <string name="topic">黃利菁|什麼是假處分</string>
+    <string name="contentpreview">假處分是針對金錢請求以外的請求，法院裁定強制債務人對請求的標的為一定行為</string>
+    <string name="image">image</string>
+    <string name="tofaguijiensuo">法規檢索</string>
+    <string name="toremenfatiao">熱門法條</string>
+    <string name="submit">提交</string>
 </resources>
+
