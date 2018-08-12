@@ -1,4 +1,4 @@
 package com.example.joan.myapplication;
 
-public class LegalAdviceActivity {
+public class LegalCounselingActivity {
 }

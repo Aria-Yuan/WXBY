@@ -11,7 +11,7 @@ public interface CourtRepository {
     List<CourtModel> findAll();
 
     //以id检索文档
-    List<CourtModel> findById(ObjectId code);
+    CourtModel findById(ObjectId code);
 
     //以关键字检索
     List<CourtModel> findByCondition(String keyWord);

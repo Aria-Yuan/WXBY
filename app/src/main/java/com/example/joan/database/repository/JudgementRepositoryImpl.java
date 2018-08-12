@@ -67,10 +67,10 @@ public class JudgementRepositoryImpl implements JudgementRepository{
     }
 
     //以id检索文档
-    public List<JudgementModel> findById(ObjectId code) {
+    public JudgementModel findById(ObjectId code) {
         Document condition = new Document();
         condition.append("_id", code);
-        return find(condition);
+        return find(condition).get(0);
     }
 
     //以关键字检索

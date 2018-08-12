@@ -11,7 +11,7 @@ public interface JudgementRepository {
     List<JudgementModel> findAll();
 
     //以id检索文档
-    List<JudgementModel> findById(ObjectId code);
+    JudgementModel findById(ObjectId code);
 
     //以关键字检索
     List<JudgementModel> findByCondition(String keyWord);

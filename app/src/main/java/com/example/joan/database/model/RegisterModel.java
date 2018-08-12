@@ -7,7 +7,7 @@ import java.util.Date;
 public class RegisterModel {
     private ObjectId id;
     private String regId;
-    private System phone;
+    private String phone;
     private String name;
     private  String sex;
     private Date regDate;
@@ -33,11 +33,11 @@ public class RegisterModel {
         this.regId = regId;
     }
 
-    public System getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(System phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
