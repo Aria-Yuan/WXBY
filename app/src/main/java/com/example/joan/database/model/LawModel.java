@@ -10,8 +10,8 @@ public class LawModel {
     private String chapter;
     private String name;
     private String content;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
 
     public ObjectId getId() {
         return id;
@@ -53,19 +53,19 @@ public class LawModel {
         this.content = content;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 }

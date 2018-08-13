@@ -30,8 +30,8 @@ public class LawRepositoryImpl implements LawRepository {
                 law.setChapter(current_cursor.getString("chapter"));
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
-                law.setStart(current_cursor.getDate("start"));
-                law.setEnd(current_cursor.getDate("end"));
+                law.setStart(current_cursor.getString("start"));
+                law.setEnd(current_cursor.getString("end"));
                 lawList.add(law);
             }
         } finally {
@@ -54,8 +54,8 @@ public class LawRepositoryImpl implements LawRepository {
                 law.setChapter(current_cursor.getString("chapter"));
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
-                law.setStart(current_cursor.getDate("start"));
-                law.setEnd(current_cursor.getDate("end"));
+                law.setStart(current_cursor.getString("start"));
+                law.setEnd(current_cursor.getString("end"));
                 lawList.add(law);
             }
         } finally {

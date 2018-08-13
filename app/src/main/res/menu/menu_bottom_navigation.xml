@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_main"
+        android:checked="true"
+        android:icon="@drawable/main_selected"
+        android:title="首頁" />
+
+    <!--因为需要覆盖view 此处省略android:icon-->
+    <item
+        android:id="@+id/menu_empty"
+        android:title="咨詢" />
+
+    <item
+        android:id="@+id/menu_me"
+        android:icon="@drawable/me_unselected"
+        android:title="我的" />
+
+
+</menu>

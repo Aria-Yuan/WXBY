@@ -7,6 +7,8 @@
     <string name="tuijian">推薦</string>
     <string name="andiqu">按地區</string>
     <string name="zahoanjianTitle">找案件</string>
+    <string name="remenanjianTitle">熱門案件</string>
+    <string name="anjiansosuo">案件搜索</string>
     <string name="remenfaguiTitle">熱門法規</string>
     <string name="faguisosuo">法規搜索</string>
     <string name="jiensuozihuiTitle">檢索字彙</string>

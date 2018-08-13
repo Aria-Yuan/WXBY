@@ -46,6 +46,7 @@ public class CourtRepositoryImpl implements CourtRepository{
             while (cursor.hasNext()) {
                 CourtModel court = new CourtModel();
                 Document current_cursor = cursor.next();
+
                 court.setId(current_cursor.getObjectId("_id"));
                 court.setName(current_cursor.getString("name"));
                 court.setSimpleName(current_cursor.getString("simple_name"));

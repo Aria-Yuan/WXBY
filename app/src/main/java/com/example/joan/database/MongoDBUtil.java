@@ -12,7 +12,7 @@ import java.util.List;
 public class MongoDBUtil {
     private static final MongoClientURI mongoDBurl = new MongoClientURI("" +
             "mongodb://dajiayiqibiye:wxby@wxby-shard-00-00-7ea9c.mongodb.net:27017,wxby-shard-00-01-7ea9c.mongodb.net:27017,wxby-shard-00-02-7ea9c.mongodb.net:27017/test?ssl=true&replicaSet=WXBY-shard-0&authSource=admin&retryWrites=true");
-    private static  MongoClient mongoClient = null;
+    private static MongoClient mongoClient = null;
     private static  MongoDatabase db = null;
 
     //初始化连接
@@ -34,8 +34,7 @@ public class MongoDBUtil {
     //连接集合
     public MongoCollection<Document> getCollection(String colName)
     {
-        MongoCollection<Document> collection = db.getCollection(colName);
-        return collection;
+        return db.getCollection(colName);
     }
 
 
