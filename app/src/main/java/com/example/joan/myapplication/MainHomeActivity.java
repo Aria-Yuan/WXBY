@@ -1,6 +1,7 @@
 package com.example.joan.myapplication;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -59,7 +62,9 @@ public class MainHomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_main:
                         item.setIcon(R.drawable.main_selected);
+                        //setIconSize();
                         position = 0;
+
                         break;
                     case R.id.menu_me:
                         item.setIcon(R.drawable.me_selected);
@@ -135,11 +140,6 @@ public class MainHomeActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.fab);
         viewPager = findViewById(R.id.main_body);
         bnve = findViewById(R.id.bnve);
-
-        TextView searchBox = (TextView) findViewById(R.id.edt_search);
-        Drawable d = ContextCompat.getDrawable(MainHomeActivity.this,R.drawable.search);
-        d.setBounds(-15, 0, 60, 60);
-        searchBox.setCompoundDrawables(d,null,null,null);
     }
 
     /**

@@ -23,6 +23,14 @@
     <string name="caipanzihao">hint</string>
     <string name="zimingguo">自民國</string>
     <string name="caipananyouTitle">裁判案由</string>
+    <string name="main_menu_judgement">查案件</string>
+    <string name="main_menu_firm">查律所</string>
+    <string name="main_menu_law">查法條</string>
+    <string name="main_menu_lawyer">問律師</string>
+    <string name="main_menu_counseling">案件咨詢</string>
+    <string name="main_menu_help">法律援助</string>
+    <string name="main_menu_unscramble">傳票解讀</string>
+    <string name="main_menu_schedule">進度查詢</string>
     <string name="caipananyouInput">hint</string>
     <string name="caipanzhuwenInput">hint</string>
     <string name="chengshenfzguanInput">hint</string>
