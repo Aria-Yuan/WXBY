@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#e6e6e6">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/layout_home_pager_bar"
@@ -29,7 +31,7 @@
             android:paddingEnd="12dp"
             android:paddingStart="12dp"
             android:textColor="@color/selector_item_color"
-            android:textColorHint="#515151" />
+            android:textColorHint="#8a8a8a" />
 
         <ImageView
             android:id="@+id/btn_notice_message"
@@ -41,168 +43,186 @@
             android:paddingEnd="15dp"
             android:paddingTop="13dp"
             android:src="@drawable/inform0" />
+
     </android.support.v7.widget.LinearLayoutCompat>
 
-    <TableLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#dbdbdb">
+        android:fitsSystemWindows="false">
 
-        <TableRow
-            android:id="@+id/menu_row1"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:stretchColumns="1">
+            android:background="#dbdbdb">
 
-            <Button
-                android:id="@+id/search_lawyer"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_lawyer"
-                android:text="@string/main_menu_lawyer"
-                android:textColor="#707070"
-                android:textSize="7pt" />
+            <android.support.design.widget.CollapsingToolbarLayout
+                app:layout_scrollFlags="scroll"
+                app:contentScrim="#dbdbdb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/search_judgement"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_judgement"
-                android:text="@string/main_menu_judgement"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-
-            <Button
-                android:id="@+id/search_law_firm"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_firm"
-                android:text="@string/main_menu_firm"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-            <Button
-                android:id="@+id/search_law"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_law"
-                android:text="@string/main_menu_law"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/menu_row2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:stretchColumns="1">
-
-            <Button
-                android:id="@+id/quick_counseling"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_counseling"
-                android:text="@string/main_menu_counseling"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-            <Button
-                android:id="@+id/unscramble"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_unscramble"
-                android:text="@string/main_menu_unscramble"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-            <Button
-                android:id="@+id/schedule"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_schedule"
-                android:text="@string/main_menu_schedule"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-
-            <Button
-                android:id="@+id/help"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite"
-                android:drawableTop="@drawable/main_menu_help"
-                android:text="@string/main_menu_help"
-                android:textColor="#707070"
-                android:textSize="7pt" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="8dp"
-            android:background="#e6e6e6">
-
-            <Button
-                android:id="@+id/button0"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:background="#e6e6e6" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#e6e6e6">
-
-            <ScrollView android:id="@+id/main_view">
-
-                <view
-                    class="android.support.v7.widget.ActionMenuView"
-                    id="@+id/view"
-                    android:layout_width="wrap_content"
+                <TableLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="116dp" />
+                    android:background="#dbdbdb"
+                    android:layout_marginBottom="8dp">
+
+                    <TableRow
+                        android:id="@+id/menu_row1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="15dp"
+                        android:stretchColumns="1">
+
+                        <Button
+                            android:id="@+id/search_lawyer"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_lawyer"
+                            android:text="@string/main_menu_lawyer"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
+
+                        <Button
+                            android:id="@+id/search_judgement"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_judgement"
+                            android:text="@string/main_menu_judgement"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
 
 
-            </ScrollView>
+                        <Button
+                            android:id="@+id/search_law_firm"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_firm"
+                            android:text="@string/main_menu_firm"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
 
-        </TableRow>
+                        <Button
+                            android:id="@+id/search_law"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_law"
+                            android:text="@string/main_menu_law"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
 
-    </TableLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/menu_row2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="15dp"
+                        android:stretchColumns="1">
+
+                        <Button
+                            android:id="@+id/quick_counseling"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_counseling"
+                            android:text="@string/main_menu_counseling"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
+
+                        <Button
+                            android:id="@+id/unscramble"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_unscramble"
+                            android:text="@string/main_menu_unscramble"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
+
+                        <Button
+                            android:id="@+id/schedule"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_schedule"
+                            android:text="@string/main_menu_schedule"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
+
+                        <Button
+                            android:id="@+id/help"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableTop="@drawable/main_menu_help"
+                            android:text="@string/main_menu_help"
+                            android:textColor="#707070"
+                            android:textSize="7pt" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/main_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:tabIndicatorColor="@color/selector_item_color"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/selector_item_color"
+                app:tabTextColor="#707070"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/main_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="100dp"
+                android:background="#e6e6e6"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
 </LinearLayout>

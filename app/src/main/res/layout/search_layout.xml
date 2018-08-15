@@ -1,51 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context="com.example.joan.myapplication.SearchActivity">
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_home_pager_bar"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorWhite"
+        android:layout_height="50dp"
+        android:background="@color/selector_item_color"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/page_search"
+        <RelativeLayout
+            android:id="@+id/rlSearchFrameDelete"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:background="@drawable/style_home_pager_toolbar_search_view"
             android:drawableStart="@drawable/search"
-            android:drawablePadding="1dp"
-            android:gravity="start|center_vertical"
-            android:hint="找什麽呢"
+            android:gravity="center_vertical"
             android:lines="1"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
             android:textColor="@color/selector_item_color"
-            android:textColorHint="#707070"
-            android:inputType="text" />
+            android:textColorHint="#8a8a8a">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:id="@+id/iv_search"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/search" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="274dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="40dp"
+                android:background="@null"
+                android:gravity="fill_vertical|start"
+                android:hint="找什麽呢"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingEnd="12dp"
+                android:paddingStart="10dp"
+                android:textColor="#515151"
+                android:textColorHint="#8a8a8a"
+                android:textSize="7pt"/>
+
+            <ImageView
+                android:id="@+id/ivDeleteText"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="5dp"
+                android:paddingRight="6dp"
+                android:src="@drawable/delete"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/btn_back"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:paddingLeft="9dp"
-            android:paddingRight="9dp"
+            android:paddingLeft="7dp"
             android:text="取消"
-            android:textColor="@color/selector_item_color"
-            android:textSize="7pt"/>
-    </LinearLayout>
+            android:textColor="@color/colorWhite"
+            android:textSize="8pt" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
 
     <ScrollView
@@ -60,28 +87,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:orientation="vertical"
-                android:paddingLeft="20dp">
+                android:paddingLeft="20dp"
+                >
 
                 <TextView
                     android:id="@+id/tv_tip"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="left|center_vertical"
+                    android:textSize="8pt"
                     android:text="搜索历史" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#EEEEEE" />
+                    android:background="#EEEEEE"/>
 
-                <com.example.joan.search_layout.Search_Listview
+                <com.example.joan.myapplication.Search_Listview
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                </com.example.joan.search_layout.Search_Listview>
 
 
             </LinearLayout>
@@ -97,6 +124,7 @@
                 android:layout_height="40dp"
                 android:background="#F6F6F6"
                 android:gravity="center"
+                android:textSize="8pt"
                 android:text="清除搜索历史" />
 
             <View
@@ -107,4 +135,6 @@
         </LinearLayout>
 
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>
+
+

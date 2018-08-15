@@ -149,17 +149,17 @@ public class MainHomeActivity extends AppCompatActivity {
         fragments = new ArrayList<>(3);
         BaseFragment homeFragment = new BaseFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("title", "首页");
+        bundle.putString("position", "0");
         homeFragment.setArguments(bundle);
 
         BaseFragment orderFragment = new BaseFragment();
         bundle = new Bundle();
-        bundle.putString("title", "订单");
+        bundle.putString("position", "1");
         orderFragment.setArguments(bundle);
 
         BaseFragment meFragment = new BaseFragment();
         bundle = new Bundle();
-        bundle.putString("title", "我的");
+        bundle.putString("position", "2");
         meFragment.setArguments(bundle);
 
 

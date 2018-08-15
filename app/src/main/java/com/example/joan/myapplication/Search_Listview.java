@@ -1,4 +1,4 @@
-package com.example.joan.search_layout;
+package com.example.joan.myapplication;
 
 import android.content.Context;
 import android.util.AttributeSet;

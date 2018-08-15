@@ -51,7 +51,6 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         collection.updateOne(registerOld,registerNewSet);
     }
 
-
     //检索所有文档
     public List<RegisterModel> findAll(){
         MongoCursor<Document> cursor = collection.find().limit(50).iterator();
