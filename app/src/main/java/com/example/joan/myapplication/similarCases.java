@@ -14,7 +14,7 @@ import java.util.List;
 
 public class similarCases extends AppCompatActivity {
 
-    float percentage[]={40,60};
+    float percentage[]={40f,60f};
     String success[]={"勝率","敗率"};
 
     @Override
