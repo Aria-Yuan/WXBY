@@ -32,7 +32,7 @@ public class similarCases extends AppCompatActivity {
             pieEntries.add(new PieEntry(percentage[i]));
         }
 
-        PieDataSet dataset = new PieDataSet(pieEntries,"rainfall");
+        PieDataSet dataset = new PieDataSet(pieEntries,"percentage");
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data = new PieData(dataset);
 
