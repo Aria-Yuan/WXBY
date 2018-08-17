@@ -18,13 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickListener{
     private String position;
     TabLayout tabLayout;
     ViewPager viewpager;
@@ -35,7 +36,8 @@ public class BaseFragment extends Fragment {
     private List<String> tabs;
     private List<Fragment> fragments;
 
-    private static View view = null;
+    private static View view_main = null;
+    private static View view_me = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,15 +55,17 @@ public class BaseFragment extends Fragment {
         //textView.setText(title);
         switch (position){
             case "0":{
-                view = inflater.inflate(R.layout.main, container, false);
-                setIconSize();
+                if(view_main == null){
+                    view_main = inflater.inflate(R.layout.main, container, false);
+                    setIconSize();
+                }
 
                 //下方热门问答显示窗口
                 initTabLayout();
                 initDatas();
                 initViewPager();
 
-                TextView search = (TextView) view.findViewById(R.id.edt_search);
+                TextView search = (TextView) view_main.findViewById(R.id.edt_search);
                 search.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
@@ -72,62 +76,80 @@ public class BaseFragment extends Fragment {
                         getActivity().startActivity(intent);
                     }
                 });
-            }
 
+                return view_main;
+            }
+            case "2":{
+                //View a = inflater.inflate(R.layout.main_me, container, false);
+                if(view_me == null){
+                    view_me = inflater.inflate(R.layout.main_me, container, false);
+                    //我的界面列表
+                    LinearLayout list1 = view_me.findViewById(R.id.me_list_1);
+                    list1.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.zhaofatiao, "我的下载", "", true)
+                            .setOnRootClickListener(this, 1));
+                    //添加我的收藏
+                    list1.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.zhaofatiao, "我的收藏", "", true)
+                            .setOnRootClickListener(this, 2));
+                }
+
+                return view_me;
+            }
         }
-        return view;
+        return view_main;
     }
 
     private void setIconSize(){
-        Button mNextButton=(Button)view.findViewById(R.id.search_lawyer);
+        Button mNextButton=(Button)view_main.findViewById(R.id.search_lawyer);
         Drawable drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_lawyer);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.search_judgement);
+        mNextButton=(Button)view_main.findViewById(R.id.search_judgement);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_judgement);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.search_law_firm);
+        mNextButton=(Button)view_main.findViewById(R.id.search_law_firm);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_firm);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.search_law);
+        mNextButton=(Button)view_main.findViewById(R.id.search_law);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_law);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.quick_counseling);
+        mNextButton=(Button)view_main.findViewById(R.id.quick_counseling);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_counseling);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.unscramble);
+        mNextButton=(Button)view_main.findViewById(R.id.unscramble);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_unscramble);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.schedule);
+        mNextButton=(Button)view_main.findViewById(R.id.schedule);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_schedule);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        mNextButton=(Button)view.findViewById(R.id.help);
+        mNextButton=(Button)view_main.findViewById(R.id.help);
         drawable=ContextCompat.getDrawable(getContext(),R.drawable.main_menu_help);
         drawable.setBounds(0,0,100,100);
         mNextButton.setCompoundDrawables(null,drawable,null,null);
 
-        TextView searchBox = (TextView) view.findViewById(R.id.edt_search);
+        TextView searchBox = (TextView) view_main.findViewById(R.id.edt_search);
         Drawable d = ContextCompat.getDrawable(getContext(),R.drawable.search);
         d.setBounds(0, 5, 65, 65);
         searchBox.setCompoundDrawables(d,null,null,null);
     }
 
     private void initTabLayout() {
-        tabLayout = view.findViewById(R.id.main_tab);
-        viewpager = view.findViewById(R.id.main_view);
+        tabLayout = view_main.findViewById(R.id.main_tab);
+        viewpager = view_main.findViewById(R.id.main_view);
         //MODE_FIXED标签栏不可滑动，各个标签会平分屏幕的宽度
         tabLayout.setTabMode(tabCount <= MOVABLE_COUNT ? TabLayout.MODE_FIXED : TabLayout.MODE_SCROLLABLE);
 //        //指示条的颜色
@@ -142,6 +164,16 @@ public class BaseFragment extends Fragment {
 //            tv.setText(tabs.get(i));
 //            tab.setCustomView(tv);
 //        }
+    }
+
+    @Override
+    public void onRootClick(View v) {
+        switch ((int) v.getTag()) {
+            case 1:
+                break;
+            case 2:
+                break;
+        }
     }
 
     private void initViewPager() {
