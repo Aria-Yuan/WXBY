@@ -87,5 +87,11 @@
     <string name="tofaguijiensuo">法規檢索</string>
     <string name="toremenfatiao">熱門法條</string>
     <string name="submit">提交</string>
+        <string name="compensation">賠償金額</string>
+    <string name="max">最大值: </string>
+    <string name="avg">平均值:</string>
+    <string name="min">最小值:</string>
+    <string name="sentencing">量刑</string>
+    <string name="intrestAmount">利息金額</string>
 </resources>
 
