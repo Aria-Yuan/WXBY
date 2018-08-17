@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/quantitative_compensation"
+    tools:context=".quantitative_compensation">
+
+    <Button
+        android:id="@+id/button106"
+        android:layout_width="31dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="256dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shangyiye"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button107"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="256dp"
+        android:background="@android:color/transparent"
+        android:text="@string/to_relatived_law"
+        android:textColor="#29B8A3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button108"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="256dp"
+        android:background="@android:color/transparent"
+        android:text="@string/to_judgement_reason"
+        android:textColor="#29B8A3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/button107"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button109"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="256dp"
+        android:background="@android:color/transparent"
+        android:text="@string/to_similar_cases"
+        android:textColor="#29B8A3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/button108"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="214dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828">
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/compensationGraph"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:clickable="false"
+                android:contextClickable="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:text="@string/compensation"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textMaximum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/max"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/avg"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/min"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+             android:layout_width="120dp"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+            >
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:id="@+id/sentencingGraph"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_sentencing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:text="@string/sentencing"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:id="@+id/interestGraph"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/interestAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:text="@string/intrestAmount"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/max_interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/max"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/avg"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/min"
+                android:textAlignment="viewStart"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
