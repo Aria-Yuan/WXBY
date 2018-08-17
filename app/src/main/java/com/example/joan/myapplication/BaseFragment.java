@@ -77,6 +77,18 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                     }
                 });
 
+                Button law_firm = view_main.findViewById(R.id.search_law_firm);
+                law_firm.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        // 生成一个Intent对象
+                        Intent intent=new Intent();
+                        intent.setClass(getContext(), SearchLawFirmActivity.class); //设置跳转的Activity
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().startActivity(intent);
+                    }
+                });
+
                 return view_main;
             }
             case "2":{
@@ -84,14 +96,34 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 if(view_me == null){
                     view_me = inflater.inflate(R.layout.main_me, container, false);
                     //我的界面列表
-                    LinearLayout list1 = view_me.findViewById(R.id.me_list_1);
+                    LinearLayout list1 = view_me.findViewById(R.id.me_list_2);
                     list1.addView(new MyOneLineView(getContext())
-                            .initMine(R.drawable.zhaofatiao, "我的下载", "", true)
+                            .initMine(R.drawable.response, "我的咨詢", "", true)
                             .setOnRootClickListener(this, 1));
-                    //添加我的收藏
                     list1.addView(new MyOneLineView(getContext())
-                            .initMine(R.drawable.zhaofatiao, "我的收藏", "", true)
+                            .initMine(R.drawable.counseling, "我收到的咨詢", "", true)
                             .setOnRootClickListener(this, 2));
+
+                    LinearLayout list2 = view_me.findViewById(R.id.me_list_3);
+                    list2.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.shoucang, "我的收藏", "", true)
+                            .setOnRootClickListener(this, 3));
+                    list2.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.follow, "我的關注", "", true)
+                            .setOnRootClickListener(this, 4));
+
+                    LinearLayout list3 = view_me.findViewById(R.id.me_list_1);
+                    list3.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.wallet, "我的錢包", "", true)
+                            .setOnRootClickListener(this, 5));
+                    list3.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.cards, "我的卡券", "", true)
+                            .setOnRootClickListener(this, 6));
+
+                    LinearLayout list4 = view_me.findViewById(R.id.me_list_4);
+                    list4.addView(new MyOneLineView(getContext())
+                            .initMine(R.drawable.zhaofatiao, "關於我們", "", true)
+                            .setOnRootClickListener(this, 7));
                 }
 
                 return view_me;
@@ -147,6 +179,16 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
         searchBox.setCompoundDrawables(d,null,null,null);
     }
 
+    @Override
+    public void onRootClick(View v) {
+        switch ((int) v.getTag()) {
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+    }
+
     private void initTabLayout() {
         tabLayout = view_main.findViewById(R.id.main_tab);
         viewpager = view_main.findViewById(R.id.main_view);
@@ -164,16 +206,6 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
 //            tv.setText(tabs.get(i));
 //            tab.setCustomView(tv);
 //        }
-    }
-
-    @Override
-    public void onRootClick(View v) {
-        switch ((int) v.getTag()) {
-            case 1:
-                break;
-            case 2:
-                break;
-        }
     }
 
     private void initViewPager() {
