@@ -93,5 +93,34 @@
     <string name="min">最小值:</string>
     <string name="sentencing">量刑</string>
     <string name="intrestAmount">利息金額</string>
+    
+      <string name="judgephoto">judgephoto</string>
+    <string name="nameOfJudge">法官</string>
+    <string name="court">法官任職法院</string>
+    <string name="seniority">法官任職年數</string>
+    <string name="casesAmounts">判案次數</string>
+    <string name="Title_setting">設定</string>
+    <string name="UserPhoto">TODO</string>
+    <string name="UserName">甄紅</string>
+    <string name="UserId">Hong_Zhen</string>
+    <string name="Sexual">性別</string>
+    <string name="LocationSetting">地區</string>
+    <string name="MyConsultation">我的諮詢</string>
+    <string name="MyCollections">我的收藏</string>
+    <string name="MyQuestions">我的提問</string>
+    <string name="ConcernedLawyers">關注的律師</string>
+    <string name="Settings">設置</string>
+    <string name="FeedbacksTitle">反饋</string>
+    <string name="feedback_title">用戶反饋</string>
+
+    <string name="feedback_hint">系統有什麼有待改善之處呢?</string>
+    <string name="collection_title">我的收藏</string>
+    <string name="concerned_lawyer_title">我關注的律師</string>
+    <string name="lawyerName1">傅雲縣</string>
+    <string name="office">君漢律師事務所</string>
+    <string name="major">擅長：刑事辯護、婚姻繼承、交通糾紛</string>
+    <string name="my_question_title">我的提問</string>
+    <string name="question_content">租約未到期，但因房東要賣房子因而把人趕出去，可以嗎</string>
+    <string name="should_be_other_layout">TODO</string>
 </resources>
 
