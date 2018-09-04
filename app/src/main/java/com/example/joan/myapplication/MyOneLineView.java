@@ -133,7 +133,7 @@ public class MyOneLineView extends LinearLayout {
         init(iconRes, textContent);
         setRightText(textRight);
         showArrow(showArrow);
-        setDividerBottomHigiht(2);
+        setDividerBottomHigiht(3);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,19 +13,34 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+
+import com.example.joan.myapplication.database.model.LawFirmModel;
+import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchLawFirmActivity extends AppCompatActivity{
+public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneLineView.OnRootClickListener{
     TabLayout tabLayout;
     ViewPager viewpager;
     private List<String> tabs;
     private List<Fragment> fragments;
 
     private EditText input;
+
+    private LawFirmRepositoryImpl lawFirmRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +51,7 @@ public class SearchLawFirmActivity extends AppCompatActivity{
         initDatas();
         initViewPager();
         initView();
+
     }
 
     private void initTabLayout() {
@@ -151,7 +168,10 @@ public class SearchLawFirmActivity extends AppCompatActivity{
 //                    queryData("");
 //                }
 //                //根据输入的内容模糊查询商品，并跳转到另一个界面，这个根据需求实现
-//                Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show();
+                SearchLawFirmActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                searchLawFirm("Asia");
+                input.setHint("找什麼呢");
+                input.setText("");
             }
         });
 
@@ -197,6 +217,77 @@ public class SearchLawFirmActivity extends AppCompatActivity{
         public CharSequence getPageTitle(int position) {
             return tabs.get(position);
         }
+    }
+
+    private void searchLawFirm(String condition){
+//        List<LawFirmModel> firms = lawFirmRepository.findByCondition("Asia");
+
+//        new Thread(){
+//            @Override
+//            public void run(){
+//                //把要联网的代码放在这里
+//                lawFirmRepository = new LawFirmRepositoryImpl();
+//
+//                MongoClientURI mongoDBurl = new MongoClientURI("" +
+//                        "mongodb://dajiayiqibiye:wxby@wxby-shard-00-00-7ea9c.mongodb.net:27017,wxby-shard-00-01-7ea9c.mongodb.net:27017,wxby-shard-00-02-7ea9c.mongodb.net:27017/test?ssl=true&replicaSet=WXBY-shard-0&authSource=admin&retryWrites=true");
+//                MongoClient mongoClient = new MongoClient(mongoDBurl);
+//                System.out.println(mongoClient.toString()+"&&&&&&&&&&&&&&&");
+//                MongoDatabase db = mongoClient.getDatabase("wxby");
+//                MongoCollection<Document> collection = db.getCollection("law_firm");
+//                FindIterable<Document> a = collection.find().limit(1);
+//                //System.out.println("***********" + a.first().get("firm_addr"));
+//
+        setContentView(R.layout.law_firm_search_result);
+        LinearLayout result = findViewById(R.id.law_firm_result);
+        for(int i = 0 ; i < 10; i++){
+            result.addView(new FirmOneLineView(getBaseContext())
+                    .init("我们真的能毕业吗事务所","新北市新专区中正路","hahaha")
+                    .setOnRootClickListener(this, new ObjectId()));
+        }
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), SearchLawFirmActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+//        System.out.println("&&&&&&&&" + firms.get(0).getAddress());
+
+//        for (LawFirmModel firm: firms) {
+//            result.addView(new FirmOneLineView(getBaseContext())
+//                    .init(firm.getAddress(),firm.getAddress(),firm.getType())
+//                    .setOnRootClickListener(this, firm.getId()));
+//        }
+
+
+    }
+
+    @Override
+    public void onRootClick(View v) {
+//        LawFirmModel firm = lawFirmRepository.findById((ObjectId)v.getTag());
+//        setContentView(R.layout.law_firm_detail);
+//
+        switch (v.getId()){
+            case R.id.btn_back:{
+                findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        finish();
+                    }
+                });
+            }break;
+
+            default:{
+                Intent intent=new Intent();
+                intent.setClass(v.getContext(), SearchLawFirmDetailActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }break;
+        }
+
     }
 
 

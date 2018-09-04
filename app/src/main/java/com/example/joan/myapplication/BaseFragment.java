@@ -77,6 +77,30 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                     }
                 });
 
+                Button search_case = view_main.findViewById(R.id.search_judgement);
+                search_case.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        // 生成一个Intent对象
+                        Intent intent=new Intent();
+                        intent.setClass(getContext(), SearchCasesActivity.class); //设置跳转的Activity
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().startActivity(intent);
+                    }
+                });
+
+                Button search_law = view_main.findViewById(R.id.search_law);
+                search_law.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        // 生成一个Intent对象
+                        Intent intent=new Intent();
+                        intent.setClass(getContext(), SearchLawActivity.class); //设置跳转的Activity
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().startActivity(intent);
+                    }
+                });
+
                 Button law_firm = view_main.findViewById(R.id.search_law_firm);
                 law_firm.setOnClickListener(new View.OnClickListener(){
                     @Override

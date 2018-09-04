@@ -1,26 +1,14 @@
 package com.example.joan.myapplication;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.example.joan.database.model.RegisterModel;
-import com.example.joan.database.repository.RegisterRepository;
-import com.example.joan.database.repository.RegisterRepositoryImpl;
-
-import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     @Override
