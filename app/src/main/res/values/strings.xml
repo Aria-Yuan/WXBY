@@ -27,7 +27,7 @@
     <string name="main_menu_firm">查律所</string>
     <string name="main_menu_law">查法條</string>
     <string name="main_menu_lawyer">問律師</string>
-    <string name="main_menu_counseling">案件咨詢</string>
+    <string name="main_menu_counseling">案件問答</string>
     <string name="main_menu_help">法律援助</string>
     <string name="main_menu_unscramble">傳票解讀</string>
     <string name="main_menu_schedule">進度查詢</string>
@@ -97,5 +97,13 @@
     <string name="tofaguijiensuo">法規檢索</string>
     <string name="toremenfatiao">熱門法條</string>
     <string name="submit">提交</string>
+    <string name="cancle">取消</string>
+    <string name="select_title">請選擇時間</string>
+    <string name="commit">確定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">時</string>
+    <string name="minute">分</string>
 </resources>
 

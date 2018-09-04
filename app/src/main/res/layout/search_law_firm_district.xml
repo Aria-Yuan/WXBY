@@ -21,7 +21,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="10dp"
                android:paddingBottom="10dp"
-               android:paddingStart="20dp"
+               android:paddingStart="30dp"
                android:paddingTop="10dp">
 
                <TextView
@@ -38,8 +38,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -92,8 +92,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -147,8 +147,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -202,7 +202,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="10dp"
                android:paddingBottom="10dp"
-               android:paddingStart="20dp"
+               android:paddingStart="30dp"
                android:paddingTop="10dp">
 
                <TextView
@@ -219,8 +219,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -273,8 +273,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -329,7 +329,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="10dp"
                android:paddingBottom="10dp"
-               android:paddingStart="20dp"
+               android:paddingStart="30dp"
                android:paddingTop="10dp">
 
                <TextView
@@ -346,8 +346,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -400,8 +400,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton
@@ -456,7 +456,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="10dp"
                android:paddingBottom="10dp"
-               android:paddingStart="20dp"
+               android:paddingStart="30dp"
                android:paddingTop="10dp">
 
                <TextView
@@ -473,8 +473,8 @@
                android:layout_height="match_parent"
                android:gravity="center"
                android:paddingBottom="5dp"
-               android:paddingEnd="40dp"
-               android:paddingStart="40dp"
+               android:paddingEnd="50dp"
+               android:paddingStart="50dp"
                android:paddingTop="5dp">
 
                <RadioButton

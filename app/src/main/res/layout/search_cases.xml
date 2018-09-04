@@ -1,480 +1,703 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/zhaoanjian_background"
-    tools:context=".SearchCasesActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="43dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="503dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/tijiao"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_firm_pager_bar"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/colorAccent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="31dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="503dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shangyiye"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/title"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/notice"
-        android:layout_width="24dp"
-        android:layout_height="26dp"
-        android:layout_marginBottom="422dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/tongzhi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/submit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
-
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="137dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/wenan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/menu"
-        android:layout_width="49dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/shoye"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/mine"
-        android:layout_width="37dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/wode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.684"
-        app:layout_constraintStart_toEndOf="@+id/menu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.968" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/zahoanjianTitle"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
-
-    <TextView
-        android:id="@+id/hot_cases"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/remenanjianTitle"
-        android:textColor="#DFE0E3"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.121" />
-
-    <TextView
-        android:id="@+id/search_case"
-        android:layout_width="72dp"
-        android:layout_height="22dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/anjiansosuo"
-        android:textColor="#5AC7B7"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/hot_cases"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127" />
-
-    <TextView
-        android:id="@+id/keyword"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="286dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/jiensuozihuiTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
-
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="286dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/caipanzihaoTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/keyword" />
-
-    <TextView
-        android:id="@+id/court"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/diyuanfanwei"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id" />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="286dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/caipanleibie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/court" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginEnd="286dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/caipanqibie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type" />
-
-    <TextView
-        android:id="@+id/detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="286dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/caipananyouTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/caipanzhuwen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail" />
-
-    <TextView
-        android:id="@+id/judge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="61dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/chengshenfaguan"
-        app:layout_constraintEnd_toStartOf="@+id/add"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/keword_input"
-        android:layout_width="245dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toEndOf="@+id/keyword"
-        app:layout_constraintTop_toBottomOf="@+id/hot_cases">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:hint="@string/jiensuozihui" />
+            android:layout_marginRight="20dp"
+            android:background="@android:color/transparent"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:src="@drawable/back"
+            android:textColor="@color/selector_item_color"
+            android:textSize="8pt" />
 
-    </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:id="@+id/et_search"
+            android:layout_width="274dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="找案件"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="10pt" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/id_input"
-        android:layout_width="245dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
-        app:layout_constraintStart_toEndOf="@+id/id"
-        app:layout_constraintTop_toBottomOf="@+id/keword_input">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/submit"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:hint="@string/caipanzihao" />
-    </android.support.design.widget.TextInputLayout>
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:src="@drawable/inform0"
+            android:text="提交"
+            android:textColor="@color/background"
+            android:textSize="9pt" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/reason_input"
-        android:layout_width="245dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="136dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toEndOf="@+id/detail"
-        app:layout_constraintTop_toBottomOf="@+id/id_input">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_firm_pager_bar"
+        android:layout_marginRight="5dp">
 
-        <android.support.design.widget.TextInputEditText
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/caipananyouInput" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/content_input"
-        android:layout_width="245dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toEndOf="@+id/content"
-        app:layout_constraintTop_toBottomOf="@+id/reason_input">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/caipanzhuwenInput" />
-    </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="檢索字彙"
+                    android:textSize="9pt" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/judge__input"
-        android:layout_width="245dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.629"
-        app:layout_constraintStart_toEndOf="@+id/judge"
-        app:layout_constraintTop_toBottomOf="@+id/content_input">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/chengshenfzguanInput" />
-    </android.support.design.widget.TextInputLayout>
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeletek"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="88dp"
-        android:contentDescription="@string/nienyuere"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_input"
-        app:srcCompat="@drawable/nienyuere" />
+                    <EditText
+                        android:id="@+id/keyword"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:hint="檢索詞彙"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="88dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
-        app:layout_constraintStart_toEndOf="@+id/date"
-        app:layout_constraintTop_toBottomOf="@+id/id_input">
+                    <ImageView
+                        android:id="@+id/ivDeleteTextk"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:paddingRight="6dp"
+                        android:src="@drawable/delete"
+                        android:visibility="gone" />
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/mingguo" />
-    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="88dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/id_input">
+            </LinearLayout>
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/yue" />
-    </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="5dp"
+                android:paddingTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout7"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="280dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout5"
-        app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="裁判字號"
+                    android:textSize="9pt" />
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/re" />
-    </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout6"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
-        app:layout_constraintStart_toEndOf="@+id/date"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeletey"
+                    android:layout_width="60dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/zhinian" />
-    </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/year"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout8"
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+                </RelativeLayout>
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/zhiyue" />
-    </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="年"
+                    android:textColor="@color/selector_item_color"
+                    android:textSize="8pt" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout8"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeletez"
+                    android:layout_width="60dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/zhire" />
-    </android.support.design.widget.TextInputLayout>
-</android.support.constraint.ConstraintLayout>
+                    <EditText
+                        android:id="@+id/zihao"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="字  第"
+                    android:textColor="@color/selector_item_color"
+                    android:textSize="8pt" />
+
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeleteyn"
+                    android:layout_width="60dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
+
+                    <EditText
+                        android:id="@+id/number"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="號"
+                    android:textColor="@color/selector_item_color"
+                    android:textSize="8pt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="地院範圍"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="僅一般案件"
+                        android:textColor="@color/selector_item_color"
+                        android:textSize="8pt" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="僅簡易案件"
+                        android:textColor="@color/selector_item_color"
+                        android:textSize="8pt" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="裁判類別"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingEnd="100dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:shadowColor="@color/selector_item_color"
+                        android:text="裁定"
+                        android:textColor="@color/selector_item_color"
+                        android:textSize="8pt" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:shadowColor="@color/selector_item_color"
+                        android:text="判決"
+                        android:textColor="@color/selector_item_color"
+                        android:textColorLink="@color/selector_item_color"
+                        android:textSize="8pt" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:text="裁判期別"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:text="開始時間"
+                            android:textColor="@color/selector_item_color"
+                            android:textSize="8pt" />
+
+                        <RelativeLayout
+                            android:id="@+id/startDate"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/style_home_pager_toolbar_search_view"
+                            android:drawableStart="@drawable/search"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:textColor="@color/selector_item_color"
+                            android:textColorHint="#8a8a8a">
+
+                            <EditText
+                                android:id="@+id/start"
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@null"
+                                android:gravity="fill_vertical|start"
+                                android:hint="請選擇"
+                                android:inputType="text"
+                                android:lines="1"
+                                android:paddingStart="10dp"
+                                android:textColor="#515151"
+                                android:textColorHint="#8a8a8a"
+                                android:textSize="7pt" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:text="結束時間"
+                            android:textColor="@color/selector_item_color"
+                            android:textSize="8pt" />
+
+                        <RelativeLayout
+                            android:id="@+id/endDate"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/style_home_pager_toolbar_search_view"
+                            android:drawableStart="@drawable/search"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:textColor="@color/selector_item_color"
+                            android:textColorHint="#8a8a8a">
+
+                            <EditText
+                                android:id="@+id/end"
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@null"
+                                android:gravity="fill_vertical|start"
+                                android:hint="請選擇"
+                                android:inputType="text"
+                                android:lines="1"
+                                android:paddingStart="10dp"
+                                android:textColor="#515151"
+                                android:textColorHint="#8a8a8a"
+                                android:textSize="7pt" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="裁判案由"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeleter"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
+
+                    <EditText
+                        android:id="@+id/reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:hint="裁判案由"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
+
+                    <ImageView
+                        android:id="@+id/ivDeleteTextr"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:paddingRight="6dp"
+                        android:src="@drawable/delete"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="裁判主文"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeletec"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
+
+                    <EditText
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:hint="裁判主文"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
+
+                    <ImageView
+                        android:id="@+id/ivDeleteTextc"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:paddingRight="6dp"
+                        android:src="@drawable/delete"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="承審法官"
+                    android:textSize="9pt" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/line" />
+
+                <RelativeLayout
+                    android:id="@+id/rlSearchFrameDeletej"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_home_pager_toolbar_search_view"
+                    android:drawableStart="@drawable/search"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/selector_item_color"
+                    android:textColorHint="#8a8a8a">
+
+                    <EditText
+                        android:id="@+id/judge"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="fill_vertical|start"
+                        android:hint="裁審法官"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:textColor="#515151"
+                        android:textColorHint="#8a8a8a"
+                        android:textSize="7pt" />
+
+                    <ImageView
+                        android:id="@+id/ivDeleteTextj"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:paddingRight="6dp"
+                        android:src="@drawable/delete"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
