@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">我們的app還沒有名字</string>
     <string name="hint">hint</string>
-    <string name="title">查事務所</string>
+    <string name="title">請選擇時間</string>
     <string name="按地區">string</string>
     <string name="anfenlei">按分類</string>
     <string name="tuijian">推薦</string>

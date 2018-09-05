@@ -13,13 +13,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.joan.myapplication.DatePicker.CustomDatePicker;
 
 import org.bson.types.ObjectId;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class SearchLawActivity extends AppCompatActivity implements CaseOneLineView.OnRootClickListener{
+public class SearchLawActivity extends AppCompatActivity implements CaseOneLineView.OnRootClickListener {
     TabLayout tabLayout;
     ViewPager viewpager;
     private List<String> tabs;
@@ -88,6 +95,7 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
 
         fragments.add(homeFragment);
         fragments.add(orderFragment);
+
     }
 
     private class VpAdapter extends FragmentPagerAdapter {
@@ -121,8 +129,8 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
         EditText year = findViewById(R.id.year);
         EditText zihao = findViewById(R.id.zihao);
         EditText num = findViewById(R.id.number);
-        EditText start = findViewById(R.id.start);
-        EditText end = findViewById(R.id.end);
+        TextView start = findViewById(R.id.start);
+        TextView end = findViewById(R.id.end);
         EditText reason = findViewById(R.id.reason);
         EditText content = findViewById(R.id.content);
         EditText judge = findViewById(R.id.judge);
@@ -138,8 +146,8 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(v.getContext(), SearchLawActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(v.getContext(), SearchLawActivity.class);
+//                startActivity(intent);
                 finish();
             }
         });
@@ -170,4 +178,5 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
         }
 
     }
+
 }

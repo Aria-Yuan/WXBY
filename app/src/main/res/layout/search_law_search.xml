@@ -449,7 +449,7 @@
                         android:textColor="@color/selector_item_color"
                         android:textColorHint="#8a8a8a">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/start"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
@@ -464,6 +464,17 @@
                             android:textColor="#515151"
                             android:textColorHint="#8a8a8a"
                             android:textSize="7pt" />
+
+                        <ImageView
+                            android:id="@+id/down_start"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:paddingBottom="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingTop="6dp"
+                            android:src="@drawable/choose" />
 
                     </RelativeLayout>
 
@@ -481,7 +492,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginEnd="10dp"
-                        android:text="開始時間"
+                        android:text="結束時間"
                         android:textColor="@color/selector_item_color"
                         android:textSize="8pt" />
 
@@ -501,7 +512,7 @@
                         android:textColor="@color/selector_item_color"
                         android:textColorHint="#8a8a8a">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/end"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
@@ -516,6 +527,17 @@
                             android:textColor="#515151"
                             android:textColorHint="#8a8a8a"
                             android:textSize="7pt" />
+
+                        <ImageView
+                            android:id="@+id/down_end"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:paddingBottom="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingTop="6dp"
+                            android:src="@drawable/choose" />
 
                     </RelativeLayout>
 

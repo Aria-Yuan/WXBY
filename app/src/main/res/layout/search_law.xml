@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="找法條"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorWhite"
             android:textSize="10pt" />
 
         <TextView

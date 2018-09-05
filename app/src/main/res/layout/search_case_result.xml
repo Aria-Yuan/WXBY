@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="找案件"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/background"
             android:textSize="10pt" />
 
         <TextView
