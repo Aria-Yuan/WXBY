@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="lawyer_consult_single_lawyer">
+        <attr name="singleLawyerString" format="string" />
+        <attr name="singleLawyerDimension" format="dimension" />
+        <attr name="singleLawyerColor" format="color" />
+        <attr name="singleLawyerDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

@@ -64,54 +64,7 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 initTabLayout();
                 initDatas();
                 initViewPager();
-
-                TextView search = (TextView) view_main.findViewById(R.id.edt_search);
-                search.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        // 生成一个Intent对象
-                        Intent intent=new Intent();
-                        intent.setClass(getContext(), SearchActivity.class); //设置跳转的Activity
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        getActivity().startActivity(intent);
-                    }
-                });
-
-                Button search_case = view_main.findViewById(R.id.search_judgement);
-                search_case.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        // 生成一个Intent对象
-                        Intent intent=new Intent();
-                        intent.setClass(getContext(), SearchCasesActivity.class); //设置跳转的Activity
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        getActivity().startActivity(intent);
-                    }
-                });
-
-                Button search_law = view_main.findViewById(R.id.search_law);
-                search_law.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        // 生成一个Intent对象
-                        Intent intent=new Intent();
-                        intent.setClass(getContext(), SearchLawActivity.class); //设置跳转的Activity
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        getActivity().startActivity(intent);
-                    }
-                });
-
-                Button law_firm = view_main.findViewById(R.id.search_law_firm);
-                law_firm.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        // 生成一个Intent对象
-                        Intent intent=new Intent();
-                        intent.setClass(getContext(), SearchLawFirmActivity.class); //设置跳转的Activity
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        getActivity().startActivity(intent);
-                    }
-                });
+                initMainButton();
 
                 return view_main;
             }
@@ -149,7 +102,6 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                             .initMine(R.drawable.zhaofatiao, "關於我們", "", true)
                             .setOnRootClickListener(this, 7));
                 }
-
                 return view_me;
             }
         }
@@ -247,6 +199,104 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
             fragments.add(MainViewFragment.newInstance(tabs.get(i)));
         }
 
+    }
+
+    private void initMainButton(){
+        final TextView search = (TextView) view_main.findViewById(R.id.edt_search);
+        search.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), SearchActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button search_case = view_main.findViewById(R.id.search_judgement);
+        search_case.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), SearchCasesActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button search_law = view_main.findViewById(R.id.search_law);
+        search_law.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), SearchLawActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button law_firm = view_main.findViewById(R.id.search_law_firm);
+        law_firm.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), SearchLawFirmActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button quick_counseling = view_main.findViewById(R.id.quick_counseling);
+        quick_counseling.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), CounselingActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button unscramble = view_main.findViewById(R.id.unscramble);
+        unscramble.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), unFinishedActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button schedule = view_main.findViewById(R.id.schedule);
+        schedule.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), unFinishedActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        Button help = view_main.findViewById(R.id.help);
+        help.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), unFinishedActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

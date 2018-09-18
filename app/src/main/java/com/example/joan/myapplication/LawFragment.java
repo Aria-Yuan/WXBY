@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class LawFragment extends Fragment {
             case "0":{
                 if(view_search == null){
                     view_search = inflater.inflate(R.layout.search_law_search, container, false);
+//                    .findViewById(R.id.submit).setVisibility(View.VISIBLE);
 
                     currentDateStart = (TextView) view_search.findViewById(R.id.start);
                     currentDateEnd = (TextView) view_search.findViewById(R.id.end);
@@ -105,7 +107,7 @@ public class LawFragment extends Fragment {
                 //View a = inflater.inflate(R.layout.main_me, container, false);
                 if(view_recommend == null){
 //                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
+//                    container.findViewById(R.id.submit).setVisibility(View.GONE);
                 }
 
                 return view_recommend;

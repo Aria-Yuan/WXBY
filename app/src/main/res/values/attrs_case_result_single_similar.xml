@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="case_result_single_similar">
+        <attr name="singleSimilarString" format="string" />
+        <attr name="singleSimilarDimension" format="dimension" />
+        <attr name="singleSimilarColor" format="color" />
+        <attr name="singleSimilarDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

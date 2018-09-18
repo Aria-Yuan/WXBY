@@ -49,8 +49,9 @@
         android:id="@+id/law_firm_result_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_firm_pager_bar"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/layout_firm_pager_bar"
+        android:layout_marginBottom="60dp"
         android:background="#efefef">
 
         <LinearLayout
@@ -73,14 +74,17 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:text="XXXXXXXX事務所"
                         android:textSize="10pt" />
 
                     <TextView
+                        android:id="@+id/tag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -123,6 +127,7 @@
                     android:src="@drawable/district" />
 
                 <TextView
+                    android:id="@+id/addr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -147,9 +152,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/district" />
+                    android:src="@drawable/phone" />
 
                 <TextView
+                    android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -177,6 +183,7 @@
                     android:textSize="10pt" />
 
                 <TextView
+                    android:id="@+id/intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
@@ -185,21 +192,47 @@
                     android:text="打不死人按不高於哈說不定就能VJSD納入女生的拘泥放入面深VID你身邊幾點上班馮如杯是介紹的你發你發我讓個別用熱水"
                     android:textSize="8pt" />
 
-                <Button
-                    android:id="@+id/contact"
-                    android:layout_width="300dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/selector_item_color"
-                    android:text="聯繫事務所"
-                    android:textColor="@android:color/white"
-                    android:textSize="9pt" />
-            </android.support.v7.widget.LinearLayoutCompat>
+                <TextView
+                    android:layout_width="390dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="right"
+                    android:background="#efefef" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="主要業務"
+                    android:textColor="@android:color/black"
+                    android:textSize="10pt" />
+
+                <TextView
+                    android:id="@+id/major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:paddingEnd="30dp"
+                    android:paddingStart="30dp"
+                    android:text="打不死人按不高於哈說不定就能VJSD納入女生的拘泥放入面深VID你身邊幾點上班馮如杯是介紹的你發你發我讓個別用熱水"
+                    android:textSize="8pt" />
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
 
 
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/selector_item_color"
+        android:text="聯繫事務所"
+        android:textColor="@android:color/white"
+        android:textSize="9pt" />
 </RelativeLayout>

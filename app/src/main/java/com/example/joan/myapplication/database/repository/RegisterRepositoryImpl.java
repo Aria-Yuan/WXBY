@@ -59,7 +59,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
             while (cursor.hasNext()) {
                 RegisterModel register = new RegisterModel();
                 Document current_cursor = cursor.next();
-                register.setId(current_cursor.getObjectId("_id"));
+//                register.setId(current_cursor.getObjectId("_id"));
                 register.setRegId(current_cursor.getString("reg_id"));
                 register.setPhone(current_cursor.getString("phone"));
                 register.setName(current_cursor.getString("name"));
@@ -87,7 +87,7 @@ public class RegisterRepositoryImpl implements RegisterRepository {
             while (cursor.hasNext()) {
                 RegisterModel register = new RegisterModel();
                 Document current_cursor = cursor.next();
-                register.setId(current_cursor.getObjectId("_id"));
+//                register.setId(current_cursor.getObjectId("_id"));
                 register.setRegId(current_cursor.getString("reg_id"));
                 register.setPhone(current_cursor.getString("phone"));
                 register.setName(current_cursor.getString("name"));

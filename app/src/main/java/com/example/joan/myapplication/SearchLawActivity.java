@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,14 +12,25 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.DatePicker.CustomDatePicker;
+import com.example.joan.myapplication.database.model.LawFirmModel;
+import com.example.joan.myapplication.database.model.LawModel;
+import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
+import com.example.joan.myapplication.database.repository.LawRepositoryImpl;
 
+import net.sf.json.JSONArray;
+
+import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,11 +38,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchLawActivity extends AppCompatActivity implements CaseOneLineView.OnRootClickListener {
+import me.shihao.library.XRadioGroup;
+
+public class SearchLawActivity extends AppCompatActivity implements LawOneLineView.OnRootClickListener {
     TabLayout tabLayout;
     ViewPager viewpager;
     private List<String> tabs;
     private List<Fragment> fragments;
+
+    List<LawModel> lawList;
+    String condition;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +71,42 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
                 searchLaw();
             }
         });
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tabLayout.getSelectedTabPosition()==1){
+                    findViewById(R.id.submit).setVisibility(View.INVISIBLE);
+                    InputMethodManager imm = (InputMethodManager) SearchLawActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(imm != null){
+                        imm.toggleSoftInput(0,0);
+                    }
+                }else{
+                    findViewById(R.id.submit).setVisibility(View.VISIBLE);
+                    InputMethodManager imm = (InputMethodManager) SearchLawActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(imm != null){
+                        imm.toggleSoftInput(1,0);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     private void initTabLayout() {
@@ -126,21 +179,69 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
     private void searchLaw(){
         SearchLawActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         EditText keyword = findViewById(R.id.keyword);
-        EditText year = findViewById(R.id.year);
-        EditText zihao = findViewById(R.id.zihao);
-        EditText num = findViewById(R.id.number);
+        EditText and = findViewById(R.id.and);
+        EditText or = findViewById(R.id.or);
+        EditText not = findViewById(R.id.not);
         TextView start = findViewById(R.id.start);
         TextView end = findViewById(R.id.end);
-        EditText reason = findViewById(R.id.reason);
-        EditText content = findViewById(R.id.content);
-        EditText judge = findViewById(R.id.judge);
+        EditText num = findViewById(R.id.number);
 
+        try{
+            RequestParams params = new RequestParams("http://192.168.137.194:8080/searchLaw.action");
+            Document d_condition = new Document();
+            if(!keyword.getText().toString().isEmpty()){
+                d_condition.append("keyword",keyword.getText().toString());
+            }
+            if(!and.getText().toString().isEmpty()){
+                d_condition.append("and",and.getText().toString());
+            }
+            if(!or.getText().toString().isEmpty()){
+                d_condition.append("or",or.getText().toString());
+            }
+            if(!not.getText().toString().isEmpty()){
+                d_condition.append("not",not.getText().toString());
+            }
+
+            condition = d_condition.toJson();
+            params.addQueryStringParameter("condition",condition);
+            params.addQueryStringParameter("type", "0");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    lawList = new LawRepositoryImpl().convert(jArray);
+
+                    LawView(lawList);
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void LawView(List<LawModel> lawList){
         setContentView(R.layout.search_law_result);
         LinearLayout result = findViewById(R.id.law_result);
-        for(int i = 0 ; i < 10; i++){
-            result.addView(new CaseOneLineView(getBaseContext())
-                    .init("我们真的能毕业吗法院","103年度板簡字53號","返還房屋租賃","民事")
-                    .setOnRootClickListener(this, new ObjectId()));
+        for(int i = 0 ; i < lawList.size(); i++){
+            result.addView(new LawOneLineView(getBaseContext())
+                    .init(lawList.get(i).getName(),lawList.get(i).getContent(),"#民事")
+                    .setOnRootClickListener(this, i));
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
@@ -151,7 +252,6 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
                 finish();
             }
         });
-
     }
 
     @Override
@@ -170,9 +270,13 @@ public class SearchLawActivity extends AppCompatActivity implements CaseOneLineV
             }break;
 
             default:{
+                LawModel l = lawList.get((int)v.getTag());
                 Intent intent=new Intent();
                 intent.setClass(v.getContext(), SearchLawDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bunble = new Bundle();
+                bunble.putSerializable("law", l);
+                intent.putExtras(bunble);
                 startActivity(intent);
             }break;
         }

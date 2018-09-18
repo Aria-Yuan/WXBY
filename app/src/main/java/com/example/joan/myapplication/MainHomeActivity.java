@@ -127,6 +127,17 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         });*/
 
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(MainHomeActivity.this, ConsultingActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void resetToDefaultIcon(){

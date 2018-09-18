@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/lawyer_consult_lawyer_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lawyer" />
+
+        <TextView
+            android:id="@+id/lawyer_consult_lawyer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/lawyer_consult_lawyer_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="@string/consult_lawyer_result_lawyer_answer"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lawyer_consult_lawyer_name"
+            app:layout_constraintStart_toEndOf="@+id/lawyer_consult_lawyer_name" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/lawyer_consult_lawyer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="TextView"
+        android:textSize="16sp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lawyer_consult_lawyer_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:paddingBottom="16dp"
+            android:paddingLeft="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lawyer_consult_lawyer_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:paddingBottom="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/lawyer_consult_lawyer_date"
+            app:layout_constraintStart_toEndOf="@+id/lawyer_consult_lawyer_date" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:srcCompat="@drawable/line_l" />
+
+</LinearLayout>

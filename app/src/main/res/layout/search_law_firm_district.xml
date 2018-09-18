@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <RadioGroup
+   <me.shihao.library.XRadioGroup
+       android:id="@+id/district_body"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
 
@@ -43,11 +44,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d1"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="基隆市"
                    android:text="基隆市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -57,14 +60,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d2"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="台北市"
                    android:text="台北市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -74,14 +79,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d3"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="新北市"
                    android:text="新北市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -97,11 +104,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d4"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="桃園縣"
                    android:text="桃園縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -111,14 +120,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d5"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="宜蘭市"
                    android:text="宜蘭市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -128,14 +139,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d6"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="新竹縣"
                    android:text="新竹縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -152,11 +165,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d7"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="新竹市"
                    android:text="新竹市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -166,7 +181,7 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
                    android:layout_width="wrap_content"
@@ -224,11 +239,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d8"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="苗栗縣"
                    android:text="苗栗縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -238,14 +255,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d9"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="台中市"
                    android:text="台中市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -255,14 +274,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d10"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="彰化縣"
                    android:text="彰化縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -278,11 +299,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d11"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="南投縣"
                    android:text="南投縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -292,14 +315,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d12"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="雲林縣"
                    android:text="雲林縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -309,14 +334,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d13"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="澎湖縣"
                    android:text="澎湖縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -351,11 +378,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d14"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="嘉義縣"
                    android:text="嘉義縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -365,14 +394,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="嘉義市"
                    android:text="嘉義市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -382,14 +413,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d16"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="台南市"
                    android:text="台南市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -405,11 +438,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d17"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="高雄市"
                    android:text="高雄市"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -419,14 +454,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d18"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="屏東縣"
                    android:text="屏東縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -436,7 +473,7 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
                    android:layout_width="wrap_content"
@@ -478,11 +515,13 @@
                android:paddingTop="5dp">
 
                <RadioButton
+                   android:id="@+id/d19"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="花蓮縣"
                    android:text="花蓮縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -492,14 +531,16 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
+                   android:id="@+id/d20"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:button="@null"
                    android:gravity="center"
+                   android:tag="台東縣"
                    android:text="台東縣"
                    android:textColor="@color/unselector_item_color"
                    android:textSize="8pt" />
@@ -509,7 +550,7 @@
                    android:layout_height="35dp"
                    android:layout_gravity="center"
                    android:layout_weight="1"
-                   android:src="@drawable/line" />
+                   android:src="@drawable/line_z" />
 
                <RadioButton
                    android:layout_width="wrap_content"
@@ -524,7 +565,7 @@
 
        </TableLayout>
 
-   </RadioGroup>
+   </me.shihao.library.XRadioGroup>
 
 
 

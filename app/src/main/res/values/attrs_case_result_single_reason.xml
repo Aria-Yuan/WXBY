@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="case_result_single_reason">
+        <attr name="singleReasonString" format="string" />
+        <attr name="singleReasonDimension" format="dimension" />
+        <attr name="singleReasonColor" format="color" />
+        <attr name="singleReasonDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

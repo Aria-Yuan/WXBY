@@ -2,9 +2,10 @@ package com.example.joan.myapplication.database.model;
 
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class LawyerModel {
+public class LawyerModel implements Serializable {
     private ObjectId id;
     private ObjectId regMsg;
     private String name;

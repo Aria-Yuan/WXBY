@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="lawyer_consult_single_sort">
+        <attr name="singleSortString" format="string" />
+        <attr name="singleSortDimension" format="dimension" />
+        <attr name="singleSortColor" format="color" />
+        <attr name="singleSortDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

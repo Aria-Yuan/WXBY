@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".LegalCounselingActivity">
+    android:background="@color/mainbg"
+    tools:context=".ConsultingActivity">
 
     <TextView
         android:id="@+id/title"
@@ -36,46 +36,37 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
-        android:id="@+id/ask_lawyer"
+        android:id="@+id/consult_lawyer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="157dp"
-        android:layout_marginStart="115dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_lvshizisun"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/remarks" />
 
     <Button
-        android:id="@+id/ask_case"
+        android:id="@+id/consult_case"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="192dp"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/button_anjianzisun"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ask_lawyer" />
+        app:layout_constraintTop_toBottomOf="@+id/consult_lawyer" />
 
     <Button
-        android:id="@+id/ask_quick_response"
+        android:id="@+id/consult_quick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="183dp"
-        android:layout_marginStart="89dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/button_kuaisuwenda"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ask_case" />
+        app:layout_constraintTop_toBottomOf="@+id/consult_case" />
 
     <Button
-        android:id="@+id/back"
+        android:id="@+id/consult_cancel"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="137dp"
@@ -83,5 +74,5 @@
         android:background="@drawable/quit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ask_quick_response" />
+        app:layout_constraintTop_toBottomOf="@+id/consult_quick" />
 </android.support.constraint.ConstraintLayout>

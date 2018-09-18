@@ -74,7 +74,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RelativeLayout
                     android:id="@+id/rlSearchFrameDeletek"
@@ -140,7 +140,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RelativeLayout
                     android:id="@+id/rlSearchFrameDeletey"
@@ -286,7 +286,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -334,7 +334,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -385,7 +385,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -537,7 +537,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RelativeLayout
                     android:id="@+id/rlSearchFrameDeleter"
@@ -602,7 +602,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RelativeLayout
                     android:id="@+id/rlSearchFrameDeletec"
@@ -669,7 +669,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/line" />
+                    android:src="@drawable/line_z" />
 
                 <RelativeLayout
                     android:id="@+id/rlSearchFrameDeletej"

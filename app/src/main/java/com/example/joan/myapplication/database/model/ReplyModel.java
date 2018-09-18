@@ -2,10 +2,11 @@ package com.example.joan.myapplication.database.model;
 
 import org.w3c.dom.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ReplyModel {
+public class ReplyModel implements Serializable {
     private RegisterModel answerer;
     private Date createTime;
     private Document content;

@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="case_result_single_refer">
+        <attr name="singleReferString" format="string" />
+        <attr name="singleReferDimension" format="dimension" />
+        <attr name="singleReferColor" format="color" />
+        <attr name="singleReferDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

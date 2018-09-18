@@ -16,9 +16,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
@@ -26,17 +32,29 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
+import net.sf.json.JSONArray;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+
+import me.shihao.library.XRadioGroup;
 
 public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneLineView.OnRootClickListener{
     TabLayout tabLayout;
     ViewPager viewpager;
+    XRadioGroup district;
     private List<String> tabs;
     private List<Fragment> fragments;
+    List<LawFirmModel> firmList;
 
     private EditText input;
 
@@ -51,6 +69,71 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
         initDatas();
         initViewPager();
         initView();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tabLayout.getSelectedTabPosition()==1){
+                    district = (XRadioGroup )findViewById(R.id.district_body);
+
+                    district.setOnCheckedChangeListener(new XRadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged (XRadioGroup group,int checkedId){
+                            System.out.println("我在這裡");
+                            String district = findViewById(checkedId).getTag().toString();
+
+                            try{
+                                RequestParams params = new RequestParams("http://192.168.1.111:8080/searchFirm.action");
+                                params.addQueryStringParameter("condition",district);
+                                params.addQueryStringParameter("type", "1");
+                                x.http().get(params, new Callback.CommonCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        JSONArray jArray= JSONArray.fromObject(s);
+                                        firmList = new LawFirmRepositoryImpl().convert(jArray);
+
+                                        FirmView(firmList);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable throwable, boolean b) {
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(CancelledException e) {
+
+                                    }
+
+                                    @Override
+                                    public void onFinished() {
+
+                                    }
+                                });
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
@@ -99,10 +182,10 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
         bundle.putString("position", "2");
         meFragment.setArguments(bundle);
 
-
         fragments.add(homeFragment);
         fragments.add(orderFragment);
         fragments.add(meFragment);
+
     }
 
     private void initView(){
@@ -169,7 +252,7 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
 //                }
 //                //根据输入的内容模糊查询商品，并跳转到另一个界面，这个根据需求实现
                 SearchLawFirmActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-                searchLawFirm("Asia");
+                searchLawFirm(input.getText().toString());
                 input.setHint("找什麼呢");
                 input.setText("");
             }
@@ -220,29 +303,49 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
     }
 
     private void searchLawFirm(String condition){
-//        List<LawFirmModel> firms = lawFirmRepository.findByCondition("Asia");
+        try{
+            RequestParams params = new RequestParams("http://140.136.155.131:8080/searchFirm.action");
+            params.addQueryStringParameter("condition",condition);
+            params.addQueryStringParameter("type", "0");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    firmList = new LawFirmRepositoryImpl().convert(jArray);
 
-//        new Thread(){
-//            @Override
-//            public void run(){
-//                //把要联网的代码放在这里
-//                lawFirmRepository = new LawFirmRepositoryImpl();
-//
-//                MongoClientURI mongoDBurl = new MongoClientURI("" +
-//                        "mongodb://dajiayiqibiye:wxby@wxby-shard-00-00-7ea9c.mongodb.net:27017,wxby-shard-00-01-7ea9c.mongodb.net:27017,wxby-shard-00-02-7ea9c.mongodb.net:27017/test?ssl=true&replicaSet=WXBY-shard-0&authSource=admin&retryWrites=true");
-//                MongoClient mongoClient = new MongoClient(mongoDBurl);
-//                System.out.println(mongoClient.toString()+"&&&&&&&&&&&&&&&");
-//                MongoDatabase db = mongoClient.getDatabase("wxby");
-//                MongoCollection<Document> collection = db.getCollection("law_firm");
-//                FindIterable<Document> a = collection.find().limit(1);
-//                //System.out.println("***********" + a.first().get("firm_addr"));
-//
+                    FirmView(firmList);
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void FirmView(List<LawFirmModel> firmList){
         setContentView(R.layout.law_firm_search_result);
         LinearLayout result = findViewById(R.id.law_firm_result);
-        for(int i = 0 ; i < 10; i++){
+        int index = 0;
+        for (LawFirmModel firm: firmList
+             ) {
             result.addView(new FirmOneLineView(getBaseContext())
-                    .init("我们真的能毕业吗事务所","新北市新专区中正路","hahaha")
-                    .setOnRootClickListener(this, new ObjectId()));
+                    .init(firm.getName(), firm.getAddress() ,"hahaha")
+                    .setOnRootClickListener(this, index));
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
@@ -253,16 +356,6 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
                 finish();
             }
         });
-
-//        System.out.println("&&&&&&&&" + firms.get(0).getAddress());
-
-//        for (LawFirmModel firm: firms) {
-//            result.addView(new FirmOneLineView(getBaseContext())
-//                    .init(firm.getAddress(),firm.getAddress(),firm.getType())
-//                    .setOnRootClickListener(this, firm.getId()));
-//        }
-
-
     }
 
     @Override
@@ -281,9 +374,13 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
             }break;
 
             default:{
+                LawFirmModel l = firmList.get((int)v.getTag());
                 Intent intent=new Intent();
                 intent.setClass(v.getContext(), SearchLawFirmDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bunble = new Bundle();
+                bunble.putSerializable("firm", l);
+                intent.putExtras(bunble);
                 startActivity(intent);
             }break;
         }

@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,6 +62,7 @@
                         android:textColorHint="#8a8a8a">
 
                         <EditText
+                            android:id="@+id/keyword"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
@@ -111,6 +112,7 @@
                         android:textColorHint="#8a8a8a">
 
                         <EditText
+                            android:id="@+id/and"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
@@ -160,6 +162,7 @@
                         android:textColorHint="#8a8a8a">
 
                         <EditText
+                            android:id="@+id/or"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
@@ -209,6 +212,7 @@
                         android:textColorHint="#8a8a8a">
 
                         <EditText
+                            android:id="@+id/not"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
@@ -246,7 +250,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <RelativeLayout
                 android:id="@+id/rlSearchFrameDeletec"
@@ -312,7 +316,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -360,7 +364,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -411,7 +415,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -564,7 +568,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:src="@drawable/line" />
+                android:src="@drawable/line_z" />
 
             <RelativeLayout
                 android:id="@+id/rlSearchFrameDeletey"
@@ -583,7 +587,7 @@
                 android:textColorHint="#8a8a8a">
 
                 <EditText
-                    android:id="@+id/year"
+                    android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:layout_marginLeft="10dp"

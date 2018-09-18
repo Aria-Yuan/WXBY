@@ -1,4 +1,6 @@
 package com.example.joan.myapplication.database.model;
 
-public class ProsecutorModel {
+import java.io.Serializable;
+
+public class ProsecutorModel implements Serializable {
 }

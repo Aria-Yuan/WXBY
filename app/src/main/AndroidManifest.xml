@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.joan.myapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +10,7 @@
         android:label="myapplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".MyApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".MainHomeActivity">
             <intent-filter>
@@ -24,6 +26,45 @@
         <activity android:name=".SearchLawActivity" />
         <activity android:name=".SearchCaseDetailActivity" />
         <activity android:name=".SearchLawDetailActivity" />
+        <activity android:name=".CounselingActivity" />
+        <activity android:name=".CounselingDetailActivity" />
+        <activity android:name=".unFinishedActivity" />
+        <activity android:name=".LawyerConsultDetailActivity" />
+        <activity android:name=".LawyerConsultSortedListActivity" />
+        <activity android:name=".LawyerConsultAllCasesActivity" />
+        <!--<activity android:name=".QuestionLawyerActivity" />-->
+        <activity android:name=".LawyerConsultResultActivity" />
+        <activity android:name=".ConsultingActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".CaseConsultActivity" />
+        <activity
+            android:name=".LawyerConsultActivity"
+            android:label="@string/lawyer_consult_title"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
+        <activity
+            android:name=".QuickConsultActivity"
+            android:label="@string/title_activity_quick_consult"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
+        <activity
+            android:name=".CaseConsultResultActivity"
+            android:label="@string/title_activity_case_consult"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
     </application>
 
 </manifest>

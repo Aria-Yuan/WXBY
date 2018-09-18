@@ -1,18 +1,19 @@
 package com.example.joan.myapplication.database.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class counselingModel {
-    private Date create_time;
+public class CounselingModel implements Serializable{
+    private String create_time;
     private String question;
-    private List<String> response;
+    private List<ResponseModel> response;
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 
@@ -24,11 +25,11 @@ public class counselingModel {
         this.question = question;
     }
 
-    public List<String> getResponse() {
+    public List<ResponseModel> getResponse() {
         return response;
     }
 
-    public void setResponse(List<String> response) {
+    public void setResponse(List<ResponseModel> response) {
         this.response = response;
     }
 }

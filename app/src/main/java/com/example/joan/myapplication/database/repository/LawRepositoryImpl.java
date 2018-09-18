@@ -1,9 +1,14 @@
 package com.example.joan.myapplication.database.repository;
 
 import com.example.joan.myapplication.database.MongoDBUtil;
+import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -25,13 +30,13 @@ public class LawRepositoryImpl implements LawRepository {
             while (cursor.hasNext()) {
                 LawModel law = new LawModel();
                 Document current_cursor = cursor.next();
-                law.setId(current_cursor.getObjectId("_id"));
-                law.setBook(current_cursor.getString("book"));
-                law.setChapter(current_cursor.getString("chapter"));
+//                law.setId(current_cursor.getObjectId("_id"));
+//                law.setBook(current_cursor.getString("book"));
+//                law.setChapter(current_cursor.getString("chapter"));
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
                 law.setStart(current_cursor.getString("start"));
-                law.setEnd(current_cursor.getString("end"));
+//                law.setEnd(current_cursor.getString("end"));
                 lawList.add(law);
             }
         } finally {
@@ -49,13 +54,13 @@ public class LawRepositoryImpl implements LawRepository {
             while (cursor.hasNext()) {
                 LawModel law = new LawModel();
                 Document current_cursor = cursor.next();
-                law.setId(current_cursor.getObjectId("_id"));
-                law.setBook(current_cursor.getString("book"));
-                law.setChapter(current_cursor.getString("chapter"));
+//                law.setId(current_cursor.getObjectId("_id"));
+//                law.setBook(current_cursor.getString("book"));
+//                law.setChapter(current_cursor.getString("chapter"));
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
                 law.setStart(current_cursor.getString("start"));
-                law.setEnd(current_cursor.getString("end"));
+//                law.setEnd(current_cursor.getString("end"));
                 lawList.add(law);
             }
         } finally {
@@ -79,6 +84,27 @@ public class LawRepositoryImpl implements LawRepository {
         condition.add(new Document("book" , regular));
         condition.add(new Document("content", regular));
         return find(new Document("$or",condition));
+    }
+
+    public List<LawModel> convert(JSONArray s){
+        List<LawModel> laws = new ArrayList<>();
+        for (int i = 0 ; i < s.size(); i++) {
+            try {
+                JSONObject a = s.getJSONObject(i);
+
+                LawModel law = new LawModel();
+                law.setId(a.getString("_id"));
+                law.setStart(a.getString("start"));
+                law.setAbandon(a.getString("abandon"));
+                law.setName(a.getString("name"));
+                law.setArticle(a.getString("article"));
+                law.setContent(a.getString("content"));
+                laws.add(law);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return laws;
     }
 
 

@@ -4,16 +4,16 @@ import org.bson.types.ObjectId;
 
 
 public class CourtModel {
-    private ObjectId id;
+    private String id;
     private String name;
     private String simpleName;
     private String code;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

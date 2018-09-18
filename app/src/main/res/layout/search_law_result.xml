@@ -50,13 +50,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_law_pager_bar"
-        android:background="@color/colorWhite">
+        android:background="#efefef">
 
         <LinearLayout
             android:id="@+id/law_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="#efefef"
             android:orientation="vertical" />
     </ScrollView>
 

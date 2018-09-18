@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="lawyer_consult_result_lawyer_answer">
+        <attr name="lawyerAnswerString" format="string" />
+        <attr name="lawyerAnswerDimension" format="dimension" />
+        <attr name="lawyerAnswerColor" format="color" />
+        <attr name="lawyerAnswerDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

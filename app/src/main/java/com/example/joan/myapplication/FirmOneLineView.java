@@ -168,7 +168,7 @@ public class FirmOneLineView extends LinearLayout{
 
     //----------------------下面是一些点击事件
 
-    public FirmOneLineView setOnRootClickListener(final FirmOneLineView.OnRootClickListener onRootClickListener, final ObjectId tag) {
+    public FirmOneLineView setOnRootClickListener(final FirmOneLineView.OnRootClickListener onRootClickListener, final int tag) {
         llRoot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

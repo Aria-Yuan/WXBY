@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_case_pager_bar"
-        android:background="@color/colorWhite">
+        android:background="#efefef">
 
         <LinearLayout
             android:id="@+id/case_result"

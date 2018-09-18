@@ -7,7 +7,7 @@
         android:id="@+id/layout_firm_pager_bar"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@color/background"
+        android:background="@android:color/background_light"
         android:gravity="center_vertical|center"
         android:orientation="horizontal">
 
@@ -60,117 +60,125 @@
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/background">
 
                 <TextView
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="法規名稱"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10pt" />
+                    android:textSize="9pt" />
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:text="勞動基準法"
-                    android:textSize="9pt" />
+                    android:textSize="8pt" />
 
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/background">
 
                 <TextView
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="生效日期"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10pt" />
+                    android:textSize="9pt" />
 
                 <TextView
+                    android:id="@+id/start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:text="民國103年9月24日"
-                    android:textSize="9pt" />
+                    android:textSize="8pt" />
 
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/background">
 
                 <TextView
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="失效日期"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10pt" />
+                    android:textSize="9pt" />
 
                 <TextView
+                    android:id="@+id/end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:text="暫未失效"
-                    android:textSize="9pt" />
+                    android:textSize="8pt" />
 
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/background">
 
                 <TextView
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="發條編號"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10pt" />
+                    android:textSize="9pt" />
 
                 <TextView
+                    android:id="@+id/article"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:text="第123條"
-                    android:textSize="9pt" />
+                    android:textSize="8pt" />
 
             </android.support.v7.widget.LinearLayoutCompat>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/background"
-                android:gravity="center"
-                android:text="法條正文"
-                android:textColor="@android:color/background_dark"
-                android:textSize="9pt" />
-
-            <TextView
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorWhite"/>
+                android:background="@color/colorWhite"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingTop="20dp"
+                android:textSize="8.5pt" />
 
         </LinearLayout>
 

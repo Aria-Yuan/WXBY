@@ -2,8 +2,11 @@ package com.example.joan.myapplication.database.model;
 
 import org.bson.types.ObjectId;
 
-public class LawFirmModel {
-    private ObjectId id;
+import java.io.Serializable;
+
+public class LawFirmModel implements Serializable{
+    private String id;
+    private String name;
     private String type;
     private String description;
     private String employee;
@@ -17,12 +20,20 @@ public class LawFirmModel {
     private String major;
     private String source_url;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {

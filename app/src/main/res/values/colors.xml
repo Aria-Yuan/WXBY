@@ -6,10 +6,17 @@
     <color name="selector_item_color">#0b988f</color>
     <color name="unselector_item_color">#8a8585</color>
     <color name="aaa">#9e9e9e</color>
-    <color name="bbb">#707070</color>
+    <color name="bbb">#696969</color>
     <color name="colorWhite">#ffffff</color>
     <color name="background">#ffffff</color>
+    <color name="ccc">#fefefe</color>
     <color name="split_line">#11112233</color>
     <color name="text1">#59B29C</color>
     <color name="text2">#333333</color>
+    <color name="title">#4c4c4c</color>
+    <color name="titlebg">#dadada</color>
+    <color name="mainbg">#e1e1e1</color>
+    <color name="touming">#00ffffff</color>
+    <color name="black">#000000</color>
+
 </resources>

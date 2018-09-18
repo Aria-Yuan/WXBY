@@ -110,7 +110,7 @@ public class SearchCasesActivity  extends AppCompatActivity implements CaseOneLi
         for(int i = 0 ; i < 10; i++){
             result.addView(new CaseOneLineView(getBaseContext())
                     .init("我们真的能毕业吗法院","103年度板簡字53號","返還房屋租賃","民事")
-                    .setOnRootClickListener(this, new ObjectId()));
+                    .setOnRootClickListener(this, i));
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){

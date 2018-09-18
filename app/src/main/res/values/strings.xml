@@ -86,7 +86,6 @@
     <string name="nextpage">下一條</string>
     <string name="toZhaolusuo_andiqu">按地區</string>
     <string name="anduqu_title">按地區</string>
-
     <string name="toZhaolvsuo_anfenlei">按分類</string>
     <string name="toZhaolvsuo_andiqu">按地區</string>
     <string name="toZhaolvsuo_tuijian">推薦</string>
@@ -105,5 +104,94 @@
     <string name="day">日</string>
     <string name="hour">時</string>
     <string name="minute">分</string>
+
+    <!-- Strings related to case_consult -->
+    <string name="consult_case_text">請詳細告知案件的詳情，我們會保證您與當事人隱私的安全</string>
+    <string name="case_consult_next">下一步</string>
+    <string name="case_consult_title">案件咨詢</string>
+    <string name="consult_case_hint">#上傳的起訴書或證據僅供本系統使用</string>
+
+    <!-- Strings related to case_consult_result -->
+    <string name="consult_case_result_title">結果</string>
+    <string name="consult_case_result_similar">類似案件</string>
+    <string name="consult_case_result_reason">判決理由</string>
+    <string name="consult_case_result_refer">參考法條</string>
+    <string name="consult_case_result_compensate">量刑賠償</string>
+    <string name="consult_case_result_percent">推估勝率：</string>
+
+    <!-- Strings related to quick_consult -->
+    <string name="consult_quick_upload">點擊上傳起訴書或其他相關證據</string>
+    <string name="consult_quick_text">您有任何法律相關的疑問，都可以在此提問。專業的律師將免費爲您解答</string>
+    <string name="consult_quick_hint">#上傳的起訴書或證據僅供本系統使用</string>
+    <string name="consult_quick_next">送出</string>
+
+    <!-- Strings related to pop up pick picture -->
+    <string name="popuppic_take">拍照</string>
+    <string name="popuppic_choose">从相册选择</string>
+    <string name="popuppic_cancel">取消</string>
+
+    <!-- Strings related to lawyer_consult -->
+    <string name="consult_lawyer_title">快速匹配律師</string>
+
+    <!-- Strings related to lawyer_detail -->
+    <string name="consult_lawyer_detail_title">律師詳情</string>
+    <string name="consult_lawyer_detail_y">年</string>
+    <string name="consult_lawyer_detail_year">從業年限</string>
+    <string name="consult_lawyer_detail_t">次</string>
+    <string name="consult_lawyer_detail_times">問答次數</string>
+    <string name="consult_lawyer_detail_score">分</string>
+    <string name="consult_lawyer_detail_scholar">學歷</string>
+    <string name="consult_lawyer_detail_occupation">現職</string>
+    <string name="consult_lawyer_detail_special">專業領域</string>
+    <string name="consult_lawyer_detail_personal">個人簡介</string>
+    <string name="consult_lawyer_detail_follow">關注</string>
+    <string name="consult_lawyer_detail_detail">律師詳情</string>
+    <string name="consult_lawyer_detail_cases">曾經處理的公開案件</string>
+    <string name="consult_lawyer_detail_allcases">點擊查看所有該律師的公開案件 ></string>
+
+
+    <string name="consult_lawyer_detail_cases_text">請向律師詳細描述您的案件經過，以及上傳相關證據圖片后，耐心等待律師為您解答</string>
+
+    <string name="consult_lawyer_result_lawyer_answer">回復了該案件</string>
+    <string name="consult_lawyer_result_follow">+關注</string>
+    <string name="consult_lawyer_result_comment">用戶評價</string>
+
+    <!-- Strings related to register -->
+    <string name="register_title">註冊</string>
+    <string name="register_back">返回</string>
+    <string name="register_account">賬號</string>
+    <string name="register_phone">手機</string>
+    <string name="register_password">密碼</string>
+    <string name="register_register">註冊</string>
+    <string name="register_agree">同意本系統用戶協議</string>
+    <string name="register_cancel">取消註冊</string>
+    <string name="register_with_account">以賬號註冊</string>
+    <string name="register_with_phone">以手機註冊</string>
+    <string name="register_contain_letter">○ 密碼中需包含英文字母</string>
+    <string name="register_contain_eight">○ 密碼至少需要8位</string>
+    <string name="lawyer_consult_title">律師咨詢</string>
+    <string name="title_activity_quick_consult">QuickConsultActivity</string>
+    <string name="title_activity_case_consult">CaseConsultActivity</string>
+
+    <string name="back">返回</string>
+    <string name="login_register">註冊</string>
+    <string name="login_account">賬號</string>
+    <string name="login_phone">手機</string>
+    <string name="login_with_phone">以手機登入</string>
+    <string name="login_with_account">以賬號登入</string>
+    <string name="login_password">密碼</string>
+    <string name="login_login">登錄</string>
+    <string name="login_cancel">取消登錄</string>
+    <string name="login_forget">忘記密碼？</string>
+    <string name="login_agree">同意本系統用戶協議</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
 </resources>
 

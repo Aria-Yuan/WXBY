@@ -195,7 +195,7 @@ public class CaseOneLineView extends LinearLayout{
 
     //----------------------下面是一些点击事件
 
-    public CaseOneLineView setOnRootClickListener(final CaseOneLineView.OnRootClickListener onRootClickListener, final ObjectId tag) {
+    public CaseOneLineView setOnRootClickListener(final CaseOneLineView.OnRootClickListener onRootClickListener, final int tag) {
         llRoot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

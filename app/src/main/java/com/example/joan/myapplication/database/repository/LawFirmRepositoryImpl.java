@@ -5,6 +5,10 @@ import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -24,7 +28,7 @@ public class LawFirmRepositoryImpl implements LawFirmRepository {
             while (cursor.hasNext()) {
                 LawFirmModel lawFirm = new LawFirmModel();
                 Document current_cursor = cursor.next();
-                lawFirm.setId(current_cursor.getObjectId("_id"));
+//                lawFirm.setId(current_cursor.getObjectId("_id"));
                 lawFirm.setType(current_cursor.getString("firm_type"));
                 lawFirm.setDescription(current_cursor.getString("firm_dscrpt"));
                 lawFirm.setEmployee(current_cursor.getString("firm_employee"));
@@ -54,7 +58,7 @@ public class LawFirmRepositoryImpl implements LawFirmRepository {
             while (cursor.hasNext()) {
                 LawFirmModel lawFirm = new LawFirmModel();
                 Document current_cursor = cursor.next();
-                lawFirm.setId(current_cursor.getObjectId("_id"));
+//                lawFirm.setId(current_cursor.getObjectId("_id"));
                 lawFirm.setType(current_cursor.getString("firm_type"));
                 lawFirm.setDescription(current_cursor.getString("firm_dscrpt"));
                 lawFirm.setEmployee(current_cursor.getString("firm_employee"));
@@ -92,6 +96,36 @@ public class LawFirmRepositoryImpl implements LawFirmRepository {
         condition.add(new Document("firm_intro" , regular));
         condition.add(new Document("firm_major" , regular));
         return find(new Document("$or",condition));
+    }
+
+    public List<LawFirmModel> convert(JSONArray s){
+        List<LawFirmModel> firms = new ArrayList<LawFirmModel>();
+        for (int i = 0 ; i < s.size(); i++) {
+            try {
+                JSONObject a = s.getJSONObject(i);
+
+                LawFirmModel lawFirm = new LawFirmModel();
+                lawFirm.setId( a.getString("_id"));
+                lawFirm.setName(a.getString("firm_name"));
+                lawFirm.setType(a.getString("firm_type"));
+                lawFirm.setDescription(a.getString("firm_dscrpt"));
+                lawFirm.setEmployee(a.getString("firm_employee"));
+                lawFirm.setCapital(a.getString("firm_capital"));
+                lawFirm.setContact(a.getString("firm_contact"));
+                lawFirm.setAddress(a.getString("firm_addr").replaceAll("地圖", ""));
+                lawFirm.setPhone(a.getString("firm_phone"));
+                lawFirm.setFax(a.getString("firm_fax"));
+                lawFirm.setSource_url(a.getString("firm_url"));
+                lawFirm.setIntroduction(a.getString("firm_intro"));
+                lawFirm.setMajor(a.getString("firm_major"));
+                lawFirm.setSource_url(a.getString("url"));
+                firms.add(lawFirm);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return firms;
     }
 
 }
