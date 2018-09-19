@@ -31,5 +31,9 @@
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>    //出场动画
     </style>
 
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">7.4pt</item>
+    </style>
+
 
 </resources>

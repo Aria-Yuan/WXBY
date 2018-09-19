@@ -57,7 +57,8 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/selector_item_color"
         app:tabTextColor="#707070"
-        tools:layout_editor_absoluteY="48dp" />
+        tools:layout_editor_absoluteY="48dp"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_body"

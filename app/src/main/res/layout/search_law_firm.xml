@@ -95,7 +95,8 @@
         app:tabIndicatorColor="@color/selector_item_color"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/selector_item_color"
-        app:tabTextColor="#707070"/>
+        app:tabTextColor="#707070"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_body"

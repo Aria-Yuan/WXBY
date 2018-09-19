@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.DatePicker.CustomDatePicker;
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawModel;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
@@ -35,6 +36,7 @@ import org.xutils.x;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -187,7 +189,7 @@ public class SearchLawActivity extends AppCompatActivity implements LawOneLineVi
         EditText num = findViewById(R.id.number);
 
         try{
-            RequestParams params = new RequestParams("http://192.168.137.194:8080/searchLaw.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchLaw.action");
             Document d_condition = new Document();
             if(!keyword.getText().toString().isEmpty()){
                 d_condition.append("keyword",keyword.getText().toString());
@@ -242,6 +244,9 @@ public class SearchLawActivity extends AppCompatActivity implements LawOneLineVi
             result.addView(new LawOneLineView(getBaseContext())
                     .init(lawList.get(i).getName(),lawList.get(i).getContent(),"#民事")
                     .setOnRootClickListener(this, i));
+        }
+        if(lawList.size()==0){
+            result.addView(new FindNothingView(getBaseContext()).init());
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){

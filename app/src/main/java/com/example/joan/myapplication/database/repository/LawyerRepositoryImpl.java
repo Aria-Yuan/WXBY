@@ -1,9 +1,14 @@
 package com.example.joan.myapplication.database.repository;
 
 import com.example.joan.myapplication.database.MongoDBUtil;
+import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -53,15 +58,15 @@ public class LawyerRepositoryImpl implements LawyerRepository {
             while (cursor.hasNext()) {
                 LawyerModel lawyer = new LawyerModel();
                 Document current_cursor = cursor.next();
-                lawyer.setId(current_cursor.getObjectId("_id"));
-                lawyer.setRegMsg(current_cursor.getObjectId("reg_id"));
+//                lawyer.setId(current_cursor.getObjectId("_id"));
+//                lawyer.setRegMsg(current_cursor.getObjectId("reg_id"));
                 lawyer.setName(current_cursor.getString("name"));
                 lawyer.setJob(current_cursor.getString("job"));
                 lawyer.setEducation(current_cursor.getString("education"));
                 lawyer.setExperience(current_cursor.getString("experience"));
                 lawyer.setDescription(current_cursor.getString("description"));
                 lawyer.setPrice(current_cursor.getDouble("price"));
-                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
+//                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
                 lawyer.setComment(current_cursor.getDouble("comment"));
 
                 lawyerList.add(lawyer);
@@ -80,15 +85,15 @@ public class LawyerRepositoryImpl implements LawyerRepository {
             while (cursor.hasNext()) {
                 LawyerModel lawyer = new LawyerModel();
                 Document current_cursor = cursor.next();
-                lawyer.setId(current_cursor.getObjectId("_id"));
-                lawyer.setRegMsg(current_cursor.getObjectId("reg_id"));
+//                lawyer.setId(current_cursor.getObjectId("_id"));
+//                lawyer.setRegMsg(current_cursor.getObjectId("reg_id"));
                 lawyer.setName(current_cursor.getString("name"));
                 lawyer.setJob(current_cursor.getString("job"));
                 lawyer.setEducation(current_cursor.getString("education"));
                 lawyer.setExperience(current_cursor.getString("experience"));
                 lawyer.setDescription(current_cursor.getString("description"));
                 lawyer.setPrice(current_cursor.getDouble("price"));
-                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
+//                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
                 lawyer.setComment(current_cursor.getDouble("comment"));
 
                 lawyerList.add(lawyer);
@@ -115,6 +120,39 @@ public class LawyerRepositoryImpl implements LawyerRepository {
         condition.add(new Document("job" , regular));
         condition.add(new Document("description" , regular));
         return find(new Document("$or",condition));
+    }
+
+    public List<LawyerModel> convert(JSONArray s){
+        List<LawyerModel> lawyers = new ArrayList<LawyerModel>();
+        for (int i = 0 ; i < s.size(); i++) {
+            try {
+                JSONObject a = s.getJSONObject(i);
+
+                LawyerModel lawyer = new LawyerModel();
+                lawyer.setId(a.getString("_id"));
+                lawyer.setRegMsg(a.getString("reg_id"));
+                lawyer.setName(a.getString("name"));
+                lawyer.setJob(a.getString("job"));
+                lawyer.setCompany(a.getString("company"));
+                lawyer.setMajor(a.getString("major"));
+                lawyer.setEducation(a.getString("education"));
+                lawyer.setExperience(a.getString("experience"));
+                lawyer.setDescription(a.getString("description"));
+                lawyer.setPrice(a.getDouble("price"));
+//                List<String> list = new ArrayList<>();
+//                JSONArray listj = a.getJSONArray("counseling_list");
+//                for(int j = 0; j < listj.size(); i++ ){
+//                    list.add((String)listj.get(i));
+//                }
+//                lawyer.setCounselingList(list);
+                lawyer.setComment(a.getDouble("comment"));
+                lawyers.add(lawyer);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lawyers;
     }
 
 }

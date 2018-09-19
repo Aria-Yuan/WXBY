@@ -6,30 +6,32 @@ import java.io.Serializable;
 import java.util.List;
 
 public class LawyerModel implements Serializable {
-    private ObjectId id;
-    private ObjectId regMsg;
+    private String id;
+    private String regMsg;
     private String name;
     private String job;
+    private String company;
+    private String major;
     private String education;
     private String experience;
     private String description;
     private double price;
-    private List<ObjectId> counselingList;
+    private List<String> counselingList;
     private double comment;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public ObjectId getRegMsg() {
+    public String getRegMsg() {
         return regMsg;
     }
 
-    public void setRegMsg(ObjectId regMsg) {
+    public void setRegMsg(String regMsg) {
         this.regMsg = regMsg;
     }
 
@@ -47,6 +49,22 @@ public class LawyerModel implements Serializable {
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getEducation() {
@@ -81,11 +99,11 @@ public class LawyerModel implements Serializable {
         this.price = price;
     }
 
-    public List<ObjectId> getCounselingList() {
+    public List<String> getCounselingList() {
         return counselingList;
     }
 
-    public void setCounselingList(List<ObjectId> counselingList) {
+    public void setCounselingList(List<String> counselingList) {
         this.counselingList = counselingList;
     }
 

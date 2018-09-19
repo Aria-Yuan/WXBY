@@ -20,6 +20,9 @@ public class CounselingContentView extends LinearLayout{
     //問答
     private LinearLayout content;
 
+    //律师姓名
+    private String lawyerName;
+
 
     public CounselingContentView(Context context) {
         super(context);
@@ -45,8 +48,9 @@ public class CounselingContentView extends LinearLayout{
      *
      * @return
      */
-    public CounselingContentView init(int times, CounselingModel question) {
+    public CounselingContentView init(int times, CounselingModel question, String name) {
         init();
+        lawyerName = name;
         setTimes(times);
         setContent(question);
 
@@ -63,7 +67,7 @@ public class CounselingContentView extends LinearLayout{
         List<ResponseModel> responses = a.getResponse();
         for (ResponseModel b: responses
              ) {
-            content.addView(new CounselingAnswerView(getContext()).init(b.getContent(),b.getDate()));
+            content.addView(new CounselingAnswerView(getContext()).init(b.getContent(),b.getDate(),lawyerName));
         }
 
         return this;

@@ -9,7 +9,7 @@
         android:background="#efefef"
         android:gravity="center"
         android:padding="10dp"
-        android:text="列表為空"
-        android:textSize="10pt" />
+        android:text="嘤嘤嘤没找到"
+        android:textSize="8pt" />
 
 </LinearLayout>

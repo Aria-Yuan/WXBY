@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
@@ -145,7 +146,7 @@ public class CounselingActivity extends AppCompatActivity implements CounselingR
 
     private void searchCounseling(String c){
         try{
-            RequestParams params = new RequestParams("http://192.168.1.111:8080/searchCounseling.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",c);
             params.addQueryStringParameter("type","0");
             x.http().get(params, new Callback.CommonCallback<String>() {
@@ -234,7 +235,7 @@ public class CounselingActivity extends AppCompatActivity implements CounselingR
                 a.setViewCount(vc);
 
                 try{
-                    RequestParams params = new RequestParams("http://192.168.1.111:8080/updateCounseling.action");
+                    RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/updateCounseling.action");
                     String firm;
                     firm = new CounselingRepositoryImpl().disconvert(a);
                     System.out.println(firm);
@@ -279,7 +280,7 @@ public class CounselingActivity extends AppCompatActivity implements CounselingR
 
     private void updateList(){
         try{
-            RequestParams params = new RequestParams("http://192.168.1.111:8080/searchCounseling.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",condition);
             params.addQueryStringParameter("type","0");
             x.http().get(params, new Callback.CommonCallback<String>() {

@@ -38,6 +38,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
+        <activity android:name=".QuestionLawyerActivity" />
+
         <activity
             android:name=".LawyerConsultActivity"
             android:label="@string/lawyer_consult_title"

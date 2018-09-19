@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,33 +12,45 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.LawyerModel;
+import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
+import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
+
+import net.sf.json.JSONArray;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 public class QuestionLawyerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView title;
     private Button back, next, upload;
-    private String lawyerName, lawyerID;
-    private int fee;
+    private String lawyerName, lawyerID, fee;
     private String[] titleString = {"向", "律師咨詢"};
     private SelectPicPopupWindow upWindow;
     private int length = 14, state;
     private EditText text;
     private AlertDialog finished;
+    private LawyerModel lawyer;
     private boolean isSubmitted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_lawyer);
+        lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer");
 
         initView();
     }
 
+    @SuppressLint("SetTextI18n")
     private void initView() {
 
-        Intent intent = getIntent();
-        lawyerID = intent.getStringExtra("lawyerID");
-        lawyerName = intent.getStringExtra("name");
-        fee = intent.getIntExtra("fee", 0);
+        lawyerID = lawyer.getId();
+        lawyerName = lawyer.getName();
+        fee = lawyer.getPrice()+"";
 
         upload = findViewById(R.id.question_lawyer_upload);
         title = findViewById(R.id.question_lawyer_title);
@@ -80,7 +93,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                 showWindow();
                 break;
             case R.id.question_lawyer_next:
-                setNext();
+                createCase();
                 break;
         }
 
@@ -224,6 +237,39 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     private void submit() {//提交
         isSubmitted = true;
         return;
+    }
+
+    private void createCase(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID);
+            params.addQueryStringParameter("condition",newOne);
+//            params.addQueryStringParameter("condition","吕浩然觉得不用写");
+            params.addQueryStringParameter("type","1");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    setNext();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void showWindow() {

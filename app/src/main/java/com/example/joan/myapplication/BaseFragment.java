@@ -297,6 +297,18 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 getActivity().startActivity(intent);
             }
         });
+
+        Button lawyer = view_main.findViewById(R.id.search_lawyer);
+        lawyer.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // 生成一个Intent对象
+                Intent intent=new Intent();
+                intent.setClass(getContext(), LawyerConsultActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

@@ -48,8 +48,9 @@ public class CounselingAnswerView extends LinearLayout {
      *
      * @return
      */
-    public CounselingAnswerView init(String content, String time) {
+    public CounselingAnswerView init(String content, String time, String lawyerName) {
         init();
+        name.setText(lawyerName);
         setConent(content);
         setTime(time);
 

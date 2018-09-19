@@ -42,21 +42,25 @@ public class ConsultingActivity extends AppCompatActivity implements View.OnClic
         switch(view.getId()){
             case R.id.consult_lawyer:
                 intent.setClass(ConsultingActivity.this, LawyerConsultActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right, R.anim.left);
                 break;
             case R.id.consult_case:
                 intent.setClass(ConsultingActivity.this, CaseConsultActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right, R.anim.left);
                 break;
             case R.id.consult_quick:
                 intent.setClass(ConsultingActivity.this, QuickConsultActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right, R.anim.left);
                 break;
             case R.id.consult_cancel:
                 finish();
-                overridePendingTransition(R.anim.left, R.anim.push_bottom_out);
+//                overridePendingTransition(R.anim.left, R.anim.push_bottom_out);
                 break;
             default:
                 break;
         }
-        startActivity(intent);
-        overridePendingTransition(R.anim.right, R.anim.left);
     }
 }

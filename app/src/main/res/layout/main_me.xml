@@ -22,10 +22,9 @@
             android:layout_gravity="center"
             android:gravity="center_vertical|center"
             android:text="我的"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/background"
             android:textSize="9pt"
-            android:textStyle="bold"
-            tools:textColor="@color/cardview_dark_background" />
+            android:textStyle="normal" />
 
         <ImageView
             android:layout_width="24dp"

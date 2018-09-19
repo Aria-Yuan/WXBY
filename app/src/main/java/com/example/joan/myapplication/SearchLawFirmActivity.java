@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
 import com.google.gson.JsonArray;
@@ -88,7 +89,7 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
                             String district = findViewById(checkedId).getTag().toString();
 
                             try{
-                                RequestParams params = new RequestParams("http://192.168.1.111:8080/searchFirm.action");
+                                RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchFirm.action");
                                 params.addQueryStringParameter("condition",district);
                                 params.addQueryStringParameter("type", "1");
                                 x.http().get(params, new Callback.CommonCallback<String>() {
@@ -304,7 +305,7 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
 
     private void searchLawFirm(String condition){
         try{
-            RequestParams params = new RequestParams("http://140.136.155.131:8080/searchFirm.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/searchFirm.action");
             params.addQueryStringParameter("condition",condition);
             params.addQueryStringParameter("type", "0");
             x.http().get(params, new Callback.CommonCallback<String>() {
@@ -346,6 +347,9 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
             result.addView(new FirmOneLineView(getBaseContext())
                     .init(firm.getName(), firm.getAddress() ,"hahaha")
                     .setOnRootClickListener(this, index));
+        }
+        if(firmList.size()==0){
+            result.addView(new FindNothingView(getBaseContext()).init());
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
