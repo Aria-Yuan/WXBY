@@ -1,6 +1,8 @@
 package com.example.joan.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,15 +22,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickListener{
+    private SharedPreferences sp;
     private String position;
     TabLayout tabLayout;
     ViewPager viewpager;
+    TextView myName;
 
     //当标签数目小于等于4个时，标签栏不可滑动
     public static final int MOVABLE_COUNT = 4;
@@ -51,6 +56,7 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        sp = getActivity().getSharedPreferences("account_info", Context.MODE_PRIVATE);
         //TextView textView = view.findViewById(R.id.tv_title);
         //textView.setText(title);
         switch (position){
@@ -73,6 +79,17 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 if(view_me == null){
                     view_me = inflater.inflate(R.layout.main_me, container, false);
                     //我的界面列表
+                    myName = view_me.findViewById(R.id.name);
+
+                    if(sp.getBoolean("login", false)){
+                        myName.setText(sp.getString("name","呂小布"));
+                        view_me.findViewById(R.id.logout).setVisibility(View.VISIBLE);
+                    }else{
+                        myName.setText("你還沒有註冊喲");
+                        view_me.findViewById(R.id.logout).setVisibility(View.GONE);
+
+                    }
+
                     LinearLayout list1 = view_me.findViewById(R.id.me_list_2);
                     list1.addView(new MyOneLineView(getContext())
                             .initMine(R.drawable.response, "我的咨詢", "", true)
@@ -101,6 +118,31 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                     list4.addView(new MyOneLineView(getContext())
                             .initMine(R.drawable.zhaofatiao, "關於我們", "", true)
                             .setOnRootClickListener(this, 7));
+
+                    view_me.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SharedPreferences.Editor editor;
+                            editor = sp.edit();
+                            editor.putBoolean("login",false);
+                            editor.commit();
+                            myName.setText("你還未註冊喲");
+                            view_me.findViewById(R.id.logout).setVisibility(View.GONE);
+
+                        }
+                    });
+
+                    myName.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(!sp.getBoolean("login", false)){
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                            }else{
+
+                            }
+                        }
+                    });
                 }
                 return view_me;
             }
@@ -159,8 +201,18 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
     public void onRootClick(View v) {
         switch ((int) v.getTag()) {
             case 1:
+                Intent intent1 = new Intent();
+                intent1.setClass(getActivity(), MyQuestionListActivity.class);
+                startActivity(intent1);
                 break;
             case 2:
+                if(sp.getString("role","0").equals("0")){
+                    Toast.makeText(getContext(),"你還不是律師哦",Toast.LENGTH_LONG).show();
+                }else{
+                    Intent intent2 = new Intent();
+                    intent2.setClass(getActivity(), MyConsultListActivity.class);
+                    startActivity(intent2);
+                }
                 break;
         }
     }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LegalCounselingModel implements Serializable{
     private String id;
-    private RegisterModel questioner;
+    private String questioner;
     private LawyerModel lawyer;
     private String createTime;
     private int viewCount;
@@ -23,11 +23,11 @@ public class LegalCounselingModel implements Serializable{
         this.id = id;
     }
 
-    public RegisterModel getQuestioner() {
+    public String getQuestioner() {
         return questioner;
     }
 
-    public void setQuestioner(RegisterModel questioner) {
+    public void setQuestioner(String questioner) {
         this.questioner = questioner;
     }
 

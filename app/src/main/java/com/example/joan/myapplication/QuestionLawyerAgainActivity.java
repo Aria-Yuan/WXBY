@@ -1,10 +1,8 @@
 package com.example.joan.myapplication;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +16,6 @@ import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
-import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,9 +24,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-public class QuestionLawyerActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private SharedPreferences sp;
+public class QuestionLawyerAgainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView title;
     private Button back, next, upload;
@@ -39,22 +34,23 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     private int length = 14, state;
     private EditText text;
     private AlertDialog finished;
-    private LawyerModel lawyer;
     private LegalCounselingModel counseling;
+    private LawyerModel lawyer;
     private boolean isSubmitted;
+    private LegalCounselingModel target;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_lawyer);
-        lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer");
+        counseling = (LegalCounselingModel)getIntent().getSerializableExtra("counseling");
+        lawyer = counseling.getLawyer();
 
         initView();
     }
 
     @SuppressLint("SetTextI18n")
     private void initView() {
-        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
 
         lawyerID = lawyer.getId();
         lawyerName = lawyer.getName();
@@ -71,7 +67,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
         upload.setOnClickListener(this);
 
         title.setText(titleString[0] + lawyerName + titleString[1]);
-        upWindow = new SelectPicPopupWindow(QuestionLawyerActivity.this, itemsOnClick);
+        upWindow = new SelectPicPopupWindow(QuestionLawyerAgainActivity.this, itemsOnClick);
 
     }
 
@@ -184,9 +180,9 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                         finished.cancel();
                         finish();
                         //跳至詳情頁面
-                        Intent intent = new Intent(QuestionLawyerActivity.this, MyQuestionLawyerConsultActivity.class);
+                        Intent intent = new Intent(QuestionLawyerAgainActivity.this, MyQuestionLawyerConsultActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("counseling",counseling );
+                        bundle.putSerializable("counseling", target);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -236,7 +232,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
             case 0:
             case -1:
                 Button no, next;
-                next = finished.getButton(DialogInterface.BUTTON_POSITIVE);
+                        next = finished.getButton(DialogInterface.BUTTON_POSITIVE);
                 no = finished.getButton(DialogInterface.BUTTON_NEGATIVE);
                 next.setTextColor(getResources().getColor(R.color.selector_item_color));
                 no.setTextColor(getResources().getColor(R.color.selector_item_color));
@@ -261,18 +257,16 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
 
     private void createCase(){
         try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
-            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID,sp.getString("_id","0"));
-//            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID,lawyerID);
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/updateCounseling.action");
+            String newOne = new CounselingRepositoryImpl().QuestionAgain(text.getText().toString(),counseling);
+            params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
-            params.addQueryStringParameter("type","1");
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
                     JSONArray jArray = new JSONArray().fromObject(s);
-                    counseling = new CounselingRepositoryImpl().convert(jArray).get(0);
-                    System.out.println(s);
+                    target = new CounselingRepositoryImpl().convert(jArray).get(0);
                     setNext();
                 }
 
@@ -297,7 +291,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     }
 
     private void showWindow() {
-        upWindow.showAtLocation(QuestionLawyerActivity.this.findViewById(R.id.question_lawyer_main), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
+        upWindow.showAtLocation(QuestionLawyerAgainActivity.this.findViewById(R.id.question_lawyer_main), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
     }
 
     private boolean isEnoughLength(){

@@ -1,7 +1,10 @@
 package com.example.joan.myapplication;
 
 import android.content.ClipData;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,12 +17,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.repository.RegisterRepositoryImpl;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
@@ -31,22 +36,43 @@ import java.util.List;
  * desc :主页
  */
 public class MainHomeActivity extends AppCompatActivity {
+    private SharedPreferences sp;
     private BottomNavigationViewEx bnve;
     private VpAdapter adapter;
     private List<Fragment> fragments;
-    private ViewPager viewPager;
+    private NoScrollViewPager viewPager;
     private FloatingActionButton floatingActionButton;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_home);
+
         initView();
         initData();
         initBNVE();
         initEvent();
+        initRegister();
 
     }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus){
+//            if(sp.getBoolean("login", false)){
+//                initData();
+//                initBNVE();
+//                initEvent();
+//            }
+//
+//        }else{
+//        }
+//
+//    }
+
 
     /**
      * init BottomNavigationViewEx envent
@@ -72,8 +98,14 @@ public class MainHomeActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_empty: {
                         position = 1;
+
+                        // 生成一个Intent对象
+                        Intent intent=new Intent();
+                        intent.setClass(MainHomeActivity.this, ConsultingActivity.class); //设置跳转的Activity
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                         //此处return false且在FloatingActionButton没有自定义点击事件时 会屏蔽点击事件
-                        //return false;
+                        return false;
                     }
                     default:
                         break;
@@ -119,15 +151,7 @@ public class MainHomeActivity extends AppCompatActivity {
 /**
  * fab 点击事件结合OnNavigationItemSelectedListener中return false使用
  */
-        /*floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(MainHomeActivity.this, "Center", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 生成一个Intent对象
@@ -148,8 +172,10 @@ public class MainHomeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        builder = new AlertDialog.Builder(this);
         floatingActionButton = findViewById(R.id.fab);
         viewPager = findViewById(R.id.main_body);
+        viewPager.setNoScroll(true);
         bnve = findViewById(R.id.bnve);
     }
 
@@ -173,7 +199,7 @@ public class MainHomeActivity extends AppCompatActivity {
         bundle.putString("position", "2");
         meFragment.setArguments(bundle);
 
-
+        sp = this.getSharedPreferences("account_info", Context.MODE_PRIVATE);
         fragments.add(homeFragment);
         fragments.add(orderFragment);
         fragments.add(meFragment);
@@ -212,6 +238,38 @@ public class MainHomeActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             return data.get(position);
+        }
+    }
+
+    private void initRegister(){
+        builder = new AlertDialog.Builder(this);
+        SharedPreferences sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
+        if (sp.getBoolean("login", false) && !sp.getString("user_name", "invalid").equals("invalid")){
+//            SharedPreferences.Editor editor;
+//            editor = sp.edit();
+//            editor.putBoolean("login",false);
+//            editor.commit();
+            new RegisterRepositoryImpl().attemptLogin(sp.getInt("login_type",0),sp.getString("user_name","wobuzhidao"),sp.getString("user_pswd","wobuzhidao"));
+//            new LoginActivity().autoLogin();
+        }else{
+
+            builder.setMessage("你還沒有登錄哦，登錄后可享受完整功能哦~");
+            builder.setPositiveButton("現在登錄", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.cancel();
+                    Intent intent = new Intent(MainHomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("稍後登錄", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.cancel();
+                }
+            });
+            dialog = builder.create();
+            dialog.show();
         }
     }
 }

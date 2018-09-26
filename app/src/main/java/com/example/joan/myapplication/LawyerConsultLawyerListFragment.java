@@ -82,10 +82,7 @@ public class LawyerConsultLawyerListFragment extends Fragment {
                 public void onSuccess(String s) {
                     JSONArray jArray= JSONArray.fromObject(s);
                     list = new LawyerRepositoryImpl().convert(jArray);
-                    LawyerModel l = list.get(0);
-                    for(int i = 0 ; i < 10 ; i++){
-                        list.add(l);
-                    }
+                    /**/
                     addView();
                 }
 

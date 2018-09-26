@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/quick_consult_result_single_user_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/me_unselected" />
+
+    <TextView
+        android:id="@+id/quick_consult_result_single_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/quick_consult_result_single_user_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/quick_consult_result_single_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/quick_consult_result_single_user_image"
+        app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_single_user_name" />
+
+    <TextView
+        android:id="@+id/quick_consult_result_single_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/quick_consult_result_single_user_image"
+        app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_single_content" />
+
+    <Button
+        android:id="@+id/quick_consult_result_single_replies"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:background="@color/touming"
+        app:layout_constraintStart_toEndOf="@+id/quick_consult_result_single_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quick_consult_result_single_like"
+        android:layout_width="17dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/zanno_l"
+        app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_single_favorites"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/quick_consult_result_single_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="19dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_single_reply"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quick_consult_result_single_reply"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/comment_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line_l" />
+
+</android.support.constraint.ConstraintLayout>

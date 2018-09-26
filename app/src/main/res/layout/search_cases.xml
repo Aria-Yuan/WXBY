@@ -9,7 +9,7 @@
         android:id="@+id/layout_firm_pager_bar"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@color/colorAccent"
+        android:background="@color/selector_item_color"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="XXXX年度XXXXX號"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="9pt" />
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/case_detail"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="6dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:lines="1"
                 android:text="返還房屋租賃" />
         </LinearLayout>

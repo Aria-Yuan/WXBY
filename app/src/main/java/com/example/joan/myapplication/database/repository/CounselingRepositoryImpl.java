@@ -1,5 +1,8 @@
 package com.example.joan.myapplication.database.repository;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
@@ -7,6 +10,7 @@ import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.ResponseModel;
 import com.google.gson.JsonObject;
+import com.mongodb.DocumentToDBRefTransformer;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
@@ -36,37 +40,10 @@ public class CounselingRepositoryImpl {
                 final LegalCounselingModel counseling = new LegalCounselingModel();
 //                counseling.setLawyer(a.getString(""));
 
-                try{
-                    RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchLawyer.action");
-                    params.addQueryStringParameter("condition",a.getString("lawyer"));
-//            params.addQueryStringParameter("condition","吕浩然觉得不用写");
-                    params.addQueryStringParameter("type","1");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        @Override
-                        public void onSuccess(String s) {
-                            JSONArray jArray= JSONArray.fromObject(s);
-                            LawyerModel l = new LawyerRepositoryImpl().convert(jArray).get(0);
-                            counseling.setLawyer(l);
-                        }
-
-                        @Override
-                        public void onError(Throwable throwable, boolean b) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(CancelledException e) {
-
-                        }
-
-                        @Override
-                        public void onFinished() {
-
-                        }
-                    });
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                JSONObject lawyer = a.getJSONObject("lawyer");
+                LawyerModel l = new LawyerRepositoryImpl().convert_single(lawyer);
+                counseling.setLawyer(l);
+                counseling.setQuestioner(a.getString("questioner"));
 
                 counseling.setId(a.getString("_id"));
                 counseling.setCreateTime(a.getString("create_time").replace("T", " "));
@@ -110,13 +87,13 @@ public class CounselingRepositoryImpl {
     }
 
     public String disconvert(LegalCounselingModel l){
-        Document counseling = new Document();
+        Document  counseling = new Document();
         counseling.append("_id",l.getId());
         counseling.append("view_count",l.getViewCount());
         return counseling.toJson();
     }
 
-    public String createNew(String question,String lawyer) throws Exception{
+    public String createNew(String question,String lawyer,String questioner) throws Exception{
         Document counseling = new Document();
         //目前時間
         Date date = new Date();
@@ -125,9 +102,9 @@ public class CounselingRepositoryImpl {
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         //進行轉換
         String dateString = sdf.format(date);
-        counseling.append("questioner",lawyer);
+        counseling.append("questioner",questioner);
         counseling.append("lawyer",lawyer);
-        counseling.append("create_time",dateString);
+        counseling.append("create_time",sdf.parse(dateString));
         counseling.append("view_count",0);
         CounselingModel c = new CounselingModel();
         c.setQuestion(question);
@@ -139,9 +116,87 @@ public class CounselingRepositoryImpl {
         content.append("response",new ArrayList<Document>());
         cs.add(content);
         counseling.append("content",cs);
+        counseling.append("publishFlag",1);
 
         return counseling.toJson();
     }
 
+    public String QuestionAgain(String question, LegalCounselingModel counseling) throws Exception{
+        List<CounselingModel> coundelingList = counseling.getContent();
+        List<Document> questions = new ArrayList<>();
+        //目前時間
+        Date date = new Date();
+        //設定日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        //進行轉換
+        String dateString = sdf.format(date);
+        for (CounselingModel coun: coundelingList) {
+            Document q = new Document();
+//            q.append("create_time",sdf.parse(dateString));
+            q.append("create_time",sdf.parse(coun.getCreate_time()));
+            q.append("question",coun.getQuestion());
+            List<ResponseModel> responses = coun.getResponse();
+            List<Document> responseList = new ArrayList<>();
+            for (ResponseModel response: responses) {
+                Document res = new Document();
+                res.append("time", sdf.parse(response.getDate()));
+                res.append("content", response.getContent());
+                responseList.add(res);
+            }
+            q.append("response", responseList);
+            questions.add(q);
+        }
+        Document newOne = new Document();
+        newOne.append("create_time", sdf.parse(dateString));
+        newOne.append("question",question);
+        newOne.append("response",new ArrayList<Document>());
+        questions.add(newOne);
 
+        Document update = new Document();
+        update.append("_id", counseling.getId());
+        update.append("content", questions);
+        return update.toJson();
+    }
+
+    public String AnswerQuestion(String answer, LegalCounselingModel counseling) throws Exception{
+        List<CounselingModel> coundelingList = counseling.getContent();
+        List<Document> questions = new ArrayList<>();
+        //目前時間
+        Date date = new Date();
+        //設定日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        //進行轉換
+        String dateString = sdf.format(date);
+        int count = 0;
+        for (CounselingModel coun: coundelingList) {
+            count++;
+            Document q = new Document();
+//            q.append("create_time",sdf.parse(dateString));
+            q.append("create_time",sdf.parse(coun.getCreate_time()));
+            q.append("question",coun.getQuestion());
+            List<ResponseModel> responses = coun.getResponse();
+            List<Document> responseList = new ArrayList<>();
+            for (ResponseModel response: responses) {
+                Document res = new Document();
+                res.append("time", sdf.parse(response.getDate()));
+                res.append("content", response.getContent());
+                responseList.add(res);
+            }
+            if(count == coundelingList.size()){
+                Document res = new Document();
+                res.append("time", sdf.parse(sdf.format(new Date())));
+                res.append("content", answer);
+                responseList.add(res);
+            }
+            q.append("response", responseList);
+            questions.add(q);
+        }
+
+        Document update = new Document();
+        update.append("_id", counseling.getId());
+        update.append("content", questions);
+        return update.toJson();
+    }
 }

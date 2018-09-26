@@ -20,6 +20,8 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginLeft="58dp"
+            android:layout_weight="1"
             android:gravity="center_vertical|center"
             android:text="我的"
             android:textColor="@color/background"
@@ -29,7 +31,6 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="110dp"
             android:src="@drawable/shezhi" />
 
         <ImageView
@@ -44,7 +45,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="80dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,6 +70,7 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
@@ -106,6 +109,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/background"
+                android:text="退出登錄"
+                android:textColor="#bc3d5d"
+                android:textSize="8.5pt" />
 
         </LinearLayout>
 

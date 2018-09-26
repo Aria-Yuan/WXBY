@@ -37,10 +37,10 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:paddingBottom="9dp"
+            android:paddingBottom="8dp"
             android:paddingEnd="6dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/shoucang" />
+            android:paddingTop="7dp"
+            android:src="@drawable/heart_z" />
     </android.support.v7.widget.LinearLayoutCompat>
 
     <ScrollView

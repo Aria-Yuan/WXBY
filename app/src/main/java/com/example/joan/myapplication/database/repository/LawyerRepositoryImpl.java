@@ -155,4 +155,27 @@ public class LawyerRepositoryImpl implements LawyerRepository {
         return lawyers;
     }
 
+    public LawyerModel convert_single(JSONObject a){
+        LawyerModel lawyer = new LawyerModel();
+        lawyer.setId(a.getString("_id"));
+        lawyer.setRegMsg(a.getString("reg_id"));
+        lawyer.setName(a.getString("name"));
+        lawyer.setJob(a.getString("job"));
+        lawyer.setCompany(a.getString("company"));
+        lawyer.setMajor(a.getString("major"));
+        lawyer.setEducation(a.getString("education"));
+        lawyer.setExperience(a.getString("experience"));
+        lawyer.setDescription(a.getString("description"));
+        lawyer.setPrice(a.getDouble("price"));
+//                List<String> list = new ArrayList<>();
+//                JSONArray listj = a.getJSONArray("counseling_list");
+//                for(int j = 0; j < listj.size(); i++ ){
+//                    list.add((String)listj.get(i));
+//                }
+//                lawyer.setCounselingList(list);
+        lawyer.setComment(a.getDouble("comment"));
+
+        return lawyer;
+    }
+
 }

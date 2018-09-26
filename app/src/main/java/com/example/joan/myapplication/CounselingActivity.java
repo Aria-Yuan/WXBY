@@ -154,7 +154,6 @@ public class CounselingActivity extends AppCompatActivity implements CounselingR
                 public void onSuccess(String s) {
                     JSONArray jArray= JSONArray.fromObject(s);
                     counselingList = new CounselingRepositoryImpl().convert(jArray);
-                    System.out.println(counselingList.get(0).getContent().get(0).getQuestion());
 
                     CounselingView(counselingList);
                 }

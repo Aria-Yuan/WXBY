@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class JudgementModel implements Serializable {
-    private ObjectId Id;
+    private String Id;
     private String jId;
     private String jDate;
     private String jReason;
@@ -16,11 +16,11 @@ public class JudgementModel implements Serializable {
     private List<Document> jPrevious;
     private String jLaws;
 
-    public ObjectId getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         Id = id;
     }
 

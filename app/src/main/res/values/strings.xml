@@ -193,5 +193,20 @@
         completions."
     </string>
 
+    <!-- Strings related to judgement consult -->
+    <string name="judgement_consult_title">案件內容</string>
+    <string name="judgement_consult_name">裁判字號</string>
+    <string name="judgement_consult_date">裁判日期</string>
+    <string name="judgement_consult_reason">裁判案由</string>
+    <string name="judgement_consult_main">裁判主文</string>
+    <string name="judgement_consult_fact">事實理由</string>
+
+    <!-- Strings related to quick consult result-->
+    <string name="quick_consult_result_reply">律師回復</string>
+    <string name="quick_consult_result_comment">用戶評論</string>
+    <string name="quick_consult_result_title">快速咨詢詳情</string>
+    <string name="quick_consult_result_only">只看作者和律師</string>
+    <string name="quick_consult_result_viewtime">次浏览</string>
+
 </resources>
 

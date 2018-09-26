@@ -9,13 +9,14 @@
         android:layout_height="wrap_content"
         android:background="@color/background"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="20dp">
+        android:paddingBottom="3dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="13dp">
 
         <ImageView
             android:id="@+id/picture"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/me" />
 
@@ -27,14 +28,14 @@
             android:layout_marginTop="6dp"
             android:text="我是誰"
             android:textColor="@color/text2"
-            android:textSize="9pt" />
+            android:textSize="8pt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="回答了該問題"
-            android:textSize="7pt" />
+            android:textSize="6.5pt" />
 
     </LinearLayout>
 
@@ -43,13 +44,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
+        android:lineSpacingExtra="5dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
         android:text="你好，我之前巴拉巴拉巴拉巴拉拉鏈承諾的積分以人為本發送到你副本，現在不知道該怎麼辦了，請問巴拉巴拉巴拉就是賭。"
         android:textColor="@color/text2"
-        android:textSize="8pt" />
+        android:textSize="7.5pt" />
 
     <TextView
         android:id="@+id/time"
@@ -58,6 +60,6 @@
         android:background="@color/background"
         android:padding="10dp"
         android:text="2018/9/2 15:30:00"
-        android:textSize="7pt" />
+        android:textSize="6pt" />
 
 </LinearLayout>

@@ -1,12 +1,18 @@
 package com.example.joan.myapplication.database.repository;
 
 import com.example.joan.myapplication.database.MongoDBUtil;
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.RegisterModel;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,4 +126,44 @@ public class RegisterRepositoryImpl implements RegisterRepository {
         Pattern regular = Pattern.compile("(?i)" + keyWord + ".*$", Pattern.MULTILINE);
         return find(new Document("name" , regular));
     }
+
+    public boolean attemptLogin(final int type, String username, String password){
+
+        final int[] result = new int[1];
+
+        try {
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/loginAndRegister.action");
+            params.addQueryStringParameter("type", String.valueOf(type));
+            params.addQueryStringParameter("username", username);
+            params.addQueryStringParameter("password", password);
+            System.out.println(params.toString());
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JsonParser jsonParser = new JsonParser();
+                    JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
+                    result[0] = jsonObject.get("resultCode").getAsInt();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result[0] == 1? true: false;
+    }
+
 }

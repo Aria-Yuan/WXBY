@@ -14,8 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -28,7 +29,8 @@ import org.xutils.x;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private Button login, cancel, forget, back, register, mode;
+    private Button login, cancel, forget, register, mode;
+    private ImageView back;
     private EditText account, password;
     private CheckBox agree;
     private String ea, ep;
@@ -51,15 +53,17 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void initItem(){
 
-        sp = getSharedPreferences("sp_name", Context.MODE_PRIVATE);
+        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
         editor = sp.edit();
 
         x.Ext.init(getApplication());
 
-        alert=new AlertDialog.Builder(LoginActivity.this);
+        alert = new AlertDialog.Builder(LoginActivity.this);
 
-        if( !autoLogin(sp.getInt("login_type", 1), sp.getString("user_name",
-                "invalid"), sp.getString("user_pswd", "")) ){
+//        editor.putBoolean("login", false);
+//        if (sp.getBoolean("login", false)){successDialog("已登入！");}
+//        else {
+//        if (hasLoginInfo()) autoLogin();
 
             login = findViewById(R.id.login_login);
             account = findViewById(R.id.login_account);
@@ -76,12 +80,9 @@ public class LoginActivity extends AppCompatActivity {
             setListener();
 
             agree.setChecked(true);
-
-        }else{
-            finish();
         }
 
-    }
+//    }
 
     protected void setListener(){
 
@@ -117,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                overridePendingTransition(R.anim.left, R.anim.left_exit);
 //                回到上一頁
             }
         });
@@ -156,14 +158,15 @@ public class LoginActivity extends AppCompatActivity {
     protected int attemptLogin(){
 
         final int[] type = new int[1];
+        type[0] = loginType;
 
-        if (password.getText().equals(null) || account.getText().equals(null)){
+        if (ea.equals(null) || ep.equals(null)){
             setDialog("請輸入賬號或密碼！");
         }else {
 
             try {
-                RequestParams params = new RequestParams("http://169.254.219.229:8080/loginAndRegister.action");
-                params.addQueryStringParameter("type", String.valueOf(loginType));
+                RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/loginAndRegister.action");
+                params.addQueryStringParameter("type", String.valueOf(type[0]));
                 params.addQueryStringParameter("username", ea);
                 params.addQueryStringParameter("password", ep);
                 System.out.println(params.toString());
@@ -175,9 +178,8 @@ public class LoginActivity extends AppCompatActivity {
                         type[0] = jsonObject.get("resultCode").getAsInt();
 
                         if (type[0] == 1) {
-                            afterLogin();
-                            Toast.makeText(LoginActivity.this, "登錄成功", Toast.LENGTH_SHORT);
-                            finish();
+                            afterLogin(jsonObject.get("_id").getAsString(),jsonObject.get("role").getAsString(),jsonObject.get("name").getAsString());
+                            successDialog("登入成功！");
                         } else {
                             setDialog(jsonObject.get("resultMessage").getAsString());
                         }
@@ -221,35 +223,49 @@ public class LoginActivity extends AppCompatActivity {
         confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
     }
 
-    public boolean autoLogin(int type, String eai, String epi){
-        if(hasLoginInfo()){
-            account = findViewById(R.id.login_account);
-            password = findViewById(R.id.login_password);
+    public boolean autoLogin(){
+        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
 
-            ea = eai;
-            ep = epi;
-//            loginType = type;
-
-            if (attemptLogin() == 1){
-                return true;
-            }else{
-                return false;
-            }
+        if (hasLoginInfo()){
+            ea = sp.getString("user_name", "invalid");
+            ep = sp.getString("user_pswd", "");
+            loginType = sp.getInt("login_type", 1);
+        if (attemptLogin() == 1){
+            return true;
         }else{
             return false;
-        }
+        }}else return false;
     }
 
-    protected void afterLogin(){
+    protected void afterLogin(String id,String role,String name){
 
         editor.putString("user_name", ea);
         editor.putString("user_pswd", ep);
         editor.putInt("login_type", loginType);
         editor.putBoolean("login", true);
+        editor.putString("_id", id);
+        editor.putString("role", role);
+        editor.putString("name", name);
         editor.apply();
         isLogined = true;
 //        finish();
 
+    }
+
+    private void successDialog(String message){
+        alert.setMessage(message);
+        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.cancel();
+                finish();
+                overridePendingTransition(R.anim.left, R.anim.left_exit);
+            }
+        });
+        dialog = alert.create();
+        dialog.show();
+        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
     }
 
 }

@@ -32,13 +32,18 @@
         <activity android:name=".LawyerConsultDetailActivity" />
         <activity android:name=".LawyerConsultSortedListActivity" />
         <activity android:name=".LawyerConsultAllCasesActivity" />
-        <!--<activity android:name=".QuestionLawyerActivity" />-->
         <activity android:name=".LawyerConsultResultActivity" />
         <activity android:name=".ConsultingActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
         <activity android:name=".QuestionLawyerActivity" />
+        <activity android:name=".MyQuestionListActivity" />
+        <activity android:name=".MyConsultListActivity" />
+        <activity android:name=".MyAnswerLawyerConsultActivity" />
+        <activity android:name=".AnswerConsultActivity" />
+        <activity android:name=".MyQuestionLawyerConsultActivity" />
+        <activity android:name=".QuestionLawyerAgainActivity" />
+        <activity android:name=".LoginActivity" />
 
         <activity
             android:name=".LawyerConsultActivity"

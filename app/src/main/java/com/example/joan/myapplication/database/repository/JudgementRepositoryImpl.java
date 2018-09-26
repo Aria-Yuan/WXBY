@@ -2,8 +2,13 @@ package com.example.joan.myapplication.database.repository;
 
 import com.example.joan.myapplication.database.model.JudgementModel;
 import com.example.joan.myapplication.database.MongoDBUtil;
+import com.example.joan.myapplication.database.model.LawyerModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -25,7 +30,7 @@ public class JudgementRepositoryImpl implements JudgementRepository{
             while (cursor.hasNext()) {
                 JudgementModel judgement = new JudgementModel();
                 Document current_cursor = cursor.next();
-                judgement.setId(current_cursor.getObjectId("_id"));
+//                judgement.setId(current_cursor.getObjectId("_id"));
                 judgement.setjId(current_cursor.getString("j_id"));
                 judgement.setjDate(current_cursor.getString("j_date"));
                 judgement.setjReason(current_cursor.getString("j_reason"));
@@ -50,7 +55,7 @@ public class JudgementRepositoryImpl implements JudgementRepository{
             while (cursor.hasNext()) {
                 JudgementModel judgement = new JudgementModel();
                 Document current_cursor = cursor.next();
-                judgement.setId(current_cursor.getObjectId("_id"));
+//                judgement.setId(current_cursor.getObjectId("_id"));
                 judgement.setjId(current_cursor.getString("j_id"));
                 judgement.setjDate(current_cursor.getString("j_date"));
                 judgement.setjReason(current_cursor.getString("j_reason"));
@@ -85,6 +90,28 @@ public class JudgementRepositoryImpl implements JudgementRepository{
         return find(new Document("$or",condition));
     }
 
+    public List<JudgementModel> convert(JSONArray s){
+        List<JudgementModel> judgementList = new ArrayList<>();
+        for (int i = 0 ; i < s.size(); i++) {
+            try {
+                JSONObject a = s.getJSONObject(i);
 
+                JudgementModel judgement = new JudgementModel();
+                judgement.setId(a.getString("_id"));
+                judgement.setjId(a.getString("j_id"));
+                judgement.setjDate(a.getString("j_date"));
+                judgement.setjReason(a.getString("j_reason"));
+                judgement.setjContent(a.getString("j_content"));
+//                judgement.setjRelavent(a.get("j_relevant",new ArrayList<Document>()));
+//                judgement.setjPrevious(a.get("j_previous",new ArrayList<Document>()));
+                judgement.setjLaws(a.getString("j_laws"));
+                judgementList.add(judgement);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return judgementList;
+
+    }
 
 }

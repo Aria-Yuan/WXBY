@@ -13,16 +13,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joan.myapplication.DatePicker.CustomDatePicker;
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.JudgementModel;
+import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
+import com.example.joan.myapplication.database.repository.JudgementRepositoryImpl;
+
+import net.sf.json.JSONArray;
 
 import org.bson.types.ObjectId;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class SearchCasesActivity  extends AppCompatActivity implements CaseOneLineView.OnRootClickListener{
     private TextView currentDateStart = null, currentDateEnd = null;
     private CustomDatePicker customDatePicker1, customDatePicker2;
+    private List<JudgementModel> judgementList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,22 +117,39 @@ public class SearchCasesActivity  extends AppCompatActivity implements CaseOneLi
         EditText content = findViewById(R.id.content);
         EditText judge = findViewById(R.id.judge);
 
-        setContentView(R.layout.search_case_result);
-        LinearLayout result = findViewById(R.id.case_result);
-        for(int i = 0 ; i < 10; i++){
-            result.addView(new CaseOneLineView(getBaseContext())
-                    .init("我们真的能毕业吗法院","103年度板簡字53號","返還房屋租賃","民事")
-                    .setOnRootClickListener(this, i));
-        }
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchJudgement.action");
+            params.addQueryStringParameter("condition","");
+            params.addQueryStringParameter("type","0");
+            setContentView(R.layout.search_case_result);
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    System.out.println(jArray);
+                    judgementList = new JudgementRepositoryImpl().convert(jArray);
 
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-//                Intent intent = new Intent(v.getContext(), SearchCasesActivity.class);
-//                startActivity(intent);
-                finish();
-            }
-        });
+                    initView();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -143,10 +172,33 @@ public class SearchCasesActivity  extends AppCompatActivity implements CaseOneLi
                 Intent intent=new Intent();
                 intent.setClass(v.getContext(), SearchCaseDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("id", judgementList.get((int)v.getTag()).getId());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }break;
         }
 
+    }
+
+    private void initView(){
+        LinearLayout result = findViewById(R.id.case_result);
+        for(int i = 0 ; i < judgementList.size(); i++){
+            String[] a = judgementList.get(i).getjId().split(" ",2);
+            System.out.println(judgementList.get(i).getjId());
+            result.addView(new CaseOneLineView(getBaseContext())
+                    .init(a[0],a[1].split(" \\[")[0],judgementList.get(i).getjReason(),"#民事")
+                    .setOnRootClickListener(this, i));
+        }
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+//                Intent intent = new Intent(v.getContext(), SearchCasesActivity.class);
+//                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initDatePicker() {
