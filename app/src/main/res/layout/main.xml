@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:background="#e6e6e6">
+    android:background="#efefef">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/layout_home_pager_bar"
@@ -31,7 +31,7 @@
             android:paddingEnd="12dp"
             android:paddingStart="12dp"
             android:textColor="@color/selector_item_color"
-            android:textColorHint="#8a8a8a" />
+            android:textColorHint="@color/bbb" />
 
         <ImageView
             android:id="@+id/btn_notice_message"
@@ -57,16 +57,17 @@
             android:background="#dbdbdb">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                app:layout_scrollFlags="scroll"
-                app:contentScrim="#dbdbdb"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#efefef"
+                app:contentScrim="#dbdbdb"
+                app:layout_scrollFlags="scroll">
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#dbdbdb"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:background="#dbdbdb">
 
                     <TableRow
                         android:id="@+id/menu_row1"

@@ -45,8 +45,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="80dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,11 +113,13 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/background"
                 android:text="退出登錄"
                 android:textColor="#bc3d5d"
-                android:textSize="8.5pt" />
+                android:textSize="8.5pt"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
 

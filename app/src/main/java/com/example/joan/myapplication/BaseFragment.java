@@ -78,18 +78,9 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 //View a = inflater.inflate(R.layout.main_me, container, false);
                 if(view_me == null){
                     view_me = inflater.inflate(R.layout.main_me, container, false);
-                    //我的界面列表
                     myName = view_me.findViewById(R.id.name);
 
-                    if(sp.getBoolean("login", false)){
-                        myName.setText(sp.getString("name","呂小布"));
-                        view_me.findViewById(R.id.logout).setVisibility(View.VISIBLE);
-                    }else{
-                        myName.setText("你還沒有註冊喲");
-                        view_me.findViewById(R.id.logout).setVisibility(View.GONE);
-
-                    }
-
+                    //我的界面列表
                     LinearLayout list1 = view_me.findViewById(R.id.me_list_2);
                     list1.addView(new MyOneLineView(getContext())
                             .initMine(R.drawable.response, "我的咨詢", "", true)

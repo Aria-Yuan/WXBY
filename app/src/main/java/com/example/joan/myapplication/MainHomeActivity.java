@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.Size;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -44,6 +45,7 @@ public class MainHomeActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
+    private int position = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,24 +57,22 @@ public class MainHomeActivity extends AppCompatActivity {
         initBNVE();
         initEvent();
         initRegister();
-
     }
 
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        if (hasFocus){
-//            if(sp.getBoolean("login", false)){
-//                initData();
-//                initBNVE();
-//                initEvent();
-//            }
-//
-//        }else{
-//        }
-//
-//    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            if(sp.getBoolean("login", false) && position == 2){
+                TextView myName = findViewById(R.id.name);
+                findViewById(R.id.logout).setVisibility(View.VISIBLE);
+                myName.setText(sp.getString("name","呂小布"));
+            }
 
+        }else{
+        }
+
+    }
 
     /**
      * init BottomNavigationViewEx envent
@@ -83,7 +83,6 @@ public class MainHomeActivity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int position = 0;
                 resetToDefaultIcon();
                 switch (item.getItemId()) {
                     case R.id.menu_main:
@@ -113,6 +112,15 @@ public class MainHomeActivity extends AppCompatActivity {
                 if (previousPosition != position) {
                     viewPager.setCurrentItem(position, false);
                     previousPosition = position;
+                }if(position == 2){
+                    TextView myName = findViewById(R.id.name);
+                    if(sp.getBoolean("login", false)){
+                        findViewById(R.id.logout).setVisibility(View.VISIBLE);
+                        myName.setText(sp.getString("name","呂小布"));
+                    }else{
+                        myName.setText("你還沒有註冊喲");
+                        findViewById(R.id.logout).setVisibility(View.GONE);
+                    }
                 }
 
                 return true;
@@ -213,6 +221,7 @@ public class MainHomeActivity extends AppCompatActivity {
         bnve.enableAnimation(false);
         bnve.enableShiftingMode(false);
         bnve.enableItemShiftingMode(false);
+        bnve.setTextSize(13);
 
         adapter = new VpAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
