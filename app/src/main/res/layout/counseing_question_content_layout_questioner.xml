@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#efefef"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:lineSpacingExtra="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="你好，我之前巴拉巴拉巴拉巴拉拉鏈承諾的積分以人為本發送到你副本，現在不知道該怎麼辦了，請問巴拉巴拉巴拉就是賭。"
+        android:textColor="@color/text2"
+        android:textSize="7.5pt" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:padding="10dp"
+        android:text="2018/9/2 15:30:00"
+        android:textSize="6pt" />
+
+</LinearLayout>

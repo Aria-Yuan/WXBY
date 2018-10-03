@@ -8,14 +8,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joan.database.model.LawModel;
-
-import java.util.List;
-
-public class CaseResultReferListFragment extends Fragment implements View.OnClickListener {
+public class CaseResultReferListFragment extends Fragment {
 
     private LinearLayout ll;
-    private List<LawModel> refers;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -30,34 +25,41 @@ public class CaseResultReferListFragment extends Fragment implements View.OnClic
         LayoutInflater li = LayoutInflater.from(getContext());
         for (int i = 0; i < 3; i ++){
             View view = li.inflate(R.layout.sample_case_result_single_refer, null);
-            view.setId(i);
-            view.setOnClickListener(this);
             ll.addView(view);
         }
-//        if (ll == null){
-//            System.out.println("-------------------");
-//            System.out.println("-------------------");
-//            System.out.println("-------------------");
-//            System.out.println("NULL  in initView!!!!!!!!!!!!!!!");
-//            System.out.println("-------------------");
-//            System.out.println("-------------------");
-//            System.out.println("-------------------");
-//        }else{
-//                System.out.println("-------------------");
-//                System.out.println("-------------------");
-//                System.out.println("-------------------");
-//                System.out.println("NOT   NULL!!!!!!!!!!!!!!!");
-//                System.out.println("-------------------");
-//                System.out.println("-------------------");
-//                System.out.println("-------------------");
-//
-//        }
+        if (ll == null){
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("NULL  in initView!!!!!!!!!!!!!!!");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+        }else{
+                System.out.println("-------------------");
+                System.out.println("-------------------");
+                System.out.println("-------------------");
+                System.out.println("NOT   NULL!!!!!!!!!!!!!!!");
+                System.out.println("-------------------");
+                System.out.println("-------------------");
+                System.out.println("-------------------");
+
+        }
     }
 
-    public void initData(List<LawModel> refer){
+    public void initData(CaseResultData.Refer[] refers){
 
-        refers = refer;
+        if (ll == null){
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("NULL!!!!!!!!!!!!!!!");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+            System.out.println("-------------------");
+        }
 
+//        View single = new case_result_similar_single(getContext());
         for(int i = 0; i < 3; i ++){
             View view = ll.getChildAt(i);
             TextView title, number, subtitle;
@@ -65,9 +67,8 @@ public class CaseResultReferListFragment extends Fragment implements View.OnClic
             title = view.findViewById(R.id.case_result_refer_single_title);
             number = view.findViewById(R.id.case_result_refer_single_number);
             subtitle = view.findViewById(R.id.case_result_refer_single_subtitle);
-            title.setText(refer.get(i).getName().replace("\"", "").replace("\r", "").replace("\n", "")
-                    + "  " + refer.get(i).getArticle().replace("\"", ""));
-            subtitle.setText(refer.get(i).getContent().replace("\\r", "").replace("\\n", ""));
+            title.setText(refers[i].title);
+            subtitle.setText(refers[i].subtitle);
             number.setText((i+1)+".");
 //            ft.add(R.id.case_consult_result_linear, new CaseResultSimilarFragment());
 
@@ -78,16 +79,5 @@ public class CaseResultReferListFragment extends Fragment implements View.OnClic
 
         }
 //        ft.commit();
-    }
-
-    @Override
-    public void onClick(View view) {
-
-//        Intent intent = new Intent(CaseConsultResultActivity.class, LawDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("law", refers.get(view.getId()));
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-
     }
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.joan.myapplication">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -11,17 +10,41 @@
         android:label="myapplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".MyApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".MainHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".SearchLawFirmActivity" />
+        <activity android:name=".SearchCasesActivity" />
+        <activity android:name=".SearchLawFirmDetailActivity" />
+        <activity android:name=".SearchLawActivity" />
+        <activity android:name=".SearchCaseDetailActivity" />
+        <activity android:name=".SearchLawDetailActivity" />
+        <activity android:name=".CounselingActivity" />
+        <activity android:name=".CounselingDetailActivity" />
+        <activity android:name=".unFinishedActivity" />
+        <activity android:name=".LawyerConsultDetailActivity" />
+        <activity android:name=".LawyerConsultSortedListActivity" />
+        <activity android:name=".LawyerConsultAllCasesActivity" />
+        <activity android:name=".LawyerConsultResultActivity" />
+        <activity android:name=".ConsultingActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
+        <activity android:name=".QuestionLawyerActivity" />
+        <activity android:name=".MyQuestionListActivity" />
+        <activity android:name=".MyConsultListActivity" />
+        <activity android:name=".MyAnswerLawyerConsultActivity" />
+        <activity android:name=".AnswerConsultActivity" />
+        <activity android:name=".MyQuestionLawyerConsultActivity" />
+        <activity android:name=".QuestionLawyerAgainActivity" />
+        <activity android:name=".LoginActivity" />
+
         <activity
             android:name=".LawyerConsultActivity"
             android:label="@string/lawyer_consult_title"
@@ -49,21 +72,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.joan.myapplication.ConsultingActivity" />
         </activity>
-        <activity android:name=".SelectPicPopupWindow" />
-        <activity android:name=".LawyerConsultLawyerListFragment" />
-        <activity android:name=".LawyerConsultSortListFragment" />
-        <activity android:name=".LawyerConsultDetailActivity" />
-        <activity android:name=".LawyerConsultSortedListActivity" />
-        <activity android:name=".LawyerConsultAllCasesActivity" />
-        <activity android:name=".QuestionLawyerActivity" />
-        <activity android:name=".LawyerConsultResultActivity" />
-        <activity android:name=".ConsultingActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".JudgementConsultActivity" />
-        <activity android:name=".QuickConsultResultActivity" />
-        <activity android:name=".QuickConsultResultListReply" />
-        <activity android:name=".QuickConsultResultListComment"></activity>
     </application>
 
 </manifest>

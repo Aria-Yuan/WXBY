@@ -9,6 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.joan.myapplication.database.model.LawModel;
+import com.example.joan.myapplication.database.model.LawyerModel;
+import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
+import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
+
+import net.sf.json.JSONArray;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +29,12 @@ public class LawyerConsultSortedListActivity extends AppCompatActivity implement
     private LayoutInflater li;
     private int lNumber = 10;
     private TextView title, name, identity, branch, special,response, fee, rate, image;
-    private List<Lawyer> totalData = new ArrayList<>();
+    private List<LawyerModel> totalData = new ArrayList<>();
     private Intent intent;
     private String sortName;
     private Button back;
+
+    private List<LawyerModel> list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +62,8 @@ public class LawyerConsultSortedListActivity extends AppCompatActivity implement
     }
 
     public void addView() {
-        List<Lawyer> list = getData();
-        for (Lawyer lawyer: list){
+        List<LawyerModel> list = getData();
+        for (LawyerModel lawyer: list){
             View view = li.inflate(R.layout.sample_lawyer_consult_single_lawyer, null);
             setData(view, lawyer);
             setListener(view, lawyer.getId());
@@ -71,16 +84,47 @@ public class LawyerConsultSortedListActivity extends AppCompatActivity implement
     }
 
     private List getData(){
-        List<Lawyer> list = new ArrayList();
-        for (int i = 1; i <= lNumber; i ++){
-            list.add(new Lawyer("000" + i, "Lawyer" + i, "Identity" + i, "Branch" + i, "Special" + i,
-                    "Response" + i, "Fee" + i, "Rate" + i, "Image"));
+        try{
+            RequestParams params = new RequestParams("http://140.136.7.72:8080/searchLawyer.action");
+            params.addQueryStringParameter("condition","");
+//            params.addQueryStringParameter("condition","吕浩然觉得不用写");
+            params.addQueryStringParameter("type","0");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    list = new LawyerRepositoryImpl().convert(jArray);
+                    LawyerModel l = list.get(0);
+                    for(int i = 0 ; i < 10 ; i++){
+                        list.add(l);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
+
         totalData.addAll(list);
         return list;
     }
 
-    private void setData(View view, Lawyer lawyer){
+    private void setData(View view, LawyerModel lawyer){
 
         name = view.findViewById(R.id.lawyer_consult_single_name);
         identity = view.findViewById((R.id.lawyer_consult_single_identity));
@@ -91,13 +135,13 @@ public class LawyerConsultSortedListActivity extends AppCompatActivity implement
         rate = view.findViewById((R.id.lawyer_consult_single_rate));
 //        image = view.findViewById((R.id.lawyer_consult_single_image));
 
-        name.setText(lawyer.getLname());
-        identity.setText(lawyer.getIdentity());
-        branch.setText(lawyer.getBranch());
-        special.setText(lawyer.getSpecial());
-        response.setText(lawyer.getResponse());
-        fee.setText(lawyer.getFee());
-        rate.setText(lawyer.getRate());
+        name.setText(lawyer.getName());
+        identity.setText(lawyer.getJob());
+//        branch.setText(lawyer.getBranch());
+//        special.setText(lawyer.getSpecial());
+//        response.setText(lawyer.getResponse());
+        fee.setText(lawyer.getPrice()+"");
+        rate.setText(lawyer.getComment()+"");
 
     }
 

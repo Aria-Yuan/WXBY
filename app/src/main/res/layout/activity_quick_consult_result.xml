@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+       <TextView
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +133,8 @@
                     android:layout_height="wrap_content"
                     android:text="Button"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="130dp" />
+                    tools:layout_editor_absoluteX="130dp"
+                    tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button26"
@@ -172,7 +173,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <CheckBox
-                        android:id="@+id/quick_consult_result_only"
+                        android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"

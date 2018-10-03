@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_root"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|end"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/me" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.1"
+            android:text="我是誰"
+            android:textColor="@color/bbb"
+            android:textSize="7.5pt" />
+
+        <TextView
+            android:id="@+id/job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:text="XXXX律師"
+            android:textColor="@color/bbb"
+            android:textSize="7.5pt" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.6"
+            android:gravity="center"
+            android:text="進行中"
+            android:textColor="@color/colorAccent"
+            android:textSize="7.5pt" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="#efefef" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:lines="3"
+            android:paddingBottom="8dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:text="我就是把黑色的不哈巴河本身就難打開的撒女就開始發v那麼多三甲是否能擦拭就不差沒寫呢不驕傲的"
+            android:textColor="@color/bbb"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingStart="19dp"
+            android:text="2018/4/5 14:00"
+            android:textSize="6pt" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="#efefef" />
+
+</LinearLayout>

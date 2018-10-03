@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--item内容部分的容器-->
+    <LinearLayout
+        android:id="@+id/ll_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/counseling_picture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/me" />
+
+            <TextView
+                android:id="@+id/counseling_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="9dp"
+                android:gravity="center"
+                android:text="匿名用户"
+                android:textColor="@color/text2"
+                android:textSize="7.5pt" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/counseling_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:lines="3"
+            android:text="律師你好，我最近遇到了一些問題，我阿爸爸爸爸不斷進步，本文由不斷進步擦邊超低價八九十不出意外，但是，示範戶人氣榜發佈任何女包，請問要怎麼解決。"
+            android:textColor="@color/bbb"
+            android:textSize="8pt" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/counseling_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"
+                android:layout_marginLeft="3dp"
+                android:text="2018-9-8 12:00" />
+
+            <TextView
+                android:id="@+id/counseling_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"
+                android:layout_marginLeft="30dp"
+                android:text="24人看过" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--item的下分割线-->
+    <View
+        android:id="@+id/divider_top"
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="#efefef" />
+
+
+</LinearLayout>

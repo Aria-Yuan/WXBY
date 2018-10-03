@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.joan.myapplication.database.model.LawyerModel;
+
 public class LawyerConsultDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String id;
-    private Lawyer lawyer = new Lawyer();
+    private LawyerModel lawyer = new LawyerModel();
     private TextView name, detail, year, times, scholar, occupation, special, personality;
     private Button question, back, follow, seeAll;
     private String[] text = {"向", "律師付費提問(NT$", ")"};
@@ -24,6 +27,7 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lawyer_consult_detail);
+        lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer") ;
 
         initView();
         setData();
@@ -33,7 +37,7 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
     private void initView() {
 
         getID();
-        getLawyer();
+        getCases();
 
         name = findViewById(R.id.consult_lawyer_detail_name);
         detail = findViewById(R.id.consult_lawyer_detail_detail);
@@ -80,9 +84,9 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
 
     private void questionTheLawyer() {
         Intent intent = new Intent(LawyerConsultDetailActivity.this, QuestionLawyerActivity.class);
-        intent.putExtra("lawyerID", id);
-        intent.putExtra("name", lawyer.getLname());
-        intent.putExtra("fee", lawyer.getFee());
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lawyer", lawyer);
+        intent.putExtras(bundle);
         startActivity(intent);
         overridePendingTransition(R.anim.right, R.anim.left);
     }
@@ -93,8 +97,8 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
 
     private void seeAll(){
         Intent intent = new Intent(LawyerConsultDetailActivity.this, LawyerConsultAllCasesActivity.class);
-        intent.putExtra("lawyerID", id);
-        intent.putExtra("name", lawyer.getLname());
+        intent.putExtra("lawyerID", lawyer.getId());
+        intent.putExtra("name", lawyer.getName());
         startActivity(intent);
         overridePendingTransition(R.anim.right, R.anim.left);
     }
@@ -105,23 +109,6 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
         id = intent.getStringExtra("lawyerID");
         System.out.println(id);
 
-    }
-
-    private void getLawyer() {
-        lawyer.setId(id);
-        lawyer.setBranch("Branch");
-        lawyer.setFee("Fee");
-        lawyer.setIdentity("Identity");
-        lawyer.setRate("4.9");
-        lawyer.setResponse("Response");
-        lawyer.setSpecial("Special");
-        lawyer.setLname("Name" + id.toString());
-        lawyer.setYear(10);
-        lawyer.setTimes(9999);
-        lawyer.setScholar("Scholar");
-        lawyer.setPersonality("Personality");
-
-        getCases();
     }
 
     private void getCases() {
@@ -138,17 +125,18 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void setData() {
 
-        name.setText(lawyer.getLname().toString());
-        detail.setText(lawyer.getBranch().toString() + " " + lawyer.getIdentity().toString());
-        year.setText(String.valueOf(lawyer.getYear()));
-        times.setText(String.valueOf(lawyer.getTimes()));
-        scholar.setText(lawyer.getScholar().toString());
-        occupation.setText(lawyer.getBranch().toString() + " " + lawyer.getIdentity().toString());
-        special.setText(lawyer.getSpecial().toString());
-        personality.setText(lawyer.getPersonality().toString());
-        question.setText(text[0] + lawyer.getLname().toString() + text[1] + lawyer.getFee().toString() + text[2]);
+        name.setText(lawyer.getName());
+        detail.setText(lawyer.getJob() + " " + lawyer.getCompany());
+//        year.setText(String.valueOf(lawyer.getYear()));
+//        times.setText(String.valueOf(lawyer.getTimes()));
+        scholar.setText(lawyer.getEducation());
+        occupation.setText(lawyer.getJob() + " " + lawyer.getCompany());
+        special.setText(lawyer.getMajor());
+        personality.setText(lawyer.getDescription());
+        question.setText(text[0] + lawyer.getName() + text[1] + lawyer.getPrice() + text[2]);
 
         setCases();
 

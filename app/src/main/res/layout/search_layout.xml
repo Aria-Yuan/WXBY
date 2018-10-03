@@ -8,7 +8,7 @@
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_home_pager_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="46dp"
         android:background="@color/selector_item_color"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -27,8 +27,8 @@
             android:textColorHint="#8a8a8a">
 
             <ImageView
-                android:layout_width="25dp"
                 android:id="@+id/iv_search"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="2dp"
@@ -48,7 +48,7 @@
                 android:paddingStart="10dp"
                 android:textColor="#515151"
                 android:textColorHint="#8a8a8a"
-                android:textSize="7pt"/>
+                android:textSize="7pt" />
 
             <ImageView
                 android:id="@+id/ivDeleteText"
@@ -59,7 +59,7 @@
                 android:layout_marginRight="5dp"
                 android:paddingRight="6dp"
                 android:src="@drawable/delete"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -94,22 +94,20 @@
                 <TextView
                     android:id="@+id/tv_tip"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="35dp"
                     android:gravity="left|center_vertical"
-                    android:textSize="8pt"
-                    android:text="搜索历史" />
+                    android:text="搜索歷史"
+                    android:textSize="7pt" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#EEEEEE"/>
+                    android:layout_height="2dp"
+                    android:background="@color/selector_item_color"/>
 
                 <com.example.joan.myapplication.Search_Listview
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
+                    android:layout_height="30dp"/>
 
             </LinearLayout>
 
@@ -121,11 +119,11 @@
             <TextView
                 android:id="@+id/tv_clear"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
                 android:background="#F6F6F6"
                 android:gravity="center"
-                android:textSize="8pt"
-                android:text="清除搜索历史" />
+                android:text="清空搜索歷史"
+                android:textSize="7pt" />
 
             <View
                 android:layout_width="match_parent"

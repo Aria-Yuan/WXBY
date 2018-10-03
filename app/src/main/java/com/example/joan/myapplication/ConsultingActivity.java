@@ -56,8 +56,8 @@ public class ConsultingActivity extends AppCompatActivity implements View.OnClic
                 overridePendingTransition(R.anim.right, R.anim.left);
                 break;
             case R.id.consult_cancel:
-                intent = new Intent(ConsultingActivity.this, QuickConsultResultActivity.class);
-                startActivity(intent);
+                finish();
+//                overridePendingTransition(R.anim.left, R.anim.push_bottom_out);
                 break;
             default:
                 break;

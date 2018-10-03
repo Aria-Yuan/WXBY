@@ -82,7 +82,7 @@
                 android:id="@+id/textView20"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="11"
+                android:layout_weight="4"
                 android:gravity="bottom|right"
                 android:paddingBottom="16dp"
                 android:text="@string/consult_case_result_percent"
@@ -108,6 +108,11 @@
             android:layout_weight="0.5"
             app:srcCompat="@drawable/line_l" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/consult_case_result_pager"
             android:layout_width="match_parent"
@@ -118,10 +123,13 @@
                 android:id="@+id/consult_case_result_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/selector_item_color"
-                app:tabTextColor="@color/unselector_item_color"></android.support.design.widget.TabLayout>
-        </android.support.v4.view.ViewPager>
+                app:tabTextAppearance="@style/result_tablayout_textsize"
+                app:tabTextColor="@color/unselector_item_color">
 
+            </android.support.design.widget.TabLayout>
+        </android.support.v4.view.ViewPager>
 
     </LinearLayout>
 

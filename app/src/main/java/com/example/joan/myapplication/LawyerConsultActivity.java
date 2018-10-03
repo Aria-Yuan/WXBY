@@ -1,7 +1,5 @@
 package com.example.joan.myapplication;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,25 +20,15 @@ public class LawyerConsultActivity extends AppCompatActivity implements View.OnC
     private LawyerConsultSortListFragment sortList;
     private Button back;
     public static LawyerConsultActivity page;
-    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lawyer_consult);
 
-        isLogin();
         getData();
         initItems();
 
-    }
-
-    private void isLogin() {
-        if (sp.getBoolean("login", false)){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private void getData() {
