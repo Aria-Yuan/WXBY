@@ -3,10 +3,7 @@ package com.example.joan.myapplication;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,12 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +67,15 @@ public class BaseFragment extends Fragment {
                         getActivity().startActivity(intent);
                     }
                 });
+            }
+
+            case "1":{
+
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ConsultingActivity.class);
+                getActivity().startActivity(intent);
+//                view.findViewById(R.id.main_consultview).setVisibility(View.VISIBLE);
+
             }
 
         }

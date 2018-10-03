@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.joan.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,11 +15,55 @@
         <activity android:name=".MainHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".CaseConsultActivity" />
+        <activity
+            android:name=".LawyerConsultActivity"
+            android:label="@string/lawyer_consult_title"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
+        <activity
+            android:name=".QuickConsultActivity"
+            android:label="@string/title_activity_quick_consult"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
+        <activity
+            android:name=".CaseConsultResultActivity"
+            android:label="@string/title_activity_case_consult"
+            android:parentActivityName=".ConsultingActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.joan.myapplication.ConsultingActivity" />
+        </activity>
+        <activity android:name=".SelectPicPopupWindow" />
+        <activity android:name=".LawyerConsultLawyerListFragment" />
+        <activity android:name=".LawyerConsultSortListFragment" />
+        <activity android:name=".LawyerConsultDetailActivity" />
+        <activity android:name=".LawyerConsultSortedListActivity" />
+        <activity android:name=".LawyerConsultAllCasesActivity" />
+        <activity android:name=".QuestionLawyerActivity" />
+        <activity android:name=".LawyerConsultResultActivity" />
+        <activity android:name=".ConsultingActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".JudgementConsultActivity" />
+        <activity android:name=".QuickConsultResultActivity" />
+        <activity android:name=".QuickConsultResultListReply" />
+        <activity android:name=".QuickConsultResultListComment"></activity>
     </application>
 
 </manifest>

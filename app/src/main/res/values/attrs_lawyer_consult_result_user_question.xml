@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="lawyer_consult_result_user_question">
+        <attr name="userQuestionString" format="string" />
+        <attr name="userQuestionDimension" format="dimension" />
+        <attr name="userQuestionColor" format="color" />
+        <attr name="userQuestionDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

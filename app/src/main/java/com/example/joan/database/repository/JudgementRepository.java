@@ -2,8 +2,6 @@ package com.example.joan.database.repository;
 
 import com.example.joan.database.model.JudgementModel;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
 
 public interface JudgementRepository {
@@ -11,7 +9,7 @@ public interface JudgementRepository {
     List<JudgementModel> findAll();
 
     //以id检索文档
-    JudgementModel findById(ObjectId code);
+    JudgementModel findById(String code);
 
     //以关键字检索
     List<JudgementModel> findByCondition(String keyWord);

@@ -25,13 +25,13 @@ public class LawRepositoryImpl implements LawRepository {
             while (cursor.hasNext()) {
                 LawModel law = new LawModel();
                 Document current_cursor = cursor.next();
-                law.setId(current_cursor.getObjectId("_id"));
-                law.setBook(current_cursor.getString("book"));
-                law.setChapter(current_cursor.getString("chapter"));
+                law.setId(current_cursor.getObjectId("_id").toString());
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
                 law.setStart(current_cursor.getString("start"));
                 law.setEnd(current_cursor.getString("end"));
+                law.setAbandon(current_cursor.getString("abandon"));
+                law.setArticle(current_cursor.getString("article"));
                 lawList.add(law);
             }
         } finally {
@@ -49,13 +49,13 @@ public class LawRepositoryImpl implements LawRepository {
             while (cursor.hasNext()) {
                 LawModel law = new LawModel();
                 Document current_cursor = cursor.next();
-                law.setId(current_cursor.getObjectId("_id"));
-                law.setBook(current_cursor.getString("book"));
-                law.setChapter(current_cursor.getString("chapter"));
+                law.setId(current_cursor.getObjectId("_id").toString());
                 law.setName(current_cursor.getString("name"));
                 law.setContent(current_cursor.getString("content"));
                 law.setStart(current_cursor.getString("start"));
                 law.setEnd(current_cursor.getString("end"));
+                law.setAbandon(current_cursor.getString("abandon"));
+                law.setArticle(current_cursor.getString("article"));
                 lawList.add(law);
             }
         } finally {
@@ -65,9 +65,9 @@ public class LawRepositoryImpl implements LawRepository {
     }
 
     //以id检索文档
-    public LawModel findById(ObjectId code){
+    public LawModel findById(String code){
         Document condition = new Document();
-        condition.append("_id", code);
+        condition.append("_id", new ObjectId(code));
         return find(condition).get(0);
     }
 

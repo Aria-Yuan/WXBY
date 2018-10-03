@@ -1,10 +1,9 @@
 package com.example.joan.database.model;
 
+import org.bson.types.ObjectId;
+
 import java.util.Date;
 import java.util.List;
-
-import org.bson.Document;
-import org.bson.types.ObjectId;
 
 public class QuickResponseModel {
     private ObjectId id;

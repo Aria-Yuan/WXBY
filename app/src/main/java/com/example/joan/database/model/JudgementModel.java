@@ -1,12 +1,11 @@
 package com.example.joan.database.model;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public class JudgementModel {
-    private ObjectId Id;
+    private String Id;
     private String jId;
     private String jDate;
     private String jReason;
@@ -15,11 +14,11 @@ public class JudgementModel {
     private List<Document> jPrevious;
     private String jLaws;
 
-    public ObjectId getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         Id = id;
     }
 

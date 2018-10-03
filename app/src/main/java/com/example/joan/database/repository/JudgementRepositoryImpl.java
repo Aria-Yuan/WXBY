@@ -1,7 +1,7 @@
 package com.example.joan.database.repository;
 
-import com.example.joan.database.model.JudgementModel;
 import com.example.joan.database.MongoDBUtil;
+import com.example.joan.database.model.JudgementModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
@@ -25,7 +25,7 @@ public class JudgementRepositoryImpl implements JudgementRepository{
             while (cursor.hasNext()) {
                 JudgementModel judgement = new JudgementModel();
                 Document current_cursor = cursor.next();
-                judgement.setId(current_cursor.getObjectId("_id"));
+                judgement.setId(current_cursor.getObjectId("_id").toString());
                 judgement.setjId(current_cursor.getString("j_id"));
                 judgement.setjDate(current_cursor.getString("j_date"));
                 judgement.setjReason(current_cursor.getString("j_reason"));
@@ -50,7 +50,7 @@ public class JudgementRepositoryImpl implements JudgementRepository{
             while (cursor.hasNext()) {
                 JudgementModel judgement = new JudgementModel();
                 Document current_cursor = cursor.next();
-                judgement.setId(current_cursor.getObjectId("_id"));
+                judgement.setId(current_cursor.getObjectId("_id").toString());
                 judgement.setjId(current_cursor.getString("j_id"));
                 judgement.setjDate(current_cursor.getString("j_date"));
                 judgement.setjReason(current_cursor.getString("j_reason"));
@@ -67,9 +67,9 @@ public class JudgementRepositoryImpl implements JudgementRepository{
     }
 
     //以id检索文档
-    public JudgementModel findById(ObjectId code) {
+    public JudgementModel findById(String code) {
         Document condition = new Document();
-        condition.append("_id", code);
+        condition.append("_id", new ObjectId(code));
         return find(condition).get(0);
     }
 

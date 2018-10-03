@@ -1,40 +1,30 @@
 package com.example.joan.database.model;
 
-import org.bson.types.ObjectId;
+import java.io.Serializable;
 
-import java.util.Date;
-
-public class LawModel {
-    private ObjectId id;
-    private String book;
-    private String chapter;
+public class LawModel implements Serializable{
+    private String id;
+    private String article;
     private String name;
     private String content;
     private String start;
     private String end;
+    private String abandon;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getBook() {
-        return book;
+    public String getArticle() {
+        return article;
     }
 
-    public void setBook(String book) {
-        this.book = book;
-    }
-
-    public String getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(String chapter) {
-        this.chapter = chapter;
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public String getName() {
@@ -67,5 +57,13 @@ public class LawModel {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public String getAbandon() {
+        return abandon;
+    }
+
+    public void setAbandon(String abandon) {
+        this.abandon = abandon;
     }
 }

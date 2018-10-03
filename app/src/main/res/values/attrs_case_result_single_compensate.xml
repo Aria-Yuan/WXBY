@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="case_result_single_compensate">
+        <attr name="singleCompensateString" format="string" />
+        <attr name="singleCompensateDimension" format="dimension" />
+        <attr name="singleCompensateColor" format="color" />
+        <attr name="singleCompensateDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>
