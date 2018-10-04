@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:text="1."
         android:textColor="@android:color/holo_orange_dark"
-        android:textSize="60sp"
+        android:textSize="56sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/case_result_similar_single_number"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,22 +35,20 @@
         android:id="@+id/case_result_similar_single_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="SIMILAR"
-        app:layout_constraintEnd_toStartOf="@+id/case_result_similar_single_lawyer"
         app:layout_constraintStart_toEndOf="@+id/case_result_similar_single_number"
         app:layout_constraintTop_toBottomOf="@+id/case_result_similar_single_title" />
 
-    <Button
-        android:id="@+id/case_result_similar_single_lawyer"
+    <TextView
+        android:id="@+id/case_result_similar_single_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"
-        android:text="Button"
-        android:textColor="@color/selector_item_color"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/case_result_similar_single_title" />
+
 </android.support.constraint.ConstraintLayout>
