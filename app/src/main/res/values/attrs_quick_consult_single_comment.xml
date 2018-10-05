@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="quick_consult_single_comment">
+        <attr name="quickConsultSingleCommentString" format="string" />
+        <attr name="quickConsultSingleCommentDimension" format="dimension" />
+        <attr name="quickConsultSingleCommentColor" format="color" />
+        <attr name="quickConsultSingleCommentDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

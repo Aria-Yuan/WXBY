@@ -26,15 +26,15 @@ public class MainViewFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // get title
-        //position = getArguments().getString("title");
+        position = getArguments().getString("position");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_base, container, false);
-        TextView tv = view.findViewById(R.id.tv_title);
-        if (getArguments() != null) tv.setText(getArguments().getString(TITLE_TAG));
+        View view = inflater.inflate(R.layout.shouye_sample, container, false);
+//        TextView tv = view.findViewById(R.id.tv_title);
+//        if (getArguments() != null) tv.setText(getArguments().getString(TITLE_TAG));
 
         return view;
     }

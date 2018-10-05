@@ -3,8 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccenta">#097e76</color>
-    <color name="colorAccent">#5c8d88</color>
-    <color name="selector_item_color">#5c8d88</color>
+    <color name="colorAccent">#73afa9</color>
+    <color name="selector_item_color">#73afa9</color>
     <color name="unselector_item_color">#8a8585</color>
     <color name="aaa">#9e9e9e</color>
     <color name="bbb">#696969</color>

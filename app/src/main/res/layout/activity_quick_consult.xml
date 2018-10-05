@@ -15,7 +15,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@color/selector_item_color"
             android:visibility="visible">
 
@@ -23,9 +23,9 @@
                 android:id="@+id/quick_consult_back"
                 android:layout_width="30dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="14dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:background="@drawable/back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,22 +42,20 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/quick_consult_next"
-                app:layout_constraintHorizontal_bias="0.63"
+                app:layout_constraintHorizontal_bias="0.611"
                 app:layout_constraintStart_toEndOf="@+id/quick_consult_back"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.517" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/quick_consult_next"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/touming"
                 android:text="@string/consult_quick_next"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

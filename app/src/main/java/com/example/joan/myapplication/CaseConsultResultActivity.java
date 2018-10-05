@@ -51,10 +51,10 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 
         back = findViewById(R.id.consult_case_result_back);
         favor = findViewById(R.id.consult_case_result_favor);
-        bar = findViewById(R.id.consult_case_result_percent);
+//        bar = findViewById(R.id.consult_case_result_percent);
         tabLayout = findViewById(R.id.consult_case_result_tablayout);
         pager = findViewById(R.id.consult_case_result_pager);
-        bar = findViewById(R.id.consult_case_result_percent);
+//        bar = findViewById(R.id.consult_case_result_percent);
         percent = findViewById(R.id.consult_case_result_number);
 
         back.setOnClickListener(this);

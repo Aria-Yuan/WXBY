@@ -115,7 +115,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/back"
+        android:id="@+id/consult_cancel"
         android:layout_width="30dp"
         android:layout_height="25dp"
         android:layout_marginEnd="315dp"
@@ -137,7 +137,7 @@
         android:background="@drawable/tongzhi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintStart_toEndOf="@+id/consult_cancel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -150,7 +150,7 @@
         android:background="@drawable/waishocang"
         app:layout_constraintEnd_toStartOf="@+id/notice"
         app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintStart_toEndOf="@+id/consult_cancel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView

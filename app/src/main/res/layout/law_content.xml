@@ -7,7 +7,7 @@
     android:background="@drawable/fatiaozhenwen">
 
     <Button
-        android:id="@+id/back"
+        android:id="@+id/consult_cancel"
         android:layout_width="31dp"
         android:layout_height="35dp"
         android:layout_marginEnd="270dp"
@@ -29,7 +29,7 @@
         android:background="@drawable/tongzhi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.809"
-        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintStart_toEndOf="@+id/consult_cancel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

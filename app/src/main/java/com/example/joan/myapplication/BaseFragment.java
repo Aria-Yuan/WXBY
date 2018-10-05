@@ -37,7 +37,6 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
 
     //当标签数目小于等于4个时，标签栏不可滑动
     public static final int MOVABLE_COUNT = 4;
-    int tabCount = 6;
     private List<String> tabs;
     private List<Fragment> fragments;
 
@@ -212,7 +211,7 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
         tabLayout = view_main.findViewById(R.id.main_tab);
         viewpager = view_main.findViewById(R.id.main_view);
         //MODE_FIXED标签栏不可滑动，各个标签会平分屏幕的宽度
-        tabLayout.setTabMode(tabCount <= MOVABLE_COUNT ? TabLayout.MODE_FIXED : TabLayout.MODE_SCROLLABLE);
+//        tabLayout.setTabMode(tabCount <= MOVABLE_COUNT ? TabLayout.MODE_FIXED : TabLayout.MODE_SCROLLABLE);
 //        //指示条的颜色
 //        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_blue_dark));
 //        tabLayout.setSelectedTabIndicatorHeight((int) getResources().getDimension(R.dimen.indicatorHeight));
@@ -233,9 +232,8 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
 
     private void initDatas() {
         tabs = new ArrayList<>();
-        for (int i = 0; i < tabCount; i++) {
-            tabs.add("标签" + i);
-        }
+        tabs.add("法律新聞");
+        tabs.add("名家評論");
 
         fragments = new ArrayList<>();
         for (int i = 0; i < tabs.size(); i++) {
