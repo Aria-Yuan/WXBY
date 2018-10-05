@@ -25,7 +25,8 @@ import org.xutils.x;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, CompoundButton.OnCheckedChangeListener {
 
-    private Button back, register, cancel, mode;
+    private Button register, cancel, mode;
+    ImageView back;
     private TextView account, password, eight, letter;
     private int registerType;
     private String ea, ep;

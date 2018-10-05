@@ -44,6 +44,7 @@
         <activity android:name=".MyQuestionLawyerConsultActivity" />
         <activity android:name=".QuestionLawyerAgainActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".QuickConsultResultActivity" />
 
         <activity
             android:name=".LawyerConsultActivity"

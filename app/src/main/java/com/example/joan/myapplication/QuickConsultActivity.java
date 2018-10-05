@@ -1,6 +1,7 @@
 package com.example.joan.myapplication;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -169,6 +170,11 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //跳至詳情頁面
+                        Intent intent = new Intent(QuickConsultActivity.this, QuickConsultResultActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putSerializable("lawyer", lawyer);
+//                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("確定", new DialogInterface.OnClickListener() {

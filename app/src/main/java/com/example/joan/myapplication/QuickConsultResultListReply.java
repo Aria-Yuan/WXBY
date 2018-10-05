@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joan.database.model.QuickConsultModel;
+import com.example.joan.myapplication.database.model.QuickConsultModel;
 
 import java.util.List;
 

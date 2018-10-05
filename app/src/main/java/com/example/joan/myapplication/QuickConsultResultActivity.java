@@ -9,7 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joan.database.model.QuickConsultModel;
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.QuickConsultModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -55,7 +56,7 @@ public class QuickConsultResultActivity extends AppCompatActivity {
         final int[] type = new int[1];
 
         try {
-            RequestParams params = new RequestParams("http://169.254.219.229:8080/getQuickConsultResult.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/getQuickConsultResult.action");
             params.addQueryStringParameter("id", id);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {

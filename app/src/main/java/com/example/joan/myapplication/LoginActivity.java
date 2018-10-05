@@ -27,7 +27,8 @@ import org.xutils.x;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private Button login, cancel, forget, back, register, mode;
+    private Button login, cancel, forget, register, mode;
+    ImageView back;
     private EditText account, password;
     private CheckBox agree;
     private String ea, ep;

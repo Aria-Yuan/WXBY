@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -215,7 +216,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
         System.out.println("BeforeSubmit");
         final int[] type2 = {-3};
         try {
-            RequestParams params = new RequestParams("http://169.254.219.229:8080/caseConsult.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/caseConsult.action");
             params.addQueryStringParameter("id", id);
             params.addQueryStringParameter("content", content);
             System.out.println(params.toString());
