@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,11 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Button;
 
-public class CaseResultSimilarListFragment extends Fragment {
+import com.example.joan.myapplication.database.model.JudgementModel;
+
+import java.util.List;
+
+public class CaseResultSimilarListFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout ll;
+    private List<JudgementModel> similars;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -26,33 +31,35 @@ public class CaseResultSimilarListFragment extends Fragment {
         LayoutInflater li = LayoutInflater.from(getContext());
         for (int i = 0; i < 3; i ++){
             View view = li.inflate(R.layout.sample_case_result_single_similar, null);
+            view.setId(i);
+            view.setOnClickListener(this);
             ll.addView(view);
         }
-        System.out.println("-------------------");
-        System.out.println("-------------------");
-        System.out.println("-------------------");
-        System.out.println("InitSimilar!!!!!!!!!!!!!!!");
-        System.out.println("-------------------");
-        System.out.println("-------------------");
-        System.out.println("-------------------");
+//        System.out.println("InitSimilar!!!!!!!!!!!!!!!");
     }
 
-    public void initData(CaseResultData.Similar[] similars){
+    public void initData(List<JudgementModel> similar){
+
+        similars = similar;
 
 //        View single = new case_result_similar_single(getContext());
         for(int i = 0; i < 3; i ++){
             View view = ll.getChildAt(i);
-            Button lawyer;
-            TextView title, subTitle, number;
+//            Button lawyer;
+            TextView title, subTitle, number, time;
 //            View view = new CaseResultSimilarFragment().getView();
-            lawyer = view.findViewById(R.id.case_result_similar_single_lawyer);
+//            lawyer = view.findViewById(R.id.case_result_similar_single_lawyer);
             title = view.findViewById(R.id.case_result_similar_single_title);
             subTitle = view.findViewById(R.id.case_result_similar_single_subtitle);
             number = view.findViewById(R.id.case_result_similar_single_number);
-            lawyer.setText(similars[i].lawyer);
-            title.setText(similars[i].title);
-            subTitle.setText(similars[i].subTitle);
+            time = view.findViewById(R.id.case_result_similar_single_time);
+//            result = view.findViewById(R.id.case_result_similar_single_number);
+//            lawyer.setText(similar.get(i).getjId());
+            title.setText(similar.get(i).getjId());
+            subTitle.setText(similar.get(i).getjReason());
             number.setText((i+1)+".");
+            time.setText(similar.get(i).getjDate());
+//            result.setText(resultt);
 //            ft.add(R.id.case_consult_result_linear, new CaseResultSimilarFragment());
 
 //            ll.addView(single);
@@ -62,5 +69,16 @@ public class CaseResultSimilarListFragment extends Fragment {
 
         }
 //        ft.commit();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        System.out.println(similars.get(view.getId()).getId());
+        String id = similars.get(view.getId()).getId();
+        Intent intent = new Intent(getContext(), JudgementConsultActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+
     }
 }

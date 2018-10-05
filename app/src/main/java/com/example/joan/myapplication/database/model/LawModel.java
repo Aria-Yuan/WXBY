@@ -2,16 +2,14 @@ package com.example.joan.myapplication.database.model;
 
 import java.io.Serializable;
 
-import java.util.Date;
-
-public class LawModel implements Serializable {
+public class LawModel implements Serializable{
     private String id;
-    private String start;
-    private String abandon;
+    private String article;
     private String name;
     private String content;
+    private String start;
     private String end;
-    private String article;
+    private String abandon;
 
     public String getId() {
         return id;
