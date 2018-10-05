@@ -167,7 +167,7 @@ public class QuickConsultResultActivity extends AppCompatActivity {
         name = findViewById(R.id.quick_consult_result_name);
         view = findViewById(R.id.quick_consult_result_view);
         time = findViewById(R.id.quick_consult_result_time);
-//        only = findViewById(R.id.quick_consult_result_only);
+        only = findViewById(R.id.quick_consult_result_only);
 
         content.setText(data.getContent());
         name.setText(data.getAuthor_name());

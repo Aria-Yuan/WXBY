@@ -1,17 +1,15 @@
 package com.example.joan.myapplication.database.model;
 
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
-import java.util.Date;
 
-public class LawModel implements Serializable {
+public class LawModel implements Serializable{
     private String id;
-    private String start;
-    private String abandon;
-    private String name;
     private String article;
+    private String name;
     private String content;
+    private String start;
+    private String end;
+    private String abandon;
 
     public String getId() {
         return id;
@@ -19,30 +17,6 @@ public class LawModel implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getStart() {
-        return start;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public String getAbandon() {
-        return abandon;
-    }
-
-    public void setAbandon(String abandon) {
-        this.abandon = abandon;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getArticle() {
@@ -53,11 +27,43 @@ public class LawModel implements Serializable {
         this.article = article;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    public String getAbandon() {
+        return abandon;
+    }
+
+    public void setAbandon(String abandon) {
+        this.abandon = abandon;
     }
 }
