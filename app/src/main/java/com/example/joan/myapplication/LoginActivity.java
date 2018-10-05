@@ -14,9 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -29,8 +27,7 @@ import org.xutils.x;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private Button login, cancel, forget, register, mode;
-    private ImageView back;
+    private Button login, cancel, forget, back, register, mode;
     private EditText account, password;
     private CheckBox agree;
     private String ea, ep;
@@ -165,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         }else {
 
             try {
-                RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/loginAndRegister.action");
+                RequestParams params = new RequestParams("http://169.254.219.229:8080/loginAndRegister.action");
                 params.addQueryStringParameter("type", String.valueOf(type[0]));
                 params.addQueryStringParameter("username", ea);
                 params.addQueryStringParameter("password", ep);
@@ -178,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                         type[0] = jsonObject.get("resultCode").getAsInt();
 
                         if (type[0] == 1) {
-                            afterLogin(jsonObject.get("_id").getAsString(),jsonObject.get("role").getAsString(),jsonObject.get("name").getAsString());
+                            afterLogin();
                             successDialog("登入成功！");
                         } else {
                             setDialog(jsonObject.get("resultMessage").getAsString());
@@ -224,7 +221,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean autoLogin(){
-        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
 
         if (hasLoginInfo()){
             ea = sp.getString("user_name", "invalid");
@@ -237,15 +233,12 @@ public class LoginActivity extends AppCompatActivity {
         }}else return false;
     }
 
-    protected void afterLogin(String id,String role,String name){
+    protected void afterLogin(){
 
         editor.putString("user_name", ea);
         editor.putString("user_pswd", ep);
         editor.putInt("login_type", loginType);
         editor.putBoolean("login", true);
-        editor.putString("_id", id);
-        editor.putString("role", role);
-        editor.putString("name", name);
         editor.apply();
         isLogined = true;
 //        finish();
