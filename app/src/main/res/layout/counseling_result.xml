@@ -50,14 +50,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_counseling_pager_bar"
-        android:background="#fefefe">
+        android:background="#efefef">
 
         <LinearLayout
             android:id="@+id/counseling_result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#efefef"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/searching"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="加載中請稍後..."
+                android:textSize="8pt" />
+
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

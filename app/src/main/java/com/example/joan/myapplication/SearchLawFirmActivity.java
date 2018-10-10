@@ -49,17 +49,14 @@ import java.util.List;
 
 import me.shihao.library.XRadioGroup;
 
-public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneLineView.OnRootClickListener{
+public class SearchLawFirmActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewpager;
     XRadioGroup district;
     private List<String> tabs;
     private List<Fragment> fragments;
-    List<LawFirmModel> firmList;
 
     private EditText input;
-
-    private LawFirmRepositoryImpl lawFirmRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,37 +85,14 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
                             System.out.println("我在這裡");
                             String district = findViewById(checkedId).getTag().toString();
 
-                            try{
-                                RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchFirm.action");
-                                params.addQueryStringParameter("condition",district);
-                                params.addQueryStringParameter("type", "1");
-                                x.http().get(params, new Callback.CommonCallback<String>() {
-                                    @Override
-                                    public void onSuccess(String s) {
-                                        JSONArray jArray= JSONArray.fromObject(s);
-                                        firmList = new LawFirmRepositoryImpl().convert(jArray);
-
-                                        FirmView(firmList);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable throwable, boolean b) {
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(CancelledException e) {
-
-                                    }
-
-                                    @Override
-                                    public void onFinished() {
-
-                                    }
-                                });
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
+                            Intent intent=new Intent();
+                            intent.setClass(SearchLawFirmActivity.this, SearchLawFirmListActivity.class); //设置跳转的Activity
+                            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Bundle bunble = new Bundle();
+                            bunble.putSerializable("type", "1");
+                            bunble.putSerializable("condition", district);
+                            intent.putExtras(bunble);
+                            startActivity(intent);
                         }
                     });
                 }
@@ -253,7 +227,15 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
 //                }
 //                //根据输入的内容模糊查询商品，并跳转到另一个界面，这个根据需求实现
                 SearchLawFirmActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-                searchLawFirm(input.getText().toString());
+                Intent intent=new Intent();
+                intent.setClass(SearchLawFirmActivity.this, SearchLawFirmListActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bunble = new Bundle();
+                bunble.putSerializable("type", "0");
+                bunble.putSerializable("condition", input.getText().toString());
+                intent.putExtras(bunble);
+                startActivity(intent);
+
                 input.setHint("找什麼呢");
                 input.setText("");
             }
@@ -302,94 +284,5 @@ public class SearchLawFirmActivity extends AppCompatActivity implements FirmOneL
             return tabs.get(position);
         }
     }
-
-    private void searchLawFirm(String condition){
-        try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/searchFirm.action");
-            params.addQueryStringParameter("condition",condition);
-            params.addQueryStringParameter("type", "0");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    JSONArray jArray= JSONArray.fromObject(s);
-                    firmList = new LawFirmRepositoryImpl().convert(jArray);
-
-                    FirmView(firmList);
-                }
-
-                @Override
-                public void onError(Throwable throwable, boolean b) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException e) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    public void FirmView(List<LawFirmModel> firmList){
-        setContentView(R.layout.law_firm_search_result);
-        LinearLayout result = findViewById(R.id.law_firm_result);
-        int index = 0;
-        for (LawFirmModel firm: firmList
-             ) {
-            result.addView(new FirmOneLineView(getBaseContext())
-                    .init(firm.getName(), firm.getAddress() ,"hahaha")
-                    .setOnRootClickListener(this, index));
-        }
-        if(firmList.size()==0){
-            result.addView(new FindNothingView(getBaseContext()).init());
-        }
-
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(v.getContext(), SearchLawFirmActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    @Override
-    public void onRootClick(View v) {
-//        LawFirmModel firm = lawFirmRepository.findById((ObjectId)v.getTag());
-//        setContentView(R.layout.law_firm_detail);
-//
-        switch (v.getId()){
-            case R.id.btn_back:{
-                findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        finish();
-                    }
-                });
-            }break;
-
-            default:{
-                LawFirmModel l = firmList.get((int)v.getTag());
-                Intent intent=new Intent();
-                intent.setClass(v.getContext(), SearchLawFirmDetailActivity.class); //设置跳转的Activity
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                Bundle bunble = new Bundle();
-                bunble.putSerializable("firm", l);
-                intent.putExtras(bunble);
-                startActivity(intent);
-            }break;
-        }
-
-    }
-
 
 }

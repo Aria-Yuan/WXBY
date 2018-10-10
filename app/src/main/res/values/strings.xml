@@ -133,7 +133,7 @@
     <!-- Strings related to case_consult -->
     <string name="consult_case_text">請詳細告知案件的詳情，我們會保證您與當事人隱私的安全</string>
     <string name="case_consult_next">下一步</string>
-    <string name="case_consult_title">案件咨詢</string>
+    <string name="case_consult_title">案件諮詢</string>
     <string name="consult_case_hint">#上傳的起訴書或證據僅供本系統使用</string>
 
     <!-- Strings related to case_consult_result -->
@@ -206,7 +206,7 @@
     <!-- Strings related to quick consult result-->
     <string name="quick_consult_result_reply">律師回復</string>
     <string name="quick_consult_result_comment">用戶評論</string>
-    <string name="quick_consult_result_title">快速咨詢詳情</string>
+    <string name="quick_consult_result_title">快速諮續詢詳情</string>
     <string name="quick_consult_result_only">只看作者和律師</string>
     <string name="quick_consult_result_viewtime">次浏览</string>
 </resources>

@@ -15,8 +15,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joan.myapplication.DatePicker.CustomDatePicker;
 import com.example.joan.myapplication.database.model.BaseModel;
@@ -42,14 +44,12 @@ import java.util.Locale;
 
 import me.shihao.library.XRadioGroup;
 
-public class SearchLawActivity extends AppCompatActivity implements LawOneLineView.OnRootClickListener {
+public class SearchLawActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewpager;
     private List<String> tabs;
     private List<Fragment> fragments;
-
-    List<LawModel> lawList;
-    String condition;
+    Document d_condition = new Document();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,20 +59,8 @@ public class SearchLawActivity extends AppCompatActivity implements LawOneLineVi
         initTabLayout();
         initDatas();
         initViewPager();
+        initOnClickListener();
 
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
-
-        findViewById(R.id.submit).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                searchLaw();
-            }
-        });
     }
 
     @Override
@@ -109,6 +97,35 @@ public class SearchLawActivity extends AppCompatActivity implements LawOneLineVi
             }
         });
 
+    }
+
+    private  void initOnClickListener(){
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
+
+        findViewById(R.id.submit).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                InputMethodManager imm = (InputMethodManager) SearchLawActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                if(imm != null){
+                    imm.toggleSoftInput(0,0);
+                }
+                if(packCondition() == 1){
+                    Intent intent=new Intent();
+                    intent.setClass(v.getContext(), SearchLawListActivity.class); //设置跳转的Activity
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("condition", d_condition.toJson());
+                    bundle.putSerializable("type", "0");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void initTabLayout() {
@@ -178,114 +195,59 @@ public class SearchLawActivity extends AppCompatActivity implements LawOneLineVi
         }
     }
 
-    private void searchLaw(){
-        SearchLawActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    private int packCondition(){
+        d_condition.clear();
         EditText keyword = findViewById(R.id.keyword);
         EditText and = findViewById(R.id.and);
         EditText or = findViewById(R.id.or);
         EditText not = findViewById(R.id.not);
+        RadioGroup item = findViewById(R.id.item);
+        RadioGroup state = findViewById(R.id.state);
         TextView start = findViewById(R.id.start);
         TextView end = findViewById(R.id.end);
         EditText num = findViewById(R.id.number);
 
-        try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchLaw.action");
-            Document d_condition = new Document();
-            if(!keyword.getText().toString().isEmpty()){
-                d_condition.append("keyword",keyword.getText().toString());
+        if(!keyword.getText().toString().isEmpty()){
+            d_condition.append("keyword",keyword.getText().toString());
+        }else{
+            d_condition.clear();
+            Toast.makeText(this, "請填寫檢索字彙",Toast.LENGTH_LONG).show();
+            return 0;
+        }
+        if(!and.getText().toString().isEmpty()){
+            d_condition.append("and",and.getText().toString());
+        }
+        else if(!or.getText().toString().isEmpty()){
+            d_condition.append("or",or.getText().toString());
+        }
+        else if(!not.getText().toString().isEmpty()){
+            d_condition.append("not",not.getText().toString());
+        }
+        switch (item.getCheckedRadioButtonId()){
+            case R.id.name: d_condition.append("item", 0);break;
+
+            case R.id.content: d_condition.append("item", 1);break;
+
+            default: {
+                d_condition.clear();
+                Toast.makeText(this, "請選擇檢索項目",Toast.LENGTH_LONG).show();
+                return 0;
             }
-            if(!and.getText().toString().isEmpty()){
-                d_condition.append("and",and.getText().toString());
-            }
-            if(!or.getText().toString().isEmpty()){
-                d_condition.append("or",or.getText().toString());
-            }
-            if(!not.getText().toString().isEmpty()){
-                d_condition.append("not",not.getText().toString());
-            }
 
-            condition = d_condition.toJson();
-            params.addQueryStringParameter("condition",condition);
-            params.addQueryStringParameter("type", "0");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    JSONArray jArray= JSONArray.fromObject(s);
-                    lawList = new LawRepositoryImpl().convert(jArray);
+        }
+        switch (state.getCheckedRadioButtonId()){
+            case R.id.valid: d_condition.append("state", 0);break;
 
-                    LawView(lawList);
-                }
-
-                @Override
-                public void onError(Throwable throwable, boolean b) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException e) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
+            case R.id.abandon: d_condition.append("state", 1);break;
         }
 
-    }
-
-    private void LawView(List<LawModel> lawList){
-        setContentView(R.layout.search_law_result);
-        LinearLayout result = findViewById(R.id.law_result);
-        for(int i = 0 ; i < lawList.size(); i++){
-            result.addView(new LawOneLineView(getBaseContext())
-                    .init(lawList.get(i).getName(),lawList.get(i).getContent(),"#民事")
-                    .setOnRootClickListener(this, i));
+        if(!start.getText().toString().isEmpty()){
+            d_condition.append("start",start.getText().toString());
         }
-        if(lawList.size()==0){
-            result.addView(new FindNothingView(getBaseContext()).init());
+        if(!end.getText().toString().isEmpty()){
+            d_condition.append("end",end.getText().toString());
         }
-
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-//                Intent intent = new Intent(v.getContext(), SearchLawActivity.class);
-//                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    @Override
-    public void onRootClick(View v) {
-//        LawFirmModel firm = lawFirmRepository.findById((ObjectId)v.getTag());
-//        setContentView(R.layout.law_firm_detail);
-//
-        switch (v.getId()){
-            case R.id.btn_back:{
-                findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        finish();
-                    }
-                });
-            }break;
-
-            default:{
-                LawModel l = lawList.get((int)v.getTag());
-                Intent intent=new Intent();
-                intent.setClass(v.getContext(), SearchLawDetailActivity.class); //设置跳转的Activity
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                Bundle bunble = new Bundle();
-                bunble.putSerializable("law", l);
-                intent.putExtras(bunble);
-                startActivity(intent);
-            }break;
-        }
-
+        return 1;
     }
 
 }

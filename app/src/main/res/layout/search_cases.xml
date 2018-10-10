@@ -2,8 +2,10 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SearchCasesActivity">
 
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_firm_pager_bar"
@@ -337,6 +339,7 @@
                     android:src="@drawable/line_z" />
 
                 <RadioGroup
+                    android:id="@+id/type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -346,7 +349,7 @@
                     android:paddingEnd="100dp">
 
                     <RadioButton
-                        android:id="@+id/radioButton3"
+                        android:id="@+id/caidin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -356,7 +359,7 @@
                         android:textSize="8pt" />
 
                     <RadioButton
-                        android:id="@+id/radioButton4"
+                        android:id="@+id/panjue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -429,7 +432,6 @@
                                 android:layout_height="32dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@null"
                                 android:gravity="fill_vertical|start"
                                 android:hint="請選擇"
                                 android:inputType="text"
@@ -437,18 +439,19 @@
                                 android:paddingStart="10dp"
                                 android:textColor="#515151"
                                 android:textColorHint="#8a8a8a"
-                                android:textSize="7pt" />
+                                android:textSize="7pt"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:onClick="onClick"/>
 
                             <ImageView
                                 android:id="@+id/down_start"
                                 android:layout_width="40dp"
                                 android:layout_height="match_parent"
                                 android:layout_alignParentEnd="true"
-                                android:paddingBottom="10dp"
-                                android:paddingEnd="10dp"
-                                android:paddingStart="10dp"
-                                android:paddingTop="6dp"
-                                android:src="@drawable/choose" />
+                                android:padding="5dp"
+                                android:src="@drawable/delete"
+                                android:visibility="gone" />
 
                         </RelativeLayout>
 
@@ -492,7 +495,6 @@
                                 android:layout_height="32dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@null"
                                 android:gravity="fill_vertical|start"
                                 android:hint="請選擇"
                                 android:inputType="text"
@@ -500,18 +502,19 @@
                                 android:paddingStart="10dp"
                                 android:textColor="#515151"
                                 android:textColorHint="#8a8a8a"
-                                android:textSize="7pt" />
+                                android:textSize="7pt"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:onClick="onClick"/>
 
                             <ImageView
                                 android:id="@+id/down_end"
                                 android:layout_width="40dp"
                                 android:layout_height="match_parent"
                                 android:layout_alignParentEnd="true"
-                                android:paddingBottom="10dp"
-                                android:paddingEnd="10dp"
-                                android:paddingStart="10dp"
-                                android:paddingTop="6dp"
-                                android:src="@drawable/choose" />
+                                android:padding="5dp"
+                                android:src="@drawable/delete"
+                                android:visibility="gone"/>
 
                         </RelativeLayout>
 

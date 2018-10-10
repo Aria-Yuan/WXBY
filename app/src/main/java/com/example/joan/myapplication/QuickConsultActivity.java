@@ -144,7 +144,7 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
     private int failed() {
         autoSave();
         finished = new AlertDialog.Builder(this)
-                .setTitle("您的咨詢信息")//设置对话框的标题
+                .setTitle("您的諮詢信息")//设置对话框的标题
                 .setMessage("送出失敗了誒~")//设置对话框的内容
                 .setPositiveButton("重試", new DialogInterface.OnClickListener() {
                     @Override
@@ -164,7 +164,7 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
 
     private int success() {
         finished = new AlertDialog.Builder(this)
-                .setTitle("您的咨詢信息")//设置对话框的标题
+                .setTitle("您的諮詢信息")//设置对话框的标题
                 .setMessage("已經成功送出咯~")//设置对话框的内容
                 .setPositiveButton("查看", new DialogInterface.OnClickListener() {
                     @Override

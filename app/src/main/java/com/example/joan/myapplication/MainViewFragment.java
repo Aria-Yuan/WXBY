@@ -32,7 +32,7 @@ public class MainViewFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.shouye_sample, container, false);
+        View view = inflater.inflate(R.layout.shouye_puicture, container, false);
 //        TextView tv = view.findViewById(R.id.tv_title);
 //        if (getArguments() != null) tv.setText(getArguments().getString(TITLE_TAG));
 

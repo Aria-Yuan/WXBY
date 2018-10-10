@@ -1,6 +1,7 @@
 package com.example.joan.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import java.util.Locale;
 
 public class LawFragment extends Fragment {
     private String position;
+    private int panjue = 0, caidin = 0, valid = 0, abandon = 0;
 
     View  view_search= null;
     View view_recommend = null;
@@ -49,56 +53,7 @@ public class LawFragment extends Fragment {
                     view_search = inflater.inflate(R.layout.search_law_search, container, false);
 //                    .findViewById(R.id.submit).setVisibility(View.VISIBLE);
 
-                    currentDateStart = (TextView) view_search.findViewById(R.id.start);
-                    currentDateEnd = (TextView) view_search.findViewById(R.id.end);
-
-                    initDatePicker();
-
-                    view_search.findViewById(R.id.down_start).setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v){
-                            // 日期格式为yyyy-MM-dd
-
-                            //拿到InputMethodManager
-                            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                            //如果window上view获取焦点 && view不为空
-                            if(imm.isActive() && getActivity().getCurrentFocus()!=null) {
-                                //拿到view的token 不为空
-                                getActivity().getCurrentFocus().clearFocus();
-//                                view_search.findViewById(R.id.down_start).setFocusable(true);
-//                                view_search.findViewById(R.id.down_start).requestFocus();
-                                if (getActivity().getCurrentFocus().getWindowToken() != null) {
-                                    //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
-                                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                                }
-                            }
-                            customDatePicker1.show(currentDateStart.getText().toString());
-                        }
-                    });
-
-                    view_search.findViewById(R.id.down_end).setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v){
-                            // 日期格式为yyyy-MM-dd
-
-                            //拿到InputMethodManager
-                            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                            //如果window上view获取焦点 && view不为空
-                            if(imm.isActive() && getActivity().getCurrentFocus()!=null) {
-                                //拿到view的token 不为空
-                                getActivity().getCurrentFocus().clearFocus();
-//                                view_search.findViewById(R.id.down_end).setFocusable(true);
-//                                view_search.findViewById(R.id.down_end).requestFocus();
-                                if (getActivity().getCurrentFocus().getWindowToken() != null) {
-                                    //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
-                                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                                }
-                            }
-                            showEndDate();
-                        }
-                    });
-
-
+                    initOnClickListener();
 
                 }
                 return view_search;
@@ -116,6 +71,126 @@ public class LawFragment extends Fragment {
         return view_recommend;
     }
 
+    private void initOnClickListener(){
+//        final RadioGroup item = view_search.findViewById(R.id.item);
+//        view_search.findViewById(R.id.name).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                panjue = 0;
+//                if(caidin == 0){
+//                    caidin = 1;
+//                }else{
+//                    caidin = 0;
+//                    item.clearCheck();
+//                }
+//            }
+//        });
+//        view_search.findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                caidin = 0;
+//                if(panjue == 0){
+//                    panjue = 1;
+//                }else{
+//                    panjue = 0;
+//                    item.clearCheck();
+//                }
+//            }
+//        });
+
+        final RadioGroup state = view_search.findViewById(R.id.state);
+        view_search.findViewById(R.id.valid).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                panjue = 0;
+                if(valid == 0){
+                    valid = 1;
+                }else{
+                    valid = 0;
+                    state.clearCheck();
+                }
+            }
+        });
+        view_search.findViewById(R.id.abandon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                valid = 0;
+                if(abandon == 0){
+                    abandon = 1;
+                }else{
+                    abandon = 0;
+                    state.clearCheck();
+                }
+            }
+        });
+
+
+        currentDateStart = (TextView) view_search.findViewById(R.id.start);
+        currentDateEnd = (TextView) view_search.findViewById(R.id.end);
+
+        initDatePicker();
+
+        currentDateStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 日期格式为yyyy-MM-dd
+                //拿到InputMethodManager
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                //如果window上view获取焦点 && view不为空
+                if(imm.isActive() && getActivity().getCurrentFocus()!=null) {
+                    //拿到view的token 不为空
+                    getActivity().getCurrentFocus().clearFocus();
+//                                view_search.findViewById(R.id.down_start).setFocusable(true);
+//                                view_search.findViewById(R.id.down_start).requestFocus();
+                    if (getActivity().getCurrentFocus().getWindowToken() != null) {
+                        //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                }
+                customDatePicker1.show(currentDateStart.getText().toString());
+            }
+        });
+
+        currentDateEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 日期格式为yyyy-MM-dd
+                //拿到InputMethodManager
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                //如果window上view获取焦点 && view不为空
+                if(imm.isActive() && getActivity().getCurrentFocus()!=null) {
+                    //拿到view的token 不为空
+                    getActivity().getCurrentFocus().clearFocus();
+//                                view_search.findViewById(R.id.down_end).setFocusable(true);
+//                                view_search.findViewById(R.id.down_end).requestFocus();
+                    if (getActivity().getCurrentFocus().getWindowToken() != null) {
+                        //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                }
+                showEndDate();
+            }
+        });
+
+        view_search.findViewById(R.id.down_start).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                currentDateStart.setText(null);
+                currentDateStart.setHint("請選擇");
+                view_search.findViewById(R.id.down_start).setVisibility(View.GONE);
+            }
+        });
+
+        view_search.findViewById(R.id.down_end).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                currentDateEnd.setText(null);
+                currentDateEnd.setHint("請選擇");
+                view_search.findViewById(R.id.down_end).setVisibility(View.GONE);
+            }
+        });
+    }
+
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
@@ -126,6 +201,7 @@ public class LawFragment extends Fragment {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 currentDateStart.setText(time.split(" ")[0]);
+                view_search.findViewById(R.id.down_start).setVisibility(View.VISIBLE);
             }
         }, "1900-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -135,6 +211,7 @@ public class LawFragment extends Fragment {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 currentDateEnd.setText(time.split(" ")[0]);
+                view_search.findViewById(R.id.down_end).setVisibility(View.VISIBLE);
             }
         }, "1900-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(false); // 不显示时和分
@@ -151,6 +228,7 @@ public class LawFragment extends Fragment {
                 @Override
                 public void handle(String time) { // 回调接口，获得选中的时间
                     currentDateEnd.setText(time.split(" ")[0]);
+                    view_search.findViewById(R.id.down_end).setVisibility(View.VISIBLE);
                 }
             }, currentDateStart.getText().toString() + " 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
             customDatePicker2.showSpecificTime(false); // 不显示时和分

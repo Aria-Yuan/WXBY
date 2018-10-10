@@ -27,14 +27,12 @@ public class LawyerConsultLawyerListFragment extends Fragment {
     private LinearLayout ll;
     private LayoutInflater li;
     private int lNumber = 10;
-    private TextView name, identity, branch, special,response, fee, rate, image;
+    private TextView name, identity, branch, special,response, fee, rate, image, searching;
     private List<LawyerModel> totalData = new ArrayList<>();
     List<LawyerModel> list = new ArrayList();
 
     @Override
-    public View onCreateView (LayoutInflater inflater,
-                              ViewGroup container, Bundle savedInstanceState){
-
+    public View onCreateView (LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.activity_lawyer_consult_lawyer_list, null);
 
         initView(view);
@@ -46,10 +44,13 @@ public class LawyerConsultLawyerListFragment extends Fragment {
     private void initView(View view) {
         ll = view.findViewById(R.id.consult_lawyer_list);
         li = LayoutInflater.from(getContext());
+        searching = view.findViewById(R.id.searching);
     }
 
     public void addView() {
 //        List<LawyerModel> listl = getData();
+        searching.setVisibility(View.GONE);
+
         for (LawyerModel lawyer: list){
             View view = li.inflate(R.layout.sample_lawyer_consult_single_lawyer, null);
             System.out.println("我想要输出" + lawyer.getComment());

@@ -1,10 +1,12 @@
 package com.example.joan.myapplication.database.model;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JudgementModel {
+public class JudgementModel implements Serializable {
     private String Id;
     private String jId;
     private String jDate;

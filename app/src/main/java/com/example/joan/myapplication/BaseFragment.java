@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,13 +64,13 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
                 if(view_main == null){
                     view_main = inflater.inflate(R.layout.main, container, false);
                     setIconSize();
-                }
 
-                //下方热门问答显示窗口
-                initTabLayout();
-                initDatas();
-                initViewPager();
-                initMainButton();
+                    //下方热门问答显示窗口
+                    initTabLayout();
+                    initDatas();
+                    initViewPager();
+                    initMainButton();
+                }
 
                 return view_main;
             }
@@ -208,6 +209,9 @@ public class BaseFragment extends Fragment implements MyOneLineView.OnRootClickL
     }
 
     private void initTabLayout() {
+        NestedScrollView scrollView = (NestedScrollView) view_main.findViewById(R.id.nScrol);
+        scrollView.setFillViewport (true);
+
         tabLayout = view_main.findViewById(R.id.main_tab);
         viewpager = view_main.findViewById(R.id.main_view);
         //MODE_FIXED标签栏不可滑动，各个标签会平分屏幕的宽度

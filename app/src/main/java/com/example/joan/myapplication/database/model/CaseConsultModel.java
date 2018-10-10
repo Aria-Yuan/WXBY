@@ -1,5 +1,7 @@
 package com.example.joan.myapplication.database.model;
 
+import com.example.joan.myapplication.database.model.JudgementModel;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 

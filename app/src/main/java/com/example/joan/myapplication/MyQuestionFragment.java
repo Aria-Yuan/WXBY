@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
@@ -29,6 +30,7 @@ import java.util.List;
 public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayout.OnRootClickListener{
 
     private SharedPreferences sp;
+    private TextView searching;
 
     private String position;
     View view_lawyer_consult = null;
@@ -55,6 +57,7 @@ public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayou
         if(view_lawyer_consult == null){
             view_lawyer_consult = inflater.inflate(R.layout.lawyer_consult_list,container,false);
             lawyer_consult_list = view_lawyer_consult.findViewById(R.id.consult_list);
+            searching = view_lawyer_consult.findViewById(R.id.searching);
             initLawyerView();
 
         }
@@ -98,6 +101,7 @@ public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayou
     }
 
     public void CounselingView(){
+        searching.setVisibility(View.GONE);
         if(counselingList.isEmpty()){
             lawyer_consult_list.addView(new FindNothingView(getContext()).init());
         }else{

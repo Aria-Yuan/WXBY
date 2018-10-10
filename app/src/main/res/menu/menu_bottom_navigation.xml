@@ -10,7 +10,7 @@
     <!--因为需要覆盖view 此处省略android:icon-->
     <item
         android:id="@+id/menu_empty"
-        android:title="咨詢" />
+        android:title="諮詢" />
 
     <item
         android:id="@+id/menu_me"

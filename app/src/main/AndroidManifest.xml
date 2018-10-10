@@ -45,6 +45,10 @@
         <activity android:name=".QuestionLawyerAgainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".QuickConsultResultActivity" />
+        <activity android:name=".SearchCasesListActivity" />
+        <activity android:name=".SearchLawFirmListActivity" />
+        <activity android:name=".CounselingListActivity" />
+        <activity android:name=".SearchLawListActivity" />
 
         <activity
             android:name=".LawyerConsultActivity"

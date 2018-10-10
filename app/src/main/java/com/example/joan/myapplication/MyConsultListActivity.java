@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
@@ -30,14 +31,16 @@ import java.util.List;
 public class MyConsultListActivity extends AppCompatActivity implements MyLawyerConsultLayout.OnRootClickListener{
 
     private SharedPreferences sp;
-    List<LegalCounselingModel > counselingList = new ArrayList<>();
-    LinearLayout lawyer_consult_list;
+    private List<LegalCounselingModel > counselingList = new ArrayList<>();
+    private LinearLayout lawyer_consult_list;
+    private TextView searching;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_consult_list);
         lawyer_consult_list = findViewById(R.id.main_body);
+        searching = findViewById(R.id.searching);
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -88,6 +91,7 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
     }
 
     public void CounselingView(){
+        searching.setVisibility(View.GONE);
         if(counselingList.isEmpty()){
             lawyer_consult_list.addView(new FindNothingView(this).init());
         }else{
