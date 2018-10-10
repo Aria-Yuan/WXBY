@@ -1,11 +1,12 @@
-package com.example.joan.database.model;
+package com.example.joan.myapplication.database.model;
 
-import org.bson.types.ObjectId;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class QuickResponseModel {
+import org.bson.types.ObjectId;
+
+public class QuickResponseModel implements Serializable {
     private ObjectId id;
     private RegisterModel author;
     private String content;

@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,8 +33,6 @@ public class QuickConsultResultActivity extends AppCompatActivity {
     private QuickConsultModel data;
     private String id;
     private TextView content, name, time, view;
-    private CheckBox only;
-    private boolean[] isLOrQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,21 +163,12 @@ public class QuickConsultResultActivity extends AppCompatActivity {
         name = findViewById(R.id.quick_consult_result_name);
         view = findViewById(R.id.quick_consult_result_view);
         time = findViewById(R.id.quick_consult_result_time);
-        only = findViewById(R.id.quick_consult_result_only);
 
         content.setText(data.getContent());
         name.setText(data.getAuthor_name());
         time.setText(data.getDate().replace("\"", ""));
         view.setText(String.valueOf(data.getView_count()) + getResources().getString(R.string.quick_consult_result_viewtime));
 
-        only.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (only.isChecked()){
-
-                }
-            }
-        });
 
     }
 

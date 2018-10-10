@@ -51,114 +51,139 @@
         android:layout_alignParentStart="true"
         android:background="#efefef">
 
-    <LinearLayout
-        android:id="@+id/law_firm_result"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#efefef"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/background">
-
-            <TextView
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="裁判字號"
-                android:textColor="@color/colorWhite"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/judgement_consult_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:lines="1"
-                android:text="103,簡版,1234"
-                android:textSize="8.5pt" />
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/background">
-
-            <TextView
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="裁判日期"
-                android:textColor="@color/colorWhite"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/judgement_consult_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:text="民國103年9月24日"
-                android:textSize="8.5pt" />
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@color/background">
-
-            <TextView
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="裁判案由"
-                android:textColor="@color/colorWhite"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/judgement_consult_reason"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:text="返還房屋租賃"
-                android:textSize="8.5pt" />
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <TextView
-            android:id="@+id/judgement_consult_maintitle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/background"
-            android:gravity="center"
-            android:text="判決正文"
-            android:textColor="@color/colorAccent"
-            android:textSize="9pt" />
-
-        <TextView
-            android:id="@+id/judgement_consult_main"
+        <LinearLayout
+            android:id="@+id/law_firm_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:lineSpacingExtra="5dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="30dp"
-            android:paddingStart="30dp"
-            android:textSize="8.5pt" />
+            android:layout_marginBottom="60dp"
+            android:background="#efefef"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/background">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="裁判字號"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9pt" />
+
+                <TextView
+                    android:id="@+id/judgement_consult_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:text="加载中..."
+                    android:textSize="8.5pt" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/background">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="裁判日期"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9pt" />
+
+                <TextView
+                    android:id="@+id/judgement_consult_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:text="加载中..."
+                    android:textSize="8.5pt" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/background">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="裁判案由"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9pt" />
+
+                <TextView
+                    android:id="@+id/judgement_consult_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:text="加载中..."
+                    android:textSize="8.5pt" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/judgement_consult_maintitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/background"
+                android:gravity="center"
+                android:text="判決正文"
+                android:textColor="@color/colorAccent"
+                android:textSize="9pt" />
+
+            <TextView
+                android:id="@+id/judgement_consult_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorWhite"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="20dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:text="加载中..."
+                android:textSize="8.5pt" />
+
+            <TextView
+                android:id="@+id/judgement_consult_law"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/background"
+                android:gravity="center"
+                android:text="相關法條"
+                android:textColor="@color/colorAccent"
+                android:textSize="9pt" />
+
+            <TextView
+                android:id="@+id/judgement_consult_lawMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="20dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:text="加载中..."
+                android:textSize="8.5pt" />
+
+        </LinearLayout>
 
     </ScrollView>
 

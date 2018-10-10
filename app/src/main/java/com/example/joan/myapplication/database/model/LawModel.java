@@ -1,5 +1,4 @@
 package com.example.joan.myapplication.database.model;
-
 import java.io.Serializable;
 
 public class LawModel implements Serializable{
@@ -67,3 +66,4 @@ public class LawModel implements Serializable{
         this.abandon = abandon;
     }
 }
+

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.CaseConsultModel;
 import com.example.joan.myapplication.database.model.JudgementModel;
 import com.example.joan.myapplication.database.model.LawModel;
@@ -145,7 +146,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
         final CaseConsultModel[] data = new CaseConsultModel[1];
 
         try {
-            RequestParams params = new RequestParams("http://169.254.219.229:8080/caseConsultResult.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + "8080/caseConsultResult.action");
             params.addQueryStringParameter("case_id", "201809191738DocherPap");
 //            System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {

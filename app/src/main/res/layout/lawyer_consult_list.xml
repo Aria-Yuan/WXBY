@@ -5,13 +5,25 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#efefef">
         <LinearLayout
             android:id="@+id/consult_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#efefef"
-            android:orientation="vertical"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/searching"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="加載中請稍後..."
+                android:textSize="8pt" />
+
+        </LinearLayout>
 
     </ScrollView>
 

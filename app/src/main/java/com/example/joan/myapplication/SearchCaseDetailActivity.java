@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
@@ -17,8 +18,9 @@ import org.xutils.x;
 
 public class SearchCaseDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView main, name, reason, date, mainTitle;
+    private TextView main, name, reason, date, mainTitle, law, lawMain;
     private Button bottom;
+    private ScrollView mainBody;
     private String id, content, fact;
     private int state, fOrC;
 
@@ -64,6 +66,7 @@ public class SearchCaseDetailActivity extends AppCompatActivity implements View.
                             name.setText(data.get("j_id").getAsString().split(" ",2)[1].split(" \\[")[0]);
                             date.setText(data.get("j_date").getAsString());
                             reason.setText(data.get("j_reason").getAsString());
+                            lawMain.setText(data.get("j_laws").getAsString());
                             mainData = data.get("j_content").getAsString().replace("\\r", "")
                                     .replace("\\n", "")
                                     .replace("\n", "")
@@ -130,6 +133,9 @@ public class SearchCaseDetailActivity extends AppCompatActivity implements View.
         date = findViewById(R.id.judgement_consult_date);
         bottom = findViewById(R.id.judgement_consult_bottom);
         mainTitle = findViewById(R.id.judgement_consult_maintitle);
+        law = findViewById(R.id.judgement_consult_law);
+        lawMain = findViewById(R.id.judgement_consult_lawMain);
+        mainBody = findViewById(R.id.law_firm_result_scroll);
 
         bottom.setOnClickListener(this);
 
@@ -144,14 +150,20 @@ public class SearchCaseDetailActivity extends AppCompatActivity implements View.
             case R.id.judgement_consult_bottom:
                 if (fOrC == 0){
                     fOrC = 1;
+                    mainBody.fullScroll(View.FOCUS_UP);
                     main.setText(fact);
                     bottom.setText(R.string.judgement_consult_main);
                     mainTitle.setText(R.string.judgement_consult_fact);
+                    law.setVisibility(View.GONE);
+                    lawMain.setVisibility(View.GONE);
                 }else {
                     fOrC = 0;
+                    mainBody.fullScroll(View.FOCUS_UP);
                     main.setText(content);
                     bottom.setText(R.string.judgement_consult_fact);
                     mainTitle.setText(R.string.judgement_consult_main);
+                    law.setVisibility(View.VISIBLE);
+                    lawMain.setVisibility(View.VISIBLE);
                 }
 
         }
