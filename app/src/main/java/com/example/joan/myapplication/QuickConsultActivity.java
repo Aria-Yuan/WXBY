@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
+
 public class QuickConsultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button back, next, upload;

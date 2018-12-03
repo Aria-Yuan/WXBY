@@ -104,7 +104,7 @@
                     android:layout_height="2dp"
                     android:background="@color/selector_item_color"/>
 
-                <com.example.joan.myapplication.Search_Listview
+                <com.example.joan.myapplication.oneLineView.SearchListview
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"/>

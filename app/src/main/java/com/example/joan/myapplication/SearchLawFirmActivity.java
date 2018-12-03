@@ -15,36 +15,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.LawFirmModel;
-import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-
-import net.sf.json.JSONArray;
-
-import org.bson.Document;
-import org.bson.types.ObjectId;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import com.example.joan.myapplication.fragment.FirmFragment;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import me.shihao.library.XRadioGroup;

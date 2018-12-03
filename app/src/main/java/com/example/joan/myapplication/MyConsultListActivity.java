@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.oneLineView.FindNothingView;
+import com.example.joan.myapplication.oneLineView.MyLawyerConsultLayout;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
@@ -106,7 +103,7 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
 
                 String name = counseling.getQuestioner();
                 String job = "";
-                int state = 0;
+                int state = counseling.getState();
 
                 lawyer_consult_list.addView(new MyLawyerConsultLayout(this)
                         .init(name,job,state,question, createTime)
@@ -119,8 +116,11 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
     @Override
     public void onRootClick(View v) {
         LegalCounselingModel counseling = counselingList.get((int)v.getTag());
-        Intent intent = new Intent(MyConsultListActivity.this, MyAnswerLawyerConsultActivity.class);
-        intent.putExtra("counseling", counseling);
+        Intent intent=new Intent();
+        intent.setClass(v.getContext(), MyAnswerLawyerConsultActivity.class); //设置跳转的Activity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("counseling", counseling);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

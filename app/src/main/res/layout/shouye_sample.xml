@@ -4,36 +4,46 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="5dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:text="黃俐菁 | 什麼是假處分"
+            android:textColor="@color/black"
+            android:textSize="9pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="15dp">
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="15dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:paddingEnd="10dp">
+                android:paddingEnd="6dp">
 
                 <TextView
+                    android:id="@+id/content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="黃俐菁 | 什麼是假處分"
-                    android:textColor="@color/black"
-                    android:textSize="10pt" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:lineSpacingExtra="6dp"
-                    android:paddingTop="15dp"
+                    android:lines="3"
                     android:text="假處分是針對金額請求以外的請求，法院裁定強制債務人對請求的標的一定行為"
                     android:textSize="7pt" />
 
@@ -52,13 +62,20 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/me" />
+                    android:id="@+id/picture"
+                    android:layout_width="140dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/ic_launcher_background" />
             </LinearLayout>
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#efefef" />
     </LinearLayout>
+
+
 
 </ScrollView>

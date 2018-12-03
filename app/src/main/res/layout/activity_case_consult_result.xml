@@ -82,7 +82,8 @@
                 android:id="@+id/textView20"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="10"
+                android:background="@color/titlebg"
                 android:gravity="bottom|right"
                 android:paddingBottom="16dp"
                 android:text="@string/consult_case_result_percent"
@@ -94,7 +95,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
+                android:background="@color/titlebg"
                 android:gravity="bottom|left"
+                android:paddingBottom="8dp"
                 android:text="75"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="64sp" />
@@ -105,25 +108,20 @@
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0"
+            android:visibility="invisible"
             app:srcCompat="@drawable/line_l" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/consult_case_result_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6">
+            android:layout_weight="8">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/consult_case_result_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/selector_item_color"
                 app:tabTextAppearance="@style/result_tablayout_textsize"
                 app:tabTextColor="@color/unselector_item_color">

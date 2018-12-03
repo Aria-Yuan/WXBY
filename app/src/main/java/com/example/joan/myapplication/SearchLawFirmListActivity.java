@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.oneLineView.FindNothingView;
+import com.example.joan.myapplication.oneLineView.FirmOneLineView;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;

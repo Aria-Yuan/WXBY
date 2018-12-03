@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;

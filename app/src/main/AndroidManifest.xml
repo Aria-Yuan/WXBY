@@ -3,6 +3,7 @@
     package="com.example.joan.myapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
     <application
         android:allowBackup="true"
@@ -49,6 +50,16 @@
         <activity android:name=".SearchLawFirmListActivity" />
         <activity android:name=".CounselingListActivity" />
         <activity android:name=".SearchLawListActivity" />
+        <activity android:name=".ConfirmPaymentActivity" />
+        <activity android:name=".AfterFeePaidActivity" />
+        <activity android:name=".QuestionLawyerFinishActivity" />
+        <activity android:name=".image.ImagePagerActivity" />
+
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
             android:name=".LawyerConsultActivity"

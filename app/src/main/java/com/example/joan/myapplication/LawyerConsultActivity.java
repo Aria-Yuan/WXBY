@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.joan.myapplication.fragment.CaseConsultAdapter;
+import com.example.joan.myapplication.fragment.LawyerConsultLawyerListFragment;
+import com.example.joan.myapplication.fragment.LawyerConsultSortListFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 

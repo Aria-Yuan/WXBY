@@ -14,6 +14,8 @@ public class LegalCounselingModel implements Serializable{
     private int viewCount;
     private List<CounselingModel> content;
     private int publishFlag;
+    private int state;
+    private double comment;
 
     public String getId() {
         return id;
@@ -69,5 +71,21 @@ public class LegalCounselingModel implements Serializable{
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public double getComment() {
+        return comment;
+    }
+
+    public void setComment(double comment) {
+        this.comment = comment;
     }
 }

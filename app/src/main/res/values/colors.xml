@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccenta">#097e76</color>
     <color name="colorAccent">#5f9b95</color>
@@ -15,7 +15,7 @@
     <color name="text1">#59B29C</color>
     <color name="text2">#333333</color>
     <color name="title">#4c4c4c</color>
-    <color name="titlebg">#dadada</color>
+    <color name="titlebg">#eeeeee</color>
     <color name="mainbg">#e1e1e1</color>
     <color name="touming">#00ffffff</color>
     <color name="black">#000000</color>

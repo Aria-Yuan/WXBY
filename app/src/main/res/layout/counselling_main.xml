@@ -343,51 +343,62 @@
                 android:layout_height="10dp"
                 android:background="#efefef"/>
 
-            <RadioGroup
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="70dp"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="3dp"
                     android:text="排序方式："
                     android:textColor="@color/colorAccent"
                     android:textSize="8pt" />
 
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/sort"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="推薦"
-                    android:textColor="@color/bbb"
-                    android:textSize="7pt" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最新"
-                    android:textColor="@color/bbb"
-                    android:textSize="7pt" />
+                    <RadioButton
+                        android:id="@+id/recommend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="推薦"
+                        android:textColor="@color/bbb"
+                        android:textSize="7pt"/>
 
-                <RadioButton
-                    android:id="@+id/radioButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="最熱"
-                    android:textColor="@color/bbb"
-                    android:textSize="7pt" />
+                    <RadioButton
+                        android:id="@+id/newest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="最新"
+                        android:textColor="@color/bbb"
+                        android:textSize="7pt" />
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/hot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="最熱"
+                        android:textColor="@color/bbb"
+                        android:textSize="7pt" />
+
+                </RadioGroup>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -402,7 +413,18 @@
                     android:id="@+id/main_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="加載中請稍後"
+                        android:textSize="8pt"
+                        android:gravity="center"
+                        android:paddingTop="5dp"/>
+
+                </LinearLayout>
 
             </ScrollView>
 

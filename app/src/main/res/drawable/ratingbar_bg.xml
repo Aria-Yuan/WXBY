@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--主背景-->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/star_border_hide"/>
+    <!--副进度条-->
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/star_border_half"/>
+    <!--主进度条-->
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/star_border_show"/>
+</layer-list>

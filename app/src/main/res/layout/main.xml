@@ -52,6 +52,7 @@
         android:fitsSystemWindows="false">
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/shenmwanyi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#dbdbdb">
@@ -213,12 +214,11 @@
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nScrol"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:foregroundGravity="top"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.v4.view.ViewPager
+            <com.example.joan.myapplication.DIYComponent.WrapContentHeightViewPager
                 android:id="@+id/main_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -10,10 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.joan.myapplication.fragment.MyCaseCounselingFragment;
+import com.example.joan.myapplication.fragment.MyQuestionFragment;
+import com.example.joan.myapplication.fragment.MyQuickResponseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import me.shihao.library.XRadioGroup;
 
 public class MyQuestionListActivity extends AppCompatActivity {
 

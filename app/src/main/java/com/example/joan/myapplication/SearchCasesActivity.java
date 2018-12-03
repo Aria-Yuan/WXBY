@@ -1,41 +1,23 @@
 package com.example.joan.myapplication;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.joan.myapplication.DatePicker.CustomDatePicker;
-import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.JudgementModel;
-import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
-import com.example.joan.myapplication.database.repository.JudgementRepositoryImpl;
-
-import net.sf.json.JSONArray;
+import com.example.joan.myapplication.datePicker.CustomDatePicker;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class SearchCasesActivity  extends AppCompatActivity implements View.OnClickListener{

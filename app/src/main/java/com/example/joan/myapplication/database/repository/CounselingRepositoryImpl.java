@@ -77,6 +77,11 @@ public class CounselingRepositoryImpl {
                 }
 
                 counseling.setContent(contentList);
+                counseling.setState(a.getInt("state"));
+                if(counseling.getState() == 3){
+                    counseling.setComment(a.getDouble("comment"));
+                }
+
                 counselings.add(counseling);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -117,9 +122,27 @@ public class CounselingRepositoryImpl {
         cs.add(content);
         counseling.append("content",cs);
         counseling.append("publishFlag",1);
+        counseling.append("state",0);
 
         return counseling.toJson();
     }
+
+    public String ChangeState(int state, LegalCounselingModel counseling){
+        Document update = new Document();
+        update.append("state", state);
+        update.append("_id", counseling.getId());
+
+        return update.toJson();
+    }
+    public String ChangeState(double score,LegalCounselingModel counseling){
+        Document update = new Document();
+        update.append("comment", score);
+        update.append("state", 3);
+        update.append("_id", counseling.getId());
+
+        return update.toJson();
+    }
+
 
     public String QuestionAgain(String question, LegalCounselingModel counseling) throws Exception{
         List<CounselingModel> coundelingList = counseling.getContent();
@@ -156,6 +179,12 @@ public class CounselingRepositoryImpl {
         Document update = new Document();
         update.append("_id", counseling.getId());
         update.append("content", questions);
+        if(counseling.getContent().size() >= 3){
+            update.append("state", 5);//提問次數達上限
+        }else{
+            update.append("state", counseling.getState());
+        }
+
         return update.toJson();
     }
 
@@ -197,6 +226,7 @@ public class CounselingRepositoryImpl {
         Document update = new Document();
         update.append("_id", counseling.getId());
         update.append("content", questions);
+        update.append("state", 1);
         return update.toJson();
     }
 }

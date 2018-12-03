@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:paddingStart="30dp"
+    android:paddingTop="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.joan.myapplication.DIYComponent.RatingBar
+            android:id="@+id/select_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:starCount="5"
+            app:starEmpty="@drawable/star_border_hide"
+            app:starFill="@drawable/star_border_show"
+            app:starHalf="@drawable/star_border_half"
+            app:starImageSize="25dp"
+            app:starPadding="5dp"
+            app:starStep="0"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/star_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingEnd="30dp"
+            android:text="不推薦"
+            android:textSize="8pt" />
+
+    </LinearLayout>
+
+</RelativeLayout>
