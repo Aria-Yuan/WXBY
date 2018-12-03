@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.oneLineView.CounselingContentView;
 import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 

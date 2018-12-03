@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,28 +51,156 @@
         android:id="@+id/law_firm_result_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/buttom_bar"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/layout_firm_pager_bar"
-        android:layout_marginBottom="60dp"
         android:background="#efefef">
 
         <LinearLayout
-            android:id="@+id/counseling_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/buttom_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/colorWhite"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingBottom="15dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="20dp"
+                android:paddingTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="你收到的評價"
+                    android:textSize="9pt" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.example.joan.myapplication.DIYComponent.RatingBar
+                        android:id="@+id/rc_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:starCount="5"
+                        app:starEmpty="@drawable/star_border_hide"
+                        app:starFill="@drawable/star_border_show"
+                        app:starHalf="@drawable/star_border_half"
+                        app:starImageSize="23dp"
+                        app:starPadding="5dp"
+                        app:starStep="2.5"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/score_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:paddingEnd="10dp"
+                        android:text="力薦"
+                        android:textSize="8pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/counseling_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+        </LinearLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/lawyer_consult"
+    <LinearLayout
+        android:id="@+id/buttom_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/selector_item_color"
-        android:text="向我是誰律師提問"
-        android:textColor="@color/colorWhite"
-        android:textSize="9pt" />
+        android:background="@color/colorWhite"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp">
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_above="@id/buttom_bar"
+            android:background="#efefef" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="回答問題"
+            android:textColor="@color/colorAccent"
+            android:textSize="8.5pt"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/lawyer_consult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="點此回答問題"
+            android:includeFontPadding="false"
+            android:inputType="textMultiLine"
+            android:padding="6dp"
+            android:singleLine="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                android:src="@drawable/gallery" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="56dp"
+                android:layout_height="28dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorAccent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="送出"
+                android:textColor="@color/colorWhite"
+                android:textSize="7pt" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.oneLineView.CounselingResultLayout;
+import com.example.joan.myapplication.oneLineView.FindNothingView;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
@@ -180,6 +181,7 @@ public class CounselingListActivity extends AppCompatActivity implements Counsel
                 public void onSuccess(String s) {
                     JSONArray jArray= JSONArray.fromObject(s);
                     counselingList = new CounselingRepositoryImpl().convert(jArray);
+
                 }
 
                 @Override

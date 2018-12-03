@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true">
+
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_firm_pager_bar"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="@color/background"
+        android:gravity="center_vertical|center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:src="@drawable/back1"
+            android:textColor="@color/colorWhite"
+            android:textSize="8pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="問題详情"
+            android:textColor="@color/colorAccent"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingBottom="8dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="7dp"
+            android:src="@drawable/heart_z" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_firm_pager_bar"
+        android:background="#cedfdd"
+        android:orientation="horizontal"
+        android:padding="7dp">
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="已結束"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/cancel_case"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:paddingStart="10dp"
+            android:text="取消提問"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/law_firm_result_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/consult_lawyer_detail_question"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cancel"
+        android:background="#efefef">
+
+        <LinearLayout
+            android:id="@+id/law_firm_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#efefef"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/lawyer_picture"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/me" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/name_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="姓名  職業"
+                        android:textColor="@color/text2"
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:id="@+id/firm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="企業名"
+                        android:textColor="@color/bbb"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/follow"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical|center"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/button"
+                    android:text="關注"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9pt" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#efefef" />
+
+            <LinearLayout
+                android:id="@+id/counseling_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="我的評價"
+                    android:textSize="8pt" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="15dp"
+                    android:orientation="horizontal">
+
+                    <com.example.joan.myapplication.DIYComponent.RatingBar
+                        android:id="@+id/rc_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:starCount="5"
+                        app:starEmpty="@drawable/star_border_hide"
+                        app:starFill="@drawable/star_border_show"
+                        app:starHalf="@drawable/star_border_half"
+                        app:starImageSize="25dp"
+                        app:starPadding="5dp"
+                        app:starStep="2.5"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/score_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:paddingEnd="25dp"
+                        android:text="力薦"
+                        android:textSize="8pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="15dp"
+                android:text="刪除問題"
+                android:textSize="8pt" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/consult_lawyer_detail_question"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="0.9"
+        android:background="@color/selector_item_color"
+        android:text="向其他律師提問"
+        android:textColor="@color/colorWhite"
+        android:textSize="9pt" />
+
+</RelativeLayout>

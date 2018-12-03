@@ -11,38 +11,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.joan.myapplication.DatePicker.CustomDatePicker;
-import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.LawFirmModel;
-import com.example.joan.myapplication.database.model.LawModel;
-import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
-import com.example.joan.myapplication.database.repository.LawRepositoryImpl;
-
-import net.sf.json.JSONArray;
+import com.example.joan.myapplication.fragment.LawFragment;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-
-import me.shihao.library.XRadioGroup;
 
 public class SearchLawActivity extends AppCompatActivity{
     TabLayout tabLayout;

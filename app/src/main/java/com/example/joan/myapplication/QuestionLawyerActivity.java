@@ -1,10 +1,8 @@
 package com.example.joan.myapplication;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,22 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
 import com.example.joan.myapplication.database.model.LawyerModel;
-import com.example.joan.myapplication.database.model.LegalCounselingModel;
-import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
-import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 public class QuestionLawyerActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private SharedPreferences sp;
 
     private TextView title;
     private Button back, next, upload;
@@ -40,13 +26,13 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     private EditText text;
     private AlertDialog finished;
     private LawyerModel lawyer;
-    private LegalCounselingModel counseling;
-    private boolean isSubmitted;
+    static QuestionLawyerActivity questionLawyerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_lawyer);
+        questionLawyerActivity = this;
         lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer");
 
         initView();
@@ -54,7 +40,6 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
 
     @SuppressLint("SetTextI18n")
     private void initView() {
-        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
 
         lawyerID = lawyer.getId();
         lawyerName = lawyer.getName();
@@ -105,25 +90,11 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                     state = setNotEnough();
                     afterCreateDialog(state);
                 }else{
-                    createCase();
+                    createPayment();
                 }
                 break;
         }
 
-    }
-
-    private void setNext() {
-        if (isEnoughLength()) {
-            submit();
-            if (isSubmitted) {
-                state = success();
-            } else {
-                state = failed();
-            }
-        }else{
-            state = setNotEnough();
-        }
-        afterCreateDialog(state);
     }
 
     private void goBack() {
@@ -132,11 +103,20 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
             finish();
             overridePendingTransition(R.anim.left, R.anim.left_exit);
         }else{
-            autoSave();
+//            autoSave();
             state = confirmBack();
             finished.show();
             afterCreateDialog(state);
         }
+    }
+
+    private  void createPayment(){
+        Intent intent = new Intent(QuestionLawyerActivity.this, ConfirmPaymentActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("content",text.getText().toString());
+        bundle.putSerializable("lawyer", lawyer);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private int setNotEnough() {
@@ -151,54 +131,6 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                 })
                 .create();
         return -2;
-    }
-
-    private int failed() {
-        autoSave();
-        finished = new AlertDialog.Builder(this)
-                .setTitle("您的諮詢信息")//设置对话框的标题
-                .setMessage("送出失敗了誒~")//设置对话框的内容
-                .setPositiveButton("重試", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        submit();
-                    }
-                })
-                .setNegativeButton("再看看~", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finished.cancel();
-                    }
-                })
-                .create();
-        return -1;
-    }
-
-    private int success() {
-        finished = new AlertDialog.Builder(this)
-                .setTitle("您的諮詢信息")//设置对话框的标题
-                .setMessage("已經成功送出咯~")//设置对话框的内容
-                .setPositiveButton("查看", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finished.cancel();
-                        finish();
-                        //跳至詳情頁面
-                        Intent intent = new Intent(QuestionLawyerActivity.this, MyQuestionLawyerConsultActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("counseling",counseling );
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("確定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                })
-                .create();
-        return 0;
     }
 
     private int confirmBack(){
@@ -247,53 +179,6 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                 break;
         }
 
-    }
-
-    private void autoSave() {
-
-    }
-
-
-    private void submit() {//提交
-        isSubmitted = true;
-        return;
-    }
-
-    private void createCase(){
-        try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
-            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID,sp.getString("_id","0"));
-//            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID,lawyerID);
-            params.addQueryStringParameter("condition",newOne);
-//            params.addQueryStringParameter("condition","吕浩然觉得不用写");
-            params.addQueryStringParameter("type","1");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    JSONArray jArray = new JSONArray().fromObject(s);
-                    counseling = new CounselingRepositoryImpl().convert(jArray).get(0);
-                    System.out.println(s);
-                    setNext();
-                }
-
-                @Override
-                public void onError(Throwable throwable, boolean b) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException e) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     private void showWindow() {

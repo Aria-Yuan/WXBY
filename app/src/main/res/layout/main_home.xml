@@ -22,7 +22,7 @@
         app:itemTextColor="@drawable/bottom_navigation_selector"
         app:menu="@menu/menu_bottom_navigation" />
 
-    <com.example.joan.myapplication.NoScrollViewPager
+    <com.example.joan.myapplication.DIYComponent.NoScrollViewPager
         android:id="@+id/main_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

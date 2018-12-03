@@ -2,12 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <!--item的上分割线-->
-    <View
-        android:id="@+id/divider_top"
-        android:layout_width="fill_parent"
-        android:layout_height="5dp"
-        android:background="#efefef" />
 
     <!--item内容部分的容器-->
     <LinearLayout
@@ -63,6 +57,11 @@
 
     </LinearLayout>
 
-
+    <!--item的上分割线-->
+    <View
+        android:id="@+id/divider_top"
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="#efefef" />
 
 </LinearLayout>

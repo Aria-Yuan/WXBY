@@ -545,11 +545,13 @@
 
                         <TextView
                             android:id="@+id/end"
-                            android:layout_width="match_parent"
+                            android:layout_width="187dp"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:background="@null"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="fill_vertical|start"
                             android:hint="請選擇"
                             android:inputType="text"
@@ -557,9 +559,7 @@
                             android:paddingStart="10dp"
                             android:textColor="#515151"
                             android:textColorHint="#8a8a8a"
-                            android:textSize="7pt"
-                            android:clickable="true"
-                            android:focusable="true"/>
+                            android:textSize="7pt" />
 
                         <ImageView
                             android:id="@+id/down_end"

@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
+import com.example.joan.myapplication.oneLineView.CounselingResultLayout;
+import com.example.joan.myapplication.oneLineView.FindNothingView;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -33,10 +37,11 @@ import java.util.List;
 
 import static java.security.AccessController.getContext;
 
-public class CounselingActivity extends AppCompatActivity{
+public class CounselingActivity extends AppCompatActivity  implements CounselingResultLayout.OnRootClickListener{
 
     private EditText input;
     private String condition;
+    private RadioGroup sort;
 
     private  List<LegalCounselingModel> counselingList = new ArrayList<>();
 
@@ -52,9 +57,30 @@ public class CounselingActivity extends AppCompatActivity{
 
     private void initDatas() {
         input = findViewById(R.id.et_search);
+        sort = findViewById(R.id.sort);
+        searchCounseling();
     }
 
     private void initView(){
+        RadioButton defaultType= findViewById(R.id.recommend);
+        defaultType.setChecked(true);
+
+        sort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (sort.getCheckedRadioButtonId()){
+                    case R.id.recommend:{
+
+                    }break;
+                    case R.id.hot:{
+
+                    }break;
+                    case R.id.newest:{
+
+                    }break;
+                }
+            }
+        });
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -151,6 +177,169 @@ public class CounselingActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    private void searchCounseling(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition","");
+            params.addQueryStringParameter("type","0");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counselingList = new CounselingRepositoryImpl().convert(jArray);
+                    CounselingView(counselingList);
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void CounselingView(List<LegalCounselingModel> counselingList){
+        findViewById(R.id.text).setVisibility(View.GONE);
+        LinearLayout result = findViewById(R.id.main_body);
+        if(counselingList.isEmpty()){
+            result.addView(new FindNothingView(getBaseContext()).init());
+        }else{
+            int index = 0;
+            for (LegalCounselingModel counseling: counselingList
+                    ) {
+                String question = counseling.getContent().get(0).getQuestion();
+
+                String createTime = counseling.getCreateTime().replace('T',' ');
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String dateString = formatter.format(createTime);
+
+                String viewCount = counseling.getViewCount() + "个人看过";
+
+                result.addView(new CounselingResultLayout(getBaseContext())
+                        .init(question, createTime,viewCount)
+                        .setOnRootClickListener(this, index));
+                index++;
+            }
+        }
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onRootClick(View v) {
+//        LawFirmModel firm = lawFirmRepository.findById((ObjectId)v.getTag());
+//        setContentView(R.layout.law_firm_detail);
+//
+        switch (v.getId()){
+            case R.id.btn_back:{
+                findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        finish();
+                    }
+                });
+            }break;
+
+            default:{
+                LegalCounselingModel a = counselingList.get((int)v.getTag());
+                int vc = a.getViewCount();
+                vc++;
+                a.setViewCount(vc);
+
+                try{
+                    RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/updateCounseling.action");
+                    String firm;
+                    firm = new CounselingRepositoryImpl().disconvert(a);
+                    System.out.println(firm);
+                    params.addQueryStringParameter("condition",firm);
+                    params.addQueryStringParameter("type", "0");
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+                        @Override
+                        public void onSuccess(String s) {
+                            JSONArray jArray= JSONArray.fromObject(s);
+                            updateList();
+                        }
+
+                        @Override
+                        public void onError(Throwable throwable, boolean b) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(CancelledException e) {
+
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                a = counselingList.get((int)v.getTag());
+                Intent intent=new Intent();
+                intent.setClass(v.getContext(), CounselingDetailActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("counseling", a);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }break;
+        }
+    }
+
+    private void updateList(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition","");
+            params.addQueryStringParameter("type","0");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counselingList = new CounselingRepositoryImpl().convert(jArray);
+
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

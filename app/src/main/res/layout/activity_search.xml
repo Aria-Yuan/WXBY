@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.joan.myapplication.SearchActivity">
 
-    <com.example.joan.myapplication.Search_View
+    <com.example.joan.myapplication.oneLineView.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/search_layout"/>

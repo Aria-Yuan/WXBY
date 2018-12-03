@@ -63,7 +63,7 @@
                 android:id="@+id/searching"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:background="#efefef"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="加載中請稍後..."

@@ -1,21 +1,33 @@
 package com.example.joan.myapplication;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.CaseConsultModel;
 import com.example.joan.myapplication.database.model.JudgementModel;
 import com.example.joan.myapplication.database.model.LawModel;
+import com.example.joan.myapplication.fragment.CaseConsultAdapter;
+import com.example.joan.myapplication.fragment.CaseResultReferListFragment;
+import com.example.joan.myapplication.fragment.CaseResultSimilarListFragment;
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.CaseConsultModel;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -26,6 +38,9 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.LogManager;
 
 public class CaseConsultResultActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,9 +53,13 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
     private CaseResultReferListFragment referList;
     private CaseConsultModel result;
     private String resultID;
+    private int AIResult;
     private int state = 0;
     private AlertDialog.Builder alert;
     private AlertDialog dialog;
+    private Thread thread;
+    private Timer timer = new Timer();
+    private TimerTask timerTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +82,6 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
     }
 
     protected void initItems(){
-
 //        mongoDb = new MongoDBUtil("wxby");
 //        collection = mongoDb.getCollection("case_consult");
 
@@ -85,9 +103,40 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
         list.add(similarList);
         list.add(referList);
         pager.setAdapter(new CaseConsultAdapter(getSupportFragmentManager(),list));
-        alert = new AlertDialog.Builder(CaseConsultResultActivity.this);
 
-        getData();
+        alert = new AlertDialog.Builder(CaseConsultResultActivity.this);
+        alert.setMessage("案件分析中，請稍後");
+        alert.setPositiveButton("先逛逛", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.cancel();
+                finish();
+            }
+        });
+        dialog = alert.create();
+        dialog.show();
+        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+
+        thread = new Thread(){
+          public void run(){
+              try {
+                  final Timer timer = new Timer();
+                  timerTask = new TimerTask(){//也可以用匿名類別的方式，
+
+                      @Override
+                      public void run() {
+                          // TODO Auto-generated method stub
+                          getData();
+                      }
+                  };
+                  timer.schedule(timerTask, 0, 15000);//一秒後開始，之後每過六秒再執行
+              }catch (Exception e){
+
+              }
+          }
+        };
+        thread.start();
 
 //        setSimilarData();
 //        setReferData();
@@ -140,14 +189,15 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
         Intent intent = getIntent();
         resultID = intent.getStringExtra("id");
 
-//        cursor = collection.find(new Document("case_id", "2018092123350067876787678")).iterator();
-//        System.out.println(cursor.next().get("case_id"));
-
         final CaseConsultModel[] data = new CaseConsultModel[1];
 
         try {
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + "8080/caseConsultResult.action");
-            params.addQueryStringParameter("case_id", "201809191738DocherPap");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/caseConsultResult.action");
+//            params.setConnectTimeout(600000);
+//            System.out.println(params.getConnectTimeout());
+//            params.setCacheMaxAge(600000);
+            params.setMaxRetryCount(0);
+            params.addQueryStringParameter("case_id", resultID);
 //            System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -155,30 +205,48 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                     JsonParser jsonParser = new JsonParser();
                     JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
 
-                    if (jsonObject.get("state").getAsInt() == 1) {
+                    state = jsonObject.get("state").getAsInt();
+                    System.out.println(state);
+                    if(state == 2){//算完le
+                        dialog.cancel();
+                        timerTask.cancel();
+                        timer.purge();
+                        timer.cancel();
 
-                        data[0] = new CaseConsultModel();
-                        //                    System.out.println(s);
-                        //                    System.out.println("SetState");
-                        data[0].setState(jsonObject.get("state").getAsInt());
-                        //                    System.out.println("SetResult");
-                        data[0].setResult(jsonObject.get("result").getAsString());
-                        //                    System.out.println("SetID");
-                        data[0].setCase_id(jsonObject.get("case_id").getAsString());
-                        //                    System.out.println("SetContent");
-                        data[0].setContent(jsonObject.get("content").getAsString());
+                        AIResult = jsonObject.get("result").getAsInt();
+                        if(AIResult == 0){
+                            num.setText("勝訴");
+                        }else if(AIResult == 1){
+                            num.setText("平手");
+                        }else if(AIResult == 2){
+                            num.setText("敗訴");
+                        }
+
+//                    if (jsonObject.get("state").getAsInt() == 1) {
+
+//                        data[0] = new CaseConsultModel();
+//                        //                    System.out.println(s);
+//                        //                    System.out.println("SetState");
+//                        data[0].setState(jsonObject.get("state").getAsInt());
+//                        //                    System.out.println("SetResult");
+//                        data[0].setResult(jsonObject.get("result").getAsString());
+//                        //                    System.out.println("SetID");
+//                        data[0].setCase_id(jsonObject.get("case_id").getAsString());
+//                        //                    System.out.println("SetContent");
+//                        data[0].setContent(jsonObject.get("content").getAsString());
 
                         List<JudgementModel> similar = new ArrayList<>();
                         //                    System.out.println(jsonObject.getAsJsonArray("similar"));
                         //                    System.out.println();
                         //                    System.out.println();
                         //                    System.out.println();
+//                        System.out.println(jsonObject.getAsJsonArray("similar"));
                         for (JsonElement je : jsonObject.getAsJsonArray("similar")) {
                             JsonObject tempJson = je.getAsJsonObject();
                             JudgementModel temp = new JudgementModel();
                             System.out.println(tempJson);
                             //                        System.out.println();
-                            temp.setjId(tempJson.get("j_id").getAsString());
+                            temp.setjId(tempJson.get("j_id").getAsString().split("\\[")[0]);
                             temp.setjReason(tempJson.get("j_reason").getAsString());
                             //                        temp.setjContent(tempJson.get("j_content").getAsString());
                             temp.setjDate(tempJson.get("j_date").getAsString());
@@ -186,87 +254,90 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                             //                        System.out.println(temp.getjId());
                             similar.add(temp);
                         }
-                        data[0].setJudgementModels(similar);
+                        result.setJudgementModels(similar);
                         //                    System.out.println(similar);
 
-                        List<LawModel> refer = new ArrayList<>();
-                        for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
-                            JsonObject tempJson = je.getAsJsonObject();
-                            LawModel temp = new LawModel();
-                            System.out.println(tempJson);
-                            temp.setId(tempJson.get("_id").toString());
-                            temp.setStart(tempJson.get("start").toString());
-                            temp.setAbandon(tempJson.get("abandon").toString());
-                            temp.setArticle(tempJson.get("article").toString());
-                            temp.setContent(tempJson.get("content").toString());
-                            temp.setName(tempJson.get("name").toString());
-                            if (tempJson.has("end")) {
-                                System.out.println("yes");
-                                temp.setEnd(tempJson.get("end").toString());
-                            }
-                            refer.add(temp);
-                        }
-                        data[0].setLawModels(refer);
-                        state = 1;
-                        result = data[0];
-                        num.setText(result.getResult());
+//                        List<LawModel> refer = new ArrayList<>();
+//                        for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
+//                            JsonObject tempJson = je.getAsJsonObject();
+//                            LawModel temp = new LawModel();
+//                            System.out.println(tempJson);
+//                            temp.setId(tempJson.get("_id").toString());
+//                            temp.setStart(tempJson.get("start").toString());
+//                            temp.setAbandon(tempJson.get("abandon").toString());
+//                            temp.setArticle(tempJson.get("article").toString());
+//                            temp.setContent(tempJson.get("content").toString());
+//                            temp.setName(tempJson.get("name").toString());
+//                            if (tempJson.has("end")) {
+//                                System.out.println("yes");
+//                                temp.setEnd(tempJson.get("end").toString());
+//                            }
+//                            refer.add(temp);
+//                        }
+//                        data[0].setLawModels(refer);
+//                        state = 1;
+//                        result = data[0];
+//                        num.setText(result.getResult());
                         //                    System.out.println("setSimilar");
                         setSimilarData();
                         //                    System.out.println("setRefer");
-                        setReferData();
+//                        setReferData();
 
                         //                    data[0].setSimilar(jsonObject.get("similar").getAsJsonArray());
                         //                    System.out.println(jsonObject.get("similar"));
                         //                    System.out.println(jsonObject.get("similar").getAsJsonArray());
 
-                    }else if (jsonObject.get("state").getAsInt() == -2){
-
-                        alert.setMessage("您的咨詢還在等待執行，請稍等5至10分鐘~");
-                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialog.cancel();
-                                finish();
-                            }
-                        });
-                        dialog = alert.create();
-                        dialog.show();
-                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
-
-                    }else if (jsonObject.get("state").getAsInt() == -1){
-
-                        alert.setMessage("糟糕！您的資訊可能出了一些問題，可能需要重新提交試試！");
-                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialog.cancel();
-                                finish();
-                            }
-                        });
-                        dialog = alert.create();
-                        dialog.show();
-                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
-
-                    }else if (jsonObject.get("state").getAsInt() == 0){
-
-                        alert.setMessage("您的咨詢正在進行處理，請稍等3至5分鐘~");
-                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialog.cancel();
-                                finish();
-                            }
-                        });
-                        dialog = alert.create();
-                        dialog.show();
-                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
-
-                    }else{
-
+//                    }
+//                    else if (jsonObject.get("state").getAsInt() == -2){
+//
+//                        alert.setMessage("您的咨詢還在等待執行，請稍等5至10分鐘~");
+//                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialog.cancel();
+//                                finish();
+//                            }
+//                        });
+//                        dialog = alert.create();
+//                        dialog.show();
+//                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+//
+//                    }else if (jsonObject.get("state").getAsInt() == -1){
+//
+//                        alert.setMessage("糟糕！您的資訊可能出了一些問題，可能需要重新提交試試！");
+//                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialog.cancel();
+//                                finish();
+//                            }
+//                        });
+//                        dialog = alert.create();
+//                        dialog.show();
+//                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+//
+//                    }else if (jsonObject.get("state").getAsInt() == 0){
+//
+//                        alert.setMessage("您的咨詢正在進行處理，請稍等3至5分鐘~");
+//                        alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialog.cancel();
+//                                finish();
+//                            }
+//                        });
+//                        dialog = alert.create();
+//                        dialog.show();
+//                        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//                        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+//
+//                    }else{
+//
+//                    }
                     }
+
                 }
 
                 @Override
@@ -297,6 +368,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 
                 }
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -339,6 +411,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
     }
 
     protected void setSimilarData(){
+//        System.out.println("111111111111111111111111111111111111");
         similarList = (CaseResultSimilarListFragment)pager.getAdapter().instantiateItem(pager, 0);
 //        System.out.println("1111111111111111111111111");
         System.out.println(result.getJudgementModels().get(0).getjId());
@@ -403,7 +476,6 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                 finish();
                 overridePendingTransition(R.anim.left, R.anim.left_exit);
                 break;
-
         }
 
     }
