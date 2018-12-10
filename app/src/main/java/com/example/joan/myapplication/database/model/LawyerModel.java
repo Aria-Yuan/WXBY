@@ -16,7 +16,7 @@ public class LawyerModel implements Serializable {
     private String experience;
     private String description;
     private double price;
-    private List<String> counselingList;
+    private List<LegalCounselingModel> counselingList;
     private double comment;
 
     public String getId() {
@@ -99,11 +99,11 @@ public class LawyerModel implements Serializable {
         this.price = price;
     }
 
-    public List<String> getCounselingList() {
+    public List<LegalCounselingModel> getCounselingList() {
         return counselingList;
     }
 
-    public void setCounselingList(List<String> counselingList) {
+    public void setCounselingList(List<LegalCounselingModel> counselingList) {
         this.counselingList = counselingList;
     }
 

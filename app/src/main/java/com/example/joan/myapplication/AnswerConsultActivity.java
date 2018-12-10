@@ -56,7 +56,7 @@ public class AnswerConsultActivity extends AppCompatActivity implements View.OnC
         lawyerName = lawyer.getName();
         fee = lawyer.getPrice()+"";
 
-        upload = findViewById(R.id.question_lawyer_upload);
+//        upload = findViewById(R.id.question_lawyer_upload);
         title = findViewById(R.id.question_lawyer_title);
         back = findViewById(R.id.question_lawyer_back);
         next = findViewById(R.id.question_lawyer_next);
@@ -93,9 +93,9 @@ public class AnswerConsultActivity extends AppCompatActivity implements View.OnC
             case R.id.question_lawyer_back:
                 goBack();
                 break;
-            case R.id.question_lawyer_upload:
-                showWindow();
-                break;
+//            case R.id.question_lawyer_upload:
+//                showWindow();
+//                break;
             case R.id.question_lawyer_next:
                 if(!isEnoughLength()){
                     state = setNotEnough();

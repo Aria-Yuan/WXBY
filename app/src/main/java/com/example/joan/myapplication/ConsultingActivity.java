@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class ConsultingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button lawyer_consult, case_consult, quick_consult, cancel;
+    private LinearLayout lawyer_consult, case_consult, quick_consult;
+    private Button cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
