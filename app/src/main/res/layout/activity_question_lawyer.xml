@@ -13,9 +13,9 @@
         android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_height="46dp"
             android:background="@color/selector_item_color"
             android:visibility="visible">
 
@@ -23,9 +23,9 @@
                 android:id="@+id/question_lawyer_back"
                 android:layout_width="30dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,70 +62,92 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/question_lawyer_text"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4.5"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="@string/consult_lawyer_detail_cases_text"
-            android:inputType="textMultiLine"
-            android:padding="16dp"
-            android:scrollHorizontally="false"
-            android:singleLine="false" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/question_lawyer_upload"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:background="@color/mainbg"
-            android:text="@string/consult_quick_upload"
-            android:textColor="@color/selector_item_color"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="top|center"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:text="@string/consult_case_hint"
-            android:textColor="@color/selector_item_color"
-            android:textSize="14sp" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:padding="8dp">
-
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            </TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:text="描述案件"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="9pt" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0" />
+                <EditText
+                    android:id="@+id/question_lawyer_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="@string/consult_case_text"
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:scrollHorizontally="false"
+                    android:singleLine="false" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
-        </TableLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp"
+                        android:paddingTop="15dp"
+                        android:text="選擇圖片"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="9pt" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2.5" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="15dp"
+                        android:text="上傳案件的描述圖片(最多上傳9張)"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+
+                <com.example.joan.myapplication.DIYComponent.NoScrollGridView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/case_consult_text"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:numColumns="3"
+
+                    android:scrollbars="none"
+                    android:verticalSpacing="3dp"
+                    android:id="@+id/recycler_view"/>
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/recycler_view"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:text="#上傳的圖片與證據僅對回答問題的律師可見"
+                    android:textColor="@color/selector_item_color"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

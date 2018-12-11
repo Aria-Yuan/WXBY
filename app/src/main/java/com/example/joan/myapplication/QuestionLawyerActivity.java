@@ -1,24 +1,45 @@
 package com.example.joan.myapplication;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.joan.myapplication.DIYComponent.NoScrollGridView;
 import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
 import com.example.joan.myapplication.database.model.LawyerModel;
+import com.example.joan.myapplication.fragment.NinePicturesAdapter;
+import com.example.joan.myapplication.image.ImagePagerActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import me.iwf.photopicker.PhotoPickerActivity;
+import me.iwf.photopicker.utils.PhotoPickerIntent;
+
+import static com.example.joan.myapplication.CaseConsultActivity.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
 
 public class QuestionLawyerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView title;
-    private Button back, next, upload;
+    private Button back, next;
     private String lawyerName, lawyerID, fee;
     private String[] titleString = {"向", "律師咨詢"};
     private SelectPicPopupWindow upWindow;
@@ -28,6 +49,14 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     private LawyerModel lawyer;
     static QuestionLawyerActivity questionLawyerActivity;
 
+    //photo picker
+    private static final int REQUEST_CODE = 100;
+    private NoScrollGridView itemLayout;
+    private ArrayList<String> photos;
+    private List<String> photossss;
+    private NinePicturesAdapter ninePicturesAdapter;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +65,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
         lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer");
 
         initView();
+        pickPicture();
     }
 
     @SuppressLint("SetTextI18n")
@@ -45,7 +75,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
         lawyerName = lawyer.getName();
         fee = lawyer.getPrice()+"";
 
-        upload = findViewById(R.id.question_lawyer_upload);
+//        upload = findViewById(R.id.question_lawyer_upload);
         title = findViewById(R.id.question_lawyer_title);
         back = findViewById(R.id.question_lawyer_back);
         next = findViewById(R.id.question_lawyer_next);
@@ -53,7 +83,6 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
 
         next.setOnClickListener(this);
         back.setOnClickListener(this);
-        upload.setOnClickListener(this);
 
         title.setText(titleString[0] + lawyerName + titleString[1]);
         upWindow = new SelectPicPopupWindow(QuestionLawyerActivity.this, itemsOnClick);
@@ -82,9 +111,9 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
             case R.id.question_lawyer_back:
                 goBack();
                 break;
-            case R.id.question_lawyer_upload:
-                showWindow();
-                break;
+//            case R.id.question_lawyer_upload:
+//                showWindow();
+//                break;
             case R.id.question_lawyer_next:
                 if(!isEnoughLength()){
                     state = setNotEnough();
@@ -190,4 +219,181 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     }
 
     private boolean isEmpty() {return text.getText().length() == 0? true: false;}
+
+    /**
+     * 每一张图片放大查看
+     * @param position
+     * @param urls
+     */
+    private void imageBrower(int position, String[] urls) {
+        Intent intent = new Intent(this, ImagePagerActivity.class);
+        // 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+        startActivity(intent);
+    }
+
+
+    /**
+     * 开启图片选择器
+     */
+    private void choosePhoto() {
+        PhotoPickerIntent intent = new PhotoPickerIntent(QuestionLawyerActivity.this);
+        intent.setPhotoCount(9);
+        intent.setShowCamera(true);
+        startActivityForResult(intent, REQUEST_CODE);
+
+        //ImageLoaderUtils.display(context,imageView,path);
+    }
+
+    private static final String TAG = "MainActivity";
+
+    /**
+     * 接受返回的图片数据
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            if (data != null) {
+                photos = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS);
+
+                for (int i = 0; i < photos.size(); i++) {
+                    Log.i(TAG, "----------onActivityResult: "+ photos.get(i));
+                }
+                if(ninePicturesAdapter!=null) {
+                    Log.i(TAG, "----------photossss: ========");
+                    ninePicturesAdapter.addAll(photos);
+                    photossss = ninePicturesAdapter.getData();
+                    Log.i(TAG, "----------photossss: ========"+photossss.size());
+
+                }
+            }
+        }
+    }
+
+    //圖片選擇適配器
+    private void pickPicture(){
+        itemLayout = (NoScrollGridView) findViewById(R.id.recycler_view);
+
+       /* tvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int photoCount = ninePicturesAdapter.getPhotoCount();
+                Log.i(TAG, "---onClick:--- "+photoCount);
+
+                if (photoCount>9){
+                    Toast.makeText(MainActivity.this, "智能选择9张图片，才能提交", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (int i = 0; i < photoCount; i++) {
+                    Log.i(TAG, "onClick: "+photos.get(i));
+                }
+                Log.i(TAG, "---提交:--- "+photoCount);
+
+            }
+        });*/
+
+
+        ninePicturesAdapter = new NinePicturesAdapter(this, 9, new NinePicturesAdapter.OnClickAddListener() {
+            @Override
+            public void onClickAdd(int positin) {
+//                finished.dismiss();
+//                dialogTwo.dismiss();
+                if (checkPermissionREAD_EXTERNAL_STORAGE(getApplicationContext())) {
+                    choosePhoto();
+                }
+            }
+        }, new NinePicturesAdapter.OnItemClickAddListener() {
+            @Override
+            public void onItemClick(int positin) {
+                if (checkPermissionREAD_EXTERNAL_STORAGE(getApplicationContext())) {
+                    Log.i(TAG, "-------------onItemClick: "+positin);
+
+                    String[] array = new String[ninePicturesAdapter.getPhotoCount()];
+                    // List转换成数组
+                    for (int i = 0; i < photossss.size()-1; i++) {
+                        array[i] = photossss.get(i);
+                    }
+                    //数组转换为集合
+                    //List<String> stringsss = Arrays.asList(array);
+
+                    Log.i(TAG, "----array:--- "+array.length);
+                    imageBrower(positin,array);
+                }
+
+            }
+        });
+        itemLayout.setAdapter(ninePicturesAdapter);
+    }
+
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+            final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showDialog("External storage", context,Manifest.permission.READ_EXTERNAL_STORAGE);
+
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    this,
+                                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    }
+
+    public void showDialog(final String msg, final Context context,
+                           final String permission) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[] { permission },
+                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // do your stuff
+                } else {
+                    Toast.makeText(getApplicationContext(), "GET_ACCOUNTS Denied",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions,
+                        grantResults);
+        }
+    }
+
+
 }

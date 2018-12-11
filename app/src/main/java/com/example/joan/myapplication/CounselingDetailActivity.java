@@ -11,9 +11,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
 import com.example.joan.myapplication.oneLineView.CounselingContentView;
 import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
+
+import net.sf.json.JSONArray;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.List;
 
@@ -26,6 +34,7 @@ public class CounselingDetailActivity extends AppCompatActivity {
     private Button consult;
     private String[] text = {"向", "律師付費提問(NT$", ")"};
 
+    private  String counselingId;
     private  LegalCounselingModel counseling;
 
     @Override
@@ -33,9 +42,9 @@ public class CounselingDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counseling_detail);
 
-        counseling = (LegalCounselingModel) getIntent().getSerializableExtra("counseling");
+        counselingId = (String) getIntent().getSerializableExtra("counseling");
         initView();
-        initData();
+        searchCounseling();
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -82,8 +91,50 @@ public class CounselingDetailActivity extends AppCompatActivity {
             }
         });
 
+        lawyerPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CounselingDetailActivity.this, LawyerConsultDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lawyer", counseling.getLawyer().getId());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right, R.anim.left);
+            }
+        });
 
     }
+    private void searchCounseling(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition",counselingId);
+            params.addQueryStringParameter("type","4");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counseling = new CounselingRepositoryImpl().convertSingle(jArray.getJSONObject(0));
+                    initData();
+                }
 
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

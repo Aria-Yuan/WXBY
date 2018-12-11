@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efefef"
+    android:background="#ebebeb"
     tools:context=".ConsultingActivity">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingBottom="60dp">
+        android:paddingBottom="30dp">
 
         <TextView
             android:id="@+id/title"
@@ -37,6 +37,7 @@
             android:layout_width="318dp"
             android:layout_height="54dp"
             android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="25dp"
             android:text="@string/subtitle"
             android:textSize="20sp"
@@ -45,41 +46,208 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
-        <Button
+        <LinearLayout
             android:id="@+id/consult_lawyer"
             android:layout_width="339dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:layout_weight="2"
-            android:background="@drawable/button_lvshizisun"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remarks" />
+            android:orientation="horizontal">
 
-        <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@drawable/linear_shadown"
+                android:gravity="fill_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:padding="6dp"
+                    android:src="@drawable/lawyer" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingStart="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="律師諮詢"
+                        android:textColor="@color/text_80"
+                        android:textSize="9.5pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="快速匹配律師，平均一小時回復"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:src="@drawable/pointer1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/consult_case"
-            android:layout_width="340dp"
+            android:layout_width="339dp"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:background="@drawable/button_anjianzisun"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/consult_lawyer" />
+            android:orientation="horizontal">
 
-        <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@drawable/linear_shadown"
+                android:gravity="fill_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:padding="6dp"
+                    android:src="@drawable/main_menu_unscramble" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="案件諮詢"
+                        android:textColor="@color/text_80"
+                        android:textSize="9.5pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="描述案件詳情，人工智慧為您解答"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:src="@drawable/pointer1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/consult_quick"
-            android:layout_width="340dp"
+            android:layout_width="339dp"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:background="@drawable/button_kuaisuwenda"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/consult_case" />
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@drawable/linear_shadown"
+                android:gravity="fill_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:padding="6dp"
+                    android:src="@drawable/main_menu_counseling" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快速問答"
+                        android:textColor="@color/text_80"
+                        android:textSize="9.5pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="提出你的問題，大家一起解答"
+                        android:textSize="7pt" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:src="@drawable/pointer1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--<Button-->
+        <!--android:id="@+id/consult_lawyer"-->
+        <!--android:layout_width="339dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:background="@drawable/button_lvshizisun"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/remarks" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/consult_case"-->
+        <!--android:layout_width="340dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:background="@drawable/button_anjianzisun"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/consult_lawyer" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/consult_quick"-->
+        <!--android:layout_width="340dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:background="@drawable/button_kuaisuwenda"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/consult_case" />-->
 
         <Button
             android:id="@+id/consult_cancel"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/quit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"

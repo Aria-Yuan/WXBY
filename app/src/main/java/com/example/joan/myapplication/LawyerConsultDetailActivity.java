@@ -10,11 +10,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
+import com.example.joan.myapplication.database.model.LegalCounselingModel;
+import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
+
+import net.sf.json.JSONArray;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 public class LawyerConsultDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String id;
+    private String lawyerId;
     private LawyerModel lawyer = new LawyerModel();
     private TextView name, detail, year, times, scholar, occupation, special, personality;
     private Button question, back, follow, seeAll;
@@ -27,17 +38,16 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lawyer_consult_detail);
-        lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer") ;
+        lawyerId = (String)getIntent().getSerializableExtra("lawyer") ;
 
         initView();
-        setData();
+        getData();
 
     }
 
     private void initView() {
-
-        getID();
-        getCases();
+//        getID();
+//        getCases();
 
         name = findViewById(R.id.consult_lawyer_detail_name);
         detail = findViewById(R.id.consult_lawyer_detail_detail);
@@ -62,6 +72,41 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void getData(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchLawyer.action");
+            params.addQueryStringParameter("condition",lawyerId);
+//            params.addQueryStringParameter("condition","吕浩然觉得不用写");
+            params.addQueryStringParameter("type","2");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    lawyer = new LawyerRepositoryImpl().convert_single(jArray.getJSONObject(0));
+                    /**/
+                    setData();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onClick(View view) {
         
@@ -78,6 +123,7 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
                 break;
             case R.id.consult_lawyer_detail_seeall:
                 seeAll();
+                break;
         }
         
     }
@@ -103,27 +149,27 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
         overridePendingTransition(R.anim.right, R.anim.left);
     }
 
-    public void getID() {
+//    public void getID() {
+//
+//        Intent intent = getIntent();
+//        id = intent.getStringExtra("lawyerID");
+//        System.out.println(id);
+//
+//    }
 
-        Intent intent = getIntent();
-        id = intent.getStringExtra("lawyerID");
-        System.out.println(id);
-
-    }
-
-    private void getCases() {
-
-        for (int i = 0; i < 3; i ++){
-            Case newCase = new Case();
-            newCase.setBrief("This is the case brief");
-            newCase.setCaseDate("2018/9/8");
-            newCase.setCaseTime("19:59");
-            newCase.setLawyerID(lawyer.getId());
-            newCase.setUserID("用戶123456");
-            cases[i] = newCase;
-        }
-
-    }
+//    private void getCases() {
+//
+//        for (int i = 0; i < 3; i ++){
+//            Case newCase = new Case();
+//            newCase.setBrief("This is the case brief");
+//            newCase.setCaseDate("2018/9/8");
+//            newCase.setCaseTime("19:59");
+//            newCase.setLawyerID(lawyer.getId());
+//            newCase.setUserID("用戶123456");
+//            cases[i] = newCase;
+//        }
+//
+//    }
 
     @SuppressLint("SetTextI18n")
     private void setData() {
@@ -144,16 +190,17 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
 
     private void setCases() {
 
-        for (Case singleCase: cases) {
+        for (LegalCounselingModel singleCase: lawyer.getCounselingList()) {
             View view = li.inflate(R.layout.sample_lawyer_consult_single_case, null);
             setCaseData(view, singleCase);
-            setCaseListener(view, singleCase.getID());
+            setCaseListener(view, singleCase.getId());
             ll.addView(view);
         }
+        System.out.println(lawyer.getCounselingList().get(0).getContent().get(0).getQuestion());
 
     }
 
-    private void setCaseData(View view, Case singleCase) {
+    private void setCaseData(View view, LegalCounselingModel singleCase) {
 
         TextView userName, brief, date, time, visit;
 
@@ -163,12 +210,11 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
         time = view.findViewById(R.id.lawyer_consult_single_case_time);
         visit = view.findViewById(R.id.lawyer_consult_single_case_visit);
 
-        userName.setText(singleCase.getUserID());
-        brief.setText(singleCase.getBrief());
-        date.setText(singleCase.getCaseDate());
-        time.setText(singleCase.getCaseTime());
-        if (!(singleCase.getVisit() == 0))
-            visit.setText(singleCase.getVisit());
+        userName.setText("匿名用户");
+        brief.setText(singleCase.getContent().get(0).getQuestion());
+        date.setText(singleCase.getCreateTime().split(" ")[0]);
+        time.setText(singleCase.getCreateTime().split(" ")[1]);
+        visit.setText(singleCase.getViewCount() + "人看过");
 
     }
 
@@ -177,8 +223,8 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LawyerConsultDetailActivity.this, LawyerConsultResultActivity.class);
-                intent.putExtra("caseID", id);
+                Intent intent = new Intent(LawyerConsultDetailActivity.this, CounselingDetailActivity.class);
+                intent.putExtra("counseling", id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right, R.anim.left);
             }

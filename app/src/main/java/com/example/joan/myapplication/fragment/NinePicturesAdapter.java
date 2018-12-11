@@ -12,8 +12,9 @@ import android.widget.ImageView;
 
 import com.example.joan.myapplication.DIYComponent.ImageLoaderUtils;
 import com.example.joan.myapplication.DIYComponent.ViewHolderUtil;
-import com.example.joan.myapplication.R;
+
 import java.util.List;
+import com.example.joan.myapplication.R;
 
 /**
  * des:9宫图适配器

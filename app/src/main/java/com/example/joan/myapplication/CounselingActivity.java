@@ -275,8 +275,7 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
                     x.http().get(params, new Callback.CommonCallback<String>() {
                         @Override
                         public void onSuccess(String s) {
-                            JSONArray jArray= JSONArray.fromObject(s);
-                            updateList();
+
                         }
 
                         @Override
@@ -302,43 +301,10 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
                 intent.setClass(v.getContext(), CounselingDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("counseling", a);
+                bundle.putSerializable("counseling", a.getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }break;
-        }
-    }
-
-    private void updateList(){
-        try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
-            params.addQueryStringParameter("condition","");
-            params.addQueryStringParameter("type","0");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    JSONArray jArray= JSONArray.fromObject(s);
-                    counselingList = new CounselingRepositoryImpl().convert(jArray);
-
-                }
-
-                @Override
-                public void onError(Throwable throwable, boolean b) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException e) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 

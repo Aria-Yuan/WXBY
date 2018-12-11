@@ -68,7 +68,7 @@ public class LawyerConsultLawyerListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LawyerConsultActivity.page, LawyerConsultDetailActivity.class);
-                intent.putExtra("lawyer", lawyer);
+                intent.putExtra("lawyer", lawyer.getId());
                 startActivity(intent);
                 LawyerConsultActivity.page.overridePendingTransition(R.anim.right, R.anim.left);
             }
@@ -85,7 +85,7 @@ public class LawyerConsultLawyerListFragment extends Fragment {
                 @Override
                 public void onSuccess(String s) {
                     JSONArray jArray= JSONArray.fromObject(s);
-                    list = new LawyerRepositoryImpl().convert(jArray);
+                    list = new LawyerRepositoryImpl().convertList(jArray);
                     /**/
                     addView();
                 }

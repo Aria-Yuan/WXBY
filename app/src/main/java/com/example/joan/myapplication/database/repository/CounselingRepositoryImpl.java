@@ -40,10 +40,7 @@ public class CounselingRepositoryImpl {
                 final LegalCounselingModel counseling = new LegalCounselingModel();
 //                counseling.setLawyer(a.getString(""));
 
-                JSONObject lawyer = a.getJSONObject("lawyer");
-                LawyerModel l = new LawyerRepositoryImpl().convert_single(lawyer);
-                counseling.setLawyer(l);
-                counseling.setQuestioner(a.getString("questioner"));
+//                counseling.setQuestioner(a.getString("questioner"));
 
                 counseling.setId(a.getString("_id"));
                 counseling.setCreateTime(a.getString("create_time").replace("T", " "));
@@ -89,6 +86,57 @@ public class CounselingRepositoryImpl {
         }
 
         return counselings;
+    }
+
+    public LegalCounselingModel convertSingle(JSONObject a){
+        final LegalCounselingModel counseling = new LegalCounselingModel();
+//                counseling.setLawyer(a.getString(""));
+
+        JSONObject lawyer = a.getJSONObject("lawyer");
+        JSONArray b = new JSONArray();
+        b.add(lawyer);
+        LawyerModel l = new LawyerRepositoryImpl().convert(b).get(0);
+        counseling.setLawyer(l);
+//        counseling.setQuestioner(a.getString("questioner"));
+
+        counseling.setId(a.getString("_id"));
+        counseling.setCreateTime(a.getString("create_time").replace("T", " "));
+        counseling.setViewCount(a.getInt("view_count"));
+
+        //问答列表
+        JSONArray content = a.getJSONArray("content");
+        System.out.println(content);
+        List<CounselingModel> contentList = new ArrayList<>();
+        //封装每次提问
+        for(int j = 0; j < content.size(); j++){
+            JSONObject c = content.getJSONObject(j);
+            CounselingModel ccontent = new CounselingModel();
+//                    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                    ParsePosition pos1 = new ParsePosition(0);
+//                    Date createTime1 = formatter.parse(c.getString("create_time"), pos);
+            ccontent.setCreate_time(c.getString("create_time").replace("T", " "));
+            ccontent.setQuestion(c.getString("question"));
+            List<ResponseModel> relies = new ArrayList<>();
+            JSONArray responses = c.getJSONArray("response");
+            //封装每次回答
+            for (int k = 0; k < responses.size(); k++){
+                JSONObject response = responses.getJSONObject(k);
+                ResponseModel rm = new ResponseModel();
+                rm.setDate(response.getString("time").replace("T", " "));
+                rm.setContent(response.getString("content"));
+                relies.add(rm);
+            }
+            ccontent.setResponse(relies);
+            contentList.add(ccontent);
+        }
+
+        counseling.setContent(contentList);
+        counseling.setState(a.getInt("state"));
+        if(counseling.getState() == 3){
+            counseling.setComment(a.getDouble("comment"));
+        }
+
+        return counseling;
     }
 
     public String disconvert(LegalCounselingModel l){

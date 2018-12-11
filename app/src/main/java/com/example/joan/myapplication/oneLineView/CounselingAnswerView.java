@@ -3,11 +3,14 @@ package com.example.joan.myapplication.oneLineView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.R;
+
+import java.util.List;
 
 public class CounselingAnswerView extends LinearLayout {
 
@@ -19,6 +22,9 @@ public class CounselingAnswerView extends LinearLayout {
 
     //正文
     private TextView content;
+
+    //正文圖片列表
+    private LinearLayout imageList;
 
     //時間
     private TextView time;
@@ -42,11 +48,12 @@ public class CounselingAnswerView extends LinearLayout {
         content = findViewById(R.id.content);
         picture = findViewById(R.id.picture);
         name = findViewById(R.id.name);
+        imageList = findViewById(R.id.imageList);
         return this;
     }
 
     /**
-     * 律所名称+地址+标签
+     * 非提問人和律師的其他使用者 看不到圖片
      *
      * @return
      */
@@ -59,6 +66,16 @@ public class CounselingAnswerView extends LinearLayout {
         return this;
     }
 
+    public CounselingAnswerView init(String content, String time, String lawyerName, List<String> imgList) {
+        init();
+        name.setText(lawyerName);
+        setConent(content);
+        setTime(time);
+        setImageList(imgList);
+
+        return this;
+    }
+
     public CounselingAnswerView setConent(String x){
         content.setText(x);
         return  this;
@@ -66,6 +83,13 @@ public class CounselingAnswerView extends LinearLayout {
 
     public CounselingAnswerView setTime(String x){
         time.setText(x);
+        return  this;
+    }
+
+    public CounselingAnswerView setImageList(List<String> x){
+        for (String a : x) {
+            imageList.addView(new LawyerCounselingImageView(getContext()).init(a));
+        }
         return  this;
     }
 

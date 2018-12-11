@@ -1,8 +1,11 @@
 package com.example.joan.myapplication.database.repository;
 
 import com.example.joan.myapplication.database.MongoDBUtil;
+import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
+import com.example.joan.myapplication.database.model.LegalCounselingModel;
+import com.example.joan.myapplication.database.model.ResponseModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
@@ -122,6 +125,35 @@ public class LawyerRepositoryImpl implements LawyerRepository {
         return find(new Document("$or",condition));
     }
 
+    public List<LawyerModel> convertList(JSONArray s){
+        List<LawyerModel> lawyers = new ArrayList<LawyerModel>();
+        for (int i = 0 ; i < s.size(); i++) {
+            try {
+                JSONObject a = s.getJSONObject(i);
+
+                LawyerModel lawyer = new LawyerModel();
+                lawyer.setId(a.getString("_id"));
+                lawyer.setName(a.getString("name"));
+                lawyer.setJob(a.getString("job"));
+                lawyer.setCompany(a.getString("company"));
+                lawyer.setMajor(a.getString("major"));
+                lawyer.setPrice(a.getDouble("price"));
+//                List<String> list = new ArrayList<>();
+//                JSONArray listj = a.getJSONArray("counseling_list");
+//                for(int j = 0; j < listj.size(); i++ ){
+//                    list.add((String)listj.get(i));
+//                }
+//                lawyer.setCounselingList(list);
+                lawyer.setComment(a.getDouble("comment"));
+                lawyers.add(lawyer);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lawyers;
+    }
+
     public List<LawyerModel> convert(JSONArray s){
         List<LawyerModel> lawyers = new ArrayList<LawyerModel>();
         for (int i = 0 ; i < s.size(); i++) {
@@ -130,7 +162,6 @@ public class LawyerRepositoryImpl implements LawyerRepository {
 
                 LawyerModel lawyer = new LawyerModel();
                 lawyer.setId(a.getString("_id"));
-                lawyer.setRegMsg(a.getString("reg_id"));
                 lawyer.setName(a.getString("name"));
                 lawyer.setJob(a.getString("job"));
                 lawyer.setCompany(a.getString("company"));
@@ -139,12 +170,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
                 lawyer.setExperience(a.getString("experience"));
                 lawyer.setDescription(a.getString("description"));
                 lawyer.setPrice(a.getDouble("price"));
-//                List<String> list = new ArrayList<>();
-//                JSONArray listj = a.getJSONArray("counseling_list");
-//                for(int j = 0; j < listj.size(); i++ ){
-//                    list.add((String)listj.get(i));
-//                }
-//                lawyer.setCounselingList(list);
+
                 lawyer.setComment(a.getDouble("comment"));
                 lawyers.add(lawyer);
             } catch (JSONException e) {
@@ -167,12 +193,31 @@ public class LawyerRepositoryImpl implements LawyerRepository {
         lawyer.setExperience(a.getString("experience"));
         lawyer.setDescription(a.getString("description"));
         lawyer.setPrice(a.getDouble("price"));
-//                List<String> list = new ArrayList<>();
-//                JSONArray listj = a.getJSONArray("counseling_list");
-//                for(int j = 0; j < listj.size(); i++ ){
-//                    list.add((String)listj.get(i));
-//                }
-//                lawyer.setCounselingList(list);
+        List<String> list = new ArrayList<>();
+        JSONArray listj = a.getJSONArray("counseling_list");
+        List<LegalCounselingModel> counselinglst = new ArrayList<>();
+        for(int j = 0; j < listj.size(); j++ ){
+            JSONObject c = listj.getJSONObject(j);
+            LegalCounselingModel l = new LegalCounselingModel();
+            l.setId(c.getString("_id"));
+            l.setCreateTime(c.getString("create_time"));
+            l.setViewCount(c.getInt("view_count"));
+            //问答列表
+            JSONArray content = c.getJSONArray("content");
+            System.out.println(content);
+            List<CounselingModel> contentList = new ArrayList<>();
+            //封装每次提问
+            for(int k = 0; k < content.size(); k++){
+                JSONObject co = content.getJSONObject(k);
+                CounselingModel ccontent = new CounselingModel();
+                ccontent.setCreate_time(co.getString("create_time").replace("T", " "));
+                ccontent.setQuestion(co.getString("question"));
+                contentList.add(ccontent);
+            }
+            l.setContent(contentList);
+            counselinglst.add(l);
+        }
+        lawyer.setCounselingList(counselinglst);
         lawyer.setComment(a.getDouble("comment"));
 
         return lawyer;

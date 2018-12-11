@@ -56,20 +56,19 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.3"
-                android:background="@color/selector_item_color">
+                android:layout_weight="1.3">
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
-                    android:layout_marginBottom="19dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_width="53dp"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_bias="0.136"
                     app:srcCompat="@drawable/me" />
 
                 <TextView
@@ -77,44 +76,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="23dp"
                     android:text="TextView"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/black_40"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/consult_lawyer_detail_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="13.5dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="TextView"
-                    android:textColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_dark_background"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/consult_lawyer_detail_name" />
 
                 <Button
                     android:id="@+id/consult_lawyer_detail_follow"
-                    android:layout_width="65dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_width="55dp"
+                    android:layout_height="21dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/round_white_margin_button"
                     android:text="@string/consult_lawyer_detail_follow"
                     android:textColor="@color/colorWhite"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.489" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
             </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.0"
+                android:layout_weight="0.8"
                 android:orientation="horizontal">
 
                 <android.support.constraint.ConstraintLayout
@@ -147,7 +146,7 @@
                         android:id="@+id/textView36"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/consult_lawyer_detail_year"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -195,10 +194,11 @@
                         android:id="@+id/textView39"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/consult_lawyer_detail_times"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.493"
                         app:layout_constraintStart_toStartOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
@@ -267,9 +267,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="3dp"
-                android:paddingBottom="4dp"
                 android:paddingLeft="16dp"
-                android:paddingTop="4dp"
+                android:paddingTop="6dp"
                 android:text="@string/consult_lawyer_detail_detail"
                 android:textColor="@color/text2"
                 android:textSize="18sp" />

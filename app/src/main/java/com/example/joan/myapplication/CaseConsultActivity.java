@@ -1,21 +1,31 @@
 package com.example.joan.myapplication;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.joan.myapplication.DIYComponent.NoScrollGridView;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.fragment.NinePicturesAdapter;
 import com.example.joan.myapplication.image.ImagePagerActivity;
+import com.example.joan.myapplication.MyApplication;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -49,12 +59,13 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
     private AlertDialog dialogTwo;
     private Date time;
 
-    //photp picker
+    //photo picker
     private static final int REQUEST_CODE = 100;
     private NoScrollGridView itemLayout;
     private ArrayList<String> photos;
     private List<String> photossss;
     private NinePicturesAdapter ninePicturesAdapter;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_case_consult);
 
         initItems();
+        CaseConsultActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void initItems(){
@@ -443,27 +455,97 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
         ninePicturesAdapter = new NinePicturesAdapter(this, 9, new NinePicturesAdapter.OnClickAddListener() {
             @Override
             public void onClickAdd(int positin) {
-                choosePhoto();
+//                finished.dismiss();
+//                dialogTwo.dismiss();
+                if (checkPermissionREAD_EXTERNAL_STORAGE(getApplicationContext())) {
+                    choosePhoto();
+                }
             }
         }, new NinePicturesAdapter.OnItemClickAddListener() {
             @Override
             public void onItemClick(int positin) {
+                if (checkPermissionREAD_EXTERNAL_STORAGE(getApplicationContext())) {
+                    Log.i(TAG, "-------------onItemClick: "+positin);
 
-                Log.i(TAG, "-------------onItemClick: "+positin);
+                    String[] array = new String[ninePicturesAdapter.getPhotoCount()];
+                    // List转换成数组
+                    for (int i = 0; i < photossss.size()-1; i++) {
+                        array[i] = photossss.get(i);
+                    }
+                    //数组转换为集合
+                    //List<String> stringsss = Arrays.asList(array);
 
-                String[] array = new String[ninePicturesAdapter.getPhotoCount()];
-                // List转换成数组
-                for (int i = 0; i < photossss.size()-1; i++) {
-                    array[i] = photossss.get(i);
+                    Log.i(TAG, "----array:--- "+array.length);
+                    imageBrower(positin,array);
                 }
-                //数组转换为集合
-                //List<String> stringsss = Arrays.asList(array);
 
-                Log.i(TAG, "----array:--- "+array.length);
-                imageBrower(positin,array);
             }
         });
         itemLayout.setAdapter(ninePicturesAdapter);
+    }
+
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+            final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showDialog("External storage", context,Manifest.permission.READ_EXTERNAL_STORAGE);
+
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    this,
+                                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    }
+
+    public void showDialog(final String msg, final Context context,
+                           final String permission) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[] { permission },
+                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // do your stuff
+                } else {
+                    Toast.makeText(getApplicationContext(), "GET_ACCOUNTS Denied",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions,
+                        grantResults);
+        }
     }
 
 }
