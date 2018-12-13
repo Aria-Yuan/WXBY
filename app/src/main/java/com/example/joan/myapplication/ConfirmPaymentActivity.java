@@ -101,7 +101,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String s) {
                     JSONArray jArray = new JSONArray().fromObject(s);
-                    counseling = new CounselingRepositoryImpl().convert(jArray).get(0);
+                    counseling = new CounselingRepositoryImpl().convertSingle(jArray.getJSONObject(0));
                     System.out.println(s);
                     setNext();
                 }

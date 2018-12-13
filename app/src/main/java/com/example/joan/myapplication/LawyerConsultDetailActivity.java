@@ -214,7 +214,7 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
         brief.setText(singleCase.getContent().get(0).getQuestion());
         date.setText(singleCase.getCreateTime().split(" ")[0]);
         time.setText(singleCase.getCreateTime().split(" ")[1]);
-        visit.setText(singleCase.getViewCount() + "人看过");
+        visit.setText(singleCase.getViewCount() + "人看過");
 
     }
 

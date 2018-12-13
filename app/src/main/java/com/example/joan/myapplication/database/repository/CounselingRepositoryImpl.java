@@ -75,9 +75,9 @@ public class CounselingRepositoryImpl {
 
                 counseling.setContent(contentList);
                 counseling.setState(a.getInt("state"));
-                if(counseling.getState() == 3){
-                    counseling.setComment(a.getDouble("comment"));
-                }
+//                if(counseling.getState() == 3){
+//                    counseling.setComment(a.getDouble("comment"));
+//                }
 
                 counselings.add(counseling);
             } catch (JSONException e) {

@@ -56,7 +56,7 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",sp.getString("_id","0"));//當前使用者id
 //            params.addQueryStringParameter("condition","222");//當前使用者id
-            params.addQueryStringParameter("type","3");
+            params.addQueryStringParameter("type","5");
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -101,12 +101,12 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            String dateString = formatter.format(createTime);
 
-                String name = counseling.getQuestioner();
+//                String name = counseling.getQuestioner();
                 String job = "";
                 int state = counseling.getState();
 
                 lawyer_consult_list.addView(new MyLawyerConsultLayout(this)
-                        .init(name,job,state,question, createTime)
+                        .init("匿名用戶",job,state,question, createTime)
                         .setOnRootClickListener(this, index));
                 index++;
             }
@@ -119,7 +119,7 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
         Intent intent=new Intent();
         intent.setClass(v.getContext(), MyAnswerLawyerConsultActivity.class); //设置跳转的Activity
         Bundle bundle = new Bundle();
-        bundle.putSerializable("counseling", counseling);
+        bundle.putSerializable("counseling", counseling.getId());
         intent.putExtras(bundle);
         startActivity(intent);
     }

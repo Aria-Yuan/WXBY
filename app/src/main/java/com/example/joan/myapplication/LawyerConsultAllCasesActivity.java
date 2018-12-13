@@ -9,25 +9,37 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.LegalCounselingModel;
+import com.example.joan.myapplication.database.repository.CounselingRepositoryImpl;
+import com.example.joan.myapplication.oneLineView.FindNothingView;
+import com.example.joan.myapplication.oneLineView.MyLawyerConsultLayout;
+
+import net.sf.json.JSONArray;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class LawyerConsultAllCasesActivity extends AppCompatActivity implements View.OnClickListener {
+public class LawyerConsultAllCasesActivity extends AppCompatActivity implements MyLawyerConsultLayout.OnRootClickListener{
 
     private String id, name, titleString = "律師的所有公開案件";
     private Button back;
     private TextView title;
     private LinearLayout ll;
     private LayoutInflater li;
-    private List<Case> cases = new ArrayList();
+    private List<LegalCounselingModel> cases = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lawyer_consult_all_cases);
 
-        getData();
         initView();
+        getData();
 
     }
 
@@ -43,24 +55,53 @@ public class LawyerConsultAllCasesActivity extends AppCompatActivity implements 
         ll = findViewById(R.id.consult_lawyer_all_cases_list);
 
         title.setText(name + titleString);
-        back.setOnClickListener(this);
-
-        initList();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.left, R.anim.left_exit);
+            }
+        });
 
     }
 
     private void initList() {
 
-        for (Case singleCase: cases){
+        for (LegalCounselingModel singleCase: cases){
             View view = li.inflate(R.layout.sample_lawyer_consult_single_case, null);
             setData(view, singleCase);
-            setListener(view, singleCase.getID());
+            setListener(view, singleCase.getId());
             ll.addView(view);
         }
 
     }
 
-    private void setData(View view, Case singleCase){
+    public void CounselingView(){
+        if(cases.isEmpty()){
+            ll.addView(new FindNothingView(this).init());
+        }else{
+            int index = 0;
+            for (LegalCounselingModel counseling: cases
+                    ) {
+                String question = counseling.getContent().get(0).getQuestion();
+
+                String createTime = counseling.getCreateTime().replace('T',' ');
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String dateString = formatter.format(createTime);
+
+                String name = counseling.getQuestioner();
+                String job = "";
+                int view_count = counseling.getViewCount();
+
+                ll.addView(new MyLawyerConsultLayout(this)
+                        .initUser("匿名用戶",job,view_count,question, createTime)
+                        .setOnRootClickListener(this, index));
+                index++;
+            }
+        }
+    }
+
+    private void setData(View view, LegalCounselingModel singleCase){
 
         TextView userName, brief, date, time, visit;
 
@@ -70,12 +111,11 @@ public class LawyerConsultAllCasesActivity extends AppCompatActivity implements 
         time = view.findViewById(R.id.lawyer_consult_single_case_time);
         visit = view.findViewById(R.id.lawyer_consult_single_case_visit);
 
-        userName.setText(singleCase.getUserID());
-        brief.setText(singleCase.getBrief());
-        date.setText(singleCase.getCaseDate());
-        time.setText(singleCase.getCaseTime());
-        if (!(singleCase.getVisit() == 0))
-            visit.setText(singleCase.getVisit());
+        userName.setText("匿名用户");
+        brief.setText(singleCase.getContent().get(0).getQuestion());
+        date.setText(singleCase.getCreateTime().split(" ")[0]);
+        time.setText(singleCase.getCreateTime().split(" ")[1]);
+        visit.setText(singleCase.getViewCount());
 
     }
 
@@ -84,25 +124,49 @@ public class LawyerConsultAllCasesActivity extends AppCompatActivity implements 
 
     public void getData() {
 
-        for (int i = 0; i < 10; i ++){
-            Case newCase = new Case();
-            newCase.setBrief("This is the case brief" + i);
-            newCase.setCaseDate("2018/9/8");
-            newCase.setCaseTime("19:59");
-            newCase.setLawyerID(id);
-            newCase.setUserID("用戶12345" + i);
-            cases.add(newCase);
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition",id);
+            params.addQueryStringParameter("type","3");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    cases = new CounselingRepositoryImpl().convert(jArray);
+                    CounselingView();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
+
 
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.consult_lawyer_all_cases_back:
-                finish();
-                overridePendingTransition(R.anim.left, R.anim.left_exit);
-                break;
-        }
+    public void onRootClick(View v) {
+        LegalCounselingModel counseling = cases.get((int)v.getTag());
+        Intent intent=new Intent();
+        intent.setClass(v.getContext(), CounselingDetailActivity.class); //设置跳转的Activity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("counseling", counseling.getId());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

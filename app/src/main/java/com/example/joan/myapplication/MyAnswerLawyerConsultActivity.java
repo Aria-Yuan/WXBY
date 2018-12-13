@@ -43,6 +43,7 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
     private int length = 14, state;
     private boolean isSubmitted;
     private AlertDialog finished;
+    private String cId;
     private LegalCounselingModel counseling;
 
     @Override
@@ -50,10 +51,9 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.answer_counseling_detail);
 
-        counseling = (LegalCounselingModel)getIntent().getSerializableExtra("counseling");
-        System.out.println(counseling.getQuestioner());
+        cId = (String) getIntent().getSerializableExtra("counseling");
         initView();
-        initData();
+        searchCounseling();
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -289,5 +289,38 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
                 })
                 .create();
         return 1;
+    }
+
+    private void searchCounseling(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition",cId);
+            params.addQueryStringParameter("type","4");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counseling = new CounselingRepositoryImpl().convertSingle(jArray.getJSONObject(0));
+                    initData();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
