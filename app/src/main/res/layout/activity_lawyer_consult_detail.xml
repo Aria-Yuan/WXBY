@@ -11,16 +11,16 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:background="@color/selector_item_color">
 
         <Button
             android:id="@+id/consult_lawyer_detail_back"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="12dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,9 +36,10 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintHorizontal_bias="0.427"
             app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_back"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.47" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -56,7 +57,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.3">
+                android:layout_weight="1.1">
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -98,22 +99,34 @@
                 <Button
                     android:id="@+id/consult_lawyer_detail_follow"
                     android:layout_width="55dp"
-                    android:layout_height="21dp"
+                    android:layout_height="26dp"
                     android:layout_marginEnd="18dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/round_white_margin_button"
+                    android:layout_marginTop="1dp"
+                    android:background="#FF6CADA7"
                     android:text="@string/consult_lawyer_detail_follow"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="6dp"
+                    android:text="平均回應時長 2 小時"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/consult_lawyer_detail_detail" />
             </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.6"
                 android:orientation="horizontal">
 
                 <android.support.constraint.ConstraintLayout
@@ -147,11 +160,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/consult_lawyer_detail_year"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.493"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35" />
                 </android.support.constraint.ConstraintLayout>
 
                 <ImageView
@@ -195,11 +210,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/consult_lawyer_detail_times"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.493"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
                 </android.support.constraint.ConstraintLayout>
 
@@ -249,9 +266,11 @@
                         android:layout_width="26dp"
                         android:layout_height="28dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView41"
                         app:srcCompat="@drawable/heart_z" />
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
@@ -441,7 +460,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/touming"
                 android:text="@string/consult_lawyer_detail_allcases"
-                android:textColor="@color/unselector_item_color" />
+                android:textColor="@color/unselector_item_color"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>
@@ -454,5 +474,5 @@
         android:background="@color/selector_item_color"
         android:text="向偉大的周大佬提問(NT$9999)"
         android:textColor="@color/colorWhite"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 </LinearLayout>

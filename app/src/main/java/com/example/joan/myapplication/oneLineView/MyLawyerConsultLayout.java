@@ -18,6 +18,7 @@ public class MyLawyerConsultLayout extends LinearLayout {
     private TextView state;
     private TextView content;
     private TextView time;
+    private TextView view;
 
     //整一行
     private LinearLayout llRoot;
@@ -50,6 +51,7 @@ public class MyLawyerConsultLayout extends LinearLayout {
         content = findViewById(R.id.content);
         time = findViewById(R.id.time);
         llRoot = findViewById(R.id.ll_root);
+        view = findViewById(R.id.view);
         return this;
     }
 
@@ -64,7 +66,7 @@ public class MyLawyerConsultLayout extends LinearLayout {
         setJob(job);
         setContent(content);
         setTime(time);
-
+        setView("");
         if(state == 0 || state == 1){
             setState("進行中");
             setStateColor(R.color.colorAccent);
@@ -72,6 +74,23 @@ public class MyLawyerConsultLayout extends LinearLayout {
             setState("已結束");
             setStateColor(R.color.bbb);
         }
+
+        return this;
+    }
+
+    /**
+     * 律所名称+地址+标签
+     *
+     * @return
+     */
+    public MyLawyerConsultLayout initUser(String name,String job,int view_count,String content, String time) {
+        init();
+        setName(name);
+        setJob(job);
+        setContent(content);
+        setTime(time);
+        setView(view_count + "人看過");
+        setState("");
 
         return this;
     }
@@ -178,6 +197,11 @@ public class MyLawyerConsultLayout extends LinearLayout {
      */
     public MyLawyerConsultLayout setTimeColor(int colorRes) {
         time.setTextColor(getResources().getColor(colorRes));
+        return this;
+    }
+
+    public MyLawyerConsultLayout setView(String textContent) {
+        view.setText(textContent);
         return this;
     }
 

@@ -33,7 +33,6 @@
         <activity android:name=".LawyerConsultDetailActivity" />
         <activity android:name=".LawyerConsultSortedListActivity" />
         <activity android:name=".LawyerConsultAllCasesActivity" />
-        <activity android:name=".LawyerConsultResultActivity" />
         <activity android:name=".ConsultingActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
