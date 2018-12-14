@@ -33,13 +33,12 @@
         android:id="@+id/quick_consult_result_single_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:lineSpacingExtra="5dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textColor="@color/cardview_dark_background"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/quick_consult_result_single_user_image"
         app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_single_user_name" />
@@ -68,9 +67,11 @@
         android:id="@+id/quick_consult_result_single_like"
         android:layout_width="17dp"
         android:layout_height="18dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/zanno_l"
+        android:textColor="@color/colorWhite"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_single_favorites"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,9 +79,10 @@
         android:id="@+id/quick_consult_result_single_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="19dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
+        android:textColor="@color/colorWhite"
         android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_single_reply"
         app:layout_constraintTop_toTopOf="parent" />
@@ -105,5 +107,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_single_replies"
         app:srcCompat="@drawable/line_l" />
+
+    <Button
+        android:id="@+id/quick_consult_result_single_delete"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/touming"
+        android:text="@string/quick_consult_result_delete"
+        android:textColor="@color/bbb"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_single_content" />
 
 </android.support.constraint.ConstraintLayout>

@@ -17,7 +17,11 @@
     </style>
 
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">7.4pt</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="tab_style" parent="android:Widget">
+        <item name="tabBackground">@drawable/main_search_tab_background</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

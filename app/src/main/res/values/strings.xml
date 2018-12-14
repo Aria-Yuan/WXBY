@@ -204,11 +204,29 @@
     <string name="judgement_consult_fact">事實理由</string>
 
     <!-- Strings related to quick consult result-->
-    <string name="quick_consult_result_reply">律師回復</string>
+
+    <!--Strings related to quick consult result-->
+    <!--<string name="quick_consult_result_reply">律師回覆</string>-->
     <string name="quick_consult_result_comment">用戶評論</string>
-    <string name="quick_consult_result_title">快速諮續詢詳情</string>
+    <string name="quick_consult_result_title">快速諮詢詳情</string>
     <string name="quick_consult_result_only">只看作者和律師</string>
-    <string name="quick_consult_result_viewtime">次浏览</string>
+    <string name="quick_consult_result_viewtime">次瀏覽</string>
+    <string name="quick_consult_result_upright">按時間順序</string>
+    <string name="quick_consult_result_downright">按時間倒序</string>
+    <string name="quick_consult_result_delete">刪除</string>
+    <string name="quick_consult_result_reply">回復</string>
+
+    <!-- Strings related to quick consult result reply-->
+    <string name="quick_consult_result_reply_submit">提交</string>
+
+    <!-- Strings related to quick consult reply list-->
+    <string name="quick_consult_reply_list_upright">順序</string>
+    <string name="quick_consult_reply_list_downright">倒序</string>
+
+    <!-- Strings related to main search result-->
+    <string name="main_search_result_counseling">正在查詢，請稍後...</string>
+    <string name="main_search_result_nothing">哎呀，好像沒東西鴨</string>
+    <string name="main_search_result_error">好像出問題了誒...</string>
 
     <!-- select picture -->
     <string name="app_pengyouquan">朋友圈</string>

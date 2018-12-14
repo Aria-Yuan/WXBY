@@ -109,6 +109,7 @@ public class QuickConsultModel {
 
 
     public class Reply{
+        private int index;
         private ObjectId id;
         private ObjectId author;
         private Date create_time;
@@ -118,6 +119,8 @@ public class QuickConsultModel {
         private List<String> replies;
         private ObjectId parent;
         private int like;
+        private int parent_index;
+        private boolean is;
 
         public Reply(){
 
@@ -135,8 +138,8 @@ public class QuickConsultModel {
             return author;
         }
 
-        public void setAuthor(ObjectId auther) {
-            this.author = author;
+        public void setAuthor(String author) {
+            this.author = new ObjectId(author);
         }
 
         public Date getCreate_time() {
@@ -194,7 +197,30 @@ public class QuickConsultModel {
         public void setDate(String date) {
             this.date = date;
         }
+
+        public boolean isIs() {
+            return is;
+        }
+
+        public void setIs(boolean is) {
+            this.is = is;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public int getParent_index() {
+            return parent_index;
+        }
+
+        public void setParent_index(int parent_index) {
+            this.parent_index = parent_index;
+        }
     }
 
 }
-

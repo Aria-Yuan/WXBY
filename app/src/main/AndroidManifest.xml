@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.joan.myapplication">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="myapplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".MainHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,6 +35,7 @@
         <activity android:name=".LawyerConsultDetailActivity" />
         <activity android:name=".LawyerConsultSortedListActivity" />
         <activity android:name=".LawyerConsultAllCasesActivity" />
+        <activity android:name=".LawyerConsultResultActivity" />
         <activity android:name=".ConsultingActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
@@ -52,14 +55,15 @@
         <activity android:name=".ConfirmPaymentActivity" />
         <activity android:name=".AfterFeePaidActivity" />
         <activity android:name=".QuestionLawyerFinishActivity" />
+        <activity android:name=".QuickConsultResultReplyActivity" />
+        <activity android:name=".QuickConsultReplyListActivity"/>
         <activity android:name=".image.ImagePagerActivity" />
-
-        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".LawyerConsultActivity"
             android:label="@string/lawyer_consult_title"
@@ -87,6 +91,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.joan.myapplication.ConsultingActivity" />
         </activity>
+        <activity android:name=".SearchResultActivity" />
+        <!--
+        <activity android:name=".fragment.MainSearchResultLawyer" />
+        <activity android:name=".fragment.MainSearchResultLaw" />
+        <activity android:name=".fragment.MainSearchResultFirm" />
+        <activity android:name=".fragment.MainSearchResultCounsel" />
+        <activity android:name=".fragment.MainSearchResultJudgement"></activity>-->
     </application>
 
 </manifest>
