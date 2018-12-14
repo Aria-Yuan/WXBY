@@ -42,7 +42,18 @@
                 android:id="@+id/case_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:lines="1"
                 android:text="XXXX年度XXXXX號"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="8.5pt" />
+
+            <TextView
+                android:id="@+id/case_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:paddingTop="5dp"
+                android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="8pt" />
 
@@ -50,7 +61,6 @@
                 android:id="@+id/case_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_marginRight="6dp"
                 android:layout_marginTop="6dp"
                 android:lines="1"
@@ -64,7 +74,7 @@
             android:layout_gravity="fill_vertical"
             android:layout_marginLeft="3dp"
             android:text="#民事"
-            android:textColor="@color/selector_item_color" />
+            android:textColor="@color/colorAccent" />
 
 
     </LinearLayout>

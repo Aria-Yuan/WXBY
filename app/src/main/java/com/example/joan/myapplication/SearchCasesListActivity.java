@@ -95,8 +95,17 @@ public class SearchCasesListActivity extends AppCompatActivity implements CaseOn
             for(int i = 0 ; i < judgementList.size(); i++){
                 String[] a = judgementList.get(i).getjId().split(" ",2);
                 System.out.println(judgementList.get(i).getjId());
+                String mainData = judgementList.get(i).getjContent().replace("\\r", "")
+                        .replace("\\n", "")
+                        .replace("\n", "")
+                        .replace("\r", "")
+                        .replace("\t", "")
+                        .replace(" ", "");
+                System.out.println(mainData);
+                String content = getContent(mainData);
                 result.addView(new CaseOneLineView(getBaseContext())
-                        .init(a[0],a[1].split(" \\[")[0],judgementList.get(i).getjReason(),"#民事")
+                        .init(a[0],a[1].split(" \\[")[0],judgementList.get(i).getjReason(),
+                                "#民事",content)
                         .setOnRootClickListener(this, i));
             }
         }
@@ -134,6 +143,17 @@ public class SearchCasesListActivity extends AppCompatActivity implements CaseOn
                 startActivity(intent);
             }break;
         }
+
+    }
+
+    private String getContent(String mainData) {
+
+        String content = "";
+
+        content = mainData.substring(mainData.indexOf("主文") + 2, mainData.indexOf("理由"));
+        content.replaceAll("中華民國","\n\r        中華民國");
+
+        return content;
 
     }
 }

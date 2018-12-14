@@ -23,6 +23,9 @@ public class CaseOneLineView extends LinearLayout{
     //判决内容
     private TextView case_detail;
 
+    //判決正文
+    private TextView case_content;
+
     //判决标签
     private TextView case_type;
 
@@ -55,6 +58,7 @@ public class CaseOneLineView extends LinearLayout{
         case_name = findViewById(R.id.case_name);
         case_detail = findViewById(R.id.case_detail);
         case_type = findViewById(R.id.case_type);
+        case_content = findViewById(R.id.case_content);
         llRoot = findViewById(R.id.ll_root);
         return this;
     }
@@ -68,12 +72,13 @@ public class CaseOneLineView extends LinearLayout{
      * @param tag 律所标签
      * @return
      */
-    public CaseOneLineView init(String court,String name, String detail, String tag) {
+    public CaseOneLineView init(String court,String name, String detail, String tag,String content) {
         init();
         setCaseCourt(court);
         setCaseName(name);
         setCaseDetail(detail);
         setCaseTag(tag);
+        setCaseContent(content);
         return this;
     }
 
@@ -188,6 +193,11 @@ public class CaseOneLineView extends LinearLayout{
      */
     public CaseOneLineView setCaseTagSize(int textSizeSp) {
         case_type.setTextSize(textSizeSp);
+        return this;
+    }
+
+    public CaseOneLineView setCaseContent(String textContent) {
+        case_content.setText(textContent);
         return this;
     }
 

@@ -130,7 +130,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                           getData();
                       }
                   };
-                  timer.schedule(timerTask, 0, 15000);//一秒後開始，之後每過六秒再執行
+                  timer.schedule(timerTask, 0, 6000);//一秒後開始，之後每過六秒再執行
               }catch (Exception e){
 
               }
@@ -248,7 +248,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                             //                        System.out.println();
                             temp.setjId(tempJson.get("j_id").getAsString().split("\\[")[0]);
                             temp.setjReason(tempJson.get("j_reason").getAsString());
-                            //                        temp.setjContent(tempJson.get("j_content").getAsString());
+                            temp.setjContent(tempJson.get("j_content").getAsString());
                             temp.setjDate(tempJson.get("j_date").getAsString());
                             temp.setId(tempJson.get("_id").getAsString());
                             //                        System.out.println(temp.getjId());
@@ -257,31 +257,32 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                         result.setJudgementModels(similar);
                         //                    System.out.println(similar);
 
-//                        List<LawModel> refer = new ArrayList<>();
-//                        for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
-//                            JsonObject tempJson = je.getAsJsonObject();
-//                            LawModel temp = new LawModel();
-//                            System.out.println(tempJson);
-//                            temp.setId(tempJson.get("_id").toString());
-//                            temp.setStart(tempJson.get("start").toString());
-//                            temp.setAbandon(tempJson.get("abandon").toString());
-//                            temp.setArticle(tempJson.get("article").toString());
-//                            temp.setContent(tempJson.get("content").toString());
-//                            temp.setName(tempJson.get("name").toString());
-//                            if (tempJson.has("end")) {
-//                                System.out.println("yes");
-//                                temp.setEnd(tempJson.get("end").toString());
-//                            }
-//                            refer.add(temp);
-//                        }
-//                        data[0].setLawModels(refer);
+                        List<LawModel> refer = new ArrayList<>();
+                        for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
+                            JsonObject tempJson = je.getAsJsonObject();
+                            LawModel temp = new LawModel();
+                            System.out.println(tempJson);
+                            temp.setId(tempJson.get("_id").getAsString());
+                            temp.setStart(tempJson.get("start").getAsString());
+                            temp.setAbandon(tempJson.get("abandon").getAsString());
+                            temp.setArticle(tempJson.get("article").getAsString());
+                            temp.setContent(tempJson.get("content").getAsString());
+                            temp.setName(tempJson.get("name").getAsString());
+                            if (tempJson.has("end")) {
+                                System.out.println("yes");
+                                temp.setEnd(tempJson.get("end").getAsString());
+                            }
+                            refer.add(temp);
+                        }
+                        result.setLawModels(refer);
 //                        state = 1;
 //                        result = data[0];
 //                        num.setText(result.getResult());
                         //                    System.out.println("setSimilar");
                         setSimilarData();
                         //                    System.out.println("setRefer");
-//                        setReferData();
+                        setReferData();
+                        System.out.println("vquququququu");
 
                         //                    data[0].setSimilar(jsonObject.get("similar").getAsJsonArray());
                         //                    System.out.println(jsonObject.get("similar"));
@@ -342,7 +343,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                     alert.setMessage("網絡可能開了會小差……再試試看吧！");
                     alert.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                         @Override
