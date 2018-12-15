@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_search);
 
-        EditText inputText = findViewById(R.id.et_search);
+        final EditText inputText = findViewById(R.id.et_search);
         inputText.setFocusable(true);
         inputText.setFocusableInTouchMode(true);
         inputText.requestFocus();
@@ -39,6 +40,15 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 finish();
+            }
+        });
+        findViewById(R.id.main_search_go).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                intent.putExtra("keyWord", inputText.getText().toString());
+                startActivity(intent);
+
             }
         });
 

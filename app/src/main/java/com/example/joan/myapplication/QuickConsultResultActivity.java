@@ -1,20 +1,25 @@
 package com.example.joan.myapplication;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.QuickConsultModel;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import com.example.joan.myapplication.database.repository.QuickResponseRepositoryImpl;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.bson.types.ObjectId;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -22,10 +27,8 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickConsultResultActivity extends AppCompatActivity {
+public class QuickConsultResultActivity extends AppCompatActivity implements View.OnClickListener {
 
-//    private QuickConsultResultListComment comment;
-//    private QuickConsultResultListReply reply;
 //    private List<Fragment> list;
 //    private ViewPager pager;
 //    private TabLayout tabLayout;
@@ -33,6 +36,13 @@ public class QuickConsultResultActivity extends AppCompatActivity {
     private QuickConsultModel data;
     private String id;
     private TextView content, name, time, view;
+    private CheckBox only;
+    private List<View> comments;
+    //    private List<Integer> likeList;
+    private Button onlyText, onlyImage, reply, like, back;
+    private SharedPreferences sp;
+    private AlertDialog.Builder alert;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +54,42 @@ public class QuickConsultResultActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus){
+//            getData();
+//        }else{
+//        }
+//
+//    }
+
+    private void initItems() {
+
+        comments = new ArrayList<>();
+
+        ll = findViewById(R.id.quick_consult_result_comment_list);
+        only = findViewById(R.id.quick_consult_result_only);
+        onlyText = findViewById(R.id.quick_consult_result_time_text);
+        onlyImage = findViewById(R.id.quick_consult_result_time_image);
+        reply = findViewById(R.id.quick_consult_result_reply);
+        like = findViewById(R.id.quick_consult_result_like);
+        back = findViewById(R.id.quick_consult_result_back);
+
+        onlyText.setOnClickListener(this);
+        onlyImage.setOnClickListener(this);
+        reply.setOnClickListener(this);
+        like.setOnClickListener(this);
+        back.setOnClickListener(this);
+
+        data = new QuickConsultModel();
+
+    }
+
     private void getData() {
         x.Ext.init(getApplication());
-//        Intent intent = getIntent();
-//        id = intent.getStringExtra("id");
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
         id = "5b6eaad08d35692c10ea06d1";
         final int[] type = new int[1];
 
@@ -60,74 +102,16 @@ public class QuickConsultResultActivity extends AppCompatActivity {
                 public void onSuccess(String s) {
                     JsonParser jsonParser = new JsonParser();
                     JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
+                    System.out.println(jsonObject);
                     type[0] = jsonObject.get("state").getAsInt();
 
                     if (type[0] == 1) {JsonObject jo = jsonObject.getAsJsonObject("data");
 
-                        data.setAuthor(new ObjectId(jo.get("author").getAsString()));
-                        data.setAuthor_name(jo.get("author_name").getAsString());
-                        data.setContent(jo.get("content").getAsString());
-//                        System.out.println("-----------------------");
-//                        System.out.println(jo.get("create_time").toString());
-                        data.setDate(jo.get("create_time").toString().replace("T", " "));
-//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                        System.out.println("-----------------------");
-//                        String d = jo.get("create_time").toString();
-//                        System.out.println(d);
-//                        try {
-//                            data.setCreate_time(sdf.parse(d));
-//                        } catch (ParseException e) {
-//                            System.out.println("here!!!");
-//                            data.setCreate_time(new Date());
-//                        }
-
-                        data.setId(new ObjectId(jo.get("_id").getAsString()));
-                        data.setLike(jo.get("like").getAsInt());
-
-                        JsonArray pictures = jo.getAsJsonArray("picture");
-                        for (JsonElement picture: pictures){
-
-                        }
-
-                        JsonArray comments = jo.getAsJsonArray("lawyer_reply");
-                        List<QuickConsultModel.Reply> replies = new ArrayList<>();
-                        for (JsonElement comment: comments){
-                            QuickConsultModel what = new QuickConsultModel();
-                            QuickConsultModel.Reply reply = what.new Reply();
-                            JsonObject temp = comment.getAsJsonObject();
-
-                            System.out.println(temp);
-
-//                            System.out.println(temp.get("author").getAsString());
-
-                            reply.setAuthor(new ObjectId(temp.get("author").getAsString()));
-                            reply.setAuthor_name(temp.get("author_name").getAsString());
-                            reply.setDate((temp.get("create_time").toString().replace("T", " ")));
-                            reply.setContent(temp.get("content").getAsString());
-                            JsonArray ror = temp.getAsJsonArray("replies");
-                            List<String> rsor = new ArrayList<>();
-//                            int count = 0;
-                            for (JsonElement r: ror){
-                                String rr = r.getAsString();
-                                rsor.add(rr);
-//                                System.out.println("1111111111111111111");
-                            }
-                            reply.setReplies(rsor);
-                            reply.setParent(new ObjectId(temp.get("parent").getAsString()));
-                            reply.setId(new ObjectId(temp.get("reply_id").getAsString()));
-                            reply.setLike(temp.get("like").getAsInt());
-                            replies.add(reply);
-                        }
-
-//                        System.out.println("2222222222222222222222");
-
-                        data.setLawyer_reply(replies);
-                        data.setView_count(jo.get("view_count").getAsInt());
-//                        System.out.println("print SomeThing!!!!!!!!!!!!!!!");
-//                        System.out.println(data);
+                        data = new QuickResponseRepositoryImpl().convert(jo);
 
                         initMain();
                         initCommentList();
+                        copyToBack();
 
                     } else {
                         onError(new Throwable(), false);
@@ -137,7 +121,22 @@ public class QuickConsultResultActivity extends AppCompatActivity {
                 @Override
                 public void onError(Throwable throwable, boolean b) {
 
-                    System.out.println("OnError");
+                    alert.setMessage("好像出了點問題啊？");
+                    alert.setPositiveButton("再試一次！", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            getData();
+                        }
+                    });
+                    alert.setNegativeButton("返回算了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+                    dialog = alert.create();
+                    dialog.show();
 
                 }
 
@@ -169,58 +168,62 @@ public class QuickConsultResultActivity extends AppCompatActivity {
         time.setText(data.getDate().replace("\"", ""));
         view.setText(String.valueOf(data.getView_count()) + getResources().getString(R.string.quick_consult_result_viewtime));
 
+        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
+        alert = new AlertDialog.Builder(QuickConsultResultActivity.this);
 
-    }
-
-    private void initItems() {
-
-//        tabLayout = findViewById(R.id.quick_consult_result_tablayout);
-//        pager = findViewById(R.id.quick_consult_result_pager);
-//
-//        comment = new QuickConsultResultListComment();
-//        reply = new QuickConsultResultListReply();
-//
-//        list = new ArrayList<>();
-//        list.add(comment);
-//        list.add(reply);
-//        pager.setAdapter(new CaseConsultAdapter(getSupportFragmentManager(),list));
-//
-//        initTabLayout();
-
-        ll = findViewById(R.id.quick_consult_result_comment_list);
-        data = new QuickConsultModel();
-
-
+        only.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                initCommentList();
+            }
+        });
 
     }
 
     private void initCommentList() {
 
-        for (QuickConsultModel.Reply reply: data.getLawyer_reply()){
+        ll.removeAllViews();
+        if (onlyText.getText().equals(getResources().getString(R.string.quick_consult_result_upright))){
+            for (QuickConsultModel.Reply reply: data.getLawyer_reply()) initOneComment(reply);
+        }else if(onlyText.getText().equals(getResources().getString(R.string.quick_consult_result_downright))){
+            for (int i = data.getLawyer_reply().size() - 1; i >= 0; i --) initOneComment(data.getLawyer_reply().get(i));
+        }
 
-            View view = View.inflate(this, R.layout.sample_quick_consult_single_comment, null);
-            Button image, like, comment;
+    }
+
+    private void initOneComment(final QuickConsultModel.Reply reply){
+
+        if (reply.isIs() || (!only.isChecked())) {
+            final View view = View.inflate(this, R.layout.sample_quick_consult_single_comment, null);
+            Button image, like, comment, delete;
             TextView content, time, replies, favorites, name;
 
 //            image = view.findViewById(R.id.quick_consult_result_single_user_image);
-            like = view.findViewById(R.id.quick_consult_result_single_like);
+//            like = view.findViewById(R.id.quick_consult_result_single_like);
             comment = view.findViewById(R.id.quick_consult_result_single_reply);
-
             content = view.findViewById(R.id.quick_consult_result_single_content);
             time = view.findViewById(R.id.quick_consult_result_single_time);
             replies = view.findViewById(R.id.quick_consult_result_single_replies);
-            favorites = view.findViewById(R.id.quick_consult_result_single_favorites);
+//            favorites = view.findViewById(R.id.quick_consult_result_single_favorites);
             name = view.findViewById(R.id.quick_consult_result_single_user_name);
+            delete = view.findViewById(R.id.quick_consult_result_single_delete);
             content.setText(reply.getContent());
-            time.setText(reply.getDate());
+            time.setText(reply.getDate().replace("\"", ""));
             replies.setText(reply.getReplies().size() + " 條回復");
-            favorites.setText(String.valueOf(reply.getLike()));
+//            favorites.setText(String.valueOf(reply.getLike()));
+            System.out.println(reply.getAuthor_name());
             name.setText(reply.getAuthor_name());
-            System.out.println("111111111111111111111111111111111111111111111");
 
             replies.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    Intent intent = new Intent(QuickConsultResultActivity.this, QuickConsultReplyListActivity.class);
+                    intent.putExtra("quick_id", data.getId().toString());
+                    intent.putExtra("reply_id", reply.getId().toString());
+                    intent.putExtra("reply_index", reply.getIndex());
+                    intent.putExtra("author_name", reply.getAuthor_name());
+                    startActivity(intent);
 
                 }
             });
@@ -231,36 +234,168 @@ public class QuickConsultResultActivity extends AppCompatActivity {
 //
 //                }
 //            });
+//            System.out.println(reply.getAuthor());
+            if (reply.getAuthor().toString().equals(sp.getString("_id", "notValid"))){
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View viewN) {
+                        alert.setMessage("確定要刪除這條評論嗎？");
+                        alert.setPositiveButton("是的！", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                ll.removeView(view);
+                                deleteComment(reply.getId().toString(), reply.getIndex(), reply.getParent_index(), reply.getParent().toString());
+                            }
+                        });
+                        alert.setNegativeButton("再想想", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog = alert.create();
+                        dialog.show();
+                    }
+                });
+            }else{
+                delete.invalidate();
+                delete.setVisibility(View.INVISIBLE);
+            }
 
-            like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+//            like.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//
+//
+//                }
+//            });
 
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(QuickConsultResultActivity.this, QuickConsultResultReplyActivity.class);
+                    intent.putExtra("index", reply.getIndex());
+                    intent.putExtra("name", reply.getAuthor_name());
+                    intent.putExtra("parent_id", reply.getId().toString());
+                    intent.putExtra("quick_id", id);
+                    startActivity(intent);
                 }
             });
 
             ll.addView(view);
-
+            comments.add(view);
         }
 
     }
 
-//    private void initTabLayout() {
-//
-//        tabLayout.setupWithViewPager(pager);
-//        tabLayout.removeAllTabs();
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.quick_consult_result_reply));
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.quick_consult_result_comment));
+    private void deleteComment(final String reply_id, final int reply_index, final int parent_index, final String parent_id) {
+        try {
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/deleteQuickConsultComment.action");
+            params.addQueryStringParameter("quick_id", id);
+            params.addQueryStringParameter("reply_index", String.valueOf(reply_index));
+            params.addQueryStringParameter("reply_id", reply_id);
+            params.addQueryStringParameter("parent_index", String.valueOf(parent_index));
+            params.addQueryStringParameter("parent_id", parent_id);
+            System.out.println(params.toString());
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JsonParser jsonParser = new JsonParser();
+                    JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
+                    if (jsonObject.get("state").getAsInt() != 1) {
+                        alert.setMessage("好像出了點問題啊？");
+                        alert.setPositiveButton("再刪一次！", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteComment(reply_id, reply_index, parent_index, parent_id);
+                            }
+                        });
+                        alert.setNegativeButton("算了放過它吧", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog = alert.create();
+                        dialog.show();
+                    }else {
+                        getData();
+                    }
+                }
 
-//        reply.temp();
-//        comment.temp();
+                @Override
+                public void onError(Throwable throwable, boolean b) {
 
-//    }
+                    alert.setMessage("好像出了點問題啊？");
+                    alert.setPositiveButton("再刪一次！", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteComment(reply_id, reply_index, parent_index, parent_id);
+                        }
+                    });
+                    alert.setNegativeButton("算了放過它吧", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialog.cancel();
+                        }
+                    });
+                    dialog = alert.create();
+                    dialog.show();
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+
+            case R.id.quick_consult_result_time_image:
+            case R.id.quick_consult_result_time_text:
+                if (onlyText.getText().equals(getResources().getString(R.string.quick_consult_result_upright))){
+                    onlyText.setText(getResources().getString(R.string.quick_consult_result_downright));
+                    onlyImage.setBackground(getResources().getDrawable(R.drawable.time_up_l));
+                }else if(onlyText.getText().equals(getResources().getString(R.string.quick_consult_result_downright))){
+                    onlyText.setText(getResources().getString(R.string.quick_consult_result_upright));
+                    onlyImage.setBackground(getResources().getDrawable(R.drawable.time_down_l));
+                }
+                initCommentList();
+                break;
+            case R.id.quick_consult_result_reply:
+                Intent intent = new Intent(QuickConsultResultActivity.this, QuickConsultResultReplyActivity.class);
+                intent.putExtra("index", -1);
+                intent.putExtra("name", data.getAuthor_name());
+                intent.putExtra("parent_id", data.getId().toString());
+                intent.putExtra("quick_id", id);
+                startActivity(intent);
+                break;
+            case R.id.quick_consult_result_back:
+                finish();
+                break;
+        }
+
+    }
+
+    private void copyToBack() {
+
+        // for ()
+
+    }
+
 }

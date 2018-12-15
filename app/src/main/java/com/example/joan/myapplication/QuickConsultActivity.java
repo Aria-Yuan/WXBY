@@ -1,5 +1,6 @@
 package com.example.joan.myapplication;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class QuickConsultActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,9 +33,10 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
     private boolean isSubmitted;
     private AlertDialog finished;
     private int length = 14, state;
+    private String content, id, oi;
 
     SharedPreferences.Editor editor;
-    SharedPreferences pref;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,9 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initItems() {
+
+        sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
+
         back = findViewById(R.id.quick_consult_back);
         next = findViewById(R.id.quick_consult_next);
         upload = findViewById(R.id.quick_consult_upload);
@@ -44,6 +60,10 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
         next.setOnClickListener(this);
 
         upWindow = new SelectPicPopupWindow(QuickConsultActivity.this, itemsOnClick);
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String newDate = df.format(new Date().getTime());
+        id = newDate + sp.getString("user_name", "invalid");
+//        System.out.println(id);
 
         autoLoad();
     }
@@ -91,15 +111,10 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
     private void setNext() {
         if (isEnoughLength()) {
             submit();
-            if (isSubmitted) {
-                state = success();
-            } else {
-                state = failed();
-            }
         }else{
             state = setNotEnough();
+            finished.show();
         }
-        afterCreateDialog(state);
     }
 
     private void afterCreateDialog(int state) {
@@ -122,7 +137,7 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
                 no.setTextColor(getResources().getColor(R.color.selector_item_color));
                 break;
             case -2:
-                Button confirm = finished.getButton(DialogInterface.BUTTON_POSITIVE);;
+                Button confirm = finished.getButton(DialogInterface.BUTTON_POSITIVE);
                 confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
                 break;
         }
@@ -146,7 +161,7 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
     private int failed() {
         autoSave();
         finished = new AlertDialog.Builder(this)
-                .setTitle("您的諮詢信息")//设置对话框的标题
+                .setTitle("您的咨詢信息")//设置对话框的标题
                 .setMessage("送出失敗了誒~")//设置对话框的内容
                 .setPositiveButton("重試", new DialogInterface.OnClickListener() {
                     @Override
@@ -166,17 +181,18 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
 
     private int success() {
         finished = new AlertDialog.Builder(this)
-                .setTitle("您的諮詢信息")//设置对话框的标题
+                .setTitle("您的咨詢信息")//设置对话框的标题
                 .setMessage("已經成功送出咯~")//设置对话框的内容
                 .setPositiveButton("查看", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //跳至詳情頁面
-                        Intent intent = new Intent(QuickConsultActivity.this, QuickConsultResultActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("lawyer", lawyer);
-//                        intent.putExtras(bundle);
+                        Intent intent = new Intent();
+                        intent.setClass(QuickConsultActivity.this, QuickConsultResultActivity.class);
+//                        intent.putExtra("id", );
+                        intent.putExtra("id", oi);
                         startActivity(intent);
+                        //跳至詳情頁面
+                        finish();
                     }
                 })
                 .setNegativeButton("確定", new DialogInterface.OnClickListener() {
@@ -210,8 +226,77 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
         return 1;
     }
 
+    private int repeat(){
+        finished = new AlertDialog.Builder(this)
+                .setTitle("重复的提交")//设置对话框的标题
+                .setMessage("請不要心急，稍等片刻")//设置对话框的内容
+                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                        overridePendingTransition(R.anim.left, R.anim.left_exit);
+                    }
+                })
+                .create();
+        return 1;
+    }
+
     private void submit() {//提交
-        isSubmitted = true;
+        isSubmitted = false;
+        content = text.getText().toString();
+
+        try {
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/submitQuickConsult.action");
+            params.addQueryStringParameter("id", id);
+            params.addQueryStringParameter("author_id", sp.getString("_id", "invalid"));
+            params.addQueryStringParameter("author_name", sp.getString("user_name", "invalid"));
+            params.addQueryStringParameter("content", content);
+            System.out.println(params.toString());
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JsonParser jsonParser = new JsonParser();
+                    JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
+//                    System.out.println("111111111111111111111111111");
+                    switch(jsonObject.get("state").getAsInt()){
+
+                        case 1:
+                            oi = jsonObject.get("id").getAsString();
+//                            System.out.println(oi);
+                            isSubmitted = true;
+                            success();
+                            afterCreateDialog(state);
+//                            System.out.println("222222222222222222222222222");
+                            break;
+                        case 0:
+                            failed();
+                            afterCreateDialog(state);
+                            break;
+                        case -1:
+                            repeat();
+                            afterCreateDialog(state);
+                    }
+
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return;
     }
 

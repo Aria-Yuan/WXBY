@@ -10,16 +10,16 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="1"
         android:background="@color/selector_item_color">
 
         <Button
             android:id="@+id/quick_consult_result_back"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,18 +33,20 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button19"
+            app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_reply"
             app:layout_constraintStart_toEndOf="@+id/quick_consult_result_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button19"
+            android:id="@+id/quick_consult_result_reply"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/touming"
+            android:text="@string/quick_consult_result_reply"
+            android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +66,7 @@
                 android:id="@+id/quick_consult_result_user"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp">
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:id="@+id/imageView12"
@@ -82,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
-                    android:text="加載中..."
+                    android:text="TextView"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView12"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
-                    android:text="加載中..."
+                    android:text="TextView"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView12"
                     app:layout_constraintTop_toBottomOf="@+id/quick_consult_result_name" />
@@ -102,24 +104,34 @@
                     android:id="@+id/quick_consult_result_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="加載中..."
+                    android:layout_marginEnd="16dp"
+                    android:text="TextView"
                     android:textSize="16sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/quick_consult_result_name"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_like" />
+
+                <Button
+                    android:id="@+id/quick_consult_result_like"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/heart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
             <TextView
                 android:id="@+id/quick_consult_result_context"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="7dp"
-                android:paddingBottom="16dp"
+                android:lineSpacingExtra="6sp"
                 android:paddingLeft="24dp"
+                android:paddingTop="16dp"
                 android:paddingRight="24dp"
-                android:paddingTop="10dp"
-                android:text="加載中..."
-                android:textSize="18sp" />
+                android:paddingBottom="16dp"
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/quick_consult_result_picture"
@@ -146,7 +158,6 @@
             </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
-                android:id="@+id/quick_consult_result_comment_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -154,10 +165,10 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="8dp"
                     android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
                     android:paddingRight="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:id="@+id/textView27"
@@ -165,8 +176,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:gravity="center"
-                        android:paddingBottom="8dp"
                         android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
                         android:text="@string/quick_consult_result_comment"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,20 +185,50 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <CheckBox
-                        android:id="@+id/checkBox"
+                        android:id="@+id/quick_consult_result_only"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
                         android:text="@string/quick_consult_result_only"
                         android:textColor="@color/selector_item_color"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/quick_consult_result_time_image"
+                        android:layout_width="26dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/time_down_l"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_time_text"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/quick_consult_result_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/touming"
+                        android:text="@string/quick_consult_result_upright"
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/quick_consult_result_only"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/quick_consult_result_comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
     </ScrollView>
