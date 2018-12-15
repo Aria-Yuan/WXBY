@@ -86,7 +86,7 @@ public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayou
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                 }
 
                 @Override

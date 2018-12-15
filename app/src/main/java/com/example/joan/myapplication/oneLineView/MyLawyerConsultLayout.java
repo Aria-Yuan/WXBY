@@ -78,6 +78,25 @@ public class MyLawyerConsultLayout extends LinearLayout {
         return this;
     }
 
+    public MyLawyerConsultLayout init(int state,String content, String time) {
+        init();
+        setName("三尺小律師");
+        setContent(content);
+        setTime(time);
+        setJob("");
+        setView("");
+        if(state == 0 || state == 1){
+            setState("分析中");
+//            setStateColor(R.color.colorAccent);
+        }else{
+            setState("已完成");
+            setStateColor(R.color.bbb);
+            setStateColor(R.color.colorAccent);
+        }
+
+        return this;
+    }
+
     /**
      * 律所名称+地址+标签
      *
