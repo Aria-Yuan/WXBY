@@ -72,7 +72,7 @@ public class FirmFragment  extends Fragment implements FirmOneLineView.OnRootCli
         for (LawFirmModel firm: firmList
                 ) {
             result.addView(new FirmOneLineView(getContext())
-                    .init(firm.getName(), firm.getAddress() ,"hahaha")
+                    .init(firm.getName(), firm.getAddress() ,"#民法")
                     .setOnRootClickListener(this, index));
         }
 

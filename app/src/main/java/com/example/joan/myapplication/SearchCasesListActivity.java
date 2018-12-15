@@ -23,6 +23,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SearchCasesListActivity extends AppCompatActivity implements CaseOneLineView.OnRootClickListener{
 
@@ -100,9 +102,13 @@ public class SearchCasesListActivity extends AppCompatActivity implements CaseOn
                         .replace("\n", "")
                         .replace("\r", "")
                         .replace("\t", "")
-                        .replace(" ", "");
-                System.out.println(mainData);
-                String content = getContent(mainData);
+                        .replace("\\s", "");
+
+                Pattern p = Pattern.compile("理由.*", Pattern.DOTALL);
+                Matcher m = p.matcher(mainData);
+//            System.out.println(mainData);
+                System.out.println(m.find());
+                String content = m.group().replaceAll("理由","");
                 result.addView(new CaseOneLineView(getBaseContext())
                         .init(a[0],a[1].split(" \\[")[0],judgementList.get(i).getjReason(),
                                 "#民事",content)

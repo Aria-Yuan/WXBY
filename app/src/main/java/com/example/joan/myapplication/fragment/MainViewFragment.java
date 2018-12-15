@@ -1,5 +1,6 @@
 package com.example.joan.myapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.joan.myapplication.NewsDetailActivity;
+import com.example.joan.myapplication.SearchCaseDetailActivity;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.NewsModel;
 import com.example.joan.myapplication.oneLineView.HomeNewsLayout;
@@ -23,7 +26,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainViewFragment extends BaseFragment {
+public class MainViewFragment extends BaseFragment implements HomeNewsLayout.OnRootClickListener{
     private String position;
     private LinearLayout mainBody;
     private net.sf.json.JSONArray newsModels;
@@ -75,7 +78,9 @@ public class MainViewFragment extends BaseFragment {
 
                 mainBody.addView(new HomeNewsLayout(getContext())
 //                          .init());
-                        .initNews(newsModels.getJSONObject(i).getString("title").replace("／"," | "), newsModels.getJSONObject(i).getString("article").replaceAll("\n",""), img));
+                        .initNews(newsModels.getJSONObject(i).getString("title").replace("／"," | "),
+                                newsModels.getJSONObject(i).getString("article").replaceAll("\n",""), img)
+                        .setOnRootClickListener(this,i));
             }
         }catch (Exception e){
 
@@ -86,21 +91,19 @@ public class MainViewFragment extends BaseFragment {
     private void searchCase(){
         try{
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/getNews.action");
+            params.addQueryStringParameter("type","0");
+            params.addQueryStringParameter("condition","");
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
                     System.out.println(s);
-                    net.sf.json.JSONObject jArray= net.sf.json.JSONObject.fromObject(s);
-//                    System.out.println(jArray);
-                    newsModels = jArray.getJSONArray("hotNews");
-//                    System.out.println("@@@@@@@@@@@" + hot + "^^^^^^^^^^^^^^^^^^^^^^^");
-//                    comment = jArray.getJSONArray("comment");
+                    newsModels = net.sf.json.JSONArray.fromObject(s);
                     initView(view);
                 }
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                 }
 
                 @Override
@@ -116,6 +119,17 @@ public class MainViewFragment extends BaseFragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void onRootClick(View v) {
+//
+        Intent intent=new Intent();
+        intent.setClass(v.getContext(), NewsDetailActivity.class); //设置跳转的Activity
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("id", newsModels.getJSONObject((int)v.getTag()).getString("_id"));
+        startActivity(intent);
 
     }
 

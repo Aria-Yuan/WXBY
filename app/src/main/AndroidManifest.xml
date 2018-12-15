@@ -35,7 +35,6 @@
         <activity android:name=".LawyerConsultDetailActivity" />
         <activity android:name=".LawyerConsultSortedListActivity" />
         <activity android:name=".LawyerConsultAllCasesActivity" />
-        <activity android:name=".LawyerConsultResultActivity" />
         <activity android:name=".ConsultingActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CaseConsultActivity" />
@@ -58,6 +57,9 @@
         <activity android:name=".QuickConsultResultReplyActivity" />
         <activity android:name=".QuickConsultReplyListActivity"/>
         <activity android:name=".image.ImagePagerActivity" />
+        <activity android:name=".NewsDetailActivity" />
+        <activity android:name=".CommentDetailActivity" />
+        <activity android:name=".CaseConsultContentActivity" />
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

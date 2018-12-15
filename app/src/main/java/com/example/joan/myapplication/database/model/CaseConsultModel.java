@@ -17,7 +17,16 @@ public class CaseConsultModel {
     private List<Document> refer;
     private List<JudgementModel> judgementModels;
     private List<LawModel> lawModels;
+    private String createTime;
     private int state;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public ObjectId getId() {
         return id;

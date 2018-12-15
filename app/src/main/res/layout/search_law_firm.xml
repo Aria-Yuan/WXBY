@@ -90,13 +90,13 @@
         android:id="@+id/main_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e6e6e6"
         android:layout_below="@+id/layout_firm_pager_bar"
+        android:background="@drawable/linear_shadown"
         app:tabIndicatorColor="@color/selector_item_color"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/selector_item_color"
-        app:tabTextColor="#707070"
-        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"/>
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+        app:tabTextColor="#707070" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_body"
