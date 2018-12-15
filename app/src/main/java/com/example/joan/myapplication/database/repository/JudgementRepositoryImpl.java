@@ -99,18 +99,34 @@ public class JudgementRepositoryImpl implements JudgementRepository{
                 JudgementModel judgement = new JudgementModel();
                 judgement.setId(a.getString("_id"));
                 judgement.setjId(a.getString("j_id"));
-                judgement.setjDate(a.getString("j_date"));
                 judgement.setjReason(a.getString("j_reason"));
                 judgement.setjContent(a.getString("j_content"));
 //                judgement.setjRelavent(a.get("j_relevant",new ArrayList<Document>()));
 //                judgement.setjPrevious(a.get("j_previous",new ArrayList<Document>()));
-                judgement.setjLaws(a.getString("j_laws"));
                 judgementList.add(judgement);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         return judgementList;
+
+    }
+
+    public JudgementModel convertSingle(JSONObject s){
+        JudgementModel judgement = new JudgementModel();
+        try {
+            judgement.setId(s.getString("_id"));
+            judgement.setjId(s.getString("j_id"));
+            judgement.setjDate(s.getString("j_date"));
+            judgement.setjReason(s.getString("j_reason"));
+            judgement.setjContent(s.getString("j_content"));
+//                judgement.setjRelavent(a.get("j_relevant",new ArrayList<Document>()));
+//                judgement.setjPrevious(a.get("j_previous",new ArrayList<Document>()));
+            judgement.setjLaws(s.getString("j_laws"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return judgement;
 
     }
 

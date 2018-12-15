@@ -67,7 +67,7 @@ public class SearchCaseDetailActivity extends AppCompatActivity implements View.
                             date.setText(data.get("j_date").getAsString());
                             reason.setText(data.get("j_reason").getAsString());
                             lawMain.setText(data.get("j_laws").getAsString());
-                            mainData = data.get("j_content").getAsString().replace("\\r", "")
+                            mainData = data.get("j_content").getAsString().replaceAll("\\r", "")
                                     .replace("\\n", "")
                                     .replace("\n", "")
                                     .replace("\r", "")
