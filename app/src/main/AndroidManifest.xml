@@ -55,7 +55,7 @@
         <activity android:name=".AfterFeePaidActivity" />
         <activity android:name=".QuestionLawyerFinishActivity" />
         <activity android:name=".QuickConsultResultReplyActivity" />
-        <activity android:name=".QuickConsultReplyListActivity"/>
+        <activity android:name=".QuickConsultReplyListActivity" />
         <activity android:name=".image.ImagePagerActivity" />
         <activity android:name=".NewsDetailActivity" />
         <activity android:name=".CommentDetailActivity" />
@@ -99,7 +99,9 @@
         <activity android:name=".fragment.MainSearchResultLaw" />
         <activity android:name=".fragment.MainSearchResultFirm" />
         <activity android:name=".fragment.MainSearchResultCounsel" />
-        <activity android:name=".fragment.MainSearchResultJudgement"></activity>-->
+        <activity android:name=".fragment.MainSearchResultJudgement"></activity>
+        -->
+        <activity android:name=".SearchResultMoreNewsActivity"></activity>
     </application>
 
 </manifest>

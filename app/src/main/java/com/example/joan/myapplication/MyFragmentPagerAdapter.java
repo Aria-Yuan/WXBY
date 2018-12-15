@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String[] mTitles = new String[]{"律師", "咨詢", "法條","律所", "判決", "新聞"};
+    private String[] mTitles = new String[]{"律師", "咨詢", "法條","律所", "判決", "新聞與評論"};
 
     static private Fragment c, l, f, lr, j, n;
 
@@ -53,7 +53,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         return mTitles.length;
     }
 
-    //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles[position];
