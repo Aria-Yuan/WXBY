@@ -25,16 +25,16 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@color/selector_item_color">
 
             <Button
                 android:id="@+id/consult_case_result_back"
                 android:layout_width="30dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="14dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:layout_weight="1"
                 android:background="@drawable/back"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,8 +45,7 @@
                 android:id="@+id/textView16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="5"
                 android:gravity="center"
                 android:text="@string/consult_case_result_title"
@@ -59,13 +58,17 @@
 
             <Button
                 android:id="@+id/consult_case_result_favor"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:background="@color/touming"
+                android:gravity="center"
+                android:text="主文"
+                android:textColor="@color/background"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,7 +78,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
+            android:layout_weight="2.0"
             android:orientation="horizontal">
 
             <TextView
@@ -98,9 +101,8 @@
                 android:background="@color/titlebg"
                 android:gravity="bottom|left"
                 android:paddingBottom="8dp"
-                android:text="75"
                 android:textColor="@android:color/holo_orange_dark"
-                android:textSize="64sp" />
+                android:textSize="60sp" />
 
         </LinearLayout>
 
@@ -122,6 +124,7 @@
                 android:id="@+id/consult_case_result_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/linear_shadown"
                 app:tabSelectedTextColor="@color/selector_item_color"
                 app:tabTextAppearance="@style/result_tablayout_textsize"
                 app:tabTextColor="@color/unselector_item_color">

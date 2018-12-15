@@ -35,7 +35,7 @@ import java.util.TimerTask;
 public class CaseConsultResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout tabLayout;
-    private Button back, favor;
+    private Button back, favor, toContent;
     private TextView num;
     private ViewPager pager;
     private List<Fragment> list;
@@ -45,6 +45,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
     private String resultID;
     private int AIResult;
     private int state = 0;
+    private int flag;
     private AlertDialog.Builder alert;
     private AlertDialog dialog;
     private Thread thread;
@@ -80,6 +81,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
         tabLayout = findViewById(R.id.consult_case_result_tablayout);
         pager = findViewById(R.id.consult_case_result_pager);
         num = findViewById(R.id.consult_case_result_number);
+        toContent = findViewById(R.id.consult_case_result_favor);
 //        bar = findViewById(R.id.consult_case_result_percent);
 //        percent = findViewById(R.id.consult_case_result_number);
 
@@ -94,19 +96,30 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
         list.add(referList);
         pager.setAdapter(new CaseConsultAdapter(getSupportFragmentManager(),list));
 
+        resultID = getIntent().getStringExtra("id");
+        flag = getIntent().getIntExtra("flag",0);
+
         alert = new AlertDialog.Builder(CaseConsultResultActivity.this);
-        alert.setMessage("案件分析中，請稍後");
-        alert.setPositiveButton("先逛逛", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialog.cancel();
-                finish();
-            }
-        });
-        dialog = alert.create();
-        dialog.show();
-        Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+        if(flag == 0){
+            alert.setMessage("案件分析中，請稍後");
+            alert.setPositiveButton("先逛逛", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.cancel();
+                    finish();
+                }
+            });
+            dialog = alert.create();
+            dialog.show();
+            Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+        }else{
+            alert.setMessage("加載中，請稍後");
+            dialog = alert.create();
+            dialog.show();
+            Button confirm = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            confirm.setTextColor(getResources().getColor(R.color.selector_item_color));
+        }
 
         thread = new Thread(){
           public void run(){
@@ -176,9 +189,6 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 
     protected void getData(){
 
-        Intent intent = getIntent();
-        resultID = intent.getStringExtra("id");
-
         final CaseConsultModel[] data = new CaseConsultModel[1];
 
         try {
@@ -205,12 +215,28 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 
                         AIResult = jsonObject.get("result").getAsInt();
                         if(AIResult == 0){
-                            num.setText("勝訴");
+                            result.setResult("勝訴");
                         }else if(AIResult == 1){
-                            num.setText("平手");
+                            result.setResult("平手");
                         }else if(AIResult == 2){
-                            num.setText("敗訴");
+                            result.setResult("敗訴");
                         }
+
+                        num.setText(result.getResult());
+                        result.setContent(jsonObject.get("content").getAsString());
+
+//                    if (jsonObject.get("state").getAsInt() == 1) {
+
+//                        data[0] = new CaseConsultModel();
+//                        //                    System.out.println(s);
+//                        //                    System.out.println("SetState");
+//                        data[0].setState(jsonObject.get("state").getAsInt());
+//                        //                    System.out.println("SetResult");
+//                        data[0].setResult(jsonObject.get("result").getAsString());
+//                        //                    System.out.println("SetID");
+//                        data[0].setCase_id(jsonObject.get("case_id").getAsString());
+//                        //                    System.out.println("SetContent");
+//                        data[0].setContent(jsonObject.get("content").getAsString());
 
                         List<JudgementModel> similar = new ArrayList<>();
                         for (JsonElement je : jsonObject.getAsJsonArray("similar")) {
@@ -439,6 +465,12 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                 finish();
                 overridePendingTransition(R.anim.left, R.anim.left_exit);
                 break;
+            case R.id.consult_case_result_favor:
+                Intent intent=new Intent();
+                intent.setClass(this, CaseConsultContentActivity.class); //设置跳转的Activity
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("content", result.getContent());
+                startActivity(intent);
         }
 
     }

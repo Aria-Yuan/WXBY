@@ -41,6 +41,10 @@ public class CounselingRepositoryImpl {
 //                counseling.setLawyer(a.getString(""));
 
 //                counseling.setQuestioner(a.getString("questioner"));
+                LawyerModel l = new LawyerModel();
+                l.setName(a.getJSONObject("lawyer").getString("name"));
+                l.setJob(a.getJSONObject("lawyer").getString("job"));
+                counseling.setLawyer(l);
 
                 counseling.setId(a.getString("_id"));
                 counseling.setCreateTime(a.getString("create_time").replace("T", " "));

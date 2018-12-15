@@ -52,13 +52,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_firm_pager_bar"
-        android:background="#e6e6e6"
+        android:background="@drawable/linear_shadown"
         app:tabIndicatorColor="@color/selector_item_color"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/selector_item_color"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         app:tabTextColor="#707070"
-        tools:layout_editor_absoluteY="48dp"
-        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"/>
+        tools:layout_editor_absoluteY="48dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_body"

@@ -207,7 +207,7 @@
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/selector_item_color"
                 app:tabTextColor="#707070"
-                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"/>
+                app:tabTextAppearance="@style/MyTabLayoutTextAppearance1"/>
 
         </android.support.design.widget.AppBarLayout>
 

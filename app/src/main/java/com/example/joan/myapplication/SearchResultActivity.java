@@ -646,8 +646,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 System.out.println(mainData);
                 String content = getContent(mainData);
                 ll.addView(new CaseOneLineView(getContext())
-                        .init(a[0],a[1].split(" \\[")[0],judgementModels.get(i).getjReason(),
-                                "#民事",content)
+                        .init(a[0], a[1].split(" \\[")[0], judgementModels.get(i).getjReason(),
+                                "#民事",judgementModels.get(i).getjContent())
                         .setOnRootClickListener(this, i));
             }
         }
