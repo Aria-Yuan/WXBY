@@ -637,11 +637,30 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             ll.removeAllViews();
             for(int i = 0 ; i < judgementModels.size(); i++) {
                 String[] a = judgementModels.get(i).getjId().split(" ", 2);
+                String mainData = judgementModels.get(i).getjContent().replace("\\r", "")
+                        .replace("\\n", "")
+                        .replace("\n", "")
+                        .replace("\r", "")
+                        .replace("\t", "")
+                        .replace(" ", "");
+                System.out.println(mainData);
+                String content = getContent(mainData);
                 ll.addView(new CaseOneLineView(getContext())
                         .init(a[0], a[1].split(" \\[")[0], judgementModels.get(i).getjReason(),
                                 "#民事",judgementModels.get(i).getjContent())
                         .setOnRootClickListener(this, i));
             }
+        }
+
+        private String getContent(String mainData) {
+
+            String content = "";
+
+            content = mainData.substring(mainData.indexOf("主文") + 2, mainData.indexOf("理由"));
+            content.replaceAll("中華民國","\n\r        中華民國");
+
+            return content;
+
         }
 
         public void initFail(){
