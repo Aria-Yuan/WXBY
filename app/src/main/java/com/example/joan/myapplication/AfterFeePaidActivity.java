@@ -31,7 +31,7 @@ public class AfterFeePaidActivity extends AppCompatActivity{
                 Intent intent = new Intent();
                 intent.setClass(AfterFeePaidActivity.this, MyQuestionLawyerConsultActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("counseling",counseling );
+                bundle.putSerializable("counseling",counseling.getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -123,84 +123,14 @@ public class CounselingListActivity extends AppCompatActivity implements Counsel
 
             default:{
                 LegalCounselingModel a = counselingList.get((int)v.getTag());
-                int vc = a.getViewCount();
-                vc++;
-                a.setViewCount(vc);
-
-                try{
-                    RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/updateCounseling.action");
-                    String firm;
-                    firm = new CounselingRepositoryImpl().disconvert(a);
-                    System.out.println(firm);
-                    params.addQueryStringParameter("condition",firm);
-                    params.addQueryStringParameter("type", "0");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        @Override
-                        public void onSuccess(String s) {
-                            JSONArray jArray= JSONArray.fromObject(s);
-                            updateList();
-                        }
-
-                        @Override
-                        public void onError(Throwable throwable, boolean b) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(CancelledException e) {
-
-                        }
-
-                        @Override
-                        public void onFinished() {
-
-                        }
-                    });
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                a = counselingList.get((int)v.getTag());
                 Intent intent=new Intent();
                 intent.setClass(v.getContext(), CounselingDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("counseling", a);
+                bundle.putSerializable("counseling", a.getId());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }break;
-        }
-    }
-
-    private void updateList(){
-        try{
-            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
-            params.addQueryStringParameter("condition",condition);
-            params.addQueryStringParameter("type","0");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    JSONArray jArray= JSONArray.fromObject(s);
-                    counselingList = new CounselingRepositoryImpl().convert(jArray);
-
-                }
-
-                @Override
-                public void onError(Throwable throwable, boolean b) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException e) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 }
