@@ -101,7 +101,7 @@
         <activity android:name=".fragment.MainSearchResultCounsel" />
         <activity android:name=".fragment.MainSearchResultJudgement"></activity>
         -->
-        <activity android:name=".SearchResultMoreNewsActivity"></activity>
+        <activity android:name=".SearchResultMoreNewsActivity" />
     </application>
 
 </manifest>
