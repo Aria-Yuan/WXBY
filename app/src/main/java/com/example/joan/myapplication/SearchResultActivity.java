@@ -18,22 +18,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.CounselingModel;
 import com.example.joan.myapplication.database.model.JudgementModel;
 import com.example.joan.myapplication.database.model.LawFirmModel;
 import com.example.joan.myapplication.database.model.LawModel;
 import com.example.joan.myapplication.database.model.LawyerModel;
 import com.example.joan.myapplication.database.model.NewsModel;
+import com.example.joan.myapplication.database.model.QuickConsultModel;
 import com.example.joan.myapplication.database.repository.JudgementRepositoryImpl;
 import com.example.joan.myapplication.database.repository.LawFirmRepositoryImpl;
 import com.example.joan.myapplication.database.repository.LawRepositoryImpl;
 import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
+import com.example.joan.myapplication.database.repository.QuickResponseRepositoryImpl;
 import com.example.joan.myapplication.oneLineView.CaseOneLineView;
 import com.example.joan.myapplication.oneLineView.FirmOneLineView;
 import com.example.joan.myapplication.oneLineView.HomeNewsLayout;
 import com.example.joan.myapplication.oneLineView.LawOneLineView;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.example.joan.myapplication.oneLineView.QuickConsultSingleView;
 
 import net.sf.json.JSONArray;
 
@@ -54,14 +54,13 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
     private static List<View> views = new ArrayList<>();
-
     private static String keyWord;
     //    public static MainSearchModel result;
 //    public static int[] result = new int[5];
 //    public static String[] result = new String[6];
     public static List<List> result= new ArrayList<>();
     public static List<LawyerModel> lawyerModels= new ArrayList<>();
-    public static List<CounselingModel> counselingModels= new ArrayList<>();
+    public static List<QuickConsultModel> counselingModels= new ArrayList<>();
     public static List<LawModel> lawModels= new ArrayList<>();
     public static List<LawFirmModel> firmModels= new ArrayList<>();
     public static List<JudgementModel> judgementModels= new ArrayList<>();
@@ -107,7 +106,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         title.setText(keyWord + " 的搜尋結果");
 
     }
-
 
     private void initViews() {
 
@@ -268,11 +266,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    public static class MainSearchResultCounsel extends Fragment {
+    public static class MainSearchResultCounsel extends Fragment implements FirmOneLineView.OnRootClickListener {
 
         private static int flag = 1;
         int position = 1;
         private TextView ft;
+        private LinearLayout ll;
 
         public static int getFlag() {
             return flag;
@@ -291,6 +290,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 views.remove(position);
                 views.add(position, inflater.inflate(R.layout.activity_main_search_result_counsel, container, false));
                 ft = views.get(position).findViewById(R.id.main_search_result_counsel_text);
+                ll = views.get(position).findViewById(R.id.main_search_result_counsel_list);
                 flag = 0;
 //                if  (getData(position) == 1) initView();
 //                else failGetData();
@@ -303,8 +303,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
                         @Override
                         public void onSuccess(String s) {
-                            JsonObject data =(JsonObject) new JsonParser().parse(s);
-                            System.out.println(data);
+                            JSONArray data =JSONArray.fromObject(s);
+                            counselingModels = new QuickResponseRepositoryImpl().convertList(data);
+//                            System.out.println(counselingModels.get(0).getAuthor_name());
 //                            result[position] = data.get("counseling").toString();
                             initView();
                         }
@@ -334,7 +335,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void initView() {
-            if (result.get(position).size() == 0) setNothing();
+            if (counselingModels.size() == 0) setNothing();
             else setList();
         }
 
@@ -343,11 +344,31 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         private void setList(){
-
+            ll.removeAllViews();
+            for(int i = 0 ; i < counselingModels.size(); i++){
+                ll.addView(new QuickConsultSingleView(getContext())
+                        .init(counselingModels.get(i).getContent(),
+                                counselingModels.get(i).getView_count(),
+                                counselingModels.get(i).getLawyer_reply().size(),
+                                counselingModels.get(i).getDate())
+                        .setOnRootClickListener(this, i));
+            }
         }
 
         public void initFail(){
             ft.setText(R.string.main_search_result_error);
+        }
+
+        @Override
+        public void onRootClick(View view) {
+            QuickConsultModel c = counselingModels.get((int)view.getTag());
+            Intent intent=new Intent();
+            intent.setClass(view.getContext(), QuickConsultResultActivity.class); //设置跳转的Activity
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            Bundle bunble = new Bundle();
+//            bunble.putSerializable("law", l);
+            intent.putExtra("id", c.getId().toString());
+            startActivity(intent);
         }
     }
 
@@ -393,7 +414,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                             System.out.println(jArray);
                             initView();
 //                            result[position] = data.get("law").toString();
-                            initView();
+//                            initView();
                         }
 
                         @Override
@@ -645,7 +666,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                         .replace("\r", "")
                         .replace("\t", "")
                         .replace(" ", "");
-                System.out.println(mainData);
+//                System.out.println(mainData);
                 String content = getContent(mainData);
                 ll.addView(new CaseOneLineView(getContext())
                         .init(a[0],a[1].split(" \\[")[0],judgementModels.get(i).getjReason(),

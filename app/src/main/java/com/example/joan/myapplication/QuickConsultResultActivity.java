@@ -96,7 +96,7 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         x.Ext.init(getApplication());
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        id = "5b6eaad08d35692c10ea06d1";
+//        id = "5b6eaad08d35692c10ea06d1";
         final int[] type = new int[1];
 
         try {
