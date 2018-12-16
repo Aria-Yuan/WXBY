@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.joan.myapplication.database.repository.LawRepositoryImpl;
 import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
 import com.example.joan.myapplication.oneLineView.CaseOneLineView;
 import com.example.joan.myapplication.oneLineView.FirmOneLineView;
+import com.example.joan.myapplication.oneLineView.HomeNewsLayout;
 import com.example.joan.myapplication.oneLineView.LawOneLineView;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -54,7 +56,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private static List<View> views = new ArrayList<>();
 
     private static String keyWord;
-//    public static MainSearchModel result;
+    //    public static MainSearchModel result;
 //    public static int[] result = new int[5];
 //    public static String[] result = new String[6];
     public static List<List> result= new ArrayList<>();
@@ -646,8 +648,8 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 System.out.println(mainData);
                 String content = getContent(mainData);
                 ll.addView(new CaseOneLineView(getContext())
-                        .init(a[0], a[1].split(" \\[")[0], judgementModels.get(i).getjReason(),
-                                "#民事",judgementModels.get(i).getjContent())
+                        .init(a[0],a[1].split(" \\[")[0],judgementModels.get(i).getjReason(),
+                                "#民事",content)
                         .setOnRootClickListener(this, i));
             }
         }
@@ -684,6 +686,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         private static int flag = 1;
         int position = 5;
         private TextView ft;
+        private LinearLayout ll;
+        private JSONArray newsModels;
+        private JSONArray commentModels;
 
         public static int getFlag() {
             return flag;
@@ -700,8 +705,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                                  @Nullable Bundle savedInstanceState) {
             if (flag == 1){
                 views.remove(position);
-                views.add(position, inflater.inflate(R.layout.activity_main_search_result_lawyer, container, false));
-                ft = views.get(position).findViewById(R.id.main_search_result_lawyer_text);
+                views.add(position, inflater.inflate(R.layout.activity_main_search_result_news, container, false));
+                ft = views.get(position).findViewById(R.id.main_search_result_news_text);
+                ll = views.get(position).findViewById(R.id.main_search_result_news_list);
                 flag = 0;
 //                if  (getData(position) == 1) initView();
 //                else failGetData();
@@ -714,9 +720,10 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
                         @Override
                         public void onSuccess(String s) {
-                            JsonObject data =(JsonObject) new JsonParser().parse(s);
-                            System.out.println(data);
+                            JSONArray jsonArray = JSONArray.fromObject(s);
 //                            result[position] = data.get("news").toString();
+                            newsModels = jsonArray.getJSONObject(0).getJSONArray("hotNews");
+                            commentModels = jsonArray.getJSONObject(1).getJSONArray("comment");
                             initView();
                         }
 
@@ -745,7 +752,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void initView() {
-            if (result.get(position).size() == 0) setNothing();
+            if (newsModels.size() + commentModels.size() == 0) setNothing();
             else setList();
         }
 
@@ -754,7 +761,95 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
 
         private void setList(){
+            ll.removeAllViews();
+            try{
 
+                setTopText(R.string.hot_news);
+
+                if (newsModels.size() < 2)
+                    setOneNewsView(newsModels.size());
+                else {
+                    setOneNewsView(2);
+                    setBottomButton(0);
+                }
+
+                setTopText(R.string.famous_comment);
+
+                if (commentModels.size() < 2)
+                    setOneCommentView(commentModels.size());
+                else {
+                    setOneCommentView(2);
+                    setBottomButton(1);
+                }
+
+            }catch (Exception e){ }
+        }
+
+        private void setTopText(int id){
+            TextView topText = new TextView(getContext());
+            topText.setText(getResources().getText(id));
+            topText.setPadding(32, 16, 32, 8);
+            topText.setGravity(Gravity.LEFT);
+            topText.setTextSize(20);
+            topText.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            ll.addView(topText);
+        }
+
+        private void setBottomButton(final int type){
+
+            TextView buttonText = new TextView(getContext());
+            buttonText.setText("查看更多>");
+            buttonText.setBackgroundColor(getResources().getColor(R.color.look_more));
+            buttonText.setGravity(Gravity.CENTER);
+            buttonText.setPadding(8,4,8,8);
+            buttonText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), SearchResultMoreNewsActivity.class);
+                    intent.putExtra("keyword", keyWord);
+                    intent.putExtra("type", type);
+                    if (type == 0)
+                        intent.putExtra("data", newsModels.toString());
+                    else
+                        intent.putExtra("data", commentModels.toString());
+                    startActivity(intent);
+                }
+            });
+//            Button newsButton = new Button(getContext());
+//            newsButton.setText("查看更多>");
+//            newsButton.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+//            newsButton.setPadding(8,8,8,8);
+            ll.addView(buttonText);
+        }
+
+        private void setOneNewsView(int num){
+            for (int i = 0; i < num; i++) {
+                String img;
+                if (newsModels.getJSONObject(i).getJSONArray("src").size() > 0) {
+                    img = newsModels.getJSONObject(i).getJSONArray("src").getString(0);
+                } else {
+                    img = "https://i.imgur.com/qM6pytU.jpg";
+                }
+
+                ll.addView(new HomeNewsLayout(getContext())
+//                          .init());
+                        .initNews(newsModels.getJSONObject(i).getString("title").replace("／", " | "), newsModels.getJSONObject(i).getString("article").replaceAll("\n", ""), img));
+            }
+        }
+
+        private void setOneCommentView(int num){
+            for (int i = 0; i < num; i++) {
+                String img;
+                if (commentModels.getJSONObject(i).getJSONArray("src").size() > 0) {
+                    img = commentModels.getJSONObject(i).getJSONArray("src").getString(0);
+                } else {
+                    img = "https://i.imgur.com/qM6pytU.jpg";
+                }
+
+                ll.addView(new HomeNewsLayout(getContext())
+//                          .init());
+                        .initNews(commentModels.getJSONObject(i).getString("title").replace("／", " | "), commentModels.getJSONObject(i).getString("article").replaceAll("\n", ""), img));
+            }
         }
 
         public void initFail(){

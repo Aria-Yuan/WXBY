@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -138,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             ep = password.getText().toString();
 
             try {
-                RequestParams params = new RequestParams("http://169.254.219.229:8080/loginAndRegister.action");
+                RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/loginAndRegister.action");
                 params.addQueryStringParameter("type", String.valueOf(registerType));
                 params.addQueryStringParameter("username", ea);
                 params.addQueryStringParameter("password", ep);
