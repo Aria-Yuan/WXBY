@@ -68,7 +68,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
                 lawyer.setEducation(current_cursor.getString("education"));
                 lawyer.setExperience(current_cursor.getString("experience"));
                 lawyer.setDescription(current_cursor.getString("description"));
-                lawyer.setPrice(current_cursor.getDouble("price"));
+                lawyer.setPrice(current_cursor.getInteger("price"));
 //                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
                 lawyer.setComment(current_cursor.getDouble("comment"));
 
@@ -95,7 +95,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
                 lawyer.setEducation(current_cursor.getString("education"));
                 lawyer.setExperience(current_cursor.getString("experience"));
                 lawyer.setDescription(current_cursor.getString("description"));
-                lawyer.setPrice(current_cursor.getDouble("price"));
+                lawyer.setPrice(current_cursor.getInteger("price"));
 //                lawyer.setCounselingList(current_cursor.get("counseling_list",new ArrayList<ObjectId>()));
                 lawyer.setComment(current_cursor.getDouble("comment"));
 
@@ -137,7 +137,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
                 lawyer.setJob(a.getString("job"));
                 lawyer.setCompany(a.getString("company"));
                 lawyer.setMajor(a.getString("major"));
-                lawyer.setPrice(a.getDouble("price"));
+                lawyer.setPrice(a.getInt("price"));
 //                List<String> list = new ArrayList<>();
 //                JSONArray listj = a.getJSONArray("counseling_list");
 //                for(int j = 0; j < listj.size(); i++ ){
@@ -169,7 +169,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
                 lawyer.setEducation(a.getString("education"));
                 lawyer.setExperience(a.getString("experience"));
                 lawyer.setDescription(a.getString("description"));
-                lawyer.setPrice(a.getDouble("price"));
+                lawyer.setPrice(a.getInt("price"));
 
                 lawyer.setComment(a.getDouble("comment"));
                 lawyers.add(lawyer);
@@ -192,7 +192,7 @@ public class LawyerRepositoryImpl implements LawyerRepository {
         lawyer.setEducation(a.getString("education"));
         lawyer.setExperience(a.getString("experience"));
         lawyer.setDescription(a.getString("description"));
-        lawyer.setPrice(a.getDouble("price"));
+        lawyer.setPrice(a.getInt("price"));
         List<String> list = new ArrayList<>();
         JSONArray listj = a.getJSONArray("counseling_list");
         List<LegalCounselingModel> counselinglst = new ArrayList<>();

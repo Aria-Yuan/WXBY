@@ -15,7 +15,7 @@ public class LawyerModel implements Serializable {
     private String education;
     private String experience;
     private String description;
-    private double price;
+    private int price;
     private List<LegalCounselingModel> counselingList;
     private double comment;
 
@@ -91,11 +91,11 @@ public class LawyerModel implements Serializable {
         this.description = description;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

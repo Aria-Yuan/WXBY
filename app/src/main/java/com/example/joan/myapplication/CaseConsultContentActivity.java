@@ -16,12 +16,16 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CaseConsultContentActivity extends AppCompatActivity {
 
     private TextView title;
     private TextView content;
     private ImageView picture;
     private String contentM;
+    private List<String> img = new ArrayList<>();
     private JSONObject news;
 
     @Override
@@ -45,12 +49,18 @@ public class CaseConsultContentActivity extends AppCompatActivity {
         content = findViewById(R.id.content);
         picture = findViewById(R.id.picture);
         contentM = getIntent().getStringExtra("content");
+        img = (List<String>)getIntent().getSerializableExtra("imglst");
     }
 
 
     private void initView(){
 //        title.setText(news.getString("title"));
         content.setText(contentM);
+
+        if(!img.isEmpty()){
+            picture.setVisibility(View.VISIBLE);
+            new DownloadImageTask(picture).execute("http://140.136.155.131:8081/picture/" + img.get(0));
+        }
 
 //        String img;
 //        if(news.getJSONArray("src").size() > 0){

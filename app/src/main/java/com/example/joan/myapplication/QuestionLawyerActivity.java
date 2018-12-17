@@ -3,16 +3,21 @@ package com.example.joan.myapplication;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -28,6 +33,10 @@ import com.example.joan.myapplication.database.model.LawyerModel;
 import com.example.joan.myapplication.fragment.NinePicturesAdapter;
 import com.example.joan.myapplication.image.ImagePagerActivity;
 
+import org.xutils.http.RequestParams;
+
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +45,7 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 import static com.example.joan.myapplication.CaseConsultActivity.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
 
+@SuppressLint("NewApi")
 public class QuestionLawyerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView title;
@@ -52,10 +62,16 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     //photo picker
     private static final int REQUEST_CODE = 100;
     private NoScrollGridView itemLayout;
-    private ArrayList<String> photos;
+    private ArrayList<String> photos = new ArrayList<>();
     private List<String> photossss;
     private NinePicturesAdapter ninePicturesAdapter;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
+    //upload
+    private List<String> encodedString = new ArrayList<>();
+    private Bitmap bitmap;
+    //進度條元件
+    private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +134,10 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                 if(!isEnoughLength()){
                     state = setNotEnough();
                     afterCreateDialog(state);
-                }else{
+                }else if(photos.size() == 0){
                     createPayment();
+                }else {
+                    encodeImagetoString();
                 }
                 break;
         }
@@ -144,6 +162,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
         Bundle bundle = new Bundle();
         bundle.putString("content",text.getText().toString());
         bundle.putSerializable("lawyer", lawyer);
+        bundle.putSerializable("imglst", (Serializable) encodedString);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -343,8 +362,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                     showDialog("External storage", context,Manifest.permission.READ_EXTERNAL_STORAGE);
 
                 } else {
-                    ActivityCompat
-                            .requestPermissions(
+                    ActivityCompat.requestPermissions(
                                     this,
                                     new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
                                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
@@ -378,8 +396,7 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -393,6 +410,80 @@ public class QuestionLawyerActivity extends AppCompatActivity implements View.On
                 super.onRequestPermissionsResult(requestCode, permissions,
                         grantResults);
         }
+    }
+
+    //处理图片，压缩，转码
+    @SuppressLint("StaticFieldLeak")
+    public void encodeImagetoString() {
+
+        new AsyncTask<Void , Integer , String>() {
+            protected void onPreExecute() {
+                //執行前 設定可以在這邊設定
+                super.onPreExecute();
+
+                progressBar = new ProgressDialog(QuestionLawyerActivity.this);
+                progressBar.setMessage("圖片上傳中請稍候...");
+                progressBar.setCancelable(false);
+                progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressBar.show();
+                //初始化進度條並設定樣式及顯示的資訊。
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                BitmapFactory.Options options = null;
+                options = new BitmapFactory.Options();
+                options.inSampleSize = 2;
+                int progress = 0;
+
+                for(int i = 0; i < photos.size(); i++){
+                    System.out.println(photossss.get(i));
+                    System.out.println("wuwuwuuw" + photos.size());
+                    //decode to bitmap
+//                    Bitmap bitmap = BitmapFactory.decodeFile(photos.get(i));
+//                    Log.d(TAG, "bitmap width: " + bitmap.getWidth() + " height: " + bitmap.getHeight());
+//                    //convert to byte array
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//                    byte[] bytes = baos.toByteArray();
+//
+//                    //base64 encode
+//                    byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
+//                    String encodeString = new String(encode);
+
+                    bitmap = BitmapFactory.decodeFile(photossss.get(i),options);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    // 压缩图片
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 80, stream);
+                    byte[] byte_arr = stream.toByteArray();
+                    // Base64图片转码为String
+                    String encode = Base64.encodeToString(byte_arr, Base64.DEFAULT);
+                    encodedString.add(encode);
+                    publishProgress(progress+=(int)(100/photossss.size()));
+                }
+                publishProgress(100);
+                return "";
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                //執行中 可以在這邊告知使用者進度
+                super.onProgressUpdate(values);
+                progressBar.setProgress(values[0]);
+                //取得更新的進度
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+                super.onPostExecute(msg);
+
+                //當完成的時候，把進度條消失
+                progressBar.dismiss();
+
+                // 上传图片
+                createPayment();
+            }
+        }.execute(null, null, null);
     }
 
 
