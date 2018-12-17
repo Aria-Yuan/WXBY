@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
     @Override
@@ -45,9 +46,14 @@ public class SearchActivity extends AppCompatActivity {
         findViewById(R.id.main_search_go).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                intent.putExtra("keyWord", inputText.getText().toString());
-                startActivity(intent);
+                if (inputText.getText().length() == 0){
+                    Toast.makeText(getApplicationContext(), "求求你输入点东西再搜索吧", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                    intent.putExtra("keyWord", inputText.getText().toString());
+                    startActivity(intent);
+                }
 
             }
         });
