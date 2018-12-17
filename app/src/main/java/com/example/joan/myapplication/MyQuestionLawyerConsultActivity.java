@@ -53,15 +53,16 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
 //    private String[] text = {"向", "律師提問(剩餘機會" , "次)"};
 
     private LegalCounselingModel counseling;
+    private String counselingId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_lawyer_again);
 
-        counseling = (LegalCounselingModel) getIntent().getSerializableExtra("counseling");
+        counselingId = (String) getIntent().getSerializableExtra("counseling");
         initView();
-        initData();
+        searchCounseling();
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -88,6 +89,39 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
         message = findViewById(R.id.message);
         ratingBar = findViewById(R.id.rc_rate);
         scoreText = findViewById(R.id.score_text);
+    }
+
+    private void searchCounseling(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition",counselingId);
+            params.addQueryStringParameter("type","4");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counseling = new CounselingRepositoryImpl().convertSingle(jArray.getJSONObject(0));
+                    initData();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -191,6 +225,18 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
                 }
             }
         });
+
+        lawyerPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyQuestionLawyerConsultActivity.this, LawyerConsultDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lawyer", counseling.getLawyer().getId());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right, R.anim.left);
+            }
+        });
     }
 
     private void setNext() {
@@ -233,7 +279,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
         Intent intent=new Intent();
         intent.setClass(MyQuestionLawyerConsultActivity.this, MyQuestionLawyerConsultActivity.class); //设置跳转的Activity
         Bundle bundle = new Bundle();
-        bundle.putSerializable("counseling", target);
+        bundle.putSerializable("counseling", target.getId());
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -339,7 +385,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
                     target = new CounselingRepositoryImpl().convert(jArray).get(0);
                     Intent intent = new Intent(MyQuestionLawyerConsultActivity.this, QuestionLawyerFinishActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("counseling", target);
+                    bundle.putSerializable("counseling", target.getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -381,7 +427,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
                     target = new CounselingRepositoryImpl().convert(jArray).get(0);
                     Intent intent = new Intent(MyQuestionLawyerConsultActivity.this, QuestionLawyerFinishActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("counseling", target);
+                    bundle.putSerializable("counseling", target.getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

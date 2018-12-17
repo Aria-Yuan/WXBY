@@ -42,6 +42,9 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
     private EditText input;
     private String condition;
     private RadioGroup sort;
+    private LinearLayout result;
+    private String type = "00";
+    private int flag = 0;
 
     private  List<LegalCounselingModel> counselingList = new ArrayList<>();
 
@@ -58,6 +61,7 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
     private void initDatas() {
         input = findViewById(R.id.et_search);
         sort = findViewById(R.id.sort);
+        result = findViewById(R.id.main_body);
         searchCounseling();
     }
 
@@ -68,14 +72,23 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
         sort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                flag = 1;
                 switch (sort.getCheckedRadioButtonId()){
                     case R.id.recommend:{
-
+                        type = "00";
+                        result.removeAllViewsInLayout();
+                        searchCounseling();
                     }break;
                     case R.id.hot:{
+                        type = "02";
+                        result.removeAllViewsInLayout();
+                        searchCounseling();
 
                     }break;
                     case R.id.newest:{
+                        type = "01";
+                        result.removeAllViewsInLayout();
+                        searchCounseling();
 
                     }break;
                 }
@@ -183,7 +196,7 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
         try{
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition","");
-            params.addQueryStringParameter("type","0");
+            params.addQueryStringParameter("type",type);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -194,7 +207,7 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                 }
 
                 @Override
@@ -213,8 +226,9 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
     }
 
     public void CounselingView(List<LegalCounselingModel> counselingList){
-        findViewById(R.id.text).setVisibility(View.GONE);
-        LinearLayout result = findViewById(R.id.main_body);
+        if(flag == 0){
+            findViewById(R.id.text).setVisibility(View.GONE);
+        }
         if(counselingList.isEmpty()){
             result.addView(new FindNothingView(getBaseContext()).init());
         }else{
@@ -261,42 +275,6 @@ public class CounselingActivity extends AppCompatActivity  implements Counseling
 
             default:{
                 LegalCounselingModel a = counselingList.get((int)v.getTag());
-                int vc = a.getViewCount();
-                vc++;
-                a.setViewCount(vc);
-
-                try{
-                    RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/updateCounseling.action");
-                    String firm;
-                    firm = new CounselingRepositoryImpl().disconvert(a);
-                    System.out.println(firm);
-                    params.addQueryStringParameter("condition",firm);
-                    params.addQueryStringParameter("type", "0");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        @Override
-                        public void onSuccess(String s) {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable throwable, boolean b) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(CancelledException e) {
-
-                        }
-
-                        @Override
-                        public void onFinished() {
-
-                        }
-                    });
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                a = counselingList.get((int)v.getTag());
                 Intent intent=new Intent();
                 intent.setClass(v.getContext(), CounselingDetailActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

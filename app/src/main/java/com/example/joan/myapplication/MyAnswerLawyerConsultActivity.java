@@ -177,7 +177,7 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
         Intent intent=new Intent();
         intent.setClass(MyAnswerLawyerConsultActivity.this, MyAnswerLawyerConsultActivity.class); //设置跳转的Activity
         Bundle bundle = new Bundle();
-        bundle.putSerializable("counseling", counseling);
+        bundle.putSerializable("counseling", counseling.getId());
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -43,15 +43,16 @@ public class QuestionLawyerFinishActivity extends AppCompatActivity {
     private  AlertDialog comment;
     private double score;
     private LegalCounselingModel counseling;
+    private String counselingId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_lawyer_finish);
 
-        counseling = (LegalCounselingModel) getIntent().getSerializableExtra("counseling");
+        counselingId = (String) getIntent().getSerializableExtra("counseling");
         initView();
-        initData();
+        searchCounseling();
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,6 +72,39 @@ public class QuestionLawyerFinishActivity extends AppCompatActivity {
         cancel = findViewById(R.id.cancel_case);
         ratingBar = findViewById(R.id.rc_rate);
         scoreText = findViewById(R.id.score_text);
+    }
+
+    private void searchCounseling(){
+        try{
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
+            params.addQueryStringParameter("condition",counselingId);
+            params.addQueryStringParameter("type","4");
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    JSONArray jArray= JSONArray.fromObject(s);
+                    counseling = new CounselingRepositoryImpl().convertSingle(jArray.getJSONObject(0));
+                    initData();
+                }
+
+                @Override
+                public void onError(Throwable throwable, boolean b) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException e) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -187,7 +221,7 @@ public class QuestionLawyerFinishActivity extends AppCompatActivity {
                     Intent intent=new Intent();
                     intent.setClass(QuestionLawyerFinishActivity.this, QuestionLawyerFinishActivity.class); //设置跳转的Activity
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("counseling", target);
+                    bundle.putSerializable("counseling", target.getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

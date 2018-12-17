@@ -135,11 +135,11 @@ public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayou
         LegalCounselingModel counseling = counselingList.get((int)v.getTag());
         if(counseling.getState() == 3 || counseling.getState() == 2 || counseling.getState() == 4){
             Intent intent = new Intent(getActivity(), QuestionLawyerFinishActivity.class);
-            intent.putExtra("counseling", counseling);
+            intent.putExtra("counseling", counseling.getId());
             startActivity(intent);
         }else{
             Intent intent = new Intent(getActivity(), MyQuestionLawyerConsultActivity.class);
-            intent.putExtra("counseling", counseling);
+            intent.putExtra("counseling", counseling.getId());
             startActivity(intent);
         }
     }
