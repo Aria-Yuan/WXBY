@@ -13,12 +13,21 @@ public class CaseConsultModel {
     private String case_id;
     private String content;
     private String result;
+    private List<String> imglst;
     private List<Document> similar;
     private List<Document> refer;
     private List<JudgementModel> judgementModels;
     private List<LawModel> lawModels;
     private String createTime;
     private int state;
+
+    public List<String> getImglst() {
+        return imglst;
+    }
+
+    public void setImglst(List<String> imglst) {
+        this.imglst = imglst;
+    }
 
     public String getCreateTime() {
         return createTime;

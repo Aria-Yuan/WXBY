@@ -150,7 +150,7 @@ public class CounselingRepositoryImpl {
         return counseling.toJson();
     }
 
-    public String createNew(String question,String lawyer,String questioner) throws Exception{
+    public String createNew(String question,String lawyer,String questioner,List<String> imglst) throws Exception{
         Document counseling = new Document();
         //目前時間
         Date date = new Date();
@@ -174,6 +174,7 @@ public class CounselingRepositoryImpl {
         cs.add(content);
         counseling.append("content",cs);
         counseling.append("publishFlag",1);
+        counseling.append("picture_lst", imglst);
         counseling.append("state",0);
 
         return counseling.toJson();

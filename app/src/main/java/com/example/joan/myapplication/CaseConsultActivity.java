@@ -1,18 +1,24 @@
 package com.example.joan.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,10 +35,13 @@ import com.example.joan.myapplication.MyApplication;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import net.sf.json.JSONArray;
+
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +57,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
     private Button next, back;//, adConfirm, adCancel;
     private EditText text;
     private AlertDialog finished;
-    private int length = 14, state, submitState;
+    private int length = -1, state, submitState;
     private boolean isSubmitted;
     private SharedPreferences sp;
     private String id, content;
@@ -62,10 +71,16 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
     //photo picker
     private static final int REQUEST_CODE = 100;
     private NoScrollGridView itemLayout;
-    private ArrayList<String> photos;
+    private ArrayList<String> photos = new ArrayList<>();
     private List<String> photossss;
     private NinePicturesAdapter ninePicturesAdapter;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
+    //upload
+    private JSONArray encodedString = new JSONArray();
+    private Bitmap bitmap;
+    //進度條元件
+    private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +140,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
 
         switch(view.getId()){
             case R.id.case_consult_next:
-                setNext();
+                encodeImagetoString();
                 break;
             case R.id.case_consult_back:
                 goBack();
@@ -248,6 +263,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/getCaseResult.action");
             params.addQueryStringParameter("id", id);
             params.addQueryStringParameter("content", content);
+            params.addQueryStringParameter("picturelst", encodedString.toString());
             params.addQueryStringParameter("owner", sp.getString("_id",null));
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
@@ -259,11 +275,14 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
 
                     if (type2[0] == 1) {
 
+                        //當完成的時候，把進度條消失
+                        progressBar.setProgress(100);
+                        progressBar.dismiss();
                         success();
                         type2[0] = 0;
 
                     } else {
-
+                        progressBar.dismiss();
                         failed();
 
                     }
@@ -271,6 +290,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
+                    progressBar.dismiss();
                     failed();
                 }
 
@@ -546,6 +566,80 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
                 super.onRequestPermissionsResult(requestCode, permissions,
                         grantResults);
         }
+    }
+
+    //处理图片，压缩，转码
+    @SuppressLint("StaticFieldLeak")
+    public void encodeImagetoString() {
+
+        new AsyncTask<Void , Integer , String>() {
+            protected void onPreExecute() {
+                //執行前 設定可以在這邊設定
+                super.onPreExecute();
+
+                progressBar = new ProgressDialog(CaseConsultActivity.this);
+                if(photos.size() > 0){
+                    progressBar.setMessage("圖片上傳中請稍候...");
+                }else {
+                    progressBar.setMessage("上傳中請稍候...");
+                }
+                progressBar.setCancelable(false);
+                progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressBar.show();
+                //初始化進度條並設定樣式及顯示的資訊。
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                BitmapFactory.Options options = null;
+                options = new BitmapFactory.Options();
+                options.inSampleSize = 2;
+                int progress = 0;
+
+                for(int i = 0; i < photos.size(); i++){
+                    System.out.println(photossss.get(i));
+                    System.out.println("wuwuwuuw" + photos.size());
+                    //decode to bitmap
+//                    Bitmap bitmap = BitmapFactory.decodeFile(photos.get(i));
+//                    Log.d(TAG, "bitmap width: " + bitmap.getWidth() + " height: " + bitmap.getHeight());
+//                    //convert to byte array
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//                    byte[] bytes = baos.toByteArray();
+//
+//                    //base64 encode
+//                    byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
+//                    String encodeString = new String(encode);
+
+                    bitmap = BitmapFactory.decodeFile(photossss.get(i),options);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    // 压缩图片
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                    byte[] byte_arr = stream.toByteArray();
+                    // Base64图片转码为String
+                    String encode = Base64.encodeToString(byte_arr, Base64.DEFAULT);
+                    encodedString.add(encode);
+                    publishProgress(progress+=(int)(100/photossss.size()));
+                }
+                return "";
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                //執行中 可以在這邊告知使用者進度
+                super.onProgressUpdate(values);
+                progressBar.setProgress(values[0]);
+                //取得更新的進度
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+                super.onPostExecute(msg);
+
+                // 上传图片
+                setNext();
+            }
+        }.execute(null, null, null);
     }
 
 }
