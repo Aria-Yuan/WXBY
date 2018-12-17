@@ -49,9 +49,13 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_consult_result);
 
-        getData();
+        initBase();
         initItems();
+        getData();
 
+    }
+
+    private void initBase() {
     }
 
 //    @Override
@@ -76,6 +80,8 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         like = findViewById(R.id.quick_consult_result_like);
         back = findViewById(R.id.quick_consult_result_back);
 
+        alert = new AlertDialog.Builder(QuickConsultResultActivity.this);
+
         onlyText.setOnClickListener(this);
         onlyImage.setOnClickListener(this);
         reply.setOnClickListener(this);
@@ -90,7 +96,7 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         x.Ext.init(getApplication());
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        id = "5b6eaad08d35692c10ea06d1";
+//        id = "5b6eaad08d35692c10ea06d1";
         final int[] type = new int[1];
 
         try {
@@ -169,7 +175,6 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         view.setText(String.valueOf(data.getView_count()) + getResources().getString(R.string.quick_consult_result_viewtime));
 
         sp = getSharedPreferences("account_info", Context.MODE_PRIVATE);
-        alert = new AlertDialog.Builder(QuickConsultResultActivity.this);
 
         only.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

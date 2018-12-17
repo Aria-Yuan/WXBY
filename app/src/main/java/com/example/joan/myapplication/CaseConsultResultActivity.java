@@ -1,33 +1,24 @@
 package com.example.joan.myapplication;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
+import com.example.joan.myapplication.database.model.CaseConsultModel;
 import com.example.joan.myapplication.database.model.JudgementModel;
 import com.example.joan.myapplication.database.model.LawModel;
 import com.example.joan.myapplication.fragment.CaseConsultAdapter;
 import com.example.joan.myapplication.fragment.CaseResultReferListFragment;
 import com.example.joan.myapplication.fragment.CaseResultSimilarListFragment;
-import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.CaseConsultModel;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -43,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.LogManager;
 
 public class CaseConsultResultActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -257,57 +247,43 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 //                        //                    System.out.println("SetContent");
 //                        data[0].setContent(jsonObject.get("content").getAsString());
 
-                            List<JudgementModel> similar = new ArrayList<>();
-                            //                    System.out.println(jsonObject.getAsJsonArray("similar"));
-                            //                    System.out.println();
-                            //                    System.out.println();
-                            //                    System.out.println();
-//                        System.out.println(jsonObject.getAsJsonArray("similar"));
-                            for (JsonElement je : jsonObject.getAsJsonArray("similar")) {
-                                JsonObject tempJson = je.getAsJsonObject();
-                                JudgementModel temp = new JudgementModel();
-                                System.out.println(tempJson);
-                                //                        System.out.println();
-                                temp.setjId(tempJson.get("j_id").getAsString().split("\\[")[0]);
-                                temp.setjReason(tempJson.get("j_reason").getAsString());
-                                temp.setjContent(tempJson.get("j_content").getAsString());
-                                temp.setjDate(tempJson.get("j_date").getAsString());
-                                temp.setId(tempJson.get("_id").getAsString());
-                                //                        System.out.println(temp.getjId());
-                                similar.add(temp);
-                            }
-                            result.setJudgementModels(similar);
+                        List<JudgementModel> similar = new ArrayList<>();
+                        for (JsonElement je : jsonObject.getAsJsonArray("similar")) {
+                            JsonObject tempJson = je.getAsJsonObject();
+                            JudgementModel temp = new JudgementModel();
+                            System.out.println(tempJson);
+                            //                        System.out.println();
+                            temp.setjId(tempJson.get("j_id").getAsString().split("\\[")[0]);
+                            temp.setjReason(tempJson.get("j_reason").getAsString());
+                            temp.setjContent(tempJson.get("j_content").getAsString());
+                            temp.setjDate(tempJson.get("j_date").getAsString());
+                            temp.setId(tempJson.get("_id").getAsString());
+                            similar.add(temp);
+                        }
+                        result.setJudgementModels(similar);
 
-                            List<LawModel> refer = new ArrayList<>();
-                            for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
-                                JsonObject tempJson = je.getAsJsonObject();
-                                LawModel temp = new LawModel();
-                                System.out.println(tempJson);
-                                temp.setId(tempJson.get("_id").getAsString());
-                                temp.setStart(tempJson.get("start").getAsString());
-                                temp.setAbandon(tempJson.get("abandon").getAsString());
-                                temp.setArticle(tempJson.get("article").getAsString());
-                                temp.setContent(tempJson.get("content").getAsString());
-                                temp.setName(tempJson.get("name").getAsString());
-                                if (tempJson.has("end")) {
-                                    System.out.println("yes");
-                                    temp.setEnd(tempJson.get("end").getAsString());
-                                }
-                                refer.add(temp);
+                        List<LawModel> refer = new ArrayList<>();
+                        for (JsonElement je : jsonObject.getAsJsonArray("refer")) {
+                            JsonObject tempJson = je.getAsJsonObject();
+                            LawModel temp = new LawModel();
+                            System.out.println(tempJson);
+                            temp.setId(tempJson.get("_id").getAsString());
+                            temp.setStart(tempJson.get("start").getAsString());
+                            temp.setAbandon(tempJson.get("abandon").getAsString());
+                            temp.setArticle(tempJson.get("article").getAsString());
+                            temp.setContent(tempJson.get("content").getAsString());
+                            temp.setName(tempJson.get("name").getAsString());
+                            if (tempJson.has("end")) {
+                                System.out.println("yes");
+                                temp.setEnd(tempJson.get("end").getAsString());
                             }
-                            result.setLawModels(refer);
-//                        state = 1;
-//                        result = data[0];
-//                        num.setText(result.getResult());
-                            //                    System.out.println("setSimilar");
-                            setSimilarData();
-                            //                    System.out.println("setRefer");
-                            setReferData();
-                            System.out.println("vquququququu");
-
-                            //                    data[0].setSimilar(jsonObject.get("similar").getAsJsonArray());
-                            //                    System.out.println(jsonObject.get("similar"));
-                            //                    System.out.println(jsonObject.get("similar").getAsJsonArray());
+                            refer.add(temp);
+                        }
+                        result.setLawModels(refer);
+                        setSimilarData();
+                        //                    System.out.println("setRefer");
+                        setReferData();
+                        System.out.println("vquququququu");
 
 //                    }
 //                    else if (jsonObject.get("state").getAsInt() == -2){

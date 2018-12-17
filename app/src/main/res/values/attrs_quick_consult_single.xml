@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="quick_consult_single">
+        <attr name="singleQuickConsultString" format="string" />
+        <attr name="singleQuickConsultDimension" format="dimension" />
+        <attr name="singleQuickConsultColor" format="color" />
+        <attr name="singleQuickConsultDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>
