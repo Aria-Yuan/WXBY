@@ -23,10 +23,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import net.sf.json.JSONArray;
+
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -44,7 +47,7 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
     private CaseConsultModel result;
     private String resultID;
     private int AIResult;
-    private int state = 0;
+    private int state, stateflag = 0;
     private int flag;
     private AlertDialog.Builder alert;
     private AlertDialog dialog;
@@ -105,6 +108,10 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
             alert.setPositiveButton("先逛逛", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    stateflag = 1;
+                    timerTask.cancel();
+                    timer.purge();
+                    timer.cancel();
                     dialog.cancel();
                     finish();
                 }
@@ -202,28 +209,30 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
-                    JsonParser jsonParser = new JsonParser();
-                    JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
+                    if(stateflag == 0){
+                        JsonParser jsonParser = new JsonParser();
+                        JsonObject jsonObject = (JsonObject) jsonParser.parse(s);
 
-                    state = jsonObject.get("state").getAsInt();
-                    System.out.println(state);
-                    if(state == 2){//算完le
-                        dialog.cancel();
-                        timerTask.cancel();
-                        timer.purge();
-                        timer.cancel();
+                        state = jsonObject.get("state").getAsInt();
+                        System.out.println(state);
+                        if(state == 2){//算完le
+                            dialog.cancel();
+                            timerTask.cancel();
+                            timer.purge();
+                            timer.cancel();
 
-                        AIResult = jsonObject.get("result").getAsInt();
-                        if(AIResult == 0){
-                            result.setResult("勝訴");
-                        }else if(AIResult == 1){
-                            result.setResult("平手");
-                        }else if(AIResult == 2){
-                            result.setResult("敗訴");
-                        }
+                            AIResult = jsonObject.get("result").getAsInt();
+                            if(AIResult == 0){
+                                result.setResult("勝訴");
+                            }else if(AIResult == 1){
+                                result.setResult("平手");
+                            }else if(AIResult == 2){
+                                result.setResult("敗訴");
+                            }
 
-                        num.setText(result.getResult());
-                        result.setContent(jsonObject.get("content").getAsString());
+                            num.setText(result.getResult());
+                            result.setContent(jsonObject.get("content").getAsString());
+                            result.setImglst(JSONArray.fromObject(jsonObject.get("picture_lst").toString()));
 
 //                    if (jsonObject.get("state").getAsInt() == 1) {
 
@@ -325,8 +334,9 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
 //                    }else{
 //
 //                    }
-                    }
+                        }
 
+                    }
                 }
 
                 @Override
@@ -470,6 +480,10 @@ public class CaseConsultResultActivity extends AppCompatActivity implements View
                 intent.setClass(this, CaseConsultContentActivity.class); //设置跳转的Activity
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("content", result.getContent());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("imglst", (Serializable) result.getImglst());
+                System.out.println(result.getImglst());
+                intent.putExtras(bundle);
                 startActivity(intent);
         }
 

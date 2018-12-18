@@ -24,6 +24,8 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfirmPaymentActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
     private LawyerModel lawyer;
     private String question;
     private TextView content, lawyer_name, lawyer_job, lawyer_company, price,total;
+    private List<String> imglst = new ArrayList<>();
     private Switch publish;
     private int state;
     private boolean isSubmitted;
@@ -45,6 +48,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
 
         lawyer = (LawyerModel)getIntent().getSerializableExtra("lawyer");
         question = getIntent().getStringExtra("content") ;
+        imglst = (List<String>) getIntent().getSerializableExtra("imglst");
 
         initView();
         setData();
@@ -91,13 +95,13 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
     private void createCase(){
         try{
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
-            String newOne = new CounselingRepositoryImpl().createNew(content.getText().toString(),lawyer.getId(),sp.getString("_id","0"));
+            String newOne = new CounselingRepositoryImpl().createNew(content.getText().toString(),lawyer.getId(),sp.getString("_id","0"),imglst);
 //            String newOne = new CounselingRepositoryImpl().createNew(text.getText().toString(),lawyerID,lawyerID);
 //            URLEncoder.encode(newOne, "UTF-8");
+            params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
-            params.addQueryStringParameter("type","1");
-            x.http().get(params, new Callback.CommonCallback<String>() {
+            x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
                     JSONArray jArray = new JSONArray().fromObject(s);
