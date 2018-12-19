@@ -131,7 +131,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="財務糾紛"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -147,7 +147,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="債權轉移"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -163,7 +163,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="人權權利"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -179,7 +179,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="合同糾紛"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
                     </TableRow>
                 </TableLayout>
@@ -204,7 +204,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="損害賠償"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -220,7 +220,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="知識產權"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -236,7 +236,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="婚姻家庭"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -252,7 +252,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="醫療事故"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
                     </TableRow>
                 </TableLayout>
@@ -277,7 +277,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="保險理賠"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -293,7 +293,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="交通事故"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -309,7 +309,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="勞動爭議"
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
 
                         <ImageView
@@ -325,7 +325,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="    其它    "
-                            android:textColor="@color/unselector_item_color"
+                            android:textColor="@color/text_80"
                             android:textSize="8pt" />
                     </TableRow>
                 </TableLayout>

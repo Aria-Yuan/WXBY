@@ -122,6 +122,12 @@ public class QuickConsultResultReplyActivity extends AppCompatActivity implement
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialog.cancel();
+                                Intent intent = new Intent();
+                                intent.setClass(QuickConsultResultReplyActivity.this, QuickConsultResultActivity.class);
+//                        intent.putExtra("id", );
+                                intent.putExtra("id", id);
+                                startActivity(intent);
+                                //跳至詳情頁面
                                 finish();
                             }
                         });
