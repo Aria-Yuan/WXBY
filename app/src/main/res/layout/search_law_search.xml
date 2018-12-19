@@ -515,8 +515,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -546,7 +546,7 @@
 
                         <TextView
                             android:id="@+id/end"
-                            android:layout_width="187dp"
+                            android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
@@ -569,7 +569,7 @@
                             android:layout_alignParentEnd="true"
                             android:padding="5dp"
                             android:src="@drawable/delete"
-                            android:visibility="gone"  />
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 

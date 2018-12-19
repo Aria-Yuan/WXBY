@@ -51,14 +51,14 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_consult_result);
 
-        initBase();
+//        initBase();
         initItems();
         getData();
 
     }
 
-    private void initBase() {
-    }
+//    private void initBase() {
+//    }
 
 //    @Override
 //    public void onWindowFocusChanged(boolean hasFocus) {
@@ -282,12 +282,14 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    finish();
                     Intent intent = new Intent(QuickConsultResultActivity.this, QuickConsultResultReplyActivity.class);
                     intent.putExtra("index", reply.getIndex());
                     intent.putExtra("name", reply.getAuthor_name());
                     intent.putExtra("parent_id", reply.getId().toString());
                     intent.putExtra("quick_id", id);
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -393,6 +395,7 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
                 intent.putExtra("parent_id", data.getId().toString());
                 intent.putExtra("quick_id", id);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.quick_consult_result_back:
                 finish();
@@ -406,5 +409,13 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         // for ()
 
     }
+//
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus){
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus) {
+//        } else {
+//        }
+//    }
 
 }
