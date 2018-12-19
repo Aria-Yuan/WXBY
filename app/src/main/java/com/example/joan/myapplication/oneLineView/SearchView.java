@@ -1,6 +1,7 @@
 package com.example.joan.myapplication.oneLineView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.joan.myapplication.R;
 import com.example.joan.myapplication.RecordSQLiteOpenHelper;
+import com.example.joan.myapplication.SearchResultActivity;
 
 /**
  * Created by Carson_Ho on 16/11/15.
@@ -144,9 +146,19 @@ public class SearchView extends LinearLayout {
                         insertData(et_search.getText().toString().trim());
 
                         queryData("");
+                        Toast.makeText(getContext(), "求求你输入点东西再搜索吧", Toast.LENGTH_SHORT)
+                                .show();
                     }
                     //根据输入的内容模糊查询商品，并跳转到另一个界面，这个需要根据需求实现
-                    Toast.makeText(context, "点击搜索", Toast.LENGTH_SHORT).show();
+                    //                    Toast.makeText(context, "点击搜索", Toast.LENGTH_SHORT).show();
+                    if (inputText.getText().length() == 0){
+                        Toast.makeText(getContext(), "求求你输入点东西再搜索吧", Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                        intent.putExtra("keyWord", inputText.getText().toString());
+                        getContext().startActivity(intent);
+                    }
 
                 }
                 return false;
@@ -182,7 +194,15 @@ public class SearchView extends LinearLayout {
                     queryData("");
                 }
                 //根据输入的内容模糊查询商品，并跳转到另一个界面，这个根据需求实现
-                Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show();
+                if (inputText.getText().length() == 0){
+                    Toast.makeText(getContext(), "求求你输入点东西再搜索吧", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                    intent.putExtra("keyWord", inputText.getText().toString());
+                    getContext().startActivity(intent);
+                }
             }
         });
 
