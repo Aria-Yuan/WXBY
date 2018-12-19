@@ -5,38 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".LawyerConsultDetailActivity">
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_height="46dp"
         android:background="@color/selector_item_color">
 
-        <Button
+        <ImageView
             android:id="@+id/consult_lawyer_detail_back"
-            android:layout_width="30dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:src="@drawable/back"
+            android:textColor="@color/colorWhite"
+            android:textSize="8pt" />
 
         <TextView
             android:id="@+id/textView44"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
             android:layout_weight="1"
             android:text="@string/consult_lawyer_detail_title"
             android:textColor="@color/colorWhite"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.427"
             app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.47" />
@@ -56,8 +55,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.1">
+                android:layout_height="115dp">
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -65,7 +63,7 @@
                     android:layout_height="53dp"
                     android:layout_marginBottom="23dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -125,8 +123,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"
+                android:layout_height="70dp"
                 android:orientation="horizontal">
 
                 <android.support.constraint.ConstraintLayout
@@ -138,22 +135,22 @@
                         android:id="@+id/consult_lawyer_detail_year"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="8dp"
-                        android:text="10"
+                        android:layout_marginTop="4dp"
+                        android:text="10 年"
                         android:textColor="@color/title"
                         android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView35"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="40dp"
-                        android:text="@string/consult_lawyer_detail_y"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_year"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/textView35"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="40dp"-->
+                    <!--android:text="@string/consult_lawyer_detail_y"-->
+                    <!--app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_year"-->
+                    <!--app:layout_constraintEnd_toEndOf="parent" />-->
 
                     <TextView
                         android:id="@+id/textView36"
@@ -166,7 +163,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.493"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                        app:layout_constraintTop_toBottomOf="@+id/consult_lawyer_detail_year" />
                 </android.support.constraint.ConstraintLayout>
 
                 <ImageView
@@ -186,24 +183,24 @@
                         android:id="@+id/consult_lawyer_detail_times"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="8dp"
-                        android:text="9999"
+                        android:text="9999 次"
                         android:textColor="@color/title"
                         android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView38"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginStart="4dp"
-                        android:text="@string/consult_lawyer_detail_t"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_times"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_times" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/textView38"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="32dp"-->
+                    <!--android:layout_marginStart="4dp"-->
+                    <!--android:text="@string/consult_lawyer_detail_t"-->
+                    <!--app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_times"-->
+                    <!--app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_times" />-->
 
                     <TextView
                         android:id="@+id/textView39"
@@ -216,7 +213,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.493"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+                        app:layout_constraintTop_toBottomOf="@+id/consult_lawyer_detail_times" />
 
                 </android.support.constraint.ConstraintLayout>
 
@@ -238,28 +235,26 @@
                         android:id="@+id/consult_lawyer_detail_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="8dp"
-                        android:text="5.0"
+                        android:text="5.0 分"
                         android:textColor="#dd6572"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/textView41"
-                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView41"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginStart="4dp"
-                        android:text="@string/consult_lawyer_detail_score"
-                        android:textColor="#dd6572"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_score"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_score" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/textView41"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="32dp"-->
+                    <!--android:layout_marginStart="4dp"-->
+                    <!--android:text="@string/consult_lawyer_detail_score"-->
+                    <!--android:textColor="#dd6572"-->
+                    <!--app:layout_constraintBaseline_toBaselineOf="@+id/consult_lawyer_detail_score"-->
+                    <!--app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.5"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/consult_lawyer_detail_score" />-->
 
                     <ImageView
                         android:id="@+id/imageView2"
@@ -270,7 +265,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView41"
+                        app:layout_constraintTop_toBottomOf="@+id/consult_lawyer_detail_score"
                         app:srcCompat="@drawable/heart_z" />
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
@@ -308,9 +303,8 @@
 
                     <TextView
                         android:id="@+id/textView21"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:paddingStart="10dp"
                         android:text="@string/consult_lawyer_detail_scholar"
@@ -339,9 +333,8 @@
 
                     <TextView
                         android:id="@+id/textView22"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:paddingStart="10dp"
                         android:text="@string/consult_lawyer_detail_occupation"
@@ -370,9 +363,8 @@
 
                     <TextView
                         android:id="@+id/textView23"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:paddingStart="10dp"
                         android:text="@string/consult_lawyer_detail_special"
@@ -401,10 +393,9 @@
 
                     <TextView
                         android:id="@+id/textView24"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="top"
-                        android:layout_weight="1"
                         android:gravity="top|left|center_vertical"
                         android:paddingStart="10dp"
                         android:paddingTop="4dp"
@@ -472,8 +463,7 @@
     <Button
         android:id="@+id/consult_lawyer_detail_question"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"
+        android:layout_height="60dp"
         android:background="@color/selector_item_color"
         android:text="向偉大的周大佬提問(NT$9999)"
         android:textColor="@color/colorWhite"

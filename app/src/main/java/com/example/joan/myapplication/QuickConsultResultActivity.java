@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,7 +40,8 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
     private CheckBox only;
     private List<View> comments;
     //    private List<Integer> likeList;
-    private Button onlyText, onlyImage, reply, like, back;
+    private Button onlyText, onlyImage, reply, like;
+    private ImageView back;
     private SharedPreferences sp;
     private AlertDialog.Builder alert;
     private AlertDialog dialog;
@@ -102,6 +104,7 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
         try {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/getQuickConsultResult.action");
             params.addQueryStringParameter("id", id);
+            params.setMaxRetryCount(0);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -302,6 +305,7 @@ public class QuickConsultResultActivity extends AppCompatActivity implements Vie
             params.addQueryStringParameter("reply_id", reply_id);
             params.addQueryStringParameter("parent_index", String.valueOf(parent_index));
             params.addQueryStringParameter("parent_id", parent_id);
+            params.setMaxRetryCount(0);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override

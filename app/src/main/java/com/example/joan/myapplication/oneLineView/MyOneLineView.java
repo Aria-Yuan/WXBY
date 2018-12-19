@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.joan.myapplication.DensityUtils;
+import com.example.joan.myapplication.DIYComponent.DensityUtils;
 import com.example.joan.myapplication.R;
 
 

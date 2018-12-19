@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.xutils.x;
@@ -18,7 +19,7 @@ import java.util.List;
 public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView title;
-    private Button back;
+    private ImageView back;
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;

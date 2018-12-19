@@ -74,6 +74,7 @@ public class MyQuestionFragment extends Fragment implements MyLawyerConsultLayou
             params.addQueryStringParameter("condition",sp.getString("_id","0"));//當前使用者id
 //            params.addQueryStringParameter("condition","222");//當前使用者id
             params.addQueryStringParameter("type","2");
+            params.setMaxRetryCount(2);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

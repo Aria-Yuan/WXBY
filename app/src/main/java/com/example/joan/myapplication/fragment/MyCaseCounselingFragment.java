@@ -77,6 +77,7 @@ public class MyCaseCounselingFragment extends Fragment implements MyLawyerConsul
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/userCaseConsultResult.action");
             params.addQueryStringParameter("condition",sp.getString("_id","0"));//當前使用者id
 //            params.addQueryStringParameter("condition","222");//當前使用者id
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

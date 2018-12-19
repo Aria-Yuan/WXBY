@@ -44,7 +44,7 @@ public class MyLawyerConsultLayout extends LinearLayout {
      */
     public MyLawyerConsultLayout init(){
         LayoutInflater.from(getContext()).inflate(R.layout.lawyer_consult_list_layout, this, true);
-        picture = findViewById(R.id.case_picture);
+        picture = findViewById(R.id.picture);
         name = findViewById(R.id.name);
         job = findViewById(R.id.job);
         state = findViewById(R.id.state);
@@ -83,6 +83,7 @@ public class MyLawyerConsultLayout extends LinearLayout {
         setName("三尺小律師");
         setContent(content);
         setTime(time);
+        picture.setImageResource(R.drawable.robot);
         setJob("");
         setView("");
         if(state == 0 || state == 1){

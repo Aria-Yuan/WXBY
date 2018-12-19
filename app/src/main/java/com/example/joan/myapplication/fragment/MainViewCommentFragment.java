@@ -85,6 +85,7 @@ public class MainViewCommentFragment  extends BaseFragment implements HomeNewsLa
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/getComments.action");
             params.addQueryStringParameter("type","0");
             params.addQueryStringParameter("condition","");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

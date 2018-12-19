@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.joan.myapplication.DIYComponent.NoScrollGridView;
@@ -54,7 +55,8 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 public class CaseConsultActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button next, back;//, adConfirm, adCancel;
+    private Button next;//, adConfirm, adCancel;
+    private ImageView back;
     private EditText text;
     private AlertDialog finished;
     private int length = -1, state, submitState;
@@ -265,6 +267,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
             params.addQueryStringParameter("content", content);
             params.addQueryStringParameter("picturelst", encodedString.toString());
             params.addQueryStringParameter("owner", sp.getString("_id",null));
+            params.setMaxRetryCount(0);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -597,8 +600,6 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
                 int progress = 0;
 
                 for(int i = 0; i < photos.size(); i++){
-                    System.out.println(photossss.get(i));
-                    System.out.println("wuwuwuuw" + photos.size());
                     //decode to bitmap
 //                    Bitmap bitmap = BitmapFactory.decodeFile(photos.get(i));
 //                    Log.d(TAG, "bitmap width: " + bitmap.getWidth() + " height: " + bitmap.getHeight());
@@ -615,6 +616,7 @@ public class CaseConsultActivity extends AppCompatActivity implements View.OnCli
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     // 压缩图片
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                    System.out.println(stream.size());
                     byte[] byte_arr = stream.toByteArray();
                     // Base64图片转码为String
                     String encode = Base64.encodeToString(byte_arr, Base64.DEFAULT);

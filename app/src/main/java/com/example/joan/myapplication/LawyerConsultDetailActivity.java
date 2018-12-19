@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
 import com.example.joan.myapplication.database.model.BaseModel;
-import com.example.joan.myapplication.database.model.CounselingModel;
+import com.example.joan.myapplication.database.model.Case;
 import com.example.joan.myapplication.database.model.LawyerModel;
 import com.example.joan.myapplication.database.model.LegalCounselingModel;
 import com.example.joan.myapplication.database.repository.LawyerRepositoryImpl;
@@ -28,7 +29,8 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
     private String lawyerId;
     private LawyerModel lawyer = new LawyerModel();
     private TextView name, detail, year, times, scholar, occupation, special, personality;
-    private Button question, back, follow, seeAll;
+    private Button question, follow, seeAll;
+    private ImageView back;
     private String[] text = {"向", "律師付費提問(NT$", ")"};
     private Case[] cases = new Case[3];
     private LayoutInflater li;
@@ -78,6 +80,7 @@ public class LawyerConsultDetailActivity extends AppCompatActivity implements Vi
             params.addQueryStringParameter("condition",lawyerId);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             params.addQueryStringParameter("type","2");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

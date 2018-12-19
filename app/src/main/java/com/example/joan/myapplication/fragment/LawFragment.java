@@ -258,6 +258,7 @@ public class LawFragment extends Fragment implements LawOneLineView.OnRootClickL
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchLaw.action");
             params.addQueryStringParameter("condition","");
             params.addQueryStringParameter("type", "0");
+             params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

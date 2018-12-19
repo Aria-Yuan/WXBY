@@ -64,6 +64,7 @@ public class MainSearchResultLawyer extends Fragment {
                 RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/searchEverything.action");
                 params.addQueryStringParameter("key", keyWord);
                 params.addQueryStringParameter("pageType", String.valueOf(position));
+                params.setMaxRetryCount(0);
                 System.out.println(params);
                 x.http().get(params, new Callback.CommonCallback<String>(){
 

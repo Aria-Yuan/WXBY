@@ -169,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.addQueryStringParameter("type", String.valueOf(type[0]));
                 params.addQueryStringParameter("username", ea);
                 params.addQueryStringParameter("password", ep);
+                params.setMaxRetryCount(0);
                 System.out.println(params.toString());
                 x.http().get(params, new Callback.CommonCallback<String>() {
                     @Override

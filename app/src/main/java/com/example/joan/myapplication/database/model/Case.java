@@ -1,4 +1,4 @@
-package com.example.joan.myapplication;
+package com.example.joan.myapplication.database.model;
 
 public class Case {
 

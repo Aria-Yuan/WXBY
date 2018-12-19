@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
@@ -24,7 +25,8 @@ public class QuickConsultResultReplyActivity extends AppCompatActivity implement
 
     private String parentId, parentName, text, authorName, authorId, id;
     private int index;
-    private Button submit, back;
+    private Button submit;
+    private ImageView back;
     private EditText content;
     private TextView title;
     private AlertDialog.Builder alert;
@@ -103,6 +105,7 @@ public class QuickConsultResultReplyActivity extends AppCompatActivity implement
             params.addQueryStringParameter("content", text);
             params.addQueryStringParameter("quick_id", id);
             params.addQueryStringParameter("index", String.valueOf(index));
+            params.setMaxRetryCount(0);
             if(sp.getString("role", "0").equals("1")) params.addQueryStringParameter("is_l_or_a", "true");
             else params.addQueryStringParameter("is_l_or_a", "false");
             System.out.println(params.toString());

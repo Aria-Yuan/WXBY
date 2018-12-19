@@ -12,7 +12,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:paddingTop="10dp">
 
         <ImageView
@@ -22,9 +22,10 @@
             android:src="@drawable/law_firm" />
 
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -39,7 +40,7 @@
                 android:id="@+id/firm_addr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:lines="1"
                 android:text="地址：XXXXXXXXXXXXXXXXXXXXXX" />
@@ -50,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_vertical"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="9dp"
             android:text="#刑法"
             android:textColor="@color/selector_item_color" />
 

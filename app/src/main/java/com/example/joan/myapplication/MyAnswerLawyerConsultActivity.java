@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.joan.myapplication.DIYComponent.RatingBar;
+import com.example.joan.myapplication.DIYComponent.WrapContentHeightViewPager;
 import com.example.joan.myapplication.oneLineView.CounselingContentView;
 import com.example.joan.myapplication.database.model.BaseModel;
 import com.example.joan.myapplication.database.model.CounselingModel;
@@ -96,6 +98,12 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
             findViewById(R.id.buttom_score).setVisibility(View.VISIBLE);
             RatingBar r = findViewById(R.id.rc_rate);
             r.setStar((float)counseling.getComment());
+        }else if(counseling.getState() == 2){
+            LinearLayout buttom = findViewById(R.id.buttom_bar);
+            buttom.setVisibility(View.GONE);
+            TextView finishMsg = findViewById(R.id.finish);
+            finishMsg.setText("咨詢已結束,您還未受到評價");
+            finishMsg.getLayoutParams().height = 80;
         }
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +244,7 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
 //            URLEncoder.encode(newOne, "UTF-8");
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -296,6 +305,7 @@ public class MyAnswerLawyerConsultActivity extends AppCompatActivity {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",cId);
             params.addQueryStringParameter("type","4");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
