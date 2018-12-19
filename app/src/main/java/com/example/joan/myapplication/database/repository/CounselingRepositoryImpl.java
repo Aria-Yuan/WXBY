@@ -99,7 +99,7 @@ public class CounselingRepositoryImpl {
         JSONObject lawyer = a.getJSONObject("lawyer");
         JSONArray b = new JSONArray();
         b.add(lawyer);
-        LawyerModel l = new LawyerRepositoryImpl().convert(b).get(0);
+        LawyerModel l = new LawyerRepositoryImpl().convertList(b).get(0);
         counseling.setLawyer(l);
 //        counseling.setQuestioner(a.getString("questioner"));
 
