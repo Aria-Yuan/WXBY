@@ -100,6 +100,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
 //            URLEncoder.encode(newOne, "UTF-8");
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override

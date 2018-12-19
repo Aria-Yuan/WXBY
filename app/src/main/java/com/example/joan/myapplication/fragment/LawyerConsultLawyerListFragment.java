@@ -81,6 +81,7 @@ public class LawyerConsultLawyerListFragment extends Fragment {
             params.addQueryStringParameter("condition","");
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             params.addQueryStringParameter("type","0");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

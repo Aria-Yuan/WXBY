@@ -120,6 +120,7 @@ public class FirmFragment  extends Fragment implements FirmOneLineView.OnRootCli
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/searchFirm.action");
             params.addQueryStringParameter("condition","");
             params.addQueryStringParameter("type", "0");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -130,7 +131,7 @@ public class FirmFragment  extends Fragment implements FirmOneLineView.OnRootCli
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                 }
 
                 @Override

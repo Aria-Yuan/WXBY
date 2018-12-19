@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.joan.myapplication.DIYComponent.SelectPicPopupWindow;
 import com.example.joan.myapplication.database.model.BaseModel;
@@ -27,7 +28,8 @@ import java.util.Date;
 
 public class QuickConsultActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button back, next, upload;
+    private Button next, upload;
+    private ImageView back;
     private SelectPicPopupWindow upWindow;
     private EditText text;
     private boolean isSubmitted;
@@ -251,6 +253,7 @@ public class QuickConsultActivity extends AppCompatActivity implements View.OnCl
             params.addQueryStringParameter("author_id", sp.getString("_id", "invalid"));
             params.addQueryStringParameter("author_name", sp.getString("user_name", "invalid"));
             params.addQueryStringParameter("content", content);
+            params.setMaxRetryCount(0);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override

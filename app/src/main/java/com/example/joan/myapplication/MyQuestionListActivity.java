@@ -75,7 +75,6 @@ public class MyQuestionListActivity extends AppCompatActivity {
         bundle = new Bundle();
         bundle.putString("position", "1");
         orderFragment.setArguments(bundle);
-        orderFragment.setFlag(0);
 
         MyCaseCounselingFragment meFragment = new MyCaseCounselingFragment();
         bundle = new Bundle();

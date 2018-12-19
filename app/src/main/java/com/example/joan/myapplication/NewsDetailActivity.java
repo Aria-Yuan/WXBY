@@ -17,6 +17,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewsDetailActivity extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/getNews.action");
             params.addQueryStringParameter("condition",newsId);
             params.addQueryStringParameter("type","1");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -88,7 +90,9 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     private void initView(){
         title.setText(news.getString("title"));
-        content.setText(news.getString("article").trim());
+        Pattern p = Pattern.compile("好文推薦.*");
+        Matcher m = p.matcher(news.getString("article").trim());
+        content.setText(m.replaceAll(""));
         time.setText(news.getString("time"));
 
         String img;

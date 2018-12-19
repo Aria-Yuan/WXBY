@@ -57,6 +57,7 @@ public class MyConsultListActivity extends AppCompatActivity implements MyLawyer
             params.addQueryStringParameter("condition",sp.getString("_id","0"));//當前使用者id
 //            params.addQueryStringParameter("condition","222");//當前使用者id
             params.addQueryStringParameter("type","5");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

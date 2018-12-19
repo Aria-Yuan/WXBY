@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@color/background">
+                android:background="@color/colorWhite">
 
                 <TextView
                     android:layout_width="110dp"
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@color/background">
+                android:background="@color/colorWhite">
 
                 <TextView
                     android:layout_width="110dp"
@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@color/background">
+                android:background="@color/colorWhite">
 
                 <TextView
                     android:layout_width="110dp"
@@ -143,7 +143,7 @@
                 android:id="@+id/judgement_consult_maintitle"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/background"
+                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:text="判決正文"
                 android:textColor="@color/colorAccent"
@@ -166,7 +166,7 @@
                 android:id="@+id/judgement_consult_law"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/background"
+                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:text="相關法條"
                 android:textColor="@color/colorAccent"

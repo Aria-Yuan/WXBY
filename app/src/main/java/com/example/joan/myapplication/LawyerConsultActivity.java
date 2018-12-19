@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.joan.myapplication.fragment.CaseConsultAdapter;
 import com.example.joan.myapplication.fragment.LawyerConsultLawyerListFragment;
@@ -22,7 +23,7 @@ public class LawyerConsultActivity extends AppCompatActivity implements View.OnC
     private List<Fragment> list;
     private LawyerConsultLawyerListFragment lawyerList;
     private LawyerConsultSortListFragment sortList;
-    private Button back;
+    private ImageView back;
     public static LawyerConsultActivity page;
 
     @Override

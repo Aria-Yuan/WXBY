@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import android.widget.Toast;
+
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.xutils.common.Callback;
@@ -34,8 +36,9 @@ public class MainActivity extends BaseActivity {
          * 这里填写你的服务器所在的IP地址替换我的ip地址
          * */
         try{
-            RequestParams params = new RequestParams("http://172.20.10.3:8080/searchFirm.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/searchFirm.action");
 //            params.addQueryStringParameter("condition",etUsername.getText().toString());
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
