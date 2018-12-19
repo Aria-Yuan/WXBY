@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joan.myapplication.database.model.BaseModel;
@@ -38,7 +39,8 @@ import java.util.TimerTask;
 public class CaseConsultResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout tabLayout;
-    private Button back, favor, toContent;
+    private Button favor, toContent;
+    private ImageView back;
     private TextView num;
     private ViewPager pager;
     private List<Fragment> list;

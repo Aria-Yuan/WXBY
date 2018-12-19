@@ -1,4 +1,4 @@
-package com.example.joan.myapplication;
+package com.example.joan.myapplication.DIYComponent;
 
 import android.content.Context;
 import android.util.TypedValue;

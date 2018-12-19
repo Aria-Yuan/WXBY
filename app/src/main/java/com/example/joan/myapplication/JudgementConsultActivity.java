@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.joan.myapplication.database.model.BaseModel;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -38,8 +39,9 @@ public class JudgementConsultActivity extends AppCompatActivity implements View.
         System.out.println(id);
 
         try {
-            RequestParams params = new RequestParams("http://169.254.219.229:8080/judgementConsult.action");
+            RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR + ":8080/judgementConsult.action");
             params.addQueryStringParameter("_id", id);
+            params.setMaxRetryCount(0);
             System.out.println(params);
 //            System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {

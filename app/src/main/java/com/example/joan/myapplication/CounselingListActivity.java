@@ -46,6 +46,7 @@ public class CounselingListActivity extends AppCompatActivity implements Counsel
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",condition);
             params.addQueryStringParameter("type",type);
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {

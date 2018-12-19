@@ -5,18 +5,19 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
+    android:background="@color/colorWhite"
     android:paddingTop="4dp">
 
     <ImageView
         android:id="@+id/lawyer_consult_single_limage"
-        android:layout_width="43dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lawyer" />
+        app:srcCompat="@drawable/main_menu_lawyer" />
 
     <TextView
         android:id="@+id/lawyer_consult_single_branch"

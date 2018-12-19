@@ -31,7 +31,7 @@ import java.util.TimeZone;
 
 public class CounselingRepositoryImpl {
 
-    public List<LegalCounselingModel> convert(JSONArray s){
+    public List<LegalCounselingModel>  convert(JSONArray s){
         List<LegalCounselingModel> counselings = new ArrayList<LegalCounselingModel>();
         for (int i = 0 ; i < s.size(); i++) {
             try {

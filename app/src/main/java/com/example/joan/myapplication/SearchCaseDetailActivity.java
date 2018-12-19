@@ -49,6 +49,7 @@ public class SearchCaseDetailActivity extends AppCompatActivity implements View.
         try {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/judgementConsult.action");
             params.addQueryStringParameter("_id", id);
+            params.setMaxRetryCount(0);
             System.out.println(params);
 //            System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {

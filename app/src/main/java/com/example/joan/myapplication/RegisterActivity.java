@@ -143,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 params.addQueryStringParameter("type", String.valueOf(registerType));
                 params.addQueryStringParameter("username", ea);
                 params.addQueryStringParameter("password", ep);
+                params.setMaxRetryCount(0);
                 System.out.println(params.toString());
                 x.http().get(params, new Callback.CommonCallback<String>() {
                     @Override
@@ -235,15 +236,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
         if (password.getText().toString().length() >= 8){
-            eight.setTextColor(getColor(R.color.selector_item_color));
+            eight.setTextColor(Color.parseColor("#5f9b95"));
         }else{
-            eight.setTextColor(getColor(R.color.unselector_item_color));
+            eight.setTextColor(Color.parseColor("8a8585"));
         }
 
         if (password.getText().toString().matches(".*[a-zA-Z].*")){
-            letter.setTextColor(getColor(R.color.selector_item_color));
+            letter.setTextColor(Color.parseColor("#5f9b95"));
         }else{
-            letter.setTextColor(getColor(R.color.unselector_item_color));
+            letter.setTextColor(Color.parseColor("8a8585"));
         }
 
         if (isEnoughLength() && isAgree) {

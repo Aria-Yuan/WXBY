@@ -261,6 +261,7 @@ public class QuestionLawyerAgainActivity extends AppCompatActivity implements Vi
             String newOne = new CounselingRepositoryImpl().QuestionAgain(text.getText().toString(),counseling);
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override

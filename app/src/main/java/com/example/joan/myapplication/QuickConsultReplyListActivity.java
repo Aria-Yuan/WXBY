@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,7 +37,8 @@ public class QuickConsultReplyListActivity extends AppCompatActivity implements 
     private AlertDialog.Builder alert;
     private AlertDialog dialog;
     private LinearLayout ll;
-    private Button onlyText, back;
+    private Button onlyText;
+    private ImageView back;
     private SharedPreferences sp;
     private List<View> comments;
     private TextView title;
@@ -105,6 +107,7 @@ public class QuickConsultReplyListActivity extends AppCompatActivity implements 
             params.addQueryStringParameter("reply_id", parent_id);
             params.addQueryStringParameter("reply_index", String.valueOf(parent_index));
             System.out.println(params.toString());
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -265,6 +268,7 @@ public class QuickConsultReplyListActivity extends AppCompatActivity implements 
             params.addQueryStringParameter("reply_id", reply_id);
             params.addQueryStringParameter("parent_index", String.valueOf(parent_index));
             params.addQueryStringParameter("parent_id", parent_id);
+            params.setMaxRetryCount(0);
             System.out.println(params.toString());
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override

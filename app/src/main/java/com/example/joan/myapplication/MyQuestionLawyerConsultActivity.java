@@ -96,6 +96,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/searchCounseling.action");
             params.addQueryStringParameter("condition",counselingId);
             params.addQueryStringParameter("type","4");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
@@ -340,6 +341,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
 //            URLEncoder.encode(newOne, "UTF-8");
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -377,6 +379,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
             URLEncoder.encode(newOne, "UTF-8");
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
@@ -419,6 +422,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
             URLEncoder.encode(newOne, "UTF-8");
             params.addQueryStringParameter("type","1");
             params.addQueryStringParameter("condition",newOne);
+            params.setMaxRetryCount(0);
 //            params.addQueryStringParameter("condition","吕浩然觉得不用写");
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override

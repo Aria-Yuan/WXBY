@@ -54,6 +54,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             RequestParams params = new RequestParams("http://" + BaseModel.IP_ADDR +":8080/getComments.action");
             params.addQueryStringParameter("condition",newsId);
             params.addQueryStringParameter("type","1");
+            params.setMaxRetryCount(0);
             x.http().get(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
