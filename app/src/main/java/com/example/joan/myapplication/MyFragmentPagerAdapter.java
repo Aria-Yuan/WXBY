@@ -14,9 +14,6 @@ import com.example.joan.myapplication.fragment.MainSearchResultNews;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Carson_Ho on 16/7/22.
- */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] mTitles = new String[]{"律師", "咨詢", "法條","律所", "判決", "新聞與評論"};
