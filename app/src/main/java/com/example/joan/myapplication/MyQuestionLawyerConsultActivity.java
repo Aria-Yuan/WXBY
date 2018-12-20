@@ -107,7 +107,7 @@ public class MyQuestionLawyerConsultActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
-
+                    System.out.println(throwable.getMessage());
                 }
 
                 @Override

@@ -125,7 +125,7 @@
                 android:layout_marginRight="3dp"
                 android:layout_marginTop="3dp"
                 android:numColumns="3"
-
+                android:background="@color/colorWhite"
                 android:scrollbars="none"
                 android:verticalSpacing="3dp"
                 android:id="@+id/recycler_view"/>

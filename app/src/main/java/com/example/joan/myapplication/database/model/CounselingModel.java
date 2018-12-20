@@ -7,7 +7,16 @@ import java.util.List;
 public class CounselingModel implements Serializable{
     private String create_time;
     private String question;
+    private List<String> pictures;
     private List<ResponseModel> response;
+
+    public List<String> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<String> pictures) {
+        this.pictures = pictures;
+    }
 
     public String getCreate_time() {
         return create_time;

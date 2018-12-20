@@ -63,7 +63,11 @@ public class CounselingContentView extends LinearLayout{
     }
 
     public  CounselingContentView setContent(CounselingModel a){
-        content.addView(new CounselingQuestionView(getContext()).init(a.getQuestion(),a.getCreate_time()));
+        try{
+            content.addView(new CounselingQuestionView(getContext()).init(a.getQuestion(),a.getCreate_time(),a.getPictures().get(0)));
+        }catch(Exception e){
+            content.addView(new CounselingQuestionView(getContext()).init(a.getQuestion(),a.getCreate_time()));
+        }
         List<ResponseModel> responses = a.getResponse();
         for (ResponseModel b: responses
              ) {
