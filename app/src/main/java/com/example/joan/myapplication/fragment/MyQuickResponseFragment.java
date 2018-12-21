@@ -33,7 +33,6 @@ public class MyQuickResponseFragment extends Fragment implements FirmOneLineView
 
 
     private SharedPreferences sp;
-//    private static int flag = 1;
 
     private String position;
     private TextView ft;
@@ -67,11 +66,16 @@ public class MyQuickResponseFragment extends Fragment implements FirmOneLineView
             ft = view.findViewById(R.id.searching);
             ll = view.findViewById(R.id.consult_list);
 
-            getData();
-
         }
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getData();
+    }
+
 
     private void getData(){
         try {
@@ -88,7 +92,7 @@ public class MyQuickResponseFragment extends Fragment implements FirmOneLineView
                     counselingModels = new QuickResponseRepositoryImpl().convertList(data);
 //                            System.out.println(counselingModels.get(0).getAuthor_name());
 //                            result[position] = data.get("counseling").toString();
-                    initView();
+                    ResponseView();
                 }
 
                 @Override
@@ -106,7 +110,7 @@ public class MyQuickResponseFragment extends Fragment implements FirmOneLineView
         }
     }
 
-    public void initView() {
+    public void ResponseView() {
         if (counselingModels.size() == 0) setNothing();
         else setList();
     }

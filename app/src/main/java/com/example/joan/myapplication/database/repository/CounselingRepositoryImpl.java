@@ -120,6 +120,17 @@ public class CounselingRepositoryImpl {
 //                    Date createTime1 = formatter.parse(c.getString("create_time"), pos);
             ccontent.setCreate_time(c.getString("create_time").replace("T", " "));
             ccontent.setQuestion(c.getString("question"));
+
+            try{
+                JSONArray picLst = c.getJSONArray("picture_lst");
+                List<String> pl = new ArrayList<>();
+                for(int i = 0; i < picLst.size(); i++){
+                    pl.add(picLst.getString(i));
+                }
+                ccontent.setPictures(pl);
+            }catch(Exception e){
+                System.out.println("================没有图片呢===============");
+            }
             List<ResponseModel> relies = new ArrayList<>();
             JSONArray responses = c.getJSONArray("response");
             //封装每次回答
@@ -171,10 +182,10 @@ public class CounselingRepositoryImpl {
         content.append("create_time",sdf.parse(c.getCreate_time()));
         content.append("question",c.getQuestion());
         content.append("response",new ArrayList<Document>());
+        content.append("picture_lst", imglst);
         cs.add(content);
         counseling.append("content",cs);
         counseling.append("publishFlag",1);
-        counseling.append("picture_lst", imglst);
         counseling.append("state",0);
 
         return counseling.toJson();

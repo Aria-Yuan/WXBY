@@ -177,7 +177,7 @@ public class SearchView extends LinearLayout {
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
                 String name = textView.getText().toString();
                 et_search.setText(name);
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -236,7 +236,9 @@ public class SearchView extends LinearLayout {
     /*插入数据*/
     private void insertData(String tempName) {
         db = helper.getWritableDatabase();
-        db.execSQL("insert into searchRecords(name) values('" + tempName + "')");
+        if(!tempName.isEmpty()){
+            db.execSQL("insert into searchRecords(name) values('" + tempName + "')");
+        }
         db.close();
     }
 

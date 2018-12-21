@@ -113,6 +113,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
+                    System.out.println("============" + throwable.getMessage());
 
                 }
 

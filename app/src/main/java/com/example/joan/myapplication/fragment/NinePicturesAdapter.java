@@ -143,9 +143,6 @@ public class NinePicturesAdapter extends BaseAblistViewAdapter<String> {
      */
     public void showAdd(){
         if(getData().size()<picturnNum){
-
-
-
             addAt(getData().size(),"");
             isAdd=true;
             notifyDataSetChanged();

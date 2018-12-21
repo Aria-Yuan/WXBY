@@ -62,8 +62,8 @@ public class MyQuestionListActivity extends AppCompatActivity {
     private void initDatas() {
         tabs = new ArrayList<>();
         tabs.add("律師咨詢");
-        tabs.add("快問快答");
         tabs.add("案件咨詢");
+        tabs.add("快問快答");
 
         fragments = new ArrayList<>(3);
         MyQuestionFragment homeFragment = new MyQuestionFragment();
@@ -71,19 +71,19 @@ public class MyQuestionListActivity extends AppCompatActivity {
         bundle.putString("position", "0");
         homeFragment.setArguments(bundle);
 
-        MyQuickResponseFragment orderFragment = new MyQuickResponseFragment();
-        bundle = new Bundle();
-        bundle.putString("position", "1");
-        orderFragment.setArguments(bundle);
-
         MyCaseCounselingFragment meFragment = new MyCaseCounselingFragment();
         bundle = new Bundle();
-        bundle.putString("position", "2");
+        bundle.putString("position", "1");
         meFragment.setArguments(bundle);
 
+        MyQuickResponseFragment orderFragment = new MyQuickResponseFragment();
+        bundle = new Bundle();
+        bundle.putString("position", "2");
+        orderFragment.setArguments(bundle);
+
         fragments.add(homeFragment);
-        fragments.add(orderFragment);
         fragments.add(meFragment);
+        fragments.add(orderFragment);
 
     }
 

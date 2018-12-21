@@ -66,10 +66,15 @@ public class MyCaseCounselingFragment extends Fragment implements MyLawyerConsul
             view_case_consult = inflater.inflate(R.layout.lawyer_consult_list,container,false);
             case_consult_list = view_case_consult.findViewById(R.id.consult_list);
             searching = view_case_consult.findViewById(R.id.searching);
-            initLawyerView();
 
         }
         return view_case_consult;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initLawyerView();
     }
 
     private void initLawyerView(){
